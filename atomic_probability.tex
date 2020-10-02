@@ -1,0 +1,149 @@
+\documentclass[a4paper,draft]{amsproc}
+\renewcommand\labelenumi{(\roman{enumi})}
+\renewcommand\theenumi\labelenumi
+\title{\textbf{Atomic Topologies in Probability Theory}}
+
+\usepackage{amssymb}
+%\usepackage[hyphens]{url} \urlstyle{same}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+%\usepackage[dvips]{graphicx} %% Package for inserting illustrations/figures
+
+\theoremstyle{plain}
+ \newtheorem{theorem}{Theorem}[section]
+ \newtheorem{proposition}{Proposition}[section]
+ \newtheorem{lemma}{Lemma}[section]
+ \newtheorem{corollary}{Corollary}[section]
+\theoremstyle{definition}
+ \newtheorem{example}{Example}[section]
+ \newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+ \newtheorem{remark}{Remark}[section]
+ \numberwithin{equation}{section}
+
+\author{Adam Dauser, Adrian Marti} % alphabetical order
+
+\date{}
+\begin{document}
+\maketitle 
+
+\section{Boolean algebras with measures}
+
+We will show that the $Set$-based models of our topos are precisely boolean algebras equipped with probability measures(in the sense defined below) with a special property.
+
+\begin{definition}
+\begin{enumerate}
+\item Let $B$ be a boolean algebra. We say a map $\mu: B \to \mathbb{R}_{\geq 0}$ is a probability measure if for elements $a,b \in B$, the following holds:
+\begin{itemize}
+\item $\mu(a) = 0$ if and only if $a = \bot $,
+\item $\mu(\top) = 1$,
+\item $\mu(a) + \mu(b) = \mu(a \vee b) + \mu(a \wedge b)$.
+\end{itemize}
+We will call a pair $(B, \mu)$ of a boolean algebra and a probability measure $\mu$ on $B$ a boolean probability algebra.
+\item We define a map $(B, \mu) \to (C, \nu)$ between boolean probability algebras to be a map of boolean algebras $f: B \to C$ that satisfies
+\[
+\nu(f(x)) = \mu(x)
+\]
+for all $x \in B$. We will denote the category of boolean probability algebras by $BProbAlg$.
+\end{enumerate}
+\end{definition}
+
+The reader will immediately notice that we are not considering any sort of $\sigma$-additivity. At first this will seem a bit unfamiliar, but by [Fremlin 416Q b)], our measures on boolean algebras correspond precisely to Radon measures on the corresponding Stone space(without nontrivial sets of measure zero). This means that we should think about boolean probability algebras as a very special subset of the probability spaces traditionally considered in probability theory. Considering the fact(that we will prove) that boolean probability algebras(with a special property) are our $Set$-based models, we can interpret our topos as a context to do probability theory that should be much more well-behaved than traditional probability theory. Whether this is to be interpreted as an indication of insufficiency of interesting probability theory is up to the readers judgement.
+
+Another thing to note is the fact that we do not allow any nontrivial elements of measure zero. In particular we do not allow the one-element boolean algebra.
+
+We wish to show that $Ind(FinProb^{op}) \simeq BProbAlg$, since this will help us compute the $Set$-based models of our topos. For doing so, first notice that for Lawvere theories we have that the forgetful functor into $Set$ creates filtered colimits. This is a special case of [Theorem 5.6.5 ii) in Riehl], if one uses the well-known correspondence between finitary monads and Lawvere theories. Using this explicit description of the underlying set of a filtered colimit of boolean algebras, we can define filtered colimits in $BProbAlg$:
+
+\begin{theorem} 
+If $(B_i, \mu_i)$ is a filtered diagram of boolean probability algebras and $B := colim_i B_i$ is the colimit of the underlying boolean algebras, we have that
+\[
+colim_i (B_i, \mu_i) \cong (B, \mu),
+\]
+where for $a \in B_i$, $\mu([a]) := \mu_i(a)$.
+\end{theorem}
+\begin{proof}
+First note that $\mu$ is well-defined, because the maps in the diagram preserve the measure. Moreover, we can check the axioms of a measure WLOG for $a,b \in B_i$:
+\begin{itemize}
+\item $\mu([a]) = 0 \Leftrightarrow \mu_i(a) = 0 \Leftrightarrow a = \bot$
+\item $\mu(\top) = \mu_i(\top) = 1$
+\item \begin{align*}
+\mu([a] \vee [b]) + \mu([a] \wedge [b]) &= \mu([a \vee b]) + \mu([a \wedge b]) \\
+&= \mu_i(a \vee b) + \mu_i(a \wedge b) \\
+&= \mu_i(a) + \mu_i(b) \\
+&= \mu([a]) + \mu([b])
+\end{align*}
+\end{itemize}
+To see that this is actually a colimit, let $(C, \nu)$ be a boolean probability algebra and $f_i : (B_i, \mu_i) \to (C, \nu)$ be maps suitably commuting with the filtered diagram. We need to show that these maps factor through the inclusions into $(B, \mu)$ uniquely. First notice, that by looking at the underlying boolean algebras, we certainly get a unique map $\psi: B \to C$.  It only remains to show it is measure-preserving, so let $a \in B_i$.
+\[
+\nu(\psi [a]) = \nu(f_i a) = \nu_i(a) = \mu_i(a) = \mu([a]),
+\]
+so we have shown how to construct filtered colimits.
+\end{proof}
+
+Now we are ready to prove the following fact:
+
+\begin{theorem} We have an equivalence of categories
+\[
+Ind(FinProb^{op}) \simeq BProbAlg
+\]
+given by sending a finite probability space to the corresponding boolean probability algebra on its powerset and moreover we send a formal filtered colimit to the corresponding filtered colimit of boolean probability algebras.
+\end{theorem}
+\begin{proof}
+Morphisms between two diagrams $F$, $G$ in $FinProb^{op}$ in the $Ind$-completion are defined by
+\[
+lim_d colim_c Hom_{FinProb^{op}}(F d, G c).
+\]
+In order to define the equivalence on morphisms, we would like to construct an isomorphism
+\[
+lim_d colim_c Hom_{FinProb^{op}}(F d, G c) \cong Hom_{BProbAlg}(colim F, colim G).
+\]
+We do this by showing compactness of the finite probability algebras. Let $(C, \mu)$ be a finite probability algebra and $(B_i, \mu_i)$ be a filtered diagram with colimit $(B, \mu)$. We want to show that the map
+\[
+\kappa: colim_i Hom((C, \nu), (B_i, \nu_i)) \to Hom((C,\nu), (B,\mu))
+\]
+is in fact a bijection.
+
+To show it is injective, let $\kappa([f]) = \kappa([g])$ with WLOG $f,g \in Hom((C,\nu), (B_i, \nu_i))$. This means we have a fork
+\[
+\begin{tikzcd}
+{(C,\nu)} \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & {(B_i,\mu_i)} \arrow[r] & {(B,\mu)},
+\end{tikzcd}
+\]
+which of course gives us a fork
+\[
+\begin{tikzcd}
+C \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & B_i \arrow[r] & B,
+\end{tikzcd}
+\]
+which by compactness of $C$ implies that $[f] = [g]$ in $colim_i Hom(C,B_i)$ and thus also in $colim_i Hom((C,\nu), (B_i, \nu_i))$. This shows injectivity.
+
+To prove surjectivity, let $f:(C, \nu) \to (B,\mu)$ be a map. By compactness of $C$, it factors through an inclusion:
+\[
+\begin{tikzcd}
+{(C,\nu)} \arrow[r, "\exists \hat{f}", dashed] \arrow[rd, "f"'] & {(B_i,\mu_i)} \arrow[d, "\iota_i"] \\
+                                                                & {(B,\mu)}                         ,
+\end{tikzcd}
+\]
+where in fact $\hat{f}$ is measure-preserving since $\mu_i(\hat{f} x) = \mu(\iota \hat{f} x) = \nu x$. This concludes the proof of surjectivity and thus we have proven that we have a fully faithful functor $Ind(FinProb^{op}) \to BProbAlg$.
+
+In order to show this functor is essentially surjective on objects, we need to show that every boolean probability algebra is a filtered colimit of finite probability algebras. So let $(B, \mu)$ be a boolean probability algebra. Certainly, we can write the underlying boolean algebra as a filtered colimit of finite boolean algebras
+\[
+B \cong colim_i B_i.
+\]
+Then the inclusions $\iota_i: B_i \to B$ let us induce a measure $\mu_i$ on $B_i$ ($\mu_i(x) := \mu(\iota_i x)$). To show that this is a diagram in $BProbAlg$, notice that for an arrow $f: i \to j$ in the indexing category, we get a commutative diagram
+\[
+\begin{tikzcd}
+{(B_i,\mu_i)} \arrow[r, "B_f"] \arrow[rd, "\iota_i"'] & {(B_j,\mu_j)} \arrow[d, "\iota_j"] \\
+                                                      & {(B,\mu)}                         ,
+\end{tikzcd}
+\]
+where in fact, $B_f$ is measure-preserving since $\iota_i$ and $\iota_j$ are measure-preserving.
+
+Now let $(B,\bar{\mu})$ be the colimit of $(B_i, \mu_i)$. Then for an $x \in B_i$, we have
+\[
+\bar{\mu}([x]) = \mu_i(x) = \mu([x]),
+\]
+so $\bar{\mu} = \mu$ and thus we have written $(B, \mu)$ as a filtered colimit of finite boolean probability algebras.
+\end{proof}
+
+\end{document}
