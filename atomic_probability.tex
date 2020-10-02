@@ -26,7 +26,34 @@
 \date{}
 \begin{document}
 \maketitle 
+\section{Definitions and Introduction}
+\begin{lemma}\label{dumbeq}$FinProb^{op}_{fin}$ is anti-equivalent to the category of finite sets $M$ with assignment $\mu_M: M\rightarrow (0,1]$ with $\sum_{m\in M}\mu_M(m)=1$ and morphisms $f:M\rightarrow N$, surjections, such that for any $n\in N$, $\sum_{m\in f^{-1}\{n \}}\mu_M (m)=\mu_N(n)$.
+\end{lemma}
+\begin{proof} The underlying boolean algebras of the measure algebras are $\mathcal{P}(n)$ for a finite set $n$. Morphisms of such boolean algebras are determined by morphisms of the sets pointing in the other direction. The maps need to be surjective, as else, the probabilities of the images fail to add to  $1$. The conditions including the sums express precisely, that $\mu_M$ extends to a measure on $\mathcal{P}(M)$ resp. that $f$ is measure preserving.
+\end{proof}
 
+\begin{lemma}\label{subcanonical} All morphisms in $FinProb^{op}_{fin}$ are strict monomorphisms.\footnote{It would also be nice if this were the case for $FinProb^{op}$. They are even regular! One proves this using some fiber stuff.}
+\end{lemma}
+\begin{proof} We show \emph{a fortiori} that all morphisms are regular monomorphisms. We apply \ref{dumbeq}.
+Given some morphism $f:A\rightarrow B$, we have the following fork:
+\begin{center}\begin{tikzcd}[column sep=large]
+\bigsqcup_{b\in B}f^{-1}\{b\}\times f^{-1}\{b \} \arrow[r, "\pi_1" description, two heads, shift left=2] \arrow[r, "\pi_2" description, two heads, shift right] & A \arrow[r, "f" description, two heads] \arrow[rd, "g" description, two heads] & B \arrow[d, "h" description,dotted] \\
+                                                                                                                                                                &                                                                                & C                  
+\end{tikzcd} \end{center}
+We endow $C=\bigsqcup_{b\in B}f^{-1}\{b\}\times f^{-1}\{b \}$ with the function given on $(c,d)\in f^{-1}\{b\}\times f^{-1}\{b \}$ as $\mu_C(c,d)=\mu_A(c)\mu_A(d)\mu_B(b)$.
+On underlying sets, this is a coequalizer in $Set$ as it is the coproduct of kernel pairs. Thus, there is exactly one map $h:B\rightarrow C$ making the diagram commute. As $g$ is surjective, so is $h$. It remains to show, that $h$ is measure preserving. Given $c\in C$, we compute:
+\[\sum_{b\in h^{-1}\{c \}} \mu_B(b)=\sum_{b\in h^{-1}\{c \}} \sum_{a \in f^{-1}\{ b\} } \mu_A(a)=\sum_{a\in g^{-1}\{c\}} \mu_A(a)=\mu_C(c) \] 
+Here the first equation holds as $f$ is measure preserving, the second is a reordering and the third holds as $g$ is measure preserving. This shows, that $f$ is a regular epi for any $f$. In particular, all morphisms in $FinProb^{op}_{fin}$ are regular monos.
+\end{proof}
+\begin{lemma}\label{rightore}
+$FinProb^{op}$ satisfies the right Ore condition. 
+\end{lemma}%I AM ALWAYS VERY UNCAUCIOUS WHEN I SHOULD DISTINGUISH THE ALGEBRAS FROM THE SETS WITH EQUIPMENTS
+\begin{proof}
+We use a similar idea as in the last proof. Given finite sets with measures $(A,\mu),(B,\nu)$ and $(C,\mu')$ and measure-preserving maps $f:(A,\mu)\rightarrow (C,\mu') ,g: (B,\nu)\rightarrow (C,\mu')$, we define a set $D=\bigsqcup_{c\in C} f^{-1}(c)\times g^{-1}(c)$ as the pullback of sets and a map $\nu':D\rightarrow (0,1]$ given by $\nu'(a,b)=\mu'(c)\mu(a)\nu(b)$ for $(a,b)\in f^{-1}(c)\times f^{-1}(d)$. The projection maps are clearly measurable.
+\end{proof}%Finish if you think this isnt formal enough
+\begin{corollary}
+The atomic topos $\textbf{Sh}(FinProb^{op},J_{at})$ exists using the na\"ive definition of an atomic topos.
+\end{corollary}
 \section{Boolean algebras with measures}
 
 We will show that the $Set$-based models of our topos are precisely boolean algebras equipped with probability measures(in the sense defined below) with a special property.
@@ -103,7 +130,7 @@ We do this by showing compactness of the finite probability algebras. Let $(C, \
 \]
 is in fact a bijection.
 
-To show it is injective, let $\kappa([f]) = \kappa([g])$ with WLOG $f,g \in Hom((C,\nu), (B_i, \nu_i))$. This means we have a fork
+To show it is hookrightarrowective, let $\kappa([f]) = \kappa([g])$ with WLOG $f,g \in Hom((C,\nu), (B_i, \nu_i))$. This means we have a fork
 \[
 \begin{tikzcd}
 {(C,\nu)} \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & {(B_i,\mu_i)} \arrow[r] & {(B,\mu)},
@@ -115,7 +142,7 @@ which of course gives us a fork
 C \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & B_i \arrow[r] & B,
 \end{tikzcd}
 \]
-which by compactness of $C$ implies that $[f] = [g]$ in $colim_i Hom(C,B_i)$ and thus also in $colim_i Hom((C,\nu), (B_i, \nu_i))$. This shows injectivity.
+which by compactness of $C$ implies that $[f] = [g]$ in $colim_i Hom(C,B_i)$ and thus also in $colim_i Hom((C,\nu), (B_i, \nu_i))$. This shows hookrightarrowectivity.
 
 To prove surjectivity, let $f:(C, \nu) \to (B,\mu)$ be a map. By compactness of $C$, it factors through an inclusion:
 \[
@@ -145,5 +172,62 @@ Now let $(B,\bar{\mu})$ be the colimit of $(B_i, \mu_i)$. Then for an $x \in B_i
 \]
 so $\bar{\mu} = \mu$ and thus we have written $(B, \mu)$ as a filtered colimit of finite boolean probability algebras.
 \end{proof}
+\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb^{op},J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=\bot$ and $\mu(b')=r\mu(b)$.
+\begin{proof} One needs to check which of the functors in $Ind(FinProb^{op})$ are $J_{at}$-continuous. As the covering sieves consist of single morphisms, this is equivalent to check that all maps in $FinProb^{op}$ are sent to epimorphisms. For a boolean probability algebra $(C,\mu')$, this is equivalent to the existence of measure-preserving lifts:
+\begin{center}
+\begin{tikzcd}
+{(A,\mu)} \arrow[r, "f"] \arrow[d, "g"'] & {(B,\nu)} \arrow[ld, "h" description, dotted] \\
+{(C,\mu')}                               &                                              
+\end{tikzcd}
+\end{center}
+for any $(A,\mu), (B,\nu)$ in $FinProb^{op}$ and measure-preserving maps $f,g$. We can factor $f$ into $f_0:(A,\mu)\rightarrow (A_1,\mu_1)$, $f_i: (A_i,\mu_i)\rightarrow (A_{i+1},\mu_{i+1})$ and $f_n: (A_n,\mu_n)\rightarrow (B,\nu)=:(A_{n+1},\mu_{n+1})$ such that $f=f_n\circ ...\circ f_0$ where $f_i$ have fibers consisting of exactly one element for all but one element of  $A_{i+1}$ whose fibers has exactly two elements. % do we have to explain this?
+\newline
+\indent This lets us reduce to the case where ....
+\end{proof}
+\end{theorem}
+\section{Galois theory}
+We seek to apply the following result due to O.Caramello:
+\begin{theorem}\label{olivia}
+Let $\mathcal{C}$ be a small, inhabited category satisfying the amalgamation and joint-embedding properties, and let $u$ be a $\mathcal{C}$-universal and $\mathcal{C}$-ultrahomogeneous object in $Ind(\mathcal{C})$. Then the collection $\mathcal{I}_{\mathcal{C}}$ of sets of the form $\mathcal{I}_{\chi}:=\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $, for an arrow $\chi:c\rightarrow u$ form an object $c$ of $\mathcal{C}$ to $u$ defines an algebraic base for the group of automorphisms of $u$ in $Ind(\mathcal{C})$, and, denoted by $Aut_\mathcal{C}$ the resulting topological group, we have an equivalence of toposes
+\[\textbf{Sh}(\mathcal{C}^{op},J_{at})\simeq \textbf{Cont}(Aut_\mathcal{C}) \]
+induced by the functor $F:\mathcal{C}^{op}\rightarrow \textbf{Cont}(Aut_{\mathcal{C}})$ which sends any object $c$ of $\mathcal{C}$ to the set $Hom_{Ind(\mathcal{C})}(c,u)$ equipped with the action by post-composition and any arrow $f:c\rightarrow d$ in $\mathcal{C}$ to pre-composition by $f$.
+\end{theorem}
+In our context we set $\mathcal{C}=FinProb^{op}$ and we claim that the boolean probability algebra $I$ defined by dividing the null-sets out the algebra of Borel-sets of the interval $\mathcal{B}(0,1]$ equipped with the Lebesgue measure $\lambda$ is  $FinProb^{op}$-universal and $FinProb^{op}$-ultrahomogeneous. More concretely, we have to prove the following:
+\begin{lemma}\begin{enumerate}
+\item $FinProb^{op}$ has a terminal object, proving the joint embedding property.
+\item $FinProb^{op}$ fulfils the right Ore condition.
+\item For any $(A,\mu),(B,\nu)$ in $FinProb^{op}$ , an arrow $f:(A,\mu)\rightarrow (B,\nu)$ in \\
+ $FinProb^{op}$, and arrows $\chi_1:(A,\mu)\rightarrow I$ as well as $\chi_2:(B,\nu)\rightarrow (I,\lambda)$ in $BProbAlg$ there exists an isomorphism $j':(I,\lambda)\rightarrow (I,\lambda)$ such that $j'\circ \chi_1=\chi_2\circ j$:
+ \begin{center}
+ \begin{tikzcd}
+{(A,\mu)} \arrow[r, "\chi_1"] \arrow[d, "j"'] & {(I,\lambda)} \arrow[d, "j'", dotted] \\
+{(B,\nu)} \arrow[r, "\chi_2"']                & {(I,\lambda)}                        
+\end{tikzcd}
+ \end{center}
+\item For any object $(A,\mu)$ of $FinProb^{op}$ there exists an arrow $\chi:(A,\mu)\rightarrow (I,\lambda)$ in $BProbAlg$.
+\end{enumerate}
+\end{lemma}
+\begin{proof} 
+\begin{enumerate}
+\item The one-element set $\{*\}$ with with measure $\mu(\star)=1$ is the terminal object. Its underlying set the terminal object in $Set$ and the universal map is tautologically measure preserving.
+\item We have already shown this in \ref{rightore}.
+\item We will show this by showing the corresponding statement for the interval $(\mathcal{B}(0,1),\lambda)$ in the category of boolean probability algebras with the possibility of nullsets and measure preserving maps and then proving that factors over the quotient map $Q: (\mathcal{B}(0,1],\lambda)\rightarrow (I,\lambda)$. Pls quote this :(
+\item Given a finite set $A$ with map $\mu:A\rightarrow (0,1]$, we can order the elements to give $A=\{a_1,...,a_n\}$ yielding a partition:
+\[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(a_j), \sum_{j=1}^{i} \mu(a_j))\]
+This yields a measure-preserving map $\chi':(A,\mu)\rightarrow (\mathcal{B}(0,1],\lambda)$. Set $\chi=Q\circ \chi'$.
 
+
+% \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\langle f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \rangle $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
+\end{enumerate}
+\end{proof}
+\begin{remark} This proof would also work for any homogeneous measure algebra instead of $I$.
+\end{remark}
+\begin{corollary} Let $G$ be the topological group of measure preserving dynamical systems on $(I,\lambda)$ topologised via an algebraic base given by collections $\mathcal{I}_{\chi}:=\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing a finite partition $\chi: (A,\mu)\rightarrow (I,\lambda)$. Then we get an equivalence of toposes, which is induced as in \ref{olivia}:
+\[\textbf{Sh}(FinProb^{op}, J_{at})\simeq \textbf{Cont}(G)\]
+\end{corollary}
+It follows that the atoms of the topos correspond to open subgroups of $G$. We shall classify them. %give ref
+\begin{lemma} The open subgroups of $G$ are precisely groups $\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing an at most countable partition $\chi: (A,\mu)\rightarrow (I,\lambda)$ i.e. $A$ is a boolean algebra $\mathcal{P}(\mathbb{N})$ or $\mathcal{P}(n)$ for some $n\in\mathbb{N}$, $\mu$ some measure without null-sets on it and $f$ is measure preserving.
+\end{lemma}
+\begin{proof} No idea.
+\end{proof}
 \end{document}
