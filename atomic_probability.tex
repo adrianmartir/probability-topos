@@ -225,7 +225,7 @@ where in fact, $B_f$ is measure-preserving since $\iota_i$ and $\iota_j$ are mea
 
 Now the colimit of the $(B_i, \mu_i)$ is in fact $(B, \mu)$ by the previous theorem. This concludes the proof.
 \end{proof}
-\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=\bot$ and $\mu(b')=r\mu(b)$.
+\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=\bot$ and $\mu(b')=r\mu(b)$.\end{theorem}
 \begin{proof} One needs to check which of the functors in $Ind(BProbAlg_f)$ are $J_{at}$-continuous. As the covering sieves consist of single morphisms, this is equivalent to check that all maps in $BProbAlg_f$ are sent to epimorphisms. For a boolean probability algebra $(C,\mu')$, this is equivalent to the existence of measure-preserving lifts:
 \begin{center}
 \begin{tikzcd}
@@ -233,11 +233,17 @@ Now the colimit of the $(B_i, \mu_i)$ is in fact $(B, \mu)$ by the previous theo
 {(C,\mu')}                               &                                              
 \end{tikzcd}
 \end{center}
-for any $(A,\mu), (B,\nu)$ in $BProbAlg_f$ and measure-preserving maps $f,g$. We can factor $f$ into $f_0:(A,\mu)\rightarrow (A_1,\mu_1)$, $f_i: (A_i,\mu_i)\rightarrow (A_{i+1},\mu_{i+1})$ and $f_n: (A_n,\mu_n)\rightarrow (B,\nu)=:(A_{n+1},\mu_{n+1})$ such that $f=f_n\circ ...\circ f_0$ where $f_i$ have fibers consisting of exactly one element for all but one element of  $A_{i+1}$ whose fibers has exactly two elements. % do we have to explain this?
+for any $(A,\mu), (B,\nu)$ in $BProbAlg_f$ and measure-preserving maps $f,g$. We can factor $f$ into $f_0:(A,\mu)\rightarrow (A_1,\mu_1)$, $f_i: (A_i,\mu_i)\rightarrow (A_{i+1},\mu_{i+1})$ and $f_n: (A_n,\mu_n)\rightarrow (B,\nu)=:(A_{n+1},\mu_{n+1})$ such that $f=f_n\circ ...\circ f_0$ where the corresponding $FinProb$-maps of $f_i$ have fibers consisting of exactly one element for all but one $a_i\in A_{i}$ whose fibers has exactly two elements. 
 \newline
-\indent This lets us reduce to the case where ....
+\indent This lets us reduce to the case where $(A,\mu)=(\mathcal{P}(\{a,b \}),\tilde{\mu})$ and $(B,\nu)=(\mathcal{P}(\{a',b',c'\}),\tilde{\nu})$ by setting $\tilde{\mu}(a)=\mu(a_i)$, $\tilde{\nu}(a')=\nu(x)$ and $\tilde{\nu}(b')=\nu(y)$ for the fibers $x,y$ of $a_i$. So the lifting property is equivalent for diagrams of the following form:
+\begin{center}
+\begin{tikzcd}
+{(\mathcal{P}(2),\mu)} \arrow[d, "g"'] \arrow[r, "f"] & {(\mathcal{P}(3),\nu)} \arrow[ld, "h" description, dotted] \\
+{(C,\mu')}                                            &                                                           
+\end{tikzcd}
+\end{center}
+A map of boolean algebras $\mathcal{P}(2)\rightarrow C$ is equivalent to giving a element $b\in C$. Choosing a morphism $f$ to a finite boolean measure algebra given by a measure $\nu$ on $\mathcal{P}(3)$ is a partition $b'\vee b''=b$, $b'\wedge b''=\bot$ for some arbitrary $0<\mu'(b')<\mu(b)$.
 \end{proof}
-\end{theorem}
 
 
 \section{Galois theory}
@@ -255,7 +261,7 @@ Let $I$ denote the boolean probability algebra defined by the boolean algebra of
 \item $FinProb$ has a terminal object, proving the joint embedding property.
 \item $FinProb$ fulfills the right Ore condition.
 \item For any $(A,\mu),(B,\nu)$ in $BProbAlg_f$ , an arrow $f:(A,\mu)\rightarrow (B,\nu)$ in \\
- $BProbAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow I$ as well as $\chi_2:(B,\nu)\rightarrow (I,\lambda)$ in $BProbAlg$ there exists an isomorphism $j':(I,\lambda)\rightarrow (I,\lambda)$ such that $j'\circ \chi_1=\chi_2\circ j$:
+ $BProbAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (I,\lambda)$ as well as $\chi_2:(B,\nu)\rightarrow (I,\lambda)$ in $BProbAlg$ there exists an isomorphism $j':(I,\lambda)\rightarrow (I,\lambda)$ such that $j'\circ \chi_1=\chi_2\circ j$:
  \begin{center}
  \begin{tikzcd}
 {(A,\mu)} \arrow[r, "\chi_1"] \arrow[d, "j"'] & {(I,\lambda)} \arrow[d, "j'", dotted] \\
@@ -285,7 +291,7 @@ Since $2 := \{\bot, \top\}$ with the unique probability measure is the initial o
 Since $\top$ has the same measure in both algebras, we can now use a corollary of Maharam's theorem [Fremlin 331P] in order to get our isomorphism.
 
 \item Given a finite probability space $(A,\mu)$, we can order the elements to give $A=\{a_1,...,a_n\}$ yielding a partition:
-\[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(a_j), \sum_{j=1}^{i} \mu(a_j))\]
+\[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(a_j), \sum_{j=1}^{i} \mu(a_j)]\]
 This yields a measure-preserving map $\chi':(\mathcal{P} A,\mu)\rightarrow (I,\lambda)$.
 
 
@@ -296,7 +302,7 @@ This yields a measure-preserving map $\chi':(\mathcal{P} A,\mu)\rightarrow (I,\l
 Notice that by using this corollary of Maharam's theorem we have implicitly used the axiom of choice. It wouldn't be surprising if this application of the axiom of choice was inessential, since we only need the fact that all subalgebras $\downarrow x$ (where $x \in I$ has fixed measure) of $I$ with their induced measure are isomorphic(as boolean algebras equipped with measures).
 
 \begin{remark}
-This proof would also work for any homogeneous measure algebra instead of $(I, \lambda)$.
+This proof would also work for any homogeneous measure algebra instead of $I$.
 \end{remark}
 \begin{corollary} Let $G$ be the topological group of measure preserving dynamical systems on $(I,\lambda)$ topologised via an algebraic base given by collections $\mathcal{I}_{\chi}:=\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing a finite partition $\chi: (A,\mu)\rightarrow (I,\lambda)$. Then we get an equivalence of toposes, which is induced as in \ref{olivia}:
 \[\textbf{Sh}(FinProb, J_{at})\simeq \textbf{Cont}(G)\]
