@@ -91,14 +91,13 @@ to show that the flat functors consist precisely of the boolean probability alge
 
 \begin{definition}
 \begin{enumerate}
-\item Let $B$ be a boolean algebra. We say a map $\mu: B \to \mathbb{R}_{\geq 0}$ is a probability measure if for elements $a,b \in B$, the following holds:
+\item Let $B$ be a boolean algebra. We say a map $\mu: B \to \mathbb{R}_{\geq 0}$ is a measure if for elements $a,b \in B$, the following holds:
 \begin{itemize}
 \item $\mu(a) = 0$ if and only if $a = \bot $,
-\item $\mu(\top) = 1$,
 \item $\mu(a) + \mu(b) = \mu(a \vee b) + \mu(a \wedge b)$.
 \end{itemize}
-We will call a pair $(B, \mu)$ of a boolean algebra and a probability measure $\mu$ on $B$ a boolean probability algebra.
-\item We define a measure-preserving map $(B, \mu) \to (C, \nu)$ between boolean probability algebras to be a map of boolean algebras $f: B \to C$ satisfying
+We will call a pair $(B, \mu)$ of a boolean measure and a measure a boolean measure algebra. If moreover $\mu(\top) = 1$, we say that $\mu$ is a  probability measure and $(B,\mu)$ a boolean probability algebra.
+\item We define a measure-preserving map $(B, \mu) \to (C, \nu)$ between boolean measure algebras to be a map of boolean algebras $f: B \to C$ satisfying
 \[
 \nu(f(x)) = \mu(x)
 \]
@@ -166,7 +165,7 @@ so we have shown how to construct filtered colimits.
 
 Now we are ready to prove the following fact:
 
-\begin{theorem} We have an equivalence of categories
+\begin{theorem} \label{ind} We have an equivalence of categories
 \[
 Ind(BProbAlg_f) \simeq BProbAlg
 \]
@@ -204,7 +203,7 @@ which by compactness of $C$ implies that $[f] = [g]$ in $colim_i Hom(C,B_i)$ and
 To prove surjectivity, let $f:(C, \nu) \to (B,\mu)$ be a map. By compactness of $C$, it factors through an inclusion:
 \[
 \begin{tikzcd}
-{(C,\nu)} \arrow[r, "\exists \hat{f}", dashed] \arrow[rd, "f"'] & {(B_i,\mu_i)} \arrow[d, "\iota_i"] \\
+{(C,\nu)} \arrow[r, "\hat{f}" description, dotted] \arrow[rd, "f"'] & {(B_i,\mu_i)} \arrow[d, "\iota_i"] \\
                                                                 & {(B,\mu)}                         ,
 \end{tikzcd}
 \]
@@ -225,24 +224,40 @@ where in fact, $B_f$ is measure-preserving since $\iota_i$ and $\iota_j$ are mea
 
 Now the colimit of the $(B_i, \mu_i)$ is in fact $(B, \mu)$ by the previous theorem. This concludes the proof.
 \end{proof}
+
+Proving things about diagrams of boolean probability algebras, often very easy due to the following facts:
+
+\begin{remark}\label{partitions}
+\begin{enumerate}
+\item In the category of boolean algebras, if one has a boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = \top$ and $a \wedge b = \bot$). A decomposition $B \times C$ induces the partition $(\top,\bot), (\bot,\top)$ on $A$ and conversely the partition $a,b$ induces the decomposition $A \cong \downarrow(a) \times \downarrow(b)$ into the boolean algebra of elements smaller than $a$ and the boolean algebra of elements smaller than $b$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
+\item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
+\item Notice that if $(A,\mu)$ is a finite boolean measure algebra and $(B,\nu)$ a boolean measure algebra, then a map $(A,\mu) \to (B,\nu)$ consists precisely of a partition of $B$ into elements $b_a$ for each atom of $A$ such that $\mu(b_a) = \mu(a)$.
+\end{enumerate}
+\end{remark}
+
 \begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=\bot$ and $\mu(b')=r\mu(b)$.\end{theorem}
-\begin{proof} One needs to check which of the functors in $Ind(BProbAlg_f)$ are $J_{at}$-continuous. As the covering sieves consist of single morphisms, this is equivalent to check that all maps in $BProbAlg_f$ are sent to epimorphisms. For a boolean probability algebra $(C,\mu')$, this is equivalent to the existence of measure-preserving lifts:
+\begin{proof} The category of points is given by the category of $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$.  The equivalence 
+\[
+Flat(BProbAlg_f^{op}, Set) \simeq Ind(BProbAlg_f) \simeq BProbAlg
+\]
+shows that the flat functors are precisely the $BProbAlg(-,(B,\nu))$ for a boolean probability algebra $(B,\nu)$. As the covering sieves consist of single morphisms, the $J_{at}$-flat functors will consist of the $BProbAlg(-,(B,\nu))$ for which all maps in $BProbAlg_f$ are sent to epimorphisms. This is equivalent to the existence of measure-preserving lifts:
 \begin{center}
 \begin{tikzcd}
-{(A,\mu)} \arrow[r, "f"] \arrow[d, "g"'] & {(B,\nu)} \arrow[ld, "h" description, dotted] \\
-{(C,\mu')}                               &                                              
+{(A_1, \mu_1)} \arrow[r, "g"] \arrow[rd, "f"'] & {(A_2,\mu_2)} \arrow[d, "\bar{f}" description, dotted] \\
+                                               & {(B,\nu)}                                 
 \end{tikzcd}
 \end{center}
-for any $(A,\mu), (B,\nu)$ in $BProbAlg_f$ and measure-preserving maps $f,g$. We can factor $f$ into $f_0:(A,\mu)\rightarrow (A_1,\mu_1)$, $f_i: (A_i,\mu_i)\rightarrow (A_{i+1},\mu_{i+1})$ and $f_n: (A_n,\mu_n)\rightarrow (B,\nu)=:(A_{n+1},\mu_{n+1})$ such that $f=f_n\circ ...\circ f_0$ where the corresponding $FinProb$-maps of $f_i$ have fibers consisting of exactly one element for all but one $a_i\in A_{i}$ whose fibers has exactly two elements. 
-\newline
-\indent This lets us reduce to the case where $(A,\mu)=(\mathcal{P}(\{a,b \}),\tilde{\mu})$ and $(B,\nu)=(\mathcal{P}(\{a',b',c'\}),\tilde{\nu})$ by setting $\tilde{\mu}(a)=\mu(a_i)$, $\tilde{\nu}(a')=\nu(x)$ and $\tilde{\nu}(b')=\nu(y)$ for the fibers $x,y$ of $a_i$. So the lifting property is equivalent for diagrams of the following form:
+for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BProbAlg_f$ and measure-preserving maps $f,g$. The atoms $a_i$ in $A_1$ give us a partition that gets preserved by $f$ and $g$. Thus we get decompositions (see \ref{partitions}) of $A_2$ and $B$ and our problem decomposes into finding measure-preserving lifts
+
 \begin{center}
 \begin{tikzcd}
-{(\mathcal{P}(2),\mu)} \arrow[d, "g"'] \arrow[r, "f"] & {(\mathcal{P}(3),\nu)} \arrow[ld, "h" description, dotted] \\
-{(C,\mu')}                                            &                                                           
-\end{tikzcd}
+2 \arrow[r] \arrow[rd] & \downarrow(g a_i) \arrow[d, "\bar{f}^i" description, dotted] \\
+                                               & \downarrow(f a_i)
+\end{tikzcd}.
 \end{center}
-A map of boolean algebras $\mathcal{P}(2)\rightarrow C$ is equivalent to giving a element $b\in C$. Choosing a morphism $f$ to a finite boolean measure algebra given by a measure $\nu$ on $\mathcal{P}(3)$ is a partition $b'\vee b''=b$, $b'\wedge b''=\bot$ for some arbitrary $0<\mu'(b')<\mu(b)$.
+But $2 := \{\bot, \top\}$ can be ignored. Furthermore, $\downarrow(g a_i)$ is finite, so by $\ref{partitions}$, such a map $\bar{f}^i$ is precisely a partition $x_1, \cdots, x_m$ of $B^i$ into a fixed number of elements that have a predetermined measure.
+
+We can summarize our findings as follows: $BProbAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $\downarrow(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
 \end{proof}
 
 
@@ -275,24 +290,23 @@ Let $I$ denote the boolean probability algebra defined by the boolean algebra of
 \begin{enumerate}
 \item The one-element set $\{*\}$ with with measure $\mu(\star)=1$ is the terminal object. Its underlying set the terminal object in $Set$ and the universal map is tautologically measure preserving.
 \item We have already shown this in \ref{pullback_measure}.
-\item First, we claim that in the category of boolean algebras if one has a boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = \top$ and $a \wedge b = \bot$). A decomposition $B \times C$ induces the partition $(\top,\bot), (\bot,\top)$ on $A$ and conversely the partition $a,b$ induces the decomposition $A \cong \downarrow(a) \times \downarrow(b)$ into the boolean algebra of elements smaller than $a$ and the boolean algebra of elements smaller than $b$.
-
-Now, given boolean probability algebras as in the claim above, we see that $(A, \mu)$ has a partition into atoms $x_i$. Crucially, if we apply a map of boolean algebras to this partition, we get a partition again. This means we can decompose our problem into finding a measure-preserving map $j'$ as below:
+\item
+Now, given boolean probability algebras as in the claim above, we see that $(A, \mu)$ has a partition into atoms $x_i$. Crucially, if we apply a map of boolean algebras to this partition, we get a partition again. This means we can decompose our problem(by \ref{partitions}) into finding a measure-preserving map $j'$ as below:
 \[
 \begin{tikzcd}
 2 \arrow[d, "j"'] \arrow[r, "\chi_1"]  & \downarrow(\chi_1 x_i) \arrow[d, "j'", dotted] \\
 \downarrow(j x_i) \arrow[r, "\chi_2"'] & \downarrow(\chi_2 j x_i)                      
 \end{tikzcd}
 \]
-Since $2 := \{\bot, \top\}$ with the unique probability measure is the initial object in $BProbAlg_f$ (see (i)), it suffices to show that we have a measure-preserving isomorphism of boolean algebras
+Since $2 := \{\bot, \top\}$ is the initial object in boolean algebras, it suffices to show that we have a measure-preserving isomorphism of boolean algebras
 \[
 \downarrow(\chi_1 x_i) \cong \downarrow(\chi_2 j x_i).
 \]
 Since $\top$ has the same measure in both algebras, we can now use a corollary of Maharam's theorem [Fremlin 331P] in order to get our isomorphism.
 
-\item Given a finite probability space $(A,\mu)$, we can order the elements to give $A=\{a_1,...,a_n\}$ yielding a partition:
-\[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(a_j), \sum_{j=1}^{i} \mu(a_j)]\]
-This yields a measure-preserving map $\chi':(\mathcal{P} A,\mu)\rightarrow (I,\lambda)$.
+\item Given a finite probability space $(X,\mu)$, we can order the elements to give $X=\{x_1,...,x_n\}$ yielding a partition:
+\[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(x_j), \sum_{j=1}^{i} \mu(x_j)]\]
+This yields a measure-preserving map $\chi':(\mathcal{P} X,\mu)\rightarrow (I,\lambda)$.
 
 
 % \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\langle f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \rangle $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
