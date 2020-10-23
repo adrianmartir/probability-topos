@@ -93,10 +93,10 @@ to show that the flat functors consist precisely of the boolean probability alge
 \begin{enumerate}
 \item Let $B$ be a boolean algebra. We say a map $\mu: B \to \mathbb{R}_{\geq 0}$ is a measure if for elements $a,b \in B$, the following holds:
 \begin{itemize}
-\item $\mu(a) = 0$ if and only if $a = \bot $,
+\item $\mu(a) = 0$ if and only if $a = 0 $,
 \item $\mu(a) + \mu(b) = \mu(a \vee b) + \mu(a \wedge b)$.
 \end{itemize}
-We will call a pair $(B, \mu)$ of a boolean measure and a measure a boolean measure algebra. If moreover $\mu(\top) = 1$, we say that $\mu$ is a  probability measure and $(B,\mu)$ a boolean probability algebra.
+We will call a pair $(B, \mu)$ of a boolean measure and a measure a boolean measure algebra. If moreover $\mu(1) = 1$, we say that $\mu$ is a  probability measure and $(B,\mu)$ a boolean probability algebra.
 \item We define a measure-preserving map $(B, \mu) \to (C, \nu)$ between boolean measure algebras to be a map of boolean algebras $f: B \to C$ satisfying
 \[
 \nu(f(x)) = \mu(x)
@@ -147,8 +147,8 @@ where for $a \in B_i$, $\mu([a]) := \mu_i(a)$.
 \begin{proof}
 First note that $\mu$ is well-defined, because the maps in the diagram preserve the measure. Moreover, we can check the axioms of a measure WLOG for $a,b \in B_i$:
 \begin{itemize}
-\item $\mu([a]) = 0 \Leftrightarrow \mu_i(a) = 0 \Leftrightarrow a = \bot$
-\item $\mu(\top) = \mu_i(\top) = 1$
+\item $\mu([a]) = 0 \Leftrightarrow \mu_i(a) = 0 \Leftrightarrow a = 0$
+\item $\mu(1) = \mu_i(1) = 1$
 \item \begin{align*}
 \mu([a] \vee [b]) + \mu([a] \wedge [b]) &= \mu([a \vee b]) + \mu([a \wedge b]) \\
 &= \mu_i(a \vee b) + \mu_i(a \wedge b) \\
@@ -229,13 +229,14 @@ Proving things about diagrams of boolean probability algebras, often very easy d
 
 \begin{remark}\label{partitions}
 \begin{enumerate}
-\item In the category of boolean algebras, if one has a boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = \top$ and $a \wedge b = \bot$). A decomposition $B \times C$ induces the partition $(\top,\bot), (\bot,\top)$ on $A$ and conversely the partition $a,b$ induces the decomposition $A \cong \downarrow(a) \times \downarrow(b)$ into the boolean algebra of elements smaller than $a$ and the boolean algebra of elements smaller than $b$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
+\item In the category of boolean algebras, if one has a boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = 1$ and $a \wedge b = 0$). A decomposition $B \times C$ induces the partition $(1,0), (0,1)$ on $A$ and conversely the partition $a,b$ induces the decomposition $A \cong \downarrow(a) \times \downarrow(b)$ into the boolean algebra of elements smaller than $a$ and the boolean algebra of elements smaller than $b$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
 \item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
+\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BProbAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
 \item Notice that if $(A,\mu)$ is a finite boolean measure algebra and $(B,\nu)$ a boolean measure algebra, then a map $(A,\mu) \to (B,\nu)$ consists precisely of a partition of $B$ into elements $b_a$ for each atom of $A$ such that $\mu(b_a) = \mu(a)$.
 \end{enumerate}
 \end{remark}
 
-\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=\bot$ and $\mu(b')=r\mu(b)$.\end{theorem}
+\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=0$ and $\mu(b')=r\mu(b)$.\end{theorem}
 \begin{proof} The category of points is given by the category of $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$.  The equivalence 
 \[
 Flat(BProbAlg_f^{op}, Set) \simeq Ind(BProbAlg_f) \simeq BProbAlg
@@ -255,13 +256,53 @@ for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BProbAlg_f$ and measure-preserving maps $
                                                & \downarrow(f a_i)
 \end{tikzcd}.
 \end{center}
-But $2 := \{\bot, \top\}$ can be ignored. Furthermore, $\downarrow(g a_i)$ is finite, so by $\ref{partitions}$, such a map $\bar{f}^i$ is precisely a partition $x_1, \cdots, x_m$ of $B^i$ into a fixed number of elements that have a predetermined measure.
+But $2 := \{0, 1\}$ can be ignored. Furthermore, $\downarrow(g a_i)$ is finite, so by $\ref{partitions}$, such a map $\bar{f}^i$ is precisely a partition $x_1, \cdots, x_m$ of $B^i$ into a fixed number of elements that have a predetermined measure.
 
 We can summarize our findings as follows: $BProbAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $\downarrow(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
 \end{proof}
 
+TODO: Call this sort of (boolean) probability algebra a (boolean) continuum probability algebra.
+
+\section{Boolean Probability Algebras II}
+
+Note: There are no countable Set-based models. This is about the measure-theoretic continuum.
+
+\begin{definition}
+Define the geometric theory $\mathbb{T}$ of boolean probability algebras to have one sort $B$, constants and function symbols
+\begin{center}
+$1: B$ \\
+$0: B$ \\
+$\wedge: B \times B \to B$ \\
+$\vee: B \times B \to B$
+\end{center}
+and a unary relation symbol $B_r$ on $B$ for each $r \in [0,1]$. We impose the following axioms($a$, $b$ and $c$ denote free variables in $B$):
+\begin{itemize}
+\item Boolean algebra:
+\begin{align*}
+\top &\vdash a \wedge (b \wedge c) = (a \wedge b) \wedge c && \text{associativity} \\
+\top &\vdash a \vee (b \vee c) = (a \vee b) \vee c && \text{associativity} \\
+\top &\vdash a \wedge 1 = a && \text{identity} \\
+\top &\vdash a \vee 0 = a && \text{identity}\\
+\top &\vdash a \wedge \neg{a} = 0 && \text{inverse}\\
+\top &\vdash a \vee \neg{a} = 1 && \text{inverse}\\
+\top &\vdash a \wedge (a \vee b) = a && \text{absorbtion}\\
+\top &\vdash a \vee (a \wedge b) = a && \text{absorbtion}\\
+\top &\vdash a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge c) && \text{distributivity} \\
+\top &\vdash a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c) && \text{distributivity}
+\end{align*}
+\item $B_r$ form a partition:
+\item Probability measure:
+\end{itemize}
+\end{definition}
 
 \section{Galois theory}
+
+We have seen that $Set^{FinSet^{op}}$ is really about statements about a measure-theoretic notion of a continuum. Traditionally, the interval with the Lebesgue measure has played this role. In this section we will see that the interval equipped with the Lebesgue measure already understands all statements about the continuum probability algebras. In fact, this interval is not special. Our proof will work precisely the same for (all?) continuum probability algebras that are complete(are they always complete?). (Are all continuum probability algebras surjective points?). Also: When do we need choice?
+
+I would hope for a positive answer to the questions above and interpret it as follows: Using our construction, we have derived an axiomatization of a measure-theoretic continuum that for the many intents and purposes behaves like the interval. The most interesting thing, is that the probability theoretic intuition of the choice of base measure space being irrelevant for all intents and purposes, now gets a mathematical formalism. Only that now, by requiring extension properties in the atomic topology, we saw that we might as well stop talking about non-continuum probability algebras. Talking about them would allow us to talk about specific atoms, which is undesirable(Some Tao extension stuff here).
+
+So in a very real way, the study of $Set^{FinSet^{op}}$ is precisely the study of a very well-behaved continuum. Thus, it is reasonable to expect being able to do probability theory based on this topos. One should think about $Set^{FinSet^{op}}$ as some sort of universal probability space representing the continuum.
+
 We seek to apply the following result due to O.Caramello:
 
 \begin{theorem}\label{olivia}
@@ -298,11 +339,11 @@ Now, given boolean probability algebras as in the claim above, we see that $(A, 
 \downarrow(j x_i) \arrow[r, "\chi_2"'] & \downarrow(\chi_2 j x_i)                      
 \end{tikzcd}
 \]
-Since $2 := \{\bot, \top\}$ is the initial object in boolean algebras, it suffices to show that we have a measure-preserving isomorphism of boolean algebras
+Since $2 := \{0, 1\}$ is the initial object in boolean algebras, it suffices to show that we have a measure-preserving isomorphism of boolean algebras
 \[
 \downarrow(\chi_1 x_i) \cong \downarrow(\chi_2 j x_i).
 \]
-Since $\top$ has the same measure in both algebras, we can now use a corollary of Maharam's theorem [Fremlin 331P] in order to get our isomorphism.
+Since $1$ has the same measure in both algebras, we can now use a corollary of Maharam's theorem [Fremlin 331P] in order to get our isomorphism.
 
 \item Given a finite probability space $(X,\mu)$, we can order the elements to give $X=\{x_1,...,x_n\}$ yielding a partition:
 \[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(x_j), \sum_{j=1}^{i} \mu(x_j)]\]
