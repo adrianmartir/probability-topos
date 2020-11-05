@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 %\usepackage[hyphens]{url} \urlstyle{same}
 \usepackage{tikz}
+\usepackage{mathtools}
 \usetikzlibrary{cd}
 %\usepackage[dvips]{graphicx} %% Package for inserting illustrations/figures
 
@@ -101,8 +102,8 @@ We will call a pair $(B, \mu)$ of a boolean measure and a measure a boolean meas
 \[
 \nu(f(x)) = \mu(x)
 \]
-for all $x \in B$. We will denote the category of boolean probability algebras with measure-preserving maps by $BProbAlg$.
-\item Denote the full subcategory of $BProbAlg$ given by the finite boolean probability algebras by $BProbAlg_f$.
+for all $x \in B$. We will denote the category of boolean probability algebras with measure-preserving maps by $BPAlg$.
+\item Denote the full subcategory of $BPAlg$ given by the finite boolean probability algebras by $BPAlg_f$.
 \end{enumerate}
 \end{definition}
 
@@ -114,7 +115,7 @@ Before we get to prove anything interesting, we need to get the following out of
 
 \begin{theorem}\label{Imnotdumb} We have an equivalence of categories
 \[
-FinProb^{op} \simeq BProbAlg_f
+FinProb^{op} \simeq BPAlg_f
 \]
 defined by sending a finite probability space $(X, \mu)$ to the finite boolean probability algebra $(\mathcal{P} X, \bar{\mu})$, where
 \[
@@ -134,8 +135,8 @@ First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is 
 The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
 \end{proof}
 
-From now on we will implicitly use this equivalence and use $FinProb$ or $BProbAlg_f$ depending on which variance more convenient.
-For computing the $Ind$-completion of $FinProb^{op} \simeq BProbAlg_f$ , first notice that for Lawvere theories we have that the forgetful functor into $Set$ creates filtered colimits. This is a special case of [Theorem 5.6.5 ii) in Riehl], if one uses the well-known correspondence between finitary monads and Lawvere theories. Using this explicit description of the underlying set of a filtered colimit of boolean algebras, we can define filtered colimits in $BProbAlg$:
+From now on we will implicitly use this equivalence and use $FinProb$ or $BPAlg_f$ depending on which variance more convenient.
+For computing the $Ind$-completion of $FinProb^{op} \simeq BPAlg_f$ , first notice that for Lawvere theories we have that the forgetful functor into $Set$ creates filtered colimits. This is a special case of [Theorem 5.6.5 ii) in Riehl], if one uses the well-known correspondence between finitary monads and Lawvere theories. Using this explicit description of the underlying set of a filtered colimit of boolean algebras, we can define filtered colimits in $BPAlg$:
 
 \begin{theorem} 
 If $(B_i, \mu_i)$ is a filtered diagram of boolean probability algebras and $B := colim_i B_i$ is the colimit of the underlying boolean algebras, we have that
@@ -167,18 +168,18 @@ Now we are ready to prove the following fact:
 
 \begin{theorem} \label{ind} We have an equivalence of categories
 \[
-Ind(BProbAlg_f) \simeq BProbAlg
+Ind(BPAlg_f) \simeq BPAlg
 \]
 given by sending a formal filtered colimit to the corresponding filtered colimit of boolean probability algebras.
 \end{theorem}
 \begin{proof}
-Morphisms between two diagrams $F$, $G$ in $BProbAlg_f$ in the $Ind$-completion are defined by
+Morphisms between two diagrams $F$, $G$ in $BPAlg_f$ in the $Ind$-completion are defined by
 \[
-lim_d colim_c BProbAlg_f(F d, G c).
+lim_d colim_c BPAlg_f(F d, G c).
 \]
 In order to define the equivalence on morphisms, we would like to construct an isomorphism
 \[
-lim_d colim_c BProbAlg_f(F d, G c) \cong BProbAlg(colim F, colim G).
+lim_d colim_c BPAlg_f(F d, G c) \cong BPAlg(colim F, colim G).
 \]
 We do this by showing compactness of the finite probability algebras. Let $(C, \mu)$ be a finite probability algebra and $(B_i, \mu_i)$ be a filtered diagram with colimit $(B, \mu)$. We want to show that the map
 \[
@@ -207,13 +208,13 @@ To prove surjectivity, let $f:(C, \nu) \to (B,\mu)$ be a map. By compactness of 
                                                                 & {(B,\mu)}                         ,
 \end{tikzcd}
 \]
-where in fact $\hat{f}$ is measure-preserving since $\mu_i(\hat{f} x) = \mu(\iota \hat{f} x) = \nu x$. This concludes the proof of surjectivity and thus we have proven that we have a fully faithful functor $Ind(BProbAlg_f) \to BProbAlg$.
+where in fact $\hat{f}$ is measure-preserving since $\mu_i(\hat{f} x) = \mu(\iota \hat{f} x) = \nu x$. This concludes the proof of surjectivity and thus we have proven that we have a fully faithful functor $Ind(BPAlg_f) \to BPAlg$.
 
 In order to show this functor is essentially surjective on objects, we need to show that every boolean probability algebra is a filtered colimit of finite probability algebras. So let $(B, \mu)$ be a boolean probability algebra. Certainly, we can write the underlying boolean algebra as a filtered colimit of finite boolean algebras
 \[
 B \cong colim_i B_i.
 \]
-Then the inclusions $\iota_i: B_i \to B$ let us induce a measure $\mu_i$ on $B_i$ ($\mu_i(x) := \mu(\iota_i x)$). To show that this is a diagram in $BProbAlg$, notice that for an arrow $f: i \to j$ in the indexing category, we get a commutative diagram
+Then the inclusions $\iota_i: B_i \to B$ let us induce a measure $\mu_i$ on $B_i$ ($\mu_i(x) := \mu(\iota_i x)$). To show that this is a diagram in $BPAlg$, notice that for an arrow $f: i \to j$ in the indexing category, we get a commutative diagram
 \[
 \begin{tikzcd}
 {(B_i,\mu_i)} \arrow[r, "B_f"] \arrow[rd, "\iota_i"'] & {(B_j,\mu_j)} \arrow[d, "\iota_j"] \\
@@ -231,24 +232,24 @@ Proving things about diagrams of boolean probability algebras, often very easy d
 \begin{enumerate}
 \item In the category of boolean algebras, if one has a boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = 1$ and $a \wedge b = 0$). A decomposition $B \times C$ induces the partition $(1,0), (0,1)$ on $A$ and conversely the partition $a,b$ induces the decomposition $A \cong \downarrow(a) \times \downarrow(b)$ into the boolean algebra of elements smaller than $a$ and the boolean algebra of elements smaller than $b$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
 \item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
-\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BProbAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
+\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BPAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
 \item Notice that if $(A,\mu)$ is a finite boolean measure algebra and $(B,\nu)$ a boolean measure algebra, then a map $(A,\mu) \to (B,\nu)$ consists precisely of a partition of $B$ into elements $b_a$ for each atom of $A$ such that $\mu(b_a) = \mu(a)$.
 \end{enumerate}
 \end{remark}
 
-\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BProbAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=0$ and $\mu(b')=r\mu(b)$.\end{theorem}
+\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BPAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=0$ and $\mu(b')=r\mu(b)$.\end{theorem}
 \begin{proof} The category of points is given by the category of $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$.  The equivalence 
 \[
-Flat(BProbAlg_f^{op}, Set) \simeq Ind(BProbAlg_f) \simeq BProbAlg
+Flat(BPAlg_f^{op}, Set) \simeq Ind(BPAlg_f) \simeq BPAlg
 \]
-shows that the flat functors are precisely the $BProbAlg(-,(B,\nu))$ for a boolean probability algebra $(B,\nu)$. As the covering sieves consist of single morphisms, the $J_{at}$-flat functors will consist of the $BProbAlg(-,(B,\nu))$ for which all maps in $BProbAlg_f$ are sent to epimorphisms. This is equivalent to the existence of measure-preserving lifts:
+shows that the flat functors are precisely the $BPAlg(-,(B,\nu))$ for a boolean probability algebra $(B,\nu)$. As the covering sieves consist of single morphisms, the $J_{at}$-flat functors will consist of the $BPAlg(-,(B,\nu))$ for which all maps in $BPAlg_f$ are sent to epimorphisms. This is equivalent to the existence of measure-preserving lifts:
 \begin{center}
 \begin{tikzcd}
 {(A_1, \mu_1)} \arrow[r, "g"] \arrow[rd, "f"'] & {(A_2,\mu_2)} \arrow[d, "\bar{f}" description, dotted] \\
                                                & {(B,\nu)}                                 
 \end{tikzcd}
 \end{center}
-for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BProbAlg_f$ and measure-preserving maps $f,g$. The atoms $a_i$ in $A_1$ give us a partition that gets preserved by $f$ and $g$. Thus we get decompositions (see \ref{partitions}) of $A_2$ and $B$ and our problem decomposes into finding measure-preserving lifts
+for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BPAlg_f$ and measure-preserving maps $f,g$. The atoms $a_i$ in $A_1$ give us a partition that gets preserved by $f$ and $g$. Thus we get decompositions (see \ref{partitions}) of $A_2$ and $B$ and our problem decomposes into finding measure-preserving lifts
 
 \begin{center}
 \begin{tikzcd}
@@ -258,26 +259,27 @@ for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BProbAlg_f$ and measure-preserving maps $
 \end{center}
 But $2 := \{0, 1\}$ can be ignored. Furthermore, $\downarrow(g a_i)$ is finite, so by $\ref{partitions}$, such a map $\bar{f}^i$ is precisely a partition $x_1, \cdots, x_m$ of $B^i$ into a fixed number of elements that have a predetermined measure.
 
-We can summarize our findings as follows: $BProbAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $\downarrow(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
+We can summarize our findings as follows: $BPAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $\downarrow(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
 \end{proof}
 
 TODO: Call this sort of (boolean) probability algebra a (boolean) continuum probability algebra.
 
 \section{Boolean Probability Algebras II}
 
-Note: There are no countable Set-based models. This is about the measure-theoretic continuum.
+In this section we will determine what $Sh(FinProb, J_{at})$ classifies. By default, we will use the notations and definitions as in part D.1 of \cite{elephant}.
 
 \begin{definition}
-Define the geometric theory $\mathbb{T}$ of boolean probability algebras to have one sort $B$, constants and function symbols
+Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
 \begin{center}
 $1: B$ \\
 $0: B$ \\
 $\wedge: B \times B \to B$ \\
-$\vee: B \times B \to B$
+$\vee: B \times B \to B$ \\
+$\neg: B \to B$
 \end{center}
 and a unary relation symbol $B_r$ on $B$ for each $r \in [0,1]$. We impose the following axioms($a$, $b$ and $c$ denote free variables in $B$):
 \begin{itemize}
-\item Boolean algebra:
+\item \textit{Boolean algebra}.
 \begin{align*}
 \top &\vdash a \wedge (b \wedge c) = (a \wedge b) \wedge c && \text{associativity} \\
 \top &\vdash a \vee (b \vee c) = (a \vee b) \vee c && \text{associativity} \\
@@ -290,18 +292,167 @@ and a unary relation symbol $B_r$ on $B$ for each $r \in [0,1]$. We impose the f
 \top &\vdash a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge c) && \text{distributivity} \\
 \top &\vdash a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c) && \text{distributivity}
 \end{align*}
-\item $B_r$ form a partition:
-\item Probability measure:
+\item \textit{$B_r$ form a partition}. For all $r, s \in [0,1]$ with $r \neq s$ we have an axiom
+\[
+B_r(a)  \wedge B_s(a) \vdash \bot
+\]
+and we also have an axiom
+\[
+\top \vdash \bigvee_{r \in [0,1]} B_r(a).
+\]
+\item \textit{Probability measure}. For all $r, s \in [0,1]$, we further require
+\[
+(a \wedge b = 0) \wedge B_r(a) \wedge B_s(a) \vdash B_{r+s}(a \vee b) 
+\]
+and finally we need
+\begin{align*}
+\top & \vdash B_1(1) \\
+B_0(a) & \vdash a = 0.
+\end{align*}
 \end{itemize}
 \end{definition}
 
+Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. If one were to write down the categorical interpretation of the two partition axioms, one would see that they are just saying that $B$ is a coproduct of the $B_r$.
+
+We would like to show that the topos $Set^{FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. Proving this fact requires a bit of work. The difficulty is mainly the fact that  $FinProb$ does not have all finite limits, so the flat functors on $FinProb$ are not as straightforward to understand. We will prove the equivalence
+\[
+Set[\mathbb{T}_{bpalg}] \simeq Set^{FinProb^{op}}
+\]
+by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $Set^{FinProb^{op}}$. The challenge lies in proving that this gives an equivalence. We will show this by interpreting the topos on the left hand side as the classifying topos of the theory of flat functors on $FinProb$ and using this fact we will give an inverse functor. Working purely syntactically is essential to being able to comfortably write down a formal argument. That means that we will need to extensively work with geometric logic.
+
+To get an idea of what the universal model might be, one can for example look at the universal models in classifying toposes of cartesian theories $\mathbb{T}$. In those cases the universal model in $[\mathbb{T} \text{-} Mod(Set)_{f.p.}, Set]$ just corresponds to the forgetful functor sending a (finitely presented) $\mathbb{T}$-model to its underlying set. Of course, the forgetful functor comes equipped with the required $\mathbb{T}$-model structure. For more details, see D3.1.2 of \cite{elephant}.
+
+The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_{f.p.}}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description.  For $r \in [0,1]$ define $U_r \in Set^{FinProb^{op}}$ as the representable functor given by a two element set where one element has measure $r$ and the other one has measure $1-r$, and in the case that $r$ is $0$ or $1$, define $U_r$ to be the one element set with its unique measure. Notice that this functor sends a finite probability space to the set of subsets of measure $r$. Then we can define $U$ to be
+\[
+\coprod_{r \in [0,1]} U_r \in Set^{FinProb^{op}} .
+\]
+One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
+
+Before we prove the equivalence of categories, we need a lemma that tells us how to internalize formulas over a signature $\Sigma$ into a $\Sigma$-structure inside a syntactic category $\mathcal{C}^{\mathbb{T}}$ of a geometric theory $\mathbb{T}$. Essentially, this reformulates the abstract definition(in terms of syntactic categories) of what an \textit{interpretation} of a theory into another theory is concretely in terms of actual formulas. This will be used for defining an interpretation of the theory of flat functors over $FinProb$ into $\mathbb{T}_{bpalg}$, which will happen to yield the inverse functor in the equivalence of categories we are trying to prove. The proof of this lemma mostly consists of computing some categorical constructions inside $\mathcal{C}^{\mathbb{T}}$(which are descirbed in D.1.4 of \cite{elephant}), so the it can safely be skipped.
+
+We diverge from the notation in D.1 of \cite{elephant} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
+
+Since the theory of flat functors we will apply this lemma to has no relation symbols, we restrict ourselves to the case where $\Sigma$ has no relation symbols
+
+\begin{lemma} [Computing interpretations]
+Let $\mathbb{T}$ be a geometric theory and $\mathcal{C}^{\mathbb{T}}$ its syntactic category. Let $\Sigma$ be a signature without relation symbols and $M$ be a $\Sigma$-structure in $\mathcal{C}^{\mathbb{T}}$.
+\begin{itemize}
+\item Let $A$ be a sort in $\Sigma$ and $M(A) = \{\vec{a} . \phi_A^{\vec{a}}\}$. Then we have
+\begin{enumerate}
+\item
+\[
+M([]) \cong \{[] . \top\}
+\]
+\item and for sorts $A_1, \cdots, A_n$ in $\Sigma$
+\[
+M(A_1, \cdots, A_n) \cong \{\vec{a} . \phi_{A_1}^{\vec{a_1}} \wedge \cdots \wedge \phi_{A_n}^{\vec{a_n}}\} .
+\]
+\end{enumerate}
+\item $M$ assigns to each term in context $\{\vec{x} . t\}$ a $\mathbb{T}$-provable functional
+\[
+[\theta_t^{\vec{a}, \vec{b}}]: \big \{ \vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}} \big \} \to \{\vec{b} . \phi_B^{\vec{b}}\} .
+\]
+We have the following recursive computation formulas:
+\begin{enumerate}
+\item Let $f: A_1 \times \cdots \times A_n \to B$ be a function symbol in $\Sigma$.  For variables $x_1 :A_1, \cdots, x_n: A_n$, we have
+\[
+[\![\vec{x} . f]\!]_M = [\theta_f^{\vec{a}, b}] , 
+\]
+which is given by $M(f)$.
+\item $[\![\vec{x} . x_i ]\!]_M: \big \{ \vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}} \big \} \to \{\vec{a'} . \phi_B^{\vec{a'}}\}$ can be computed by
+\[
+[\![\vec{x} . x_i ]\!]_M = \big [ \bigwedge_i \phi_{A_i}^{\vec{a_i}} \wedge (\vec{a_i} = \vec{a'})\big ] .
+\]
+\item Let $f$ be a function symbol in $\Sigma$. Then
+\[
+[\![ \vec{x} . f(t_1, \cdots, t_n) ]\!]_M = [(\exists b) \theta_{t_1}^{\vec{a}, \vec{b}} \wedge \cdots \wedge \theta_{t_1}^{\vec{a}, \vec{b}} \wedge \theta_f^{\vec{b}, \vec{c}}],
+\]
+where $\vec{a}$ are the variables in the domain of the morphism and $\vec{b}$ the variables in the codomain.
+\end{enumerate}
+\item $M$ assigns to each formula in context $\{\vec{x} . \varphi \}$ a subobject
+\[
+\{\vec{a} . \chi_{\varphi}^{\vec{a}} \} \xhookrightarrow{} \{ \vec{a'} . \bigwedge_i \phi_{A_i}^{\vec{a'_i}}\} .
+\]
+We will not give formulas for the inclusion arrow, as its form is already uniquely determined by $\chi_{\varphi}^{\vec{a}}$ (D.1.4.4 (iv) in \cite{elephant}). We have the following recursive computation formulas:
+\begin{enumerate}
+\item For terms in context $\{\vec{x} . s\}$ and $\{\vec{x} . t\}$, we have
+\[
+[\![\vec{x} . s = t ]\!]_M \cong \{\vec{a} . (\exists \vec{b}) (\theta_s^{\vec{a}, \vec{b}} \wedge \theta_t^{\vec{a}, \vec{b}}) \}
+\]
+\item For formulas in context $\{\vec{x} . \psi_i\}$ we have
+\[
+[\![\vec{x} . \bigvee_i \psi_i ]\!]_M \cong \big \{ \vec{a} . \bigvee_i \chi_{\psi_i}^{\vec{a}} \big \} . 
+\]
+\item For finitely many formulas in context $\{\vec{x} . \psi_i\}$ we have
+\[
+[\![\vec{x} . \bigwedge_i \psi_i ]\!]_M \cong \big \{ \vec{a} . \bigwedge_i \chi_{\psi_i}^{\vec{a}} \big \} . 
+\]
+\item Let $\{\vec{x}, y . \psi \}$ be a formula in context. Then
+\[
+[\![\vec{x} . (\exists y) \psi]\!]_M \cong \{\vec{a} . (\exists \vec{b}) \chi^{\vec{a}, \vec{b}}_{\psi} \} .
+\]
+\end{enumerate}
+\end{itemize}
+
+\end{lemma}
+\begin{proof}
+D.1.4.2 in \cite{elephant} describes how to compute limits in $\mathcal{C}^{\mathbb{T}}$ \footnote{Technically this is only shown for cartesian syntactic categories, but at the bottom of page 847 there is a note about this also working for geometric syntactic categories of geometric theories.}. This immediately gives the first part about the sorts.
+
+Now in the part about the terms, in (i) there is nothing to show. In (ii), we again just use the description of finite limits in D.1.4.2. (iii) is can be proved by writing down the internalized arrow, computing a map induced by the universal property of the cartesian product and computing composition in $\mathcal{C}^{\mathbb{T}}$.
+
+In the part about formulas, (i) is again just the computation of an equalizer in $\mathcal{C}^{\mathbb{T}}$. For (ii) and (iii) notice that D.1.4.4 (iv) in \cite{elephant} tells us that the subobject lattice of $\{ \vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}}\}$ is equivalent(as a category that happen to be a preorder) to the formulas $\psi$ over the context $\vec{a}$ such that $\psi \vdash_{\vec{a}} \bigwedge_i \phi_{A_i}^{\vec{a_i}}$ equipped with the poset structure given by $\vdash_{\vec{a}}$. This means that we can compute the logical operations $\bigwedge$ and $\bigvee$ on formulas over $\Sigma$ by using the joins and meets in poset of formulas over $\mathbb{T}$, which are precisely the logical operations $\bigwedge$ and $\bigvee$ on the formulas over $\mathbb{T}$(this is what the rules for conjunction and disjunction say).
+
+For (iv), letting $\pi$ denote the projection onto the components given by the $A_i$, we compute:
+\begin{align*}
+[\![ \vec{x} . (\exists y) \psi ]\!]_M
+&\cong Im \Big (\{ \vec{a'}, \vec{b'} . \chi_{\psi}^{\vec{a'}, \vec{b'}}\} \xhookrightarrow{} \{\vec{a''}, \vec{b''} . \bigwedge_i \phi_{A_i}^{\vec{a_i''}} \wedge \phi_B^{\vec{b''}} \} \xrightarrow{\pi} \{\vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}}\} \Big ) \\
+\shortintertext{Expand the codomain to $\{\vec{a} . \top \}$:}
+&\cong Im \Big (\{ \vec{a'}, \vec{b'} . \chi_{\psi}^{\vec{a'}, \vec{b'}}\} \xhookrightarrow{[\chi_{\psi}^{\vec{a'}, \vec{b'}} \wedge (a = a')]} \{ \vec{a} . \top \} \Big ) \\
+\shortintertext{Calculate this as in the proof of D.1.4.10 i) in \cite{elephant}:}
+&\cong \{\vec{a} . (\exists \vec{a'}, \vec{b'}) \chi_{\psi}^{\vec{a'}, \vec{b'}} \wedge (\vec{a} = \vec{a'}) \} \\
+&\cong \{\vec{a} . (\exists \vec{b}) \chi_{\psi}^{\vec{a}, \vec{b}}\}
+\end{align*}
+
+\end{proof}
+
+We record the following facts that will be used numerous times during \ref{classifying1}.
+
+\begin{lemma}
+\end{lemma}
+
+\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying1}
+$U$ is a model of $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$. Moreover this model induces the required equivalence of categories
+\[
+Set[\mathbb{T}_{bpalg}] \simeq Set^{FinProb^{op}}.
+\]
+\end{theorem}
+\begin{proof}
+
+We first will prove that $U$ is a model of $\mathbb{T}_{bpalg}$. We begin with some well-definedness remarks. Notice that under the equivalence $Set^{FinProb^{op}} \simeq Set^{BPAlg_f}$, $U$ becomes the functor forgetting the boolean algebra structure. The operations $\wedge, \vee \text{ and } \neg$ on $U$ can now be defined as the regular boolean algebra operations at every object of $BPAlg_f$. Since the boolean algebra homomorphisms in $BPAlg_f$ preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $U_r \to U$ are natural by the fact that boolean probability algebra morphisms preserve measure.
+
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $Set^{BPAlg_f}$.
+
+
+\end{proof}
+
+\begin{theorem}
+This extends to our results about continuum boolean probability algebras.
+\end{theorem}
+
+Note that the models of $\mathbb{T}_{cbpalg}$ in $Set$ must all be uncountable.
+
+\begin{example}
+Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure.
+More generally, atomless measure algebras. Question: Are these all continuum boolean probability algebras?
+\end{example}
+
+\begin{corollary}
+A geometric sequent in $\mathbb{T}_{cbpalg}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{cbpalg}$. In particular, a geometric sequent in $\mathbb{T}_{cbpalg}$ holds for the interval if and only if it holds for all atomless measure algebras.
+\end{corollary}
+
+This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements about $(I, \lambda)$. Thus $\mathbb{T}_{cbpalg}$ can be thought as the ultimate context for studying geometric properties of the measure-theoretic interval. Interestingly, geometric logic doesn't suffice to study typical analytic properties of $(I, \lambda)$. TODO: examples.
+
 \section{Galois theory}
-
-We have seen that $Set^{FinSet^{op}}$ is really about statements about a measure-theoretic notion of a continuum. Traditionally, the interval with the Lebesgue measure has played this role. In this section we will see that the interval equipped with the Lebesgue measure already understands all statements about the continuum probability algebras. In fact, this interval is not special. Our proof will work precisely the same for (all?) continuum probability algebras that are complete(are they always complete?). (Are all continuum probability algebras surjective points?). Also: When do we need choice?
-
-I would hope for a positive answer to the questions above and interpret it as follows: Using our construction, we have derived an axiomatization of a measure-theoretic continuum that for the many intents and purposes behaves like the interval. The most interesting thing, is that the probability theoretic intuition of the choice of base measure space being irrelevant for all intents and purposes, now gets a mathematical formalism. Only that now, by requiring extension properties in the atomic topology, we saw that we might as well stop talking about non-continuum probability algebras. Talking about them would allow us to talk about specific atoms, which is undesirable(Some Tao extension stuff here).
-
-So in a very real way, the study of $Set^{FinSet^{op}}$ is precisely the study of a very well-behaved continuum. Thus, it is reasonable to expect being able to do probability theory based on this topos. One should think about $Set^{FinSet^{op}}$ as some sort of universal probability space representing the continuum.
 
 We seek to apply the following result due to O.Caramello:
 
@@ -311,20 +462,20 @@ Let $\mathcal{C}$ be a small, inhabited category satisfying the amalgamation and
 induced by the functor $F:\mathcal{C}^{op}\rightarrow \textbf{Cont}(Aut_{\mathcal{C}})$ which sends any object $c$ of $\mathcal{C}$ to the set $Hom_{Ind(\mathcal{C})}(c,u)$ equipped with the action by post-composition and any arrow $f:c\rightarrow d$ in $\mathcal{C}$ to pre-composition by $f$.
 \end{theorem}
 
-Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure. In our context we set $\mathcal{C}=BProbAlg_f$ and we claim that $(I, \lambda)$ is  $BProbAlg_f$-universal and $BProbAlg_f$-ultrahomogeneous. More concretely, we have to prove the following:
+In our context we set $\mathcal{C}=BPAlg_f$ and we claim that $(I, \lambda)$ is  $BPAlg_f$-universal and $BPAlg_f$-ultrahomogeneous. More concretely, we have to prove the following:
 
 \begin{lemma}\begin{enumerate}
 \item $FinProb$ has a terminal object, proving the joint embedding property.
 \item $FinProb$ fulfills the right Ore condition.
-\item For any $(A,\mu),(B,\nu)$ in $BProbAlg_f$ , an arrow $f:(A,\mu)\rightarrow (B,\nu)$ in \\
- $BProbAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (I,\lambda)$ as well as $\chi_2:(B,\nu)\rightarrow (I,\lambda)$ in $BProbAlg$ there exists an isomorphism $j':(I,\lambda)\rightarrow (I,\lambda)$ such that $j'\circ \chi_1=\chi_2\circ j$:
+\item For any $(A,\mu),(B,\nu)$ in $BPAlg_f$ , an arrow $f:(A,\mu)\rightarrow (B,\nu)$ in \\
+ $BPAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (I,\lambda)$ as well as $\chi_2:(B,\nu)\rightarrow (I,\lambda)$ in $BPAlg$ there exists an isomorphism $j':(I,\lambda)\rightarrow (I,\lambda)$ such that $j'\circ \chi_1=\chi_2\circ j$:
  \begin{center}
  \begin{tikzcd}
 {(A,\mu)} \arrow[r, "\chi_1"] \arrow[d, "j"'] & {(I,\lambda)} \arrow[d, "j'", dotted] \\
 {(B,\nu)} \arrow[r, "\chi_2"']                & {(I,\lambda)}                        
 \end{tikzcd}
  \end{center}
-\item For any object $(A,\mu)$ of $BProbAlg_f$ there exists an arrow $\chi:(A,\mu)\rightarrow (I,\lambda)$ in $BProbAlg$.
+\item For any object $(A,\mu)$ of $BPAlg_f$ there exists an arrow $\chi:(A,\mu)\rightarrow (I,\lambda)$ in $BPAlg$.
 \end{enumerate}
 \end{lemma}
 \begin{proof} 
@@ -354,11 +505,10 @@ This yields a measure-preserving map $\chi':(\mathcal{P} X,\mu)\rightarrow (I,\l
 \end{enumerate}
 \end{proof}
 
-Notice that by using this corollary of Maharam's theorem we have implicitly used the axiom of choice. It wouldn't be surprising if this application of the axiom of choice was inessential, since we only need the fact that all subalgebras $\downarrow x$ (where $x \in I$ has fixed measure) of $I$ with their induced measure are isomorphic(as boolean algebras equipped with measures).
-
 \begin{remark}
-This proof would also work for any homogeneous measure algebra instead of $I$.
+Notice that by using this corollary of Maharam's theorem we have implicitly used the axiom of choice. It wouldn't be surprising if this application of the axiom of choice was inessential, since we only need the fact that all subalgebras $\downarrow x$ (where $x \in I$ has fixed measure) of $I$ with their induced measure are isomorphic(as boolean algebras equipped with measures). But because we only used properties of homogeneous Maharam type measure algebras,  we actually have proved the same theorem have proved the theorem above in greater generality. The lemma above holds for any homogeneous Maharam type measure algebra.
 \end{remark}
+
 \begin{corollary} Let $G$ be the topological group of measure preserving dynamical systems on $(I,\lambda)$ topologised via an algebraic base given by collections $\mathcal{I}_{\chi}:=\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing a finite partition $\chi: (A,\mu)\rightarrow (I,\lambda)$. Then we get an equivalence of toposes, which is induced as in \ref{olivia}:
 \[\textbf{Sh}(FinProb, J_{at})\simeq \textbf{Cont}(G)\]
 \end{corollary}
@@ -367,4 +517,13 @@ It follows that the atoms of the topos correspond to open subgroups of $G$. We s
 \end{lemma}
 \begin{proof} No idea.
 \end{proof}
+
+
+\begin{thebibliography}{9}
+\bibitem{sheaves_geometry_logic} 
+Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First Introduction to Topos Theory.
+\bibitem{elephant}
+ELEPHANT
+\end{thebibliography}
+
 \end{document}
