@@ -21,6 +21,9 @@
 \theoremstyle{remark}
  \newtheorem{remark}{Remark}[section]
  \numberwithin{equation}{section}
+ 
+\newcommand{\ldoub}{[\![ }
+\newcommand{\rdoub}{]\!]}
 
 \author{Adam Dauser, Adrian Marti}
 
@@ -28,6 +31,10 @@
 \begin{document}
 \maketitle 
 \section{Introduction}
+
+Talk about the challenge of using topos theory for talking about topological phenomena involving completeness properties in a logical way(obviously one can consider sheaves on a space, but it is hard to consider classifying toposes of some kind of space). Completeness kind of provides a solution to this dilemma.
+
+Talk about 'bookkeeping' in probability theory. Nobody cares about the choice of base $\sigma$-algebra, as long as it has good properties. Yet, a $\sigma$-algebra must be chosen. One may try to exploit this by imposing restrictions(of functorial or topological nature) on how statements/sets may depend on the base $\sigma$-algebra. These techniques will lead to an approach to probability theory that works without a choice of $\sigma$-algebra.
 
 The basic ingredient of our theory will be the following category of finite probability spaces.
 
@@ -322,9 +329,9 @@ by purely syntactical means. The functor in one direction will be given by an ap
 
 To get an idea of what the universal model might be, one can for example look at the universal models in classifying toposes of cartesian theories $\mathbb{T}$. In those cases the universal model in $[\mathbb{T} \text{-} Mod(Set)_{f.p.}, Set]$ just corresponds to the forgetful functor sending a (finitely presented) $\mathbb{T}$-model to its underlying set. Of course, the forgetful functor comes equipped with the required $\mathbb{T}$-model structure. For more details, see D3.1.2 of \cite{elephant}.
 
-The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_{f.p.}}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description.  For $r \in [0,1]$ define $U_r \in Set^{FinProb^{op}}$ as the representable functor given by a two element set where one element has measure $r$ and the other one has measure $1-r$, and in the case that $r$ is $0$ or $1$, define $U_r$ to be the one element set with its unique measure. Notice that this functor sends a finite probability space to the set of subsets of measure $r$. Then we can define $U$ to be
+The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_{f.p.}}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description. For $r \in [0,1]$ define $U_r \in FinProb$ as follows: $U_0 \cong U_1$ is the unique probability space with one element and for $r \in (0,1)$ $U_r$ is a two element set where one element has measure $r$ and the other one has measure $1-r$. Notice that this functor sends a finite probability space to the set of subsets of measure $r$. Then we can define $U$ to be
 \[
-\coprod_{r \in [0,1]} U_r \in Set^{FinProb^{op}} .
+\coprod_{r \in [0,1]} y U_r \in Set^{FinProb^{op}} .
 \]
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
 
@@ -334,7 +341,7 @@ We diverge from the notation in D.1 of \cite{elephant} in that we will sometimes
 
 Since the theory of flat functors we will apply this lemma to has no relation symbols, we restrict ourselves to the case where $\Sigma$ has no relation symbols
 
-\begin{lemma} [Computing interpretations]
+\begin{lemma} [Computing interpretations] \label{interpretations}
 Let $\mathbb{T}$ be a geometric theory and $\mathcal{C}^{\mathbb{T}}$ its syntactic category. Let $\Sigma$ be a signature without relation symbols and $M$ be a $\Sigma$-structure in $\mathcal{C}^{\mathbb{T}}$.
 \begin{itemize}
 \item Let $A$ be a sort in $\Sigma$ and $M(A) = \{\vec{a} . \phi_A^{\vec{a}}\}$. Then we have
@@ -356,16 +363,16 @@ We have the following recursive computation formulas:
 \begin{enumerate}
 \item Let $f: A_1 \times \cdots \times A_n \to B$ be a function symbol in $\Sigma$.  For variables $x_1 :A_1, \cdots, x_n: A_n$, we have
 \[
-[\![\vec{x} . f]\!]_M = [\theta_f^{\vec{a}, b}] , 
+\ldoub \vec{x} . f\rdoub_M = [\theta_f^{\vec{a}, b}] , 
 \]
 which is given by $M(f)$.
-\item $[\![\vec{x} . x_i ]\!]_M: \big \{ \vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}} \big \} \to \{\vec{a'} . \phi_B^{\vec{a'}}\}$ can be computed by
+\item $\ldoub\vec{x} . x_i \rdoub_M: \big \{ \vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}} \big \} \to \{\vec{a'} . \phi_B^{\vec{a'}}\}$ can be computed by
 \[
-[\![\vec{x} . x_i ]\!]_M = \big [ \bigwedge_i \phi_{A_i}^{\vec{a_i}} \wedge (\vec{a_i} = \vec{a'})\big ] .
+\ldoub\vec{x} . x_i \rdoub_M = \big [ \bigwedge_i \phi_{A_i}^{\vec{a_i}} \wedge (\vec{a_i} = \vec{a'})\big ] .
 \]
 \item Let $f$ be a function symbol in $\Sigma$. Then
 \[
-[\![ \vec{x} . f(t_1, \cdots, t_n) ]\!]_M = [(\exists b) \theta_{t_1}^{\vec{a}, \vec{b}} \wedge \cdots \wedge \theta_{t_1}^{\vec{a}, \vec{b}} \wedge \theta_f^{\vec{b}, \vec{c}}],
+\ldoub \vec{x} . f(t_1, \cdots, t_n) \rdoub_M = [(\exists b) \theta_{t_1}^{\vec{a}, \vec{b}} \wedge \cdots \wedge \theta_{t_1}^{\vec{a}, \vec{b}} \wedge \theta_f^{\vec{b}, \vec{c}}],
 \]
 where $\vec{a}$ are the variables in the domain of the morphism and $\vec{b}$ the variables in the codomain.
 \end{enumerate}
@@ -377,19 +384,19 @@ We will not give formulas for the inclusion arrow, as its form is already unique
 \begin{enumerate}
 \item For terms in context $\{\vec{x} . s\}$ and $\{\vec{x} . t\}$, we have
 \[
-[\![\vec{x} . s = t ]\!]_M \cong \{\vec{a} . (\exists \vec{b}) (\theta_s^{\vec{a}, \vec{b}} \wedge \theta_t^{\vec{a}, \vec{b}}) \}
+\ldoub\vec{x} . s = t \rdoub_M \cong \{\vec{a} . (\exists \vec{b}) (\theta_s^{\vec{a}, \vec{b}} \wedge \theta_t^{\vec{a}, \vec{b}}) \}
 \]
 \item For formulas in context $\{\vec{x} . \psi_i\}$ we have
 \[
-[\![\vec{x} . \bigvee_i \psi_i ]\!]_M \cong \big \{ \vec{a} . \bigvee_i \chi_{\psi_i}^{\vec{a}} \big \} . 
+\ldoub\vec{x} . \bigvee_i \psi_i \rdoub_M \cong \big \{ \vec{a} . \bigvee_i \chi_{\psi_i}^{\vec{a}} \big \} . 
 \]
 \item For finitely many formulas in context $\{\vec{x} . \psi_i\}$ we have
 \[
-[\![\vec{x} . \bigwedge_i \psi_i ]\!]_M \cong \big \{ \vec{a} . \bigwedge_i \chi_{\psi_i}^{\vec{a}} \big \} . 
+\ldoub\vec{x} . \bigwedge_i \psi_i \rdoub_M \cong \big \{ \vec{a} . \bigwedge_i \chi_{\psi_i}^{\vec{a}} \big \} . 
 \]
 \item Let $\{\vec{x}, y . \psi \}$ be a formula in context. Then
 \[
-[\![\vec{x} . (\exists y) \psi]\!]_M \cong \{\vec{a} . (\exists \vec{b}) \chi^{\vec{a}, \vec{b}}_{\psi} \} .
+\ldoub\vec{x} . (\exists y) \psi\rdoub_M \cong \{\vec{a} . (\exists \vec{b}) \chi^{\vec{a}, \vec{b}}_{\psi} \} .
 \]
 \end{enumerate}
 \end{itemize}
@@ -404,7 +411,7 @@ In the part about formulas, (i) is again just the computation of an equalizer in
 
 For (iv), letting $\pi$ denote the projection onto the components given by the $A_i$, we compute:
 \begin{align*}
-[\![ \vec{x} . (\exists y) \psi ]\!]_M
+\ldoub \vec{x} . (\exists y) \psi \rdoub_M
 &\cong Im \Big (\{ \vec{a'}, \vec{b'} . \chi_{\psi}^{\vec{a'}, \vec{b'}}\} \xhookrightarrow{} \{\vec{a''}, \vec{b''} . \bigwedge_i \phi_{A_i}^{\vec{a_i''}} \wedge \phi_B^{\vec{b''}} \} \xrightarrow{\pi} \{\vec{a} . \bigwedge_i \phi_{A_i}^{\vec{a_i}}\} \Big ) \\
 \shortintertext{Expand the codomain to $\{\vec{a} . \top \}$:}
 &\cong Im \Big (\{ \vec{a'}, \vec{b'} . \chi_{\psi}^{\vec{a'}, \vec{b'}}\} \xhookrightarrow{[\chi_{\psi}^{\vec{a'}, \vec{b'}} \wedge (a = a')]} \{ \vec{a} . \top \} \Big ) \\
@@ -415,24 +422,92 @@ For (iv), letting $\pi$ denote the projection onto the components given by the $
 
 \end{proof}
 
-We record the following facts that will be used numerous times during \ref{classifying1}.
+We record two facts that will be used numerous times during \ref{classifying1}.
 
-\begin{lemma}
+\begin{lemma} With the same setup as in \ref{interpretations}, we have that for a function symbol $f$ in $\Sigma$,
+\[
+\ldoub \vec{x} . f(\vec{x}) \rdoub_M \cong [ \theta_f^{\vec{a}, \vec{b}} ]
+\]
+and
+\[
+\ldoub \vec{x}, y . f(\vec{x}) = y \rdoub_M \cong \{\vec{a}, \vec{b} . \theta_f^{\vec{a},\vec{b}} \} .
+\]
 \end{lemma}
+
+\begin{proof}
+Boring.
+\end{proof}
 
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying1}
 $U$ is a model of $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$. Moreover this model induces the required equivalence of categories
 \[
-Set[\mathbb{T}_{bpalg}] \simeq Set^{FinProb^{op}}.
+Set^{FinProb^{op}} \simeq Set[\mathbb{T}_{bpalg}].
 \]
 \end{theorem}
 \begin{proof}
 
-We first will prove that $U$ is a model of $\mathbb{T}_{bpalg}$. We begin with some well-definedness remarks. Notice that under the equivalence $Set^{FinProb^{op}} \simeq Set^{BPAlg_f}$, $U$ becomes the functor forgetting the boolean algebra structure. The operations $\wedge, \vee \text{ and } \neg$ on $U$ can now be defined as the regular boolean algebra operations at every object of $BPAlg_f$. Since the boolean algebra homomorphisms in $BPAlg_f$ preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $U_r \to U$ are natural by the fact that boolean probability algebra morphisms preserve measure.
+For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
 
-Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $Set^{BPAlg_f}$.
+We first will prove that $U$ is a model of $\mathbb{T}$. We begin with some well-definedness remarks. Notice that under the equivalence $Set^{FinProb^{op}} \simeq Set^{BPAlg_f}$, $U$ becomes the functor forgetting the boolean algebra structure. The operations $\wedge, \vee \text{ and } \neg$ on $U$ can now be defined as the regular boolean algebra operations at every object of $BPAlg_f$. Since the boolean algebra homomorphisms in $BPAlg_f$ preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $y U_r \to U$ are natural by the fact that boolean probability algebra morphisms preserve measure.
 
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}$-model in $Set^{BPAlg_f}$.
 
+We abuse notation and identify the model $U$ with the corresponding functor $\mathcal{C}^{\mathbb{T}} \to Set^{FinProb^{op}}$. $U$, of course, induces a functor
+\[
+Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}]: Lan_y(U).
+\]
+
+It remains to construct its inverse functor. We induce it by a geometric functor $\mathcal{C}^{\mathbb{T}^{FinProb}} \to \mathcal{C}^{\mathbb{T}}$, where $\mathbb{T}^{FinProb}$ denotes the theory of flat functors over $FinProb$. We give the functor in this way because it allows us to use internal logic to prove that the induced functor on classifying toposes is left exact, which will be needed when showing that the functors are inverses of each other. This geometric functor of course is given by a model of $\mathbb{T}^{FinProb}$ in $\mathcal{C}^{\mathbb{T}_{bpalg}}$. Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $FinProb$. We specify a model $M$ on the sort given by $(X,\mu)$ and on the function symbol given by $f$ as follows:
+\begin{align*}
+\{\vec{a} . \phi_{(X,\mu)}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{x \in X} B_{\mu x} a^x \wedge \bigwedge_{\substack{x,y \in X \\ x \neq y}} (a^x \wedge a^y = 0) \Bigg \} \\
+[\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{y \in Y} (b^y = \bigvee_{f x = y} a^x) \wedge \phi_{(X,\mu)}^{\vec{a}} \wedge \phi_{(Y,\nu)}^{\vec{b}} \Bigg] ,
+\end{align*}
+so now we can give $M((X,\mu))$ by $\{\vec{a} . \phi_{(X,\mu)}^{\vec{a}}\}$ and $M(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$. The challenge will be showing that this is actually a model of the theory of flat functors on $FinProb$. The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways. Now we get to the meat of the proof: we check that the five axioms of the theory $\mathbb{T}^{FinProb}$ are satisfied.
+\begin{enumerate}
+\item bla
+\end{enumerate}
+
+We still need to check that the functors we defined are inverses to each other.
+
+We first check that $Lan_y(U) \circ Lan_F \cong Id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in FinProb$. Then we get natural isomorphisms
+
+\begin{align*}
+Lan_y(U)(Lan_F(y(X,\mu))) &\cong Lan_y(U)(yF(X,\mu)) \\
+&\cong UF(X,\mu) \\
+&\cong U \{\vec{a} . \phi^{\vec{a}}_{X,\mu}\} \\
+&\cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U .
+\end{align*}
+
+It remains to show that we have a natural isomorphims $y (X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$. First, we compute this functor on objects. Since the corresponding limits are computed pointwise, we first get a natural (in $(X,\mu)$) isomorphism
+\[
+\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U (Y,\nu) \cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)} .
+\]
+But computing these pullbacks and equalizers in $Set$ yields
+\begin{align*}
+\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)} \cong
+\{\{V_x\} \subset Y | (\nu(V_x) = \mu(x)) \wedge (V_x \cap V_y = \emptyset) \text{ for } x,y \in X, x \neq y\} .
+\end{align*}
+
+Now we can use this together with the Yoneda lemma in order to give the required isomorphism $y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ by the element $\{x\}_{x \in X} \in \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(X,\mu)}$. In order to show this actually is an isomorphism, we explicitly compute this isomorphism on an $f \in y (X,\mu) (Y,\nu)$. In order to do that, we note that the functor $\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ is a subfunctor of $\prod_{x \in X} U$, so that lets us see that the map
+\[
+\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
+\]
+sends $\{x\}_{x \in X}$ to $\{f^{-1} x\}_{x \in X}$. This means that the morphism
+\[
+y (X,\mu) (Y,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
+\]
+sends an $f$ to the family $\{f^{-1} x\}$. This clearly is an isomorphism, so $y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ is an isomorphism.
+
+We still need to show this isomorphism is natural in $(X,\mu)$. We prove naturality on each $(Y,\nu) \in FinProb$. So let $(X,\mu), (X',\mu') \in FinProb$. The diagram
+\[
+\begin{tikzcd}
+    {Hom((Y,\nu),(X,\mu))} \arrow[r, "\cong"] \arrow[d, "f_*"'] & {\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)}} \arrow[d, "{\{\vec{a},\vec{b} . \theta_f \}}"] \\
+    {Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_{U(Y,\nu)}}                                             
+\end{tikzcd}
+\]
+commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $Set$-model. This concludes our proof of $Lan_y(U) \circ Lan_F \cong Id$.
+
+We now prove that $Lan_F \circ Lan_y(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $Set[\mathbb{T}]$. This means we have to compute $Lan_F \circ Lan_y(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $Set[\mathbb{T}]$.
 \end{proof}
 
 \begin{theorem}
