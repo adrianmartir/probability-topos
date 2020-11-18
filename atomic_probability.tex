@@ -501,13 +501,27 @@ sends an $f$ to the family $\{f^{-1} x\}$. This clearly is an isomorphism, so $y
 We still need to show this isomorphism is natural in $(X,\mu)$. We prove naturality on each $(Y,\nu) \in FinProb$. So let $(X,\mu), (X',\mu') \in FinProb$. The diagram
 \[
 \begin{tikzcd}
-    {Hom((Y,\nu),(X,\mu))} \arrow[r, "\cong"] \arrow[d, "f_*"'] & {\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)}} \arrow[d, "{\{\vec{a},\vec{b} . \theta_f \}}"] \\
+    {Hom((Y,\nu),(X,\mu))} \arrow[r, "\cong"] \arrow[d, "f_*"'] & {\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)}} \arrow[d, "{\ldoub \vec{a},\vec{b} . \theta_f \rdoub}"] \\
     {Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_{U(Y,\nu)}}                                             
 \end{tikzcd}
 \]
 commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $Set$-model. This concludes our proof of $Lan_y(U) \circ Lan_F \cong Id$.
 
 We now prove that $Lan_F \circ Lan_y(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $Set[\mathbb{T}]$. This means we have to compute $Lan_F \circ Lan_y(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $Set[\mathbb{T}]$.
+
+We first check this for the sort $B$. This means that we have to show that $Lan_F(U) \cong y \{b . \top\}$. This reduces to showing
+\[
+\coprod_{r \in [0,1]} y \{b . B_r b\} \cong y \{b . \top\} .
+\]
+We can prove this by showing that for every sheaf $\mathcal{F} \in Set[\mathbb{T}]$, we have a natural bijection
+\[
+Hom(y \{b . \top\}, \mathcal{F}) \cong \prod_{r \in [0,1]} Hom(y \{b . B_r b\}, \mathcal{F})
+\]
+given by the inclusions $\iota_r : \{b . B_r b\} \to \{b . \top\}$. Applying the yoneda lemma on both sides, this is equivalent to showing that the inclusions induce an isomorphism
+\[
+\mathcal{F} \{b . \top\} \cong \prod_{r \in [0,1]} \mathcal{F} \{b . B_r b\} .
+\]
+But this can be checked by applying the sheaf condition to the cover of $\{b . \top\}$ given by the $\{b . B_r b\}$.
 \end{proof}
 
 \begin{theorem}
@@ -525,7 +539,7 @@ More generally, atomless measure algebras. Question: Are these all continuum boo
 A geometric sequent in $\mathbb{T}_{cbpalg}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{cbpalg}$. In particular, a geometric sequent in $\mathbb{T}_{cbpalg}$ holds for the interval if and only if it holds for all atomless measure algebras.
 \end{corollary}
 
-This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements about $(I, \lambda)$. Thus $\mathbb{T}_{cbpalg}$ can be thought as the ultimate context for studying geometric properties of the measure-theoretic interval. Interestingly, geometric logic doesn't suffice to study typical analytic properties of $(I, \lambda)$. TODO: examples.
+This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{cbpalg}$ can be thought as the ultimate context for studying geometric properties of the measure-theoretic interval.
 
 \section{Galois theory}
 
