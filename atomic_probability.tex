@@ -478,7 +478,7 @@ Lan_y(U)(Lan_F(y(X,\mu))) &\cong Lan_y(U)(yF(X,\mu)) \\
 &\cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U .
 \end{align*}
 
-It remains to show that we have a natural isomorphims $y (X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$. First, we compute this functor on objects. Since the corresponding limits are computed pointwise, we first get a natural (in $(X,\mu)$) isomorphism
+It remains to show that we have a natural isomorphim $y (X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$. First, we compute this functor on objects. Since the corresponding limits are computed pointwise, we first get a natural (in $(X,\mu)$) isomorphism
 \[
 \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U (Y,\nu) \cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)} .
 \]
@@ -522,6 +522,36 @@ given by the inclusions $\iota_r : \{b . B_r b\} \to \{b . \top\}$. Applying the
 \mathcal{F} \{b . \top\} \cong \prod_{r \in [0,1]} \mathcal{F} \{b . B_r b\} .
 \]
 But this can be checked by applying the sheaf condition to the cover of $\{b . \top\}$ given by the $\{b . B_r b\}$.
+
+Next, we need to show that the above isomorphism actually is an isomorphism of $\mathbb{T}$-models. Explicitly, we have to show that for each function symbol $f$ our isomorphism induces an iso
+\[
+\begin{tikzcd}[column sep=tiny]
+    {y \{b_1,\cdots,b_n . \top \}} \arrow[d, "{[f(b_1,\cdots,b_n) = a]}"'] \arrow[r, "\cong"',phantom, shift right=7] & (Lan_F U)^n \arrow[d, "Lan_F U(f)"] \\
+    y \{a . \top \}                                                                                           & Lan_F U                            
+\end{tikzcd}
+\]
+in the category of arrows in $Set[\mathbb{T}]$. We also need the analogous statement for relation symbols.
+
+We first consider the 0-ary function $0$. On $U$ it is the map $0: * \to \coprod y U_r$. Notice that $FinProb$ also has a terminal object $*$ and thus $y * \cong *$. In order to send the map $0$ through $Lan_F$, we write it as the composition $y * \to y U_0 \to U$. Applying $Lan_F$ now yields the composition
+% \[ Why does xrightarrow draw such scuffed arrows????
+% y \{[] . \top\} \xrightarrow{[\top]_*} y \{a . B_0 a \} \xrightarrow{[(a=b) \wedge B_0 a]_*} y \{ b . \top \}
+% \]
+\[
+\begin{tikzcd}[column sep=huge]
+    y \{[] . \top\} \arrow[r, "{[\top]_*}", "\cong"'] & y \{a . B_0 a \} \arrow[r, "{[(a=b) \wedge B_0 a ]_*}"] & y \{b . \top \}
+\end{tikzcd}
+\]
+
+Composing these maps yields
+
+\begin{align*}
+    [(a=b) \wedge B_0 a]_* [\top]_* &= [\exists a . (a = b) \wedge B_0 a]_* \\
+    &= [B_0 b]_* \\
+    &= [b = 0]_* ,
+\end{align*}
+which is precisely the $0$-map for the universal model. The proof for $1$ is almost the same, again one only needs the fact that $B_1 a \dashv \vdash_a (a = 1)$, which is provable in our theory.
+
+N
 \end{proof}
 
 \begin{theorem}
@@ -540,6 +570,8 @@ A geometric sequent in $\mathbb{T}_{cbpalg}$ holds for the interval if and only 
 \end{corollary}
 
 This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{cbpalg}$ can be thought as the ultimate context for studying geometric properties of the measure-theoretic interval.
+
+TODO: Give a completeness statement for infinitary logic (with LEM?).
 
 \section{Galois theory}
 
