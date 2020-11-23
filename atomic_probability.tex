@@ -350,7 +350,16 @@ The above gives us some inspiration as to how to guess the universal model. We w
 \]
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
 
-Before we prove the equivalence of categories, we need a lemma that tells us how to internalize formulas over a signature $\Sigma$ into a $\Sigma$-structure inside a syntactic category $\mathcal{C}^{\mathbb{T}}$ of a geometric theory $\mathbb{T}$. Essentially, this reformulates the abstract definition(in terms of syntactic categories) of what an \textit{interpretation} of a theory into another theory is concretely in terms of actual formulas. This will be used for defining an interpretation of the theory of flat functors over $FinProb$ into $\mathbb{T}_{bpalg}$, which will happen to yield the inverse functor in the equivalence of categories we are trying to prove. The proof of this lemma mostly consists of computing some categorical constructions inside $\mathcal{C}^{\mathbb{T}}$(which are descirbed in D.1.4 of \cite{elephant}), so the it can safely be skipped.
+\begin{lemma} \label{universal model}
+$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$. This yields a left-exact, colimit-preserving functor $Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}_{bpalg}]$.
+\end{lemma}
+\begin{proof}
+We begin with some well-definedness remarks. Notice that under the equivalence $Set^{FinProb^{op}} \simeq Set^{BPAlg_f}$, $U$ becomes the functor forgetting the boolean algebra structure. The operations $\wedge, \vee \text{ and } \neg$ on $U$ can now be defined as the regular boolean algebra operations at every object of $BPAlg_f$. Since the boolean algebra homomorphisms in $BPAlg_f$ preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $y U_r \to U$ are natural by the fact that boolean probability algebra morphisms preserve measure.
+
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $Set^{BPAlg_f}$.
+\end{proof}
+
+Before we can give the inverse functor, we need a lemma that tells us how to internalize formulas over a signature $\Sigma$ into a $\Sigma$-structure inside a syntactic category $\mathcal{C}^{\mathbb{T}}$ of a geometric theory $\mathbb{T}$. Essentially, this reformulates the abstract definition(in terms of syntactic categories) of what an \textit{interpretation} of a theory into another theory is concretely in terms of actual formulas. This will be used for defining an interpretation of the theory of flat functors over $FinProb$ into $\mathbb{T}_{bpalg}$, which will happen to yield the inverse functor in the equivalence of categories we are trying to prove. The proof of this lemma mostly consists of computing some categorical constructions inside $\mathcal{C}^{\mathbb{T}}$(which are described in D.1.4 of \cite{elephant}), so the it can safely be skipped.
 
 We diverge from the notation in D.1 of \cite{elephant} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
 
@@ -437,7 +446,7 @@ For (iv), letting $\pi$ denote the projection onto the components given by the $
 
 \end{proof}
 
-We record two facts that will be used numerous times during \ref{classifying1}.
+We record two facts that will be used numerous times for proving well-definedness of the inverse functor.
 
 \begin{lemma} With the same setup as in \ref{interpretations}, we have that for a function symbol $f$ in $\Sigma$,
 \[
@@ -453,37 +462,46 @@ and
 Boring.
 \end{proof}
 
-% TODO: The bridge (including the inverse functor!) should be made more explicit in the statement of the theorem. Probably one should move the flat functor proof to another lemma.
+We now define the inverse functor. We induce it by a geometric functor $\mathcal{C}^{\mathbb{T}^{FinProb}} \to \mathcal{C}^{\mathbb{T}}$, where $\mathbb{T}^{FinProb}$ denotes the theory of flat functors over $FinProb$. Such a geometric functor of course is given by a model of $\mathbb{T}^{FinProb}$ in $\mathcal{C}^{\mathbb{T}_{bpalg}}$. We give the functor in this way because it allows us to use internal logic to prove that the induced functor on classifying toposes is left-exact, which will be needed when showing that the functors are inverses of each other.
+
+\begin{lemma} \label{inverse}
+We have a $\mathbb{T}^{FinProb}$-model in $\mathcal{C}^{\mathbb{T}_{bpalg}}$ given as follows. Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $FinProb$. We specify a model $F$ on the sort given by $(X,\mu)$ and on the function symbol given by $f$ by:
+\begin{align*}
+\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{x \in X} B_{\mu x} a^x \wedge \bigwedge_{\substack{x,y \in X \\ x \neq y}} (a^x \wedge a^y = 0) \Bigg \} \\
+[\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{y \in Y} (b^y = \bigvee_{f x = y} a^x) \wedge \phi_{X,\mu}^{\vec{a}} \wedge \phi_{Y,\nu}^{\vec{b}} \Bigg] ,
+\end{align*}
+so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$.
+\end{lemma}
+
+The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
+
+\begin{proof}
+The challenge is showing that this is actually a model of the theory of flat functors on $FinProb$.  Now we check that the five axioms of the theory $\mathbb{T}^{FinProb}$ are satisfied, which is an arduous task that has already required quite a bit of setup in the form of \ref{interpretations}.
+\begin{enumerate}
+\item bla
+\end{enumerate}
+\end{proof}
+
+Finally, we show that the above functors assemble into an equivalence of categories. We abuse notation and identify the candidate universal model $U$ with the corresponding functor $\mathcal{C}^{\mathbb{T}} \to Set^{FinProb^{op}}$. $U$, of course, induces a left-exact, colimit-preserving functor
+\[
+Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}]: Lan_y(U).
+\]
+
+Similarly, we abuse notation and identify $F$, our $\mathbb{T}^{FinProb}$-model in $\mathcal{C}^{\mathbb{T}_{bpalg}}$ with a flat functor $FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$, that of course induces a left-exact, colimit-preserving functor
+\[
+Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}].
+\]
+
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying1}
-$U$ is a model of $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$. Moreover this model induces the required equivalence of categories
+$Lan_y(U)$ and $Lan_F$ define an equivalence of categories
 \[
 Set^{FinProb^{op}} \simeq Set[\mathbb{T}_{bpalg}].
 \]
 \end{theorem}
 \begin{proof}
-
 For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
 
-We first will prove that $U$ is a model of $\mathbb{T}$. We begin with some well-definedness remarks. Notice that under the equivalence $Set^{FinProb^{op}} \simeq Set^{BPAlg_f}$, $U$ becomes the functor forgetting the boolean algebra structure. The operations $\wedge, \vee \text{ and } \neg$ on $U$ can now be defined as the regular boolean algebra operations at every object of $BPAlg_f$. Since the boolean algebra homomorphisms in $BPAlg_f$ preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $y U_r \to U$ are natural by the fact that boolean probability algebra morphisms preserve measure.
-
-Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}$-model in $Set^{BPAlg_f}$.
-
-We abuse notation and identify the model $U$ with the corresponding functor $\mathcal{C}^{\mathbb{T}} \to Set^{FinProb^{op}}$. $U$, of course, induces a functor
-\[
-Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}]: Lan_y(U).
-\]
-
-It remains to construct its inverse functor. We induce it by a geometric functor $\mathcal{C}^{\mathbb{T}^{FinProb}} \to \mathcal{C}^{\mathbb{T}}$, where $\mathbb{T}^{FinProb}$ denotes the theory of flat functors over $FinProb$. We give the functor in this way because it allows us to use internal logic to prove that the induced functor on classifying toposes is left exact, which will be needed when showing that the functors are inverses of each other. This geometric functor of course is given by a model of $\mathbb{T}^{FinProb}$ in $\mathcal{C}^{\mathbb{T}_{bpalg}}$. Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $FinProb$. We specify a model $M$ on the sort given by $(X,\mu)$ and on the function symbol given by $f$ as follows:
-\begin{align*}
-\{\vec{a} . \phi_{(X,\mu)}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{x \in X} B_{\mu x} a^x \wedge \bigwedge_{\substack{x,y \in X \\ x \neq y}} (a^x \wedge a^y = 0) \Bigg \} \\
-[\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{y \in Y} (b^y = \bigvee_{f x = y} a^x) \wedge \phi_{(X,\mu)}^{\vec{a}} \wedge \phi_{(Y,\nu)}^{\vec{b}} \Bigg] ,
-\end{align*}
-so now we can give $M((X,\mu))$ by $\{\vec{a} . \phi_{(X,\mu)}^{\vec{a}}\}$ and $M(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$. The challenge will be showing that this is actually a model of the theory of flat functors on $FinProb$. The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways. Now we check that the five axioms of the theory $\mathbb{T}^{FinProb}$ are satisfied, which is an arduous task.
-\begin{enumerate}
-\item bla
-\end{enumerate}
-
-We still need to check that the functors we defined are inverses to each other.
+We check that the functors we defined are inverses to each other.
 
 We first check that $Lan_y(U) \circ Lan_F \cong Id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in FinProb$. Then we get natural isomorphisms
 
@@ -607,18 +625,21 @@ where $\phi$ is given by $[(a_1 = b_1 \vee b_2) \wedge (a_2 = b_1 \vee b_3)]_*$.
 \]
 commutes. But this time, we already know that $\alpha_1$ and the corresponding second projection are the universal cone of a product and similarly, $[a=a_1]_*$ are the projections of a product. This already implies that $\phi$ is induced by the correct isomorphisms and moreover that $\phi$ itself is an isomorphism. This concludes the proof that $Lan_F U(\wedge)$ matches the corresponding operation on the universal model in $Set[\mathbb{T}]$. The argument for $\vee$ should be very similar.
 
-(This must be cleaned up a bit) To show that $Lan_F U(\neg)$ matches the corresponding operation on the universal model, we show that morphisms of distributive lattices internal to a topos $\mathcal{E}$ automatically preserve $\neg$. So let $M$, $N$ be boolean algebras internal to $\mathcal{E}$ and let $\varphi: M \to N$ be a homomorphism of distributive lattices. We have that
+We show that $Lan_F U(\neg)$ matches the corresponding operation on the universal model, by showing that we don't need to show it. Let $\mathbb{T}_{BAlg}$ denote the theory of boolean algebras and $\mathbb{T}_{DLat'}$ be the theory of distributive lattices together with the axiom
 \[
-[y=\neg x] = [(x\wedge y=0) \wedge (x\vee y=1)] ,
+\top \vdash_{x} \exists y . (x \wedge y=0)\wedge (x\vee y=1) .
 \]
-where we view both formulas as $\mathbb{T}$-provably functional formulas $\{x.\top\} \to \{y.\top\}$ in the syntactic category of boolean algebras. Thus, by identifying boolean algebras with functors from the syntactic category of boolean algebras into $\mathcal{E}$, the diagram
+
+We even have that $\mathcal{C}^{\mathbb{T}_{BAlg}} \simeq \mathcal{C}^{\mathbb{T}_{DLat'}}$. The functor pointing towards the left is just given by the universal model in $\mathbb{T}_{BAlg}$. The functor pointing towards the right is given by the universal model in $\mathbb{T}_{DLat'}$, where negation is given by the $\mathbb{T}_{DLat'}$-provably functional formula
 \[
-\begin{tikzcd}
-M \arrow[d, "M(\neg)"'] \arrow[r, "\varphi"] & N \arrow[d, "N(\neg)"] \\
-M \arrow[r, "\varphi"]                       & N                     
-\end{tikzcd}
+[(x\wedge y=0) \wedge (x\vee y=1)] : \{x.\top\} \to \{y.\top\}  .
 \]
-must already commute.
+
+One can verify that this actually is an equivalence by using \ref{interpretations} and the fact that
+\[
+[y=\neg x] = [(x\wedge y=0) \wedge (x\vee y=1)] 
+\]
+in $\mathcal{C}^{\mathbb{T}_{BAlg}}$. This now proves that we don't need to check that negation gets preserved, by identifying models of $\mathbb{T}_{BAlg}$ with models of $\mathbb{T}_{DLat'}$.
 
 Luckily, sending $U_r \to \coprod U_r$ through $Lan_F$ is easily seen to give the expected subobject, concluding the proof.
 \end{proof}
