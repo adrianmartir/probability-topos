@@ -5,3 +5,4 @@
 *.log
 *.fls
 *.fdb_latexmk
+.vscode

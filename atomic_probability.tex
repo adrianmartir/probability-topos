@@ -446,15 +446,15 @@ For (iv), letting $\pi$ denote the projection onto the components given by the $
 
 \end{proof}
 
-We record two facts that will be used numerous times for proving well-definedness of the inverse functor.
+The following two facts allow us to interpret statements $t = s$ into an easier form without noise given by redundant variables.
 
 \begin{lemma} With the same setup as in \ref{interpretations}, we have that for a function symbol $f$ in $\Sigma$,
 \[
 \ldoub \vec{x} . f(\vec{x}) \rdoub_M \cong [ \theta_f^{\vec{a}, \vec{b}} ]
 \]
-and
+and for a term $t$ with free variables among the $\vec{x}$,
 \[
-\ldoub \vec{x}, y . f(\vec{x}) = y \rdoub_M \cong \{\vec{a}, \vec{b} . \theta_f^{\vec{a},\vec{b}} \} .
+\ldoub \vec{x} . (t=x_i) \rdoub_M \cong \{\vec{a} . \theta_f^{\vec{a},a_i} \} .
 \]
 \end{lemma}
 
@@ -464,11 +464,13 @@ Boring.
 
 We now define the inverse functor. We induce it by a geometric functor $\mathcal{C}^{\mathbb{T}^{FinProb}} \to \mathcal{C}^{\mathbb{T}}$, where $\mathbb{T}^{FinProb}$ denotes the theory of flat functors over $FinProb$. Such a geometric functor of course is given by a model of $\mathbb{T}^{FinProb}$ in $\mathcal{C}^{\mathbb{T}_{bpalg}}$. We give the functor in this way because it allows us to use internal logic to prove that the induced functor on classifying toposes is left-exact, which will be needed when showing that the functors are inverses of each other.
 
+We will identify the objects and arrows in $FinProb$ with the corresponding sorts and function symbols in $\mathbb{T}^{FinProb}$.
+
 \begin{lemma} \label{inverse}
 We have a $\mathbb{T}^{FinProb}$-model in $\mathcal{C}^{\mathbb{T}_{bpalg}}$ given as follows. Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $FinProb$. We specify a model $F$ on the sort given by $(X,\mu)$ and on the function symbol given by $f$ by:
 \begin{align*}
-\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{x \in X} B_{\mu x} a^x \wedge \bigwedge_{\substack{x,y \in X \\ x \neq y}} (a^x \wedge a^y = 0) \Bigg \} \\
-[\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{y \in Y} (b^y = \bigvee_{f x = y} a^x) \wedge \phi_{X,\mu}^{\vec{a}} \wedge \phi_{Y,\nu}^{\vec{b}} \Bigg] ,
+\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{i \in X} B_{\mu(i)} a_i \wedge \bigwedge_{\substack{i,j \in X \\ i \neq j}} (a_i \wedge a_j = 0) \Bigg \} \\
+[\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{j \in Y} (b_j = \bigvee_{f i = j} a_i) \wedge \phi_{X,\mu}^{\vec{a}} \Bigg] ,
 \end{align*}
 so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$.
 \end{lemma}
@@ -476,9 +478,88 @@ so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F
 The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
 
 \begin{proof}
-The challenge is showing that this is actually a model of the theory of flat functors on $FinProb$.  Now we check that the five axioms of the theory $\mathbb{T}^{FinProb}$ are satisfied, which is an arduous task that has already required quite a bit of setup in the form of \ref{interpretations}.
+First notice that $[\theta_f^{\vec{a}, \vec{b}}]$ has actually the correct codomain by additivity of the measure. It is also easily seen to be provably functional.
+
+The challenge is showing that this is actually a model of the theory of flat functors on $FinProb$.  Now we check that the five axioms of the theory $\mathbb{T}^{FinProb}$ are satisfied in the above interpretation. We will heavily and implicitly make use of the previous two lemmas.
 \begin{enumerate}
-\item bla
+\item The sequent
+\[
+\top \vdash_x id(x) = x
+\]
+interprets to the sequent
+\[
+\top \vdash_a \theta_{id}^{a,a} ,
+\]
+which holds since $\theta_{id}^{a,a} \dashv \vdash_a a = a \dashv \vdash_a \top$.
+
+\item Let $h = g f$ be the composition of two arrows in $FinProb$. The sequent
+\[
+\top \vdash_x h(x) = g(f(x))
+\]
+interprets to the sequent
+\[
+\top \vdash_a (\exists b, c) \theta^{a,b}_h \wedge \theta^{a,c}_f \wedge \theta^{c,b}_g ,
+\]
+which can be checked with associativity and commutativity of the $\vee$ operation and with the additivity of the the measure.
+
+\item The sequent
+\[
+\top \vdash_{[]} \bigvee_{\alpha \in FinProb} (\exists x^{\alpha}) \top ,
+\]
+where $x^{\alpha}$ denotes a variable of sort $\alpha$, interprets to the sequent
+\[
+\top \vdash_{[]} \bigvee_{\alpha \in FinProb} (\exists a) \phi_{\alpha}^a .
+\]
+But of course we have
+\[
+\top \vdash_{[]} B_1(1) \vdash_{[]} \phi^1_{U_1} ,
+\]
+which means that this axiom holds.
+
+\item Let $\alpha$, $\beta$ be finite probability spaces and $x$, $y$ be variables of these sorts, respectively, and moreover let $z^{\gamma}$ be of sort $\gamma$, for any finite probability space $\gamma$. The sequent
+\[
+\top \vdash_{x,y} \bigvee_{\alpha \xleftarrow{f} \gamma \xrightarrow{g} \beta} (\exists z^{\gamma}) (f(z^{\gamma}) = x) \wedge (g(z^{\gamma}) = y) ,
+\]
+where the disjunction goes over all cones of the specified shape, interprets to the sequent
+\[
+\phi^{\vec{a}}_{\alpha} \wedge \phi^{\vec{b}}_{\beta} \vdash_{\vec{a}, \vec{b}} \bigvee_{\alpha \xleftarrow{f} \gamma \xrightarrow{g} \beta} (\exists \vec{c})(\theta_f^{\vec{c},\vec{a}} \wedge \theta_g^{\vec{c},\vec{b}}) .
+\]
+
+Now, by the partition axiom, we have that $\top \vdash \bigvee_{r_{ij} \in [0,1]} \phi_{U_{r_{ij}}}^{\vec{a}\wedge\vec{b}}$, where $i$ ranges over the elements of $\alpha$ and $j$ ranges over the elements of $\beta$ and moreover, $\vec{a}\wedge\vec{b}$ denotes all the variables that arise from terms of the form $a_i \wedge b_j$. We can use this fact in order to rewrite the left hand side as
+
+\[
+\bigvee_{r_{ij} \in [0,1]} \phi^{\vec{a}}_{\alpha} \wedge \phi^{\vec{b}}_{\beta} \wedge \phi_{U_{r_{ij}}}^{\vec{a}\wedge\vec{b}} .
+\]
+
+Thus we can show the sequent above, by instead showing that for all families of $r_{ij} \in [0,1]$, the following holds:
+
+\[
+\phi^{\vec{a}}_{\alpha} \wedge \phi^{\vec{b}}_{\beta} \wedge \phi_{U_{r_{ij}}}^{\vec{a}\wedge\vec{b}} \vdash_{\vec{a},\vec{b}} (\exists \vec{c})(\theta_f^{\vec{c},\vec{a}} \wedge \theta_g^{\vec{c},\vec{b}}) ,
+\]
+where $c$ is of the sort $U_{r_{ij}}$ and $f$ and $g$ are the canonical maps projecting onto the correct indices. But this last sequent is easily to hold by setting $c_{ij} := a_i \wedge b_j$.
+
+\item Let
+\begin{tikzcd}
+\alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
+\end{tikzcd}
+be a diagram in $FinProb$ and let $x$ be a variable of sort $\alpha$ and $z^{\gamma}$ of sort $\gamma$ for any $\gamma$. The sequent
+\[
+f(x) = g(x) \vdash_x \bigvee_{\substack{\gamma \xrightarrow{h} \alpha \\ fh = gh}} (\exists z)(h(z) = x)
+\]
+interprets to the sequent
+\[
+(\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}} \vdash_{\vec{a}} \bigvee_{\substack{\gamma \xrightarrow{h} \alpha \\ fh = gh}} (\exists c) \theta_h^{c,a} .
+\]
+In the case that $f=g$, this sequent is trivial, since we can set $h = id$. In the case that $f \neq g$, let $k$ be such that $f(k) \neq g(k)$. Now we can also prove the sequent by deriving $\bot$.
+\begin{align*}
+(\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}}
+&\vdash_{\vec{a}} (\exists \vec{b}) \bigwedge_{j \in \beta} (b_j = \bigvee_{f i = j} a_i) \wedge \bigwedge_{j \in \beta} (b_j = \bigvee_{g i = j} a_i) \wedge \phi_{\alpha}^{\vec{a}} \\
+&\vdash_{\vec{a}} \bigwedge_{j \in \beta} \big ( \bigvee_{f i = j} a_i = \bigvee_{g i = j} a_i \big ) \wedge \phi_{\alpha}^{\vec{a}} \\
+&\vdash_{\vec{a}} \big ( \bigvee_{f i = f k} a_i = \bigvee_{g i = f k} a_i \big ) \wedge \phi_{\alpha}^{\vec{a}} \\
+&\vdash_{\vec{a}} \big ( \bigvee_{f i = f k} a_i \wedge a_k = \bigvee_{g i = f k} a_i \wedge a_k \big ) \wedge \phi_{\alpha}^{\vec{a}}\\
+&\vdash_{\vec{a}} (a_k = 0) \wedge \phi_{\alpha}^{\vec{a}} \\
+&\vdash_{\vec{a}} \bot
+\end{align*}
 \end{enumerate}
 \end{proof}
 
@@ -492,7 +573,7 @@ Similarly, we abuse notation and identify $F$, our $\mathbb{T}^{FinProb}$-model 
 Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}].
 \]
 
-\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying1}
+\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying}
 $Lan_y(U)$ and $Lan_F$ define an equivalence of categories
 \[
 Set^{FinProb^{op}} \simeq Set[\mathbb{T}_{bpalg}].
@@ -627,7 +708,7 @@ commutes. But this time, we already know that $\alpha_1$ and the corresponding s
 
 We show that $Lan_F U(\neg)$ matches the corresponding operation on the universal model, by showing that we don't need to show it. Let $\mathbb{T}_{BAlg}$ denote the theory of boolean algebras and $\mathbb{T}_{DLat'}$ be the theory of distributive lattices together with the axiom
 \[
-\top \vdash_{x} \exists y . (x \wedge y=0)\wedge (x\vee y=1) .
+\top \vdash_{x} (\exists y) ((x \wedge y=0)\wedge (x\vee y=1)) .
 \]
 
 We even have that $\mathcal{C}^{\mathbb{T}_{BAlg}} \simeq \mathcal{C}^{\mathbb{T}_{DLat'}}$. The functor pointing towards the left is just given by the universal model in $\mathbb{T}_{BAlg}$. The functor pointing towards the right is given by the universal model in $\mathbb{T}_{DLat'}$, where negation is given by the $\mathbb{T}_{DLat'}$-provably functional formula
@@ -644,9 +725,15 @@ in $\mathcal{C}^{\mathbb{T}_{BAlg}}$. This now proves that we don't need to chec
 Luckily, sending $U_r \to \coprod U_r$ through $Lan_F$ is easily seen to give the expected subobject, concluding the proof.
 \end{proof}
 
-\begin{theorem}
-This extends to our results about probability intervals.
-\end{theorem}
+We proceed by investigating what $Sh(FinProb, J_{at})$ classifies.
+
+\begin{definition}
+Define the \textit{theory of intervals} $\mathbb{T}_{int}$ by adding the axioms
+\[
+B_s a \vdash_a (\exists b) \big ( (b = a \wedge b) \wedge B_r b \big )
+\]
+for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability algebras.
+\end{definition}
 
 Note that the models of $\mathbb{T}_{int}$ in $Set$ must all be uncountable.
 
@@ -654,6 +741,10 @@ Note that the models of $\mathbb{T}_{int}$ in $Set$ must all be uncountable.
 Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure.
 More generally, atomless measure algebras. Question: Are these all continuum boolean probability algebras?
 \end{example}
+
+\begin{theorem}
+This extends to our results about probability intervals.
+\end{theorem}
 
 \begin{corollary}
 A geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{int}$. In particular, a geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds for all atomless measure algebras.
