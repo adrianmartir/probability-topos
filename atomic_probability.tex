@@ -1,4 +1,4 @@
-\documentclass[a4paper,draft]{amsproc}
+\documentclass[a4paper]{amsproc}
 \renewcommand\labelenumi{(\roman{enumi})}
 \renewcommand\theenumi\labelenumi
 \title{\textbf{Atomic Topologies in Probability Theory}}
@@ -93,7 +93,31 @@ We use our construction of the measure on the pullback in \ref{pullback_measure}
 \]
 Since this is clearly a coequalizer on the underlying sets, the only thing to show is that the uniquely induced map is measure-preserving. This can either be directly computed or more concisely calculated by using \ref{Imnotdumb}.
 \end{proof}
-
+%More generally;
+%\begin{theorem}
+%The category $FinProb$ has all multi-limits and connected colimits.
+%\end{theorem}
+%\begin{proof} We prove it has all coequalizer, pushouts, multi-products and multi-equalizer.
+%\begin{enumerate}
+%\item Given a diagram as follows, where $\eta'([x])=\eta(x)$ for any equivalence class $[x]$:
+%\begin{center}
+%\begin{tikzcd}
+%{(X,\mu)} \arrow[r, "g"', shift right] \arrow[r, "f", shift left] & {(Y,\nu)} \arrow[r] \arrow[rd] & {(CoEq(f,g),\nu')} \arrow[d, dotted] \\
+%                                                                  &                                & {(L,\eta)}                        
+%\end{tikzcd} 
+%\end{center}
+%The induced map by the universal property is measure preserving by \ref{Imnotdumb}. We need only show that $(CoEq(f,g),\nu')$ is a finite probability space. 
+%\item Given a diagram as follows, where $\eta'([x])=\eta(x)$ or $\eta'([x])=\lambda(x)$ depending on which set $x$ belongs, for any equivalence class $[x]$. This is a finite probability space ...:
+%\begin{center}\begin{tikzcd}
+%{(X,\mu)} \arrow[d, "f"'] \arrow[r, "g"]    & {(L,\lambda)} \arrow[rdd, bend left] \arrow[d] &            \\
+%{(Y,\nu)} \arrow[rrd, bend right] \arrow[r] & (Y\cup_X L,\mu') \arrow[rd, dotted]                 &            \\
+%                                            &                                                & {(M,\eta)}
+%\end{tikzcd}\end{center}
+%Again the induced map is measure preserving by \ref{Imnotdumb}. Note that this also works for infinite pushouts, since the pushout is also finite given it has a surjection from a finite set.
+%\item It has mulit-products. Given a family of finite probability spaces $(X_i,\mu_i)$ and any family of measure preserving maps $f_i:(Y,\nu)\rightarrow (X_i,\mu_i)$, the inverse images of elements of the $X_i$ generate a sub finite probability algebra of $\mathcal{P}(Y)$. We can take $(\tilde{Y},\tilde{\nu})$ the corresponding finite probability space. All the $f_i$ factor through  $(\tilde{Y},\tilde{\nu})$. Take the set of all such finite probability spaces. We claim it is the multi-product of $(X_i,\mu_i)$. This is like painfully obvious.
+%\item The same argument applies to all multi-limits.
+%\end{enumerate}
+%\end{proof}
 Now we can introduce the topos that we wish to study in this paper.
 
 \begin{definition}
@@ -536,7 +560,7 @@ Thus we can show the sequent above, by instead showing that for all families of 
 \[
 \phi^{\vec{a}}_{\alpha} \wedge \phi^{\vec{b}}_{\beta} \wedge \phi_{U_{r_{ij}}}^{\vec{a}\wedge\vec{b}} \vdash_{\vec{a},\vec{b}} (\exists \vec{c})(\theta_f^{\vec{c},\vec{a}} \wedge \theta_g^{\vec{c},\vec{b}}) ,
 \]
-where $c$ is of the sort $U_{r_{ij}}$ and $f$ and $g$ are the canonical maps projecting onto the correct indices. But this last sequent is easily to hold by setting $c_{ij} := a_i \wedge b_j$.
+where $c$ is of the sort $U_{r_{ij}}$ and $f$ and $g$ are the canonical maps projecting onto the correct indices. But this last sequent is easily seen to hold by setting $c_{ij} := a_i \wedge b_j$.
 
 \item Let
 \begin{tikzcd}
@@ -743,8 +767,15 @@ More generally, atomless measure algebras. Question: Are these all continuum boo
 \end{example}
 
 \begin{theorem}
-This extends to our results about probability intervals.
+The topos $Sh(FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$.
 \end{theorem}
+\begin{proof}
+Using (Olivia book corollary 8.1.14) and \ref{classifying} in order to get that $Sh(FinProb,J_{at})$ classifies $\mathbb{T}_{bpalg}$ together with an axiom
+\[
+\phi_{\alpha}^{\vec{a}} \vdash_{\vec{a}} (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}}
+\]
+for each morphism $f: \alpha \to \beta$ in $FinProb$.
+\end{proof}
 
 \begin{corollary}
 A geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{int}$. In particular, a geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds for all atomless measure algebras.
@@ -815,9 +846,159 @@ Notice that by using this corollary of Maharam's theorem we have implicitly used
 \[\textbf{Sh}(FinProb, J_{at})\simeq \textbf{Cont}(G)\]
 \end{corollary}
 It follows that the atoms of the topos correspond to open subgroups of $G$. We shall classify them. %give ref
-\begin{lemma} The open subgroups of $G$ are precisely groups $\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing an at most countable partition $\chi: (A,\mu)\rightarrow (I,\lambda)$ i.e. $A$ is a boolean algebra $\mathcal{P}(\mathbb{N})$ or $\mathcal{P}(n)$ for some $n\in\mathbb{N}$, $\mu$ some measure without null-sets on it and $f$ is measure preserving.
+\section{"Our topos" as a set-theoretical universe}
+\begin{proposition} The internal language of "our topos" is a model of ZFA (Zermelo-Frenkel with atoms).
+\end{proposition}
+\begin{proof} Quote some shit.
+\end{proof}
+\begin{proposition} The internal language of our topos proves the negation of countable choice.
+\end{proposition}
+\begin{proof} We construct a countable product of non-empty objects, which is empty. Take $X_n$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n X_n=0$.
+\end{proof}
+This proof can, in fact be adapted in many situations, to suggest that most countable products of objects are empty. So there is really not much hope to extend the transfer principle to statements containing countably infinitely many variables or more.
+\section{Forgetting how to measure}
+In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
+\begin{theorem} The first-order theory of atomless, decidable boolean algebras is complete. Moreover, the atomic topos on the site  $FinSur$ given by non-empty finite sets and surjections is its classifying topos and that is Morita equivalent to the automorphism group of boolean algebras of the Cantor space $\mathfrak{C}$ fixing finite partitions.
+\[ \text{Sh}(FinSur, J_{at})\simeq \text{Cont}(Aut_{Bool}(\mathfrak{C}))\]
+Its universal model is given by $h_2\sqcup h_1 \sqcup h_1$ i.e. the functor assigning each set its power-set algebra.
+\end{theorem}
+\begin{proof}Elephant, Olivia
+\end{proof}
+\begin{remark} Instead of $\mathfrak{C}$ one could take the boolean algebra $I$, again with the automorphism group fixing finite partitions. This follows from the argument given in Olivia.
+\end{remark}
+\begin{lemma} The evident forgetful functor $U: FinProb\rightarrow FinSur$ is a comorphism of sites. The corresponding geometric morphism 
+\[U^*\dashv U_*: \text{Sh}(FinProb, J_{at})\rightarrow  \text{Sh}(FinSur, J_{at})\]
+ is surjective and localic. We also get on representable functors:
+ \[U^*h_X=\bigsqcup_{\mu\text{ is a measure on }X}h_{(X,\mu)}\]
 \end{lemma}
-\begin{proof} No idea.
+\begin{proof} We need to show the covering-lifting property. It is enough to check this on sieves with one morphism as the atomic topology is generated by them. Given any finite probability space $(X,\mu)$ and cover $\{f: Y\rightarrow U(X,\mu) \}$, we can equip $Y$ with a measure $\nu$ making $\{f: (Y,\nu)\rightarrow (X,\mu) \}$ measure preserving. Define:
+\[\nu(y)=\frac{\mu(f(y))}{\# f^{-1}(f(y))} \]
+This is a measure as $\nu(y)>0$ and
+\[  \sum_{y\in Y}\nu(y)=\sum_{y\in Y}\frac{\mu(f(y))}{\# f^{-1}(f(y))}=\sum_{x\in X}\sum_{y\in f^{-1}(x)}\frac{\mu(f(y))}{\# f^{-1}(f(y))} =\sum_{x\in X}\mu(x)=1\]
+where the penultimate step holds as $f$ is surjective. This line of reasoning also shows that $f$ is measure preserving. 
+\newline \indent To show it is surjective, it suffices to show $U^*$, which is the composition of sheafification and precomposition by $U$, is faithful. Sheafification is always faithful, so we need only check $-\circ U$ is. As $U$ is essentially surjective on objects we can apply the argument of A4.2.7(b) to see this.
+\newline \indent It is localic as $U$ is faithful and both topologies are subcanonical, so the argument of A4.6.2(c) applies.
+\newline\indent The explicit equation follows by the following observation, probing both functors at some finite probability space $(Y,\nu)$:
+\[U^*h_X(Y,\nu)=FinSur(Y,X)=\bigsqcup_{\mu\text{ is a measure on }X}FinProb((Y,\nu),(X,\mu))\]
+This holds as any surjective map $f:Y\rightarrow X$ induces a unique measure $\mu(x)=\sum_{y\in f^{-1}(x)} \nu(y)$ on $X$ making $f$ measure preserving. On maps $f:X\rightarrow Y$, we get for the representable functors:
+\begin{center}
+\begin{tikzcd}
+{U^*h_X(Z,\lambda)} \arrow[d, "{U^*h_f(Z,\lambda)}"'] \arrow[r, dash] & {FinSur(Z,X)} \arrow[d, "f\circ -" description]\arrow[r, dash]  & {\bigsqcup_{\mu}FinProb((Z,\lambda),(X,\mu))} \arrow[d, "\alpha_f (Z{,} \lambda)"] \\
+{U^*h_Y(Z,\lambda)} \arrow[r, dash]                                   & {FinSur(Z,Y)}\arrow[r, dash]                    & {\bigsqcup_\nu FinProb((Z,\lambda),(Y,\nu))}                     
+\end{tikzcd}
+\end{center}
+There is at most one non-empty $FinProb((Z,\lambda),(X,\mu))$ respectively \linebreak $FinProb((Z,\lambda),(Y,\mu))$. And $\nu(y)=\sum_{x\in f^{-1}(y)} \mu(x)$ for all $y\in Y$, so  $\alpha_f (Z{,} \lambda)$ is simply post composition between these hom-sets.
+\end{proof}%Is there a "two out of three rule for surjectivity in general?"
+The fact that it is localic hints to the fact that the theory which "our topos" classifies is obtained from the theory of atomic boolean algebras by adding only relation symbols and axioms. [ref olivias denseness paper]
+\begin{corollary} The geometric morphism $(U^*\vdash U_*)$ corresponds to the map exhibiting the universal model of the theory of continuum boolean probability algebras as an atomic boolean algebra. The inequality predicate is $\bigvee_{r>0} B_r ( A\Delta B )$.%edited this here!
+\end{corollary}
+\begin{proof} We compute 
+\[U^*(h_2\sqcup h_1 \sqcup h_1)= (U^*h_2)\sqcup (U^*h_1)\sqcup (U^*h_1)=\bigsqcup_{r\in (0,1)}h_{(2,r)}\sqcup h_1 \sqcup h_1, \] which is the universal model of the theory of continuum boolean probability algebras. It is easily checked that this identification induces an isomorphism of the boolean algebra structures.
+\end{proof}%Super technical detail allert!!!!!!! r=0, r=1 !!!!!!!! a single point missing !!!!!!!!!!!!!
+We can also characterise the internal complete boolean algebra, the sheaves over which are equivalent to our topos.
+\begin{lemma} Given the sheaf of boolean algebras $\mathbb{M}$ which assigns to a finite sets the power set of the set of probability measures on it and a set map $f:X\rightarrow Y$ to the map given by $\{\nu \}\mapsto \{\mu| \forall y\in Y. \nu(y)=\sum_{x\in f^{-1}(y)}\mu(y)  \}$. Then we get:
+\[\text{Sh}(FinProb,J_{at})\simeq \text{Sh}_{\text{Sh}(FinSur,J_{at})}(\mathbb{M}) \]
+\end{lemma}
+\begin{proof} By [elephant], we need to compute $U_*\Omega$ for the subobject classifyer $\Omega$:
+\[(U_*\Omega)(X)\simeq \text{Hom}(h_X,U_*\Omega)\simeq \text{Hom}(U^*h_X,\Omega)\simeq \text{Hom}(\bigsqcup_{\mu \text{ is a measure on }X}h_{(X,\mu)},\Omega)\]
+\[\simeq \prod_{\mu \text{ is a measure on }X}\text{Hom}(h_{X,\mu},\Omega)\simeq \prod_{\mu \text{ is a measure on }X} 2\simeq 2^{\{\mu \text{ is a measure on }X\} } 
+ \]
+ Here we used, that the representable functors are atoms and the $\Omega$-axiom.
+ On maps, a similar calculation can be done to compute $(U_*\Omega)(f)$ for $f:X\rightarrow Y$:
+ \begin{center}
+ \begin{tikzcd}
+{\text{Hom}(U^*h_Y,\Omega)} \arrow[d, "-\circ U^*h_f"'] \arrow[r,dash] & {\text{Hom}(\bigsqcup_\nu h_{(Y,\nu)},\Omega)} \arrow[d, "-\circ \alpha_f" description] \arrow[r,dash]  & {\text{Sub}(\bigsqcup_\nu h_{(Y,\nu)})} \arrow[d, "\text{pull back along }\alpha_f"] \\
+{\text{Hom}(U^*h_X,\Omega)} \arrow[r,dash]                                        & {\text{Hom}(\bigsqcup_{\mu} h_{(X,\mu)},\Omega)}          \arrow[r,dash]                                & {\text{Sub}(\bigsqcup_\mu h_{(X,\mu)})}                                             
+\end{tikzcd}
+\end{center}
+Pulling back $\alpha_f$ is given by sending $\{\nu\}$ to the set of all possible measures $\mu$ on $X$ whose pushforward measure is $\nu$.  
+\end{proof} 
+This construction looks strikingly similar to the distribution (or finitary Giry) monad used in other category theoretic investigations of probability.[quote some paper] We can recover $\mathbb{M}$ as the following composite:
+\begin{center}
+\begin{tikzcd}
+\mathbb{M}: FinSur^{op}\arrow[r, "D^{op}"]& \text{Set}^{op}\arrow[r,"\mathcal{P}"]&\text{Set}\\
+\end{tikzcd}
+\end{center}
+Here $D$ is the restriction of the distribution monad and $\mathcal{P}$ the contravariant power set functor.
+\begin{lemma} The geometric morphism considered above is naturally isomorphic to the one given by:
+\[\tilde{U}^*\dashv \tilde{U}_*:\text{Cont}(Aut_{BProbAlg}(I,\lambda))\rightarrow\text{Cont}(Aut_{Bool}(I))\]
+where the inverse image functor is defined as restricting the action of $Aut_{Bool}(I)$ to the one of $Aut_{BProbAlg}(I,\lambda)$.
+\end{lemma}
+\begin{proof} 
+$\tilde{U}^*$ preserves colimits as colimits of sets with continuous group actions are computed using the underlying sets only (in partiuclar $\tilde{U}_*$ exists).
+Now we can apply the coYoneda lemma, it suffices to show $U^*$ does the right stuff on representables.
+  $\tilde{U}^*\text{Hom}_{Bool}(X,I)$ is the set 
+$\text{Hom}_{Bool}(X,I)$ with the action given by $Aut_{BProbAlg}(I,\lambda))$. Here we compute:
+\[\text{Hom}_{Bool}(X,I)=\bigsqcup_{\mu\text{ is measure on }X}\text{Hom}_{BProbAlg}((X,\mu),(I,\lambda))\]
+This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can induce a unique measure $\mu_f$ on $X$ making it measure preserving. The stuff on the right hand side is as we expected, concluding the proof.
+\end{proof}
+\begin{remark} The same argument would apply for any homogeneous measure algebra instead of $I$.
+\end{remark}
+\section{Advanced, general tools}
+Before we can begin providing a connection between the different categories of sheaves over the underlying boolean algebras of Set-based probability intervals, we will require a crucial measure theoretic lemma.
+\begin{lemma} Given a measure algebra $(\mathcal{B},\mu)$ with $\mu(\top)=1$ (here we assume that the measure is additive) then any measure preserving automorphism of boolean algebras $f:(\mathcal{B},\mu)\rightarrow (\mathcal{B},\mu)$ preserves all meets and joins.
+\end{lemma}
+\begin{proof} Because in the reference [Fremlin], they use many definitions and theorems, that the reader may not be familiar with, we choose to sketch the proof of 324Kb from which our claim immediately follows.\newline
+\indent First note that a morphism of boolean algebra between complete boolean algebras preserves all meets and joins iff it preserves meets of the form $\bigwedge_i A_i=\bot$ for decreasing $A_i$. This can be seen as follows:\newline 
+\indent  Given arbitrary $A_i$ prove preservation of $\inf A_i$ using that for any ordering $<$ of the index set $I$ we get
+\[\bigwedge_{i\in I} \bigwedge_{j<i} (A_j \Delta \inf A_i)=\bot\] %Do we need this much detail?
+\indent Given $\sup A_i$ use $\sup A_i=\neg \inf \neg A_i$\newline
+$\mu$ is additive hence for decreasing $A_i$ we have $\bigwedge_i A_i=\bot$ iff $\inf \mu(A_i)=0$. Now the measure preservation comes in:
+\[ \inf \mu f(A_i)=\inf \mu(A_i)=0\]
+Hence $f$ is necessarily a complete boolean algebra homomorphism.
+\end{proof}
+\begin{lemma} The universal model $U$ of the theory of probability intervals is $(I,\lambda)$ acting on itself via its automorphisms. Moreover, it is an internal complete boolean algebra.
+\end{lemma}
+\begin{proof} We apply the bridge $\text{Cont}(\text{Aut}_{BPAlg}(I,\lambda))\simeq \text{Set}[\mathbb{T}_{int}]$. Under this equivalence, the universal model gets sent to:
+\[\bigsqcup_{r\in [0,1]} \text{Hom}_{BPAlg}(U_r, (I,\lambda))\simeq I \]
+The isomorphism is given by sending $f\in \text{Hom}_{BPAlg}(U_r, (I,\lambda))$ to the image of the element with measure $r$ in $(I,\lambda)$. We need to check that the boolean algebra structure of the universal model coincides with the one of $I$. But this can be done exactly as in the proof of [classifying shit]:\newline
+\indent Thus $U$ is a complete boolean algebra acting on itself via automorphisms. By the preceding lemma, these are even automorphisms of complete boolean algebras, in particular locales. Locales in $\text{Set}^G$ are simply locales upon which $G$ acts by locale-automorphisms by C2.5.8(d) so the universal model is a  $[\text{Aut}(I,\lambda),\text{Set}]$-indexed locale. B2.3.10 states that, for any closure operator $j$ on a topos $\mathcal{S}$ an $\mathcal{S}$-indexed cocomplete category is a  $sh_j\mathcal{S}$-indexed cocomplete category iff it is a $j$-sheaf. Applying this result to the closure operator associated to the inclusion $\text{Cont}_\tau(\text{Aut}(I,\lambda))\hookrightarrow [\text{Aut}(I,\lambda),\text{Set}]$ proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
+\end{proof}
+This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is quite a different from the situation of the theory of atomless boolean algebras. There, the automorphism need not preserve the complete boolean algebra structure. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
+\begin{lemma}[Trivial lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by complete boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
+\begin{center}
+\begin{tikzcd}
+\text{Sh}(\mathcal{B}) \arrow[d, "\bar{f}"'] \arrow[r, "\Gamma"]      & \text{Set} \arrow[d, "f"] \\
+{\text{Sh}^{(G,\tau)}(\mathcal{B})} \arrow[r, "{\Gamma^{(G,\tau)}}"'] & \text{Cont}_\tau(G)      
+\end{tikzcd}
+\end{center}
+Here $\text{Sh}^{(G,\tau)}(\mathcal{B})$ denotes the topos of $(G,\tau)$-equivariant sheaves on $\mathcal{B}$ and $f^*$, $\bar{f}^*$ just forget the group action.\newline
+\indent In particular, $\bar{f}$ is an open surjective geometric morphism.
+\end{lemma}
+\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms are again localic. Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale. We know $f$ is open geometric as points of atomic toposes are always open surjective by C3.5.6. By C3.1.28 $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
+\[ \mathcal{B}=f^*\Gamma^{(G,\tau)}\Omega\simeq \Gamma e^*\Omega\simeq \Gamma e^*(1\sqcup 1)\simeq \Gamma (1\sqcup 1)\simeq\Gamma \Omega_\mathcal{E}  \]
+\newline
+In the first step we use the well-known description of subobject classifiers of localic topoi [ref]. In the second steps we use that for boolean topoi we have $\Omega=1\sqcup 1$. We now need to chase around the boolean algebra structure (only the Beck-Chevalley morphism is questionable.) This is immediate as all functors in question preserve finite limits and thus the algebraic structure of boolean algebras.
+
+\indent Pullbacks of open surjections are again open surjections by C3.1.23, thus $\bar{f}$ has this property. 
+\end{proof}
+
+
+\begin{theorem}[Very strong completeness] Given a probability interval $(\mathcal{B},\mu)$ in Set with classifying morphism $f_{(\mathcal{B},\mu)}:\text{Set}\rightarrow \text{Set}[\mathbb{T}_{int}]$, we get the following 2-pullback diagram of topoi and geometric morphisms:
+\begin{center}
+\begin{tikzcd}
+\text{Sh}(\mathcal{B}) \arrow[r, "\Gamma"] \arrow[d, "\bar{f}"']   & \text{Set} \arrow[d, "{f_{(\mathcal{B},\mu)}}"] \\
+{\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)} \arrow[r, "\Gamma"'] & {\text{Set}[\mathbb{T}_{int}]}                 
+\end{tikzcd}
+\end{center}
+Impressively, $\bar{f}$ is an open surjective geometric morphism. It preserves and reflects infinitary first order logic.
+\end{theorem}
+\begin{proof} 
+Follows immediately from the last two theorems and the bridge 
+\[\text{Cont}_\tau(\text{Aut}_{BPRobAlg}(\mathcal{B},\mu))\simeq \text{Set}[\mathbb{T}_{int}]\]
+ for homogeneous Maharam-type measure algebras under which, as shown in these lemmas, the universal model corresponds to $\mathcal{B}$.%is this the correct wording?
+\end{proof}
+The following might be rather boring as descent for torsors is just giving a "global trivialisation"!
+\begin{corollary}[Descent] The morphism $\bar{f}$ has descent. This means $\mathcal{F}:=\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)$ is equivalent to the category of the descent data.
+Fixing the notation as in the following diagram:
+\begin{center}
+\begin{tikzcd}
+{\text{Sh}(\mathcal{B})\times_\mathcal{F}\text{Sh}(\mathcal{B})\times_\mathcal{F}\text{Sh}(\mathcal{B})} \arrow[r, "\pi_{13}" description] \arrow[r, "\pi_{12}", shift left=3] \arrow[r, "\pi_{23}"', shift right=3]  & {\text{Sh}(\mathcal{B})\times_\mathcal{F}\text{Sh}(\mathcal{B})} \arrow[r, "\pi_2"', shift right=3] \arrow[r, "\pi_1", shift left=3] & {\text{Sh}(\mathcal{B})} \arrow[l, "\Delta" description]
+\end{tikzcd}
+\end{center}
+The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sheaf on $\mathcal{B}$ and $\theta:\pi_1^*A\simeq \pi_2^*A$ is an isomorphism such that $\Delta^*\theta=\text{id}$ and the cocycle condition $\pi_{13}^*\theta=\pi_{12}^*\theta\circ \pi_{23}^*\theta$ is fulfilled. Morphisms of descent data are natural transformations $\psi:A\rightarrow B$ commuting with all the structure.
+\end{corollary}
+\begin{proof} Open surjections are descent morphisms by C5.1.6.
 \end{proof}
 
 
