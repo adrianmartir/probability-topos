@@ -536,7 +536,7 @@ Thus we can show the sequent above, by instead showing that for all families of 
 \[
 \phi^{\vec{a}}_{\alpha} \wedge \phi^{\vec{b}}_{\beta} \wedge \phi_{U_{r_{ij}}}^{\vec{a}\wedge\vec{b}} \vdash_{\vec{a},\vec{b}} (\exists \vec{c})(\theta_f^{\vec{c},\vec{a}} \wedge \theta_g^{\vec{c},\vec{b}}) ,
 \]
-where $c$ is of the sort $U_{r_{ij}}$ and $f$ and $g$ are the canonical maps projecting onto the correct indices. But this last sequent is easily to hold by setting $c_{ij} := a_i \wedge b_j$.
+where $c$ is of the sort $U_{r_{ij}}$ and $f$ and $g$ are the canonical maps projecting onto the correct indices. But this last sequent is easily seen to hold by setting $c_{ij} := a_i \wedge b_j$.
 
 \item Let
 \begin{tikzcd}
@@ -743,8 +743,19 @@ More generally, atomless measure algebras. Question: Are these all continuum boo
 \end{example}
 
 \begin{theorem}
-This extends to our results about probability intervals.
+The topos $Sh(FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$.
 \end{theorem}
+\begin{proof}
+Using (Olivia book corollary 8.1.14) and \ref{classifying} in order to get that $Sh(FinProb,J_{at})$ classifies $\mathbb{T}_{bpalg}$ together with an axiom
+\[
+\phi_{\alpha}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
+\]
+for each morphism $f: \alpha \to \beta$ in $FinProb$. One can easily see that the axioms
+\[
+\phi_{U_{r+s,t}}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
+\]
+suffice, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. Now, the axioms above are precisely reformulations of the interval axioms.
+\end{proof}
 
 \begin{corollary}
 A geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{int}$. In particular, a geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds for all atomless measure algebras.
