@@ -762,15 +762,27 @@ for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability alg
 Note that the models of $\mathbb{T}_{int}$ in $Set$ must all be uncountable.
 
 \begin{example}
-Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure.
-More generally, atomless measure algebras. Question: Are these all continuum boolean probability algebras?
+\begin{itemize}
+\item Let $(A,\mu)$ be an atomless measure algebra where $\mu(1) = 1$. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element of measure $s$. Consider the set
+\[
+S := \{ b \leq a | \mu(b) \leq s \}.
+\]
+Since every chain has a supremum, we can use Zorn's lemma to get a maximal element $b \in S$. Now consider the set
+\[
+T := \{ b' \leq a | b' \geq b\} .
+\]
+This has a minimal element $b'$ given by the meet of all elements of $T$. Note that $\mu(b') \geq s$ since $b' \geq b$. Thus, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
+\item Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure. This is an atomless measure algebra, so the interval $(I, \lambda)$ is actually an interval.
+\end{itemize}
 \end{example}
 
+The obvious question to ask now is whether these atomless measure algebras already are all the models of $\mathbb{T}_{int}$ in $Set$. The authors have not investigated this question further.
+
 \begin{theorem}
-The topos $Sh(FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$.
+The topos $Sh(FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$. Moreover, $U$ is the universal model that gives us the required equivalence.
 \end{theorem}
 \begin{proof}
-Using (Olivia book corollary 8.1.14) and \ref{classifying} in order to get that $Sh(FinProb,J_{at})$ classifies $\mathbb{T}_{bpalg}$ together with an axiom
+We use \cite{caramello_book}, corollary 8.1.14 and \ref{classifying} in order to get that $Sh(FinProb,J_{at})$ classifies $\mathbb{T}_{bpalg}$ together with an axiom
 \[
 \phi_{\alpha}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
 \]
@@ -779,6 +791,28 @@ for each morphism $f: \alpha \to \beta$ in $FinProb$. One can easily see that th
 \phi_{U_{r+s,t}}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
 \]
 suffice, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. Now, the axioms above are precisely reformulations of the interval axioms.
+
+Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf. Recall that by \cite{sheaves_geometry_logic}, III.4 Lemma 2 , we can check that $U$ is a sheaf on the atomic topology by checking the following for any morphism $f: \alpha \to \beta$ and any $a \in U(\alpha)$: If for all diagrams
+
+\[
+\begin{tikzcd}
+\gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \alpha \arrow[r, "f"] & \beta
+\end{tikzcd}
+\]
+with $f g = f h$ we have that $U(g)(a) = U(h)(a)$, then there is a unique lift $b \in U(\beta)$ with the property that $U(f)(b) = a$.
+
+So lets fix an $f$ and an $a$ as above. Then we can choose $\gamma$ to be the pullback of $f$ along itself (as in \ref{pullback_measure}) and $g = p_1$, $h = p_2$ to be the two projections. This tells us that $p_1^{-1}(a) = p_2^{-1}(a)$, which means that
+
+\[
+\forall x,y \text{ such that } f(x) = f(y): x \in a \Leftrightarrow y \in a .
+\]
+This is equivalent to the fact that
+\[
+\forall x \in X: f^{-1}(x) \cap a \text{ is } \emptyset \text{ or } f^{-1}(x) .
+\]
+But this means, that we can lift the subset $a \in U(\alpha)$ to a subset $b \in U(\beta)$, and the subset clearly must be unique.
+
+Thus we can conclude that $U$ is in fact the universal model in $Sh(FinProb, J_{at})$.
 \end{proof}
 
 \begin{corollary}
@@ -1011,6 +1045,8 @@ The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sh
 Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First Introduction to Topos Theory.
 \bibitem{elephant}
 ELEPHANT
+\bibitem{caramello_book}
+Theories, Sites, Toposes - Caramello
 \end{thebibliography}
 
 \end{document}
