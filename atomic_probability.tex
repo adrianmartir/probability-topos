@@ -126,193 +126,10 @@ Define the topos $\mathfrak{Prob}$ to be $Sh(FinProb, J_{at})$.
 
 Much of this paper is dedicated to finding other equivalent ways of describing $\mathfrak{Prob}$.
 
-\section{Boolean Probability Algebras}
 
-In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below).
+\section{$\mathfrak{Prob}$ as a classifying topos}
 
-The models we want to compute are given by the $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$[reference?], so first we will use 
-\[
-Flat(FinProb, Set) \simeq Ind(FinProb^{op})
-\]
-to show that the flat functors consist precisely of the boolean probability algebras.
-
-\begin{definition}
-\begin{enumerate}
-\item Let $B$ be a boolean algebra. We say a map $\mu: B \to \mathbb{R}_{\geq 0}$ is a measure if for elements $a,b \in B$, the following holds:
-\begin{itemize}
-\item $\mu(a) = 0$ if and only if $a = 0 $,
-\item $\mu(a) + \mu(b) = \mu(a \vee b) + \mu(a \wedge b)$.
-\end{itemize}
-We will call a pair $(B, \mu)$ of a boolean measure and a measure a boolean measure algebra. If moreover $\mu(1) = 1$, we say that $\mu$ is a  probability measure and $(B,\mu)$ a boolean probability algebra.
-\item We define a measure-preserving map $(B, \mu) \to (C, \nu)$ between boolean measure algebras to be a map of boolean algebras $f: B \to C$ satisfying
-\[
-\nu(f(x)) = \mu(x)
-\]
-for all $x \in B$. We will denote the category of boolean probability algebras with measure-preserving maps by $BPAlg$.
-\item Denote the full subcategory of $BPAlg$ given by the finite boolean probability algebras by $BPAlg_f$.
-\end{enumerate}
-\end{definition}
-
-The reader will immediately notice that we are not considering any sort of $\sigma$-additivity. At first this will seem a bit unfamiliar, but by [Fremlin 416Q b)], our measures on boolean algebras correspond precisely to Radon measures on the corresponding Stone space(without nontrivial sets of measure zero). This means that we should think about boolean probability algebras as a very special subset of the probability spaces traditionally considered in probability theory. Considering the fact(that we will prove) that boolean probability algebras(with a special property) are our $Set$-based models, we can interpret our topos as a context to do probability theory that should be much more well-behaved than traditional probability theory. Whether this is to be interpreted as an indication of insufficiency of interesting probability theory is up to the readers judgement.
-
-Another thing to note is the fact that we do not allow any nontrivial elements of measure zero. In particular we do not allow the one-element boolean algebra.
-
-Before we get to prove anything interesting, we need to get the following out of the way:
-
-\begin{theorem}\label{Imnotdumb} We have an equivalence of categories
-\[
-FinProb^{op} \simeq BPAlg_f
-\]
-defined by sending a finite probability space $(X, \mu)$ to the finite boolean probability algebra $(\mathcal{P} X, \bar{\mu})$, where
-\[
-\bar{\mu}(S) := \sum_{x \in S} \mu(x).
-\]
-A map in $FinProb$ is sent to the preimage map on powersets.
-\end{theorem}
-\begin{proof}
-First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is sent to a measure-preserving map $f^{-1}: (\mathcal{P}X, \bar{\mu}) \to (\mathcal{P}Y, \bar{\nu})$. So let $S \in \mathcal{P} Y$.
-\begin{align*}
-\bar{\mu}(f^{-1} S) &= \sum_{x \in f^{-1} S} \mu x \\
-&= \sum_{y \in S} \sum_{x \in f^{-1} y} \mu x \\
-&= \sum_{y \in S} \nu y \\
-&= \bar{\nu} S
-\end{align*}
-
-The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
-\end{proof}
-
-From now on we will implicitly use this equivalence and use $FinProb$ or $BPAlg_f$ depending on which variance more convenient.
-For computing the $Ind$-completion of $FinProb^{op} \simeq BPAlg_f$ , first notice that for Lawvere theories we have that the forgetful functor into $Set$ creates filtered colimits. This is a special case of [Theorem 5.6.5 ii) in Riehl], if one uses the well-known correspondence between finitary monads and Lawvere theories. Using this explicit description of the underlying set of a filtered colimit of boolean algebras, we can define filtered colimits in $BPAlg$:
-
-\begin{theorem} 
-If $(B_i, \mu_i)$ is a filtered diagram of boolean probability algebras and $B := colim_i B_i$ is the colimit of the underlying boolean algebras, we have that
-\[
-colim_i (B_i, \mu_i) \cong (B, \mu),
-\]
-where for $a \in B_i$, $\mu([a]) := \mu_i(a)$.
-\end{theorem}
-\begin{proof}
-First note that $\mu$ is well-defined, because the maps in the diagram preserve the measure. Moreover, we can check the axioms of a measure WLOG for $a,b \in B_i$:
-\begin{itemize}
-\item $\mu([a]) = 0 \Leftrightarrow \mu_i(a) = 0 \Leftrightarrow a = 0$
-\item $\mu(1) = \mu_i(1) = 1$
-\item \begin{align*}
-\mu([a] \vee [b]) + \mu([a] \wedge [b]) &= \mu([a \vee b]) + \mu([a \wedge b]) \\
-&= \mu_i(a \vee b) + \mu_i(a \wedge b) \\
-&= \mu_i(a) + \mu_i(b) \\
-&= \mu([a]) + \mu([b])
-\end{align*}
-\end{itemize}
-To see that this is actually a colimit, let $(C, \nu)$ be a boolean probability algebra and $f_i : (B_i, \mu_i) \to (C, \nu)$ be maps suitably commuting with the filtered diagram. We need to show that these maps factor through the inclusions into $(B, \mu)$ uniquely. First notice, that by looking at the underlying boolean algebras, we certainly get a unique map $\psi: B \to C$.  It only remains to show it is measure-preserving, so let $a \in B_i$.
-\[
-\nu(\psi [a]) = \nu(f_i a) = \nu_i(a) = \mu_i(a) = \mu([a]),
-\]
-so we have shown how to construct filtered colimits.
-\end{proof}
-
-Now we are ready to prove the following fact:
-
-\begin{theorem} \label{ind} We have an equivalence of categories
-\[
-Ind(BPAlg_f) \simeq BPAlg
-\]
-given by sending a formal filtered colimit to the corresponding filtered colimit of boolean probability algebras.
-\end{theorem}
-\begin{proof}
-Morphisms between two diagrams $F$, $G$ in $BPAlg_f$ in the $Ind$-completion are defined by
-\[
-lim_d colim_c BPAlg_f(F d, G c).
-\]
-In order to define the equivalence on morphisms, we would like to construct an isomorphism
-\[
-lim_d colim_c BPAlg_f(F d, G c) \cong BPAlg(colim F, colim G).
-\]
-We do this by showing compactness of the finite probability algebras. Let $(C, \mu)$ be a finite probability algebra and $(B_i, \mu_i)$ be a filtered diagram with colimit $(B, \mu)$. We want to show that the map
-\[
-\kappa: colim_i Hom((C, \nu), (B_i, \nu_i)) \to Hom((C,\nu), (B,\mu))
-\]
-is in fact a bijection.
-
-To show it is injective, let $\kappa([f]) = \kappa([g])$ with WLOG $f,g \in Hom((C,\nu), (B_i, \nu_i))$. This means we have a fork
-\[
-\begin{tikzcd}
-{(C,\nu)} \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & {(B_i,\mu_i)} \arrow[r] & {(B,\mu)},
-\end{tikzcd}
-\]
-which of course gives us a fork
-\[
-\begin{tikzcd}
-C \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & B_i \arrow[r] & B,
-\end{tikzcd}
-\]
-which by compactness of $C$ implies that $[f] = [g]$ in $colim_i Hom(C,B_i)$ and thus also in $colim_i Hom((C,\nu), (B_i, \nu_i))$. This shows injectivity.
-
-To prove surjectivity, let $f:(C, \nu) \to (B,\mu)$ be a map. By compactness of $C$, it factors through an inclusion:
-\[
-\begin{tikzcd}
-{(C,\nu)} \arrow[r, "\hat{f}" description, dotted] \arrow[rd, "f"'] & {(B_i,\mu_i)} \arrow[d, "\iota_i"] \\
-                                                                & {(B,\mu)}                         ,
-\end{tikzcd}
-\]
-where in fact $\hat{f}$ is measure-preserving since $\mu_i(\hat{f} x) = \mu(\iota \hat{f} x) = \nu x$. This concludes the proof of surjectivity and thus we have proven that we have a fully faithful functor $Ind(BPAlg_f) \to BPAlg$.
-
-In order to show this functor is essentially surjective on objects, we need to show that every boolean probability algebra is a filtered colimit of finite probability algebras. So let $(B, \mu)$ be a boolean probability algebra. Certainly, we can write the underlying boolean algebra as a filtered colimit of finite boolean algebras
-\[
-B \cong colim_i B_i.
-\]
-Then the inclusions $\iota_i: B_i \to B$ let us induce a measure $\mu_i$ on $B_i$ ($\mu_i(x) := \mu(\iota_i x)$). To show that this is a diagram in $BPAlg$, notice that for an arrow $f: i \to j$ in the indexing category, we get a commutative diagram
-\[
-\begin{tikzcd}
-{(B_i,\mu_i)} \arrow[r, "B_f"] \arrow[rd, "\iota_i"'] & {(B_j,\mu_j)} \arrow[d, "\iota_j"] \\
-                                                      & {(B,\mu)}                         ,
-\end{tikzcd}
-\]
-where in fact, $B_f$ is measure-preserving since $\iota_i$ and $\iota_j$ are measure-preserving.
-
-Now the colimit of the $(B_i, \mu_i)$ is in fact $(B, \mu)$ by the previous theorem. This concludes the proof.
-\end{proof}
-
-Proving things about diagrams of boolean probability algebras, often very easy due to the following facts:
-
-\begin{remark}\label{partitions}
-\begin{enumerate}
-\item In the category of boolean algebras, if one has a boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = 1$ and $a \wedge b = 0$). A decomposition $B \times C$ induces the partition $(1,0), (0,1)$ on $A$ and conversely the partition $a,b$ induces the decomposition $A \cong \downarrow(a) \times \downarrow(b)$ into the boolean algebra of elements smaller than $a$ and the boolean algebra of elements smaller than $b$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
-\item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
-\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BPAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
-\item Notice that if $(A,\mu)$ is a finite boolean measure algebra and $(B,\nu)$ a boolean measure algebra, then a map $(A,\mu) \to (B,\nu)$ consists precisely of a partition of $B$ into elements $b_a$ for each atom of $A$ such that $\mu(b_a) = \mu(a)$.
-\end{enumerate}
-\end{remark}
-
-\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BPAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=0$ and $\mu(b')=r\mu(b)$.\end{theorem}
-\begin{proof} The category of points is given by the category of $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$.  The equivalence 
-\[
-Flat(BPAlg_f^{op}, Set) \simeq Ind(BPAlg_f) \simeq BPAlg
-\]
-shows that the flat functors are precisely the $BPAlg(-,(B,\nu))$ for a boolean probability algebra $(B,\nu)$. As the covering sieves consist of single morphisms, the $J_{at}$-flat functors will consist of the $BPAlg(-,(B,\nu))$ for which all maps in $BPAlg_f$ are sent to epimorphisms. This is equivalent to the existence of measure-preserving lifts:
-\begin{center}
-\begin{tikzcd}
-{(A_1, \mu_1)} \arrow[r, "g"] \arrow[rd, "f"'] & {(A_2,\mu_2)} \arrow[d, "\bar{f}" description, dotted] \\
-                                               & {(B,\nu)}                                 
-\end{tikzcd}
-\end{center}
-for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BPAlg_f$ and measure-preserving maps $f,g$. The atoms $a_i$ in $A_1$ give us a partition that gets preserved by $f$ and $g$. Thus we get decompositions (see \ref{partitions}) of $A_2$ and $B$ and our problem decomposes into finding measure-preserving lifts
-
-\begin{center}
-\begin{tikzcd}
-2 \arrow[r] \arrow[rd] & \downarrow(g a_i) \arrow[d, "\bar{f}^i" description, dotted] \\
-                                               & \downarrow(f a_i)
-\end{tikzcd}.
-\end{center}
-But $2 := \{0, 1\}$ can be ignored. Furthermore, $\downarrow(g a_i)$ is finite, so by $\ref{partitions}$, such a map $\bar{f}^i$ is precisely a partition $x_1, \cdots, x_m$ of $B^i$ into a fixed number of elements that have a predetermined measure.
-
-We can summarize our findings as follows: $BPAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $\downarrow(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
-\end{proof}
-
-TODO: Call this sort of (boolean) probability algebra a probability interval.
-
-\section{Boolean Probability Algebras II}
-
-In this section we will determine what $Sh(FinProb, J_{at})$ classifies. By default, we will use the notations and definitions as in part D.1 of \cite{elephant}.
+In this section we will determine what $Sh(FinProb, J_{at})$ classifies. By default, we will use the notations and definitions as in part D.1 of \cite{elephant}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}. If the reader still wants an intuition about why \ref{classifying} should be true, we have provided an independent proof of a weaker theorem in the appendix. There prove our result only for the models of $Sh(FinProb, J_{at})$ in $Set$ in a way that should be accessible to a reader only familiar with $Ind$-completions and flat functors into $Set$.
 
 \begin{definition}
 Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
@@ -360,6 +177,28 @@ B_0(a) & \vdash a = 0.
 
 Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. If one were to write down the categorical interpretation of the two partition axioms, one would see that they are just saying that $B$ is a coproduct of the $B_r$.
 
+Let us get some more notation out of the way.
+
+\begin{definition}
+Denote the category models of $\mathbb{T}_{bpalg}$ in $Set$ by $BPAlg$. Denote the category of finite models by $BPAlg_f$.
+\end{definition}
+
+The first thing to note is that this gives us an equivalent site for topos.
+
+\begin{proposition} We have an equivalence of categories
+\[
+FinProb^{op} \simeq BPAlg_f
+\]
+defined by sending a finite probability space $(X, \mu)$ to the finite boolean probability algebra $(\mathcal{P} X, \bar{\mu})$, where
+\[
+\bar{\mu}(S) := \sum_{x \in S} \mu(x).
+\]
+A map in $FinProb$ is sent to the preimage map on powersets.
+\end{proposition}
+\begin{proof}
+See \ref{Imnotdumb}.
+\end{proof}
+
 We would like to show that the topos $Set^{FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. Proving this fact requires a bit of work. The difficulty is mainly the fact that  $FinProb$ does not have all finite limits, so the flat functors on $FinProb$ are not as straightforward to understand. We will prove the equivalence
 \[
 Set[\mathbb{T}_{bpalg}] \simeq Set^{FinProb^{op}}
@@ -368,7 +207,7 @@ by purely syntactical means. The functor in one direction will be given by an ap
 
 To get an idea of what the universal model might be, one can for example look at the universal models in classifying toposes of cartesian theories $\mathbb{T}$. In those cases the universal model in $[\mathbb{T} \text{-} Mod(Set)_{f.p.}, Set]$ just corresponds to the forgetful functor sending a (finitely presented) $\mathbb{T}$-model to its underlying set. Of course, the forgetful functor comes equipped with the required $\mathbb{T}$-model structure. For more details, see D3.1.2 of \cite{elephant}.
 
-The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_{f.p.}}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description. First, we introduce the shorthand $U_r := U_{r,r-1}$ for $r \in (0,1)$. Notice that $y U_r$ sends a finite probability space to the set of subsets of measure $r$. Then we can define $U$ to be
+The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_f}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description. First, we introduce the shorthand $U_r := U_{r,r-1}$ for $r \in (0,1)$. Notice that $y U_r$ sends a finite probability space to the set of subsets of measure $r$. Then we can define $U$ to be
 \[
 \coprod_{r \in [0,1]} y U_r \in Set^{FinProb^{op}} .
 \]
@@ -597,7 +436,7 @@ Similarly, we abuse notation and identify $F$, our $\mathbb{T}^{FinProb}$-model 
 Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}].
 \]
 
-\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying}
+\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
 $Lan_y(U)$ and $Lan_F$ define an equivalence of categories
 \[
 Set^{FinProb^{op}} \simeq Set[\mathbb{T}_{bpalg}].
@@ -751,7 +590,7 @@ Luckily, sending $U_r \to \coprod U_r$ through $Lan_F$ is easily seen to give th
 
 We proceed by investigating what $Sh(FinProb, J_{at})$ classifies.
 
-\begin{definition}
+\begin{definition} \label{theory_of_intevals}
 Define the \textit{theory of intervals} $\mathbb{T}_{int}$ by adding the axioms
 \[
 B_s a \vdash_a (\exists b) \big ( (b = a \wedge b) \wedge B_r b \big )
@@ -759,11 +598,23 @@ B_s a \vdash_a (\exists b) \big ( (b = a \wedge b) \wedge B_r b \big )
 for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability algebras.
 \end{definition}
 
-Note that the models of $\mathbb{T}_{int}$ in $Set$ must all be uncountable.
+Note that the models of $\mathbb{T}_{int}$ in $Set$ must all be uncountable. We now look at some examples of intervals in $Set$.
 
-\begin{example}
+\begin{definition}
+Call a boolean probability algebra $(A,\mu)$ simply a probability algebra, if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
+\[
+\mu(\bigvee a_i) = \text{sup } \mu(a_i) .
+\]
+The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a probability algebra will simply be called measure algebras. A morphism of measure algebras is a morphism of boolean algebras that is measure-preserving.
+\end{definition}
+
+Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
+
+Measure algebras are the correct setting for doing measure theory while ignoring the effects of nullsets. They connect to the more standard setting for measure theory as follows: Given a $\sigma$-algebra $(X,\Sigma)$ and a measure on $(X,\Sigma)$, dividing out the nullsets out of $\Sigma$ is guaranteed to yield a measure algebra. This is a surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. One can also conversely construct a measure space on a $\sigma$-algebra out of a measure algebra. For many more details on measure algebras, see chapter 32 of \cite{fremlin}, a notably long reference on measure theory.
+
+\begin{example} \label{interval_examples}
 \begin{itemize}
-\item Let $(A,\mu)$ be an atomless measure algebra where $\mu(1) = 1$. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element of measure $s$. Consider the set
+\item Let $(A,\mu)$ be an atomless probability algebra. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element of measure $s$. Consider the set
 \[
 S := \{ b \leq a | \mu(b) \leq s \}.
 \]
@@ -772,17 +623,25 @@ Since every chain has a supremum, we can use Zorn's lemma to get a maximal eleme
 T := \{ b' \leq a | b' \geq b\} .
 \]
 This has a minimal element $b'$ given by the meet of all elements of $T$. Note that $\mu(b') \geq s$ since $b' \geq b$. Thus, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
-\item Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure. This is an atomless measure algebra, so the interval $(I, \lambda)$ is actually an interval.
+\item Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure, and call $(I, \lambda)$ the Lebesgue interval. This is an atomless measure algebra, so the Lebesgue interval $(I, \lambda)$ is actually an interval.
+\item Note that not all intervals are atomless probability algebras. Consider the subalgebra
+\[
+A = \{(x_i) \in \prod_{i=1}^{\infty} I | \text{ finitely many } x_i \text{ nonzero or finitely many } x_i \text{ zero.}\}
+\]
+of the product of boolean algebras $\prod_{i \in \mathbb{N}} I$, where $(I, \lambda)$ is the Lebesgue interval. For some remarks on product boolean algebras, see \ref{partitions}. $A$ is boolean algebra(that is not complete) and we have a measure on this boolean algebra defined by
+\[
+\mu((x_i)) := \sum_{i=1}^{\infty} 2^{-i} \lambda(x_i) ,
+\]
+where $\lambda$ denotes the Lebesgue measure on the $i$th Lebesgue interval. It can be easily seen that the defined boolean probability algebra is actually an interval.
 \end{itemize}
 \end{example}
 
-The obvious question to ask now is whether these atomless measure algebras already are all the models of $\mathbb{T}_{int}$ in $Set$. The authors have not investigated this question further.
 
-\begin{theorem}
+\begin{theorem} \label{classifying}
 The topos $Sh(FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$. Moreover, $U$ is the universal model that gives us the required equivalence.
 \end{theorem}
 \begin{proof}
-We use \cite{caramello_book}, corollary 8.1.14 and \ref{classifying} in order to get that $Sh(FinProb,J_{at})$ classifies $\mathbb{T}_{bpalg}$ together with an axiom
+We use \cite{caramello_book}, corollary 8.1.14 and \ref{classifying_presheaf} in order to get that $Sh(FinProb,J_{at})$ classifies $\mathbb{T}_{bpalg}$ together with an axiom
 \[
 \phi_{\alpha}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
 \]
@@ -816,12 +675,13 @@ Thus we can conclude that $U$ is in fact the universal model in $Sh(FinProb, J_{
 \end{proof}
 
 \begin{corollary}
-A geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{int}$. In particular, a geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds for all atomless measure algebras.
+A geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{int}$. In particular, a geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds for all atomless probability algebras.
 \end{corollary}
 
 This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{int}$ can be thought as the ultimate context for studying geometric properties of the measure-theoretic interval.
 
 TODO: Give a completeness statement for infinitary logic (with LEM?).
+
 
 \section{Galois theory}
 
@@ -833,20 +693,45 @@ Let $\mathcal{C}$ be a small, inhabited category satisfying the amalgamation and
 induced by the functor $F:\mathcal{C}^{op}\rightarrow \textbf{Cont}(Aut_{\mathcal{C}})$ which sends any object $c$ of $\mathcal{C}$ to the set $Hom_{Ind(\mathcal{C})}(c,u)$ equipped with the action by post-composition and any arrow $f:c\rightarrow d$ in $\mathcal{C}$ to pre-composition by $f$.
 \end{theorem}
 
-In our context we set $\mathcal{C}=BPAlg_f$ and we claim that $(I, \lambda)$ is  $BPAlg_f$-universal and $BPAlg_f$-ultrahomogeneous. More concretely, we have to prove the following:
+In our context we set $\mathcal{C}=BPAlg_f$ and will show that the Lebesgue interval is $BPAlg_f$-universal and $BPAlg_f$-ultrahomogeneous. But before we do that, we need some remarks that will be used in our proof.
+
+\begin{remark}\label{partitions}
+For an element $a \in B$ of a boolean algebra, we will denote the ideal of elements of $B$ that are less than or equal to $a$ by $I(a)$.
+\begin{enumerate}
+\item In the category of boolean algebras, if one has a \\ boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = 1$ and $a \wedge b = 0$). A decomposition $B \times C$ induces the partition $(1,0), (0,1)$ on $A$ and conversely the partition $a,b$ induces the decomposition \\ $A \cong I(a) \times I(b)$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
+\item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
+\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BPAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
+\item Notice that if $(A,\mu)$ is a finite boolean measure algebra and $(B,\nu)$ a boolean measure algebra, then a map $(A,\mu) \to (B,\nu)$ consists precisely of a partition of $B$ into elements $b_a$ for each atom of $A$ such that $\mu(b_a) = \mu(a)$.
+\end{enumerate}
+\end{remark}
+
+We could now start proving that the Lebesgue interval satisfies the required properties, but in order to emphasize that the Lebesgue interval is not really special, we will will prove that a well-known more general class of measure algebras is $BPAlg_f$-universal and $BPAlg_f$-ultrahomogeneous. The reader can ignore this and pretend that he is dealing with the Lebesgue interval.
+
+\begin{definition} \label{maharam_type_homogeneous}
+\begin{enumerate}
+\item Let $A$ be a complete boolean algebra. We say that a subset $S \subset A$ generates $A$ if $A$ is the only every complete boolean subalgebra of $A$ containing $S$.
+\item Let $A$ be a complete boolean algebra. We say that the Maharam type of $A$ is the smallest possible cardinality of a generating set.
+\item We moreover say that $A$ is Maharam-type-homogeneous if the Maharam type of every nonzero principal ideal $I(a)$ is the same.
+\item Call a measure algebra Maharam-type-homogeneous if its underlying boolean algebra is Maharam-type homogeneous.
+\end{enumerate}
+\end{definition}
+
+For more information on Maharam-type-homogeneous measure algebras, see chapter 33 of \cite{fremlin}. The crucial fact about Maharam-type-homogeneous measure algebras, is they are isomorphic if and only if they have the same Maharam type and the top element $1$ has the same measure on both measure algebras(see 331I of \cite{fremlin}). Moreover, there is a surprising theorem by Maharam (see 332J in \cite{fremlin}) that lets us decompose any atomless measure algebra into Maharam-type-homogeneous measure algebras.
+
+Now we actually show that homogeneous-Maharam-type probability algebras are $BPAlg_f$-universal and $BPAlg_f$-ultrahomogeneous. More concretely, we prove the following for a Maharam-type-homogeneous probability algebra $(M, \alpha)$:
 
 \begin{lemma}\begin{enumerate}
 \item $FinProb$ has a terminal object, proving the joint embedding property.
 \item $FinProb$ fulfills the right Ore condition.
 \item For any $(A,\mu),(B,\nu)$ in $BPAlg_f$ , an arrow $f:(A,\mu)\rightarrow (B,\nu)$ in \\
- $BPAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (I,\lambda)$ as well as $\chi_2:(B,\nu)\rightarrow (I,\lambda)$ in $BPAlg$ there exists an isomorphism $j':(I,\lambda)\rightarrow (I,\lambda)$ such that $j'\circ \chi_1=\chi_2\circ j$:
+ $BPAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (M, \alpha)$ as well as $\chi_2:(B,\nu)\rightarrow (M, \alpha)$ in $BPAlg$ there exists an isomorphism $j':(M, \alpha) \rightarrow (M, \alpha)$ such that $j'\circ \chi_1=\chi_2\circ j$:
  \begin{center}
  \begin{tikzcd}
-{(A,\mu)} \arrow[r, "\chi_1"] \arrow[d, "j"'] & {(I,\lambda)} \arrow[d, "j'", dotted] \\
-{(B,\nu)} \arrow[r, "\chi_2"']                & {(I,\lambda)}                        
+{(A,\mu)} \arrow[r, "\chi_1"] \arrow[d, "j"'] & {(M, \alpha)} \arrow[d, "j'", dotted] \\
+{(B,\nu)} \arrow[r, "\chi_2"']                & {(M, \alpha)}                        
 \end{tikzcd}
  \end{center}
-\item For any object $(A,\mu)$ of $BPAlg_f$ there exists an arrow $\chi:(A,\mu)\rightarrow (I,\lambda)$ in $BPAlg$.
+\item For any object $(A,\mu)$ of $BPAlg_f$ there exists an arrow $\chi:(A,\mu)\rightarrow (M, \alpha)$ in $BPAlg$.
 \end{enumerate}
 \end{lemma}
 \begin{proof} 
@@ -857,42 +742,44 @@ In our context we set $\mathcal{C}=BPAlg_f$ and we claim that $(I, \lambda)$ is 
 Now, given boolean probability algebras as in the claim above, we see that $(A, \mu)$ has a partition into atoms $x_i$. Crucially, if we apply a map of boolean algebras to this partition, we get a partition again. This means we can decompose our problem(by \ref{partitions}) into finding a measure-preserving map $j'$ as below:
 \[
 \begin{tikzcd}
-2 \arrow[d, "j"'] \arrow[r, "\chi_1"]  & \downarrow(\chi_1 x_i) \arrow[d, "j'", dotted] \\
-\downarrow(j x_i) \arrow[r, "\chi_2"'] & \downarrow(\chi_2 j x_i)                      
+2 \arrow[d, "j"'] \arrow[r, "\chi_1"]  & I(\chi_1 x_i) \arrow[d, "j'", dotted] \\
+I(j x_i) \arrow[r, "\chi_2"'] & I(\chi_2 j x_i)                      
 \end{tikzcd}
 \]
-Since $2 := \{0, 1\}$ is the initial object in boolean algebras, it suffices to show that we have a measure-preserving isomorphism of boolean algebras
+Since $2 := \{0, 1\}$ is the initial object in boolean algebras, it suffices to show that we have an isomorphism of measure algebras
 \[
-\downarrow(\chi_1 x_i) \cong \downarrow(\chi_2 j x_i).
+I(\chi_1 x_i) \cong I(\chi_2 j x_i)
 \]
-Since $1$ has the same measure in both algebras, we can now use a corollary of Maharam's theorem [Fremlin 331P] in order to get our isomorphism.
+for each $i$. Now both of these measure algebras are Maharam-type-homogeneous and have the same Maharam type, since $(M, \alpha)$ was Maharam-type-homogeneous. Moreover, the top element $1$ has the same measure in both algebras, so we can now use 331I in \cite{fremlin} in order to get our isomorphism.
 
-\item Given a finite probability space $(X,\mu)$, we can order the elements to give $X=\{x_1,...,x_n\}$ yielding a partition
-\[ (0,1]=\bigsqcup_{i=1}^n (\sum_{j=1}^{i-1} \mu(x_j), \sum_{j=1}^{i} \mu(x_j)]\]
-giving us a measure-preserving map $\chi:(\mathcal{P} X,\mu)\rightarrow (I,\lambda)$.
-
+\item A measure-preserving map $\chi:(\mathcal{P} X,\mu)\rightarrow (A,\mu)$ consists of precisely a partition of $(A,\mu)$ into finitely many elements of predetermined measure. But this is precisely the interval property for atomless measure algebras, see \ref{interval_examples}.
 
 % \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\langle f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \rangle $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
 \end{enumerate}
 \end{proof}
 
 \begin{remark}
-Notice that by using this corollary of Maharam's theorem we have implicitly used the axiom of choice. It wouldn't be surprising if this application of the axiom of choice was inessential, since we only need the fact that all subalgebras $\downarrow x$ (where $x \in I$ has fixed measure) of $I$ with their induced measure are isomorphic(as boolean algebras equipped with measures). But because we only used properties of homogeneous Maharam type measure algebras,  we actually have proved the same theorem have proved the theorem above in greater generality. The lemma above holds for any homogeneous Maharam type measure algebra.
+Notice that by using 331I in \cite{fremlin} we have implicitly used the axiom of choice.
 \end{remark}
 
-\begin{corollary} Let $G$ be the topological group of measure preserving dynamical systems on $(I,\lambda)$ topologised via an algebraic base given by collections $\mathcal{I}_{\chi}:=\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing a finite partition $\chi: (A,\mu)\rightarrow (I,\lambda)$. Then we get an equivalence of toposes, which is induced as in \ref{olivia}:
+\begin{corollary} Let $(M, \alpha)$ be a homogeneous-Maharam-type probability algebra. Let $G$ be the group of automorphisms of $(M, \alpha)$ topologised via an algebraic base given by collections $\mathcal{M}_{\chi}:=\{f:u\overset{\sim}{\rightarrow} u| f\circ \chi=\chi\} $ of automorphisms fixing a finite partition $\chi: (A,\mu)\rightarrow (M, \alpha)$. Then we get an equivalence of toposes, which is induced as in \ref{olivia}:
 \[\textbf{Sh}(FinProb, J_{at})\simeq \textbf{Cont}(G)\]
 \end{corollary}
 It follows that the atoms of the topos correspond to open subgroups of $G$. We shall classify them. %give ref
+
+
 \section{"Our topos" as a set-theoretical universe}
+
 \begin{proposition} The internal language of "our topos" is a model of ZFA (Zermelo-Frenkel with atoms).
 \end{proposition}
 \begin{proof} Quote some shit.
 \end{proof}
+
 \begin{proposition} The internal language of our topos proves the negation of countable choice.
 \end{proposition}
 \begin{proof} We construct a countable product of non-empty objects, which is empty. Take $X_n$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n X_n=0$.
 \end{proof}
+
 This proof can, in fact be adapted in many situations, to suggest that most countable products of objects are empty. So there is really not much hope to extend the transfer principle to statements containing countably infinitely many variables or more.
 \section{Forgetting how to measure}
 In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
@@ -976,7 +863,7 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 Before we can begin providing a connection between the different categories of sheaves over the underlying boolean algebras of Set-based probability intervals, we will require a crucial measure theoretic lemma.
 \begin{lemma} Given a measure algebra $(\mathcal{B},\mu)$ with $\mu(\top)=1$ (here we assume that the measure is additive) then any measure preserving automorphism of boolean algebras $f:(\mathcal{B},\mu)\rightarrow (\mathcal{B},\mu)$ preserves all meets and joins.
 \end{lemma}
-\begin{proof} Because in the reference [Fremlin], they use many definitions and theorems, that the reader may not be familiar with, we choose to sketch the proof of 324Kb from which our claim immediately follows.\newline
+\begin{proof} Because in the reference \cite{fremlin}, they use many definitions and theorems, that the reader may not be familiar with, we choose to sketch the proof of 324Kb from which our claim immediately follows.\newline
 \indent First note that a morphism of boolean algebra between complete boolean algebras preserves all meets and joins iff it preserves meets of the form $\bigwedge_i A_i=\bot$ for decreasing $A_i$. This can be seen as follows:\newline 
 \indent  Given arbitrary $A_i$ prove preservation of $\inf A_i$ using that for any ordering $<$ of the index set $I$ we get
 \[\bigwedge_{i\in I} \bigwedge_{j<i} (A_j \Delta \inf A_i)=\bot\] %Do we need this much detail?
@@ -1040,6 +927,180 @@ The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sh
 \end{proof}
 
 
+\section{Appendix: Models in Set}
+
+In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
+
+The models we want to compute are given by the $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$[reference?], so first we will use 
+\[
+Flat(FinProb, Set) \simeq Ind(FinProb^{op})
+\]
+to show that the flat functors consist precisely of the boolean probability algebras.
+
+\begin{definition}
+\begin{enumerate}
+\item Let $B$ be a boolean algebra. We say a map $\mu: B \to \mathbb{R}_{\geq 0}$ is a measure if for elements $a,b \in B$, the following holds:
+\begin{itemize}
+\item $\mu(a) = 0$ if and only if $a = 0 $,
+\item $\mu(a) + \mu(b) = \mu(a \vee b) + \mu(a \wedge b)$.
+\end{itemize}
+We will call a pair $(B, \mu)$ of a boolean measure and a measure a boolean measure algebra. If moreover $\mu(1) = 1$, we say that $\mu$ is a  probability measure and $(B,\mu)$ a boolean probability algebra.
+\item We define a measure-preserving map $(B, \mu) \to (C, \nu)$ between boolean measure algebras to be a map of boolean algebras $f: B \to C$ satisfying
+\[
+\nu(f(x)) = \mu(x)
+\]
+for all $x \in B$. We will denote the category of boolean probability algebras with measure-preserving maps by $BPAlg$.
+\item Denote the full subcategory of $BPAlg$ given by the finite boolean probability algebras by $BPAlg_f$.
+\end{enumerate}
+\end{definition}
+
+The reader will immediately notice that we are not considering any sort of $\sigma$-additivity. At first this will seem a bit unfamiliar, but by [Fremlin 416Q b)], our measures on boolean algebras correspond precisely to Radon measures on the corresponding Stone space(without nontrivial sets of measure zero). This means that we should think about boolean probability algebras as a very special subset of the probability spaces traditionally considered in probability theory. Considering the fact(that we will prove) that boolean probability algebras(with a special property) are our $Set$-based models, we can interpret our topos as a context to do probability theory that should be much more well-behaved than traditional probability theory. Whether this is to be interpreted as an indication of insufficiency of interesting probability theory is up to the readers judgement.
+
+Another thing to note is the fact that we do not allow any nontrivial elements of measure zero. In particular we do not allow the one-element boolean algebra.
+
+Before we get to prove anything interesting, we need to get the following out of the way:
+
+\begin{proposition}\label{Imnotdumb} We have an equivalence of categories
+\[
+FinProb^{op} \simeq BPAlg_f
+\]
+defined by sending a finite probability space $(X, \mu)$ to the finite boolean probability algebra $(\mathcal{P} X, \bar{\mu})$, where
+\[
+\bar{\mu}(S) := \sum_{x \in S} \mu(x).
+\]
+A map in $FinProb$ is sent to the preimage map on powersets.
+\end{proposition}
+\begin{proof}
+First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is sent to a measure-preserving map $f^{-1}: (\mathcal{P}X, \bar{\mu}) \to (\mathcal{P}Y, \bar{\nu})$. So let $S \in \mathcal{P} Y$.
+\begin{align*}
+\bar{\mu}(f^{-1} S) &= \sum_{x \in f^{-1} S} \mu x \\
+&= \sum_{y \in S} \sum_{x \in f^{-1} y} \mu x \\
+&= \sum_{y \in S} \nu y \\
+&= \bar{\nu} S
+\end{align*}
+
+The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
+\end{proof}
+
+From now on we will implicitly use this equivalence and use $FinProb$ or $BPAlg_f$ depending on which variance more convenient.
+For computing the $Ind$-completion of $FinProb^{op} \simeq BPAlg_f$ , first notice that for Lawvere theories we have that the forgetful functor into $Set$ creates filtered colimits. This is a special case of theorem 5.6.5 ii) in \cite{riehl}, if one uses the well-known correspondence between finitary monads and Lawvere theories. Using this explicit description of the underlying set of a filtered colimit of boolean algebras, we can define filtered colimits in $BPAlg$:
+
+\begin{theorem} 
+If $(B_i, \mu_i)$ is a filtered diagram of boolean probability algebras and $B := colim_i B_i$ is the colimit of the underlying boolean algebras, we have that
+\[
+colim_i (B_i, \mu_i) \cong (B, \mu),
+\]
+where for $a \in B_i$, $\mu([a]) := \mu_i(a)$.
+\end{theorem}
+\begin{proof}
+First note that $\mu$ is well-defined, because the maps in the diagram preserve the measure. Moreover, we can check the axioms of a measure WLOG for $a,b \in B_i$:
+\begin{itemize}
+\item $\mu([a]) = 0 \Leftrightarrow \mu_i(a) = 0 \Leftrightarrow a = 0$
+\item $\mu(1) = \mu_i(1) = 1$
+\item \begin{align*}
+\mu([a] \vee [b]) + \mu([a] \wedge [b]) &= \mu([a \vee b]) + \mu([a \wedge b]) \\
+&= \mu_i(a \vee b) + \mu_i(a \wedge b) \\
+&= \mu_i(a) + \mu_i(b) \\
+&= \mu([a]) + \mu([b])
+\end{align*}
+\end{itemize}
+To see that this is actually a colimit, let $(C, \nu)$ be a boolean probability algebra and $f_i : (B_i, \mu_i) \to (C, \nu)$ be maps suitably commuting with the filtered diagram. We need to show that these maps factor through the inclusions into $(B, \mu)$ uniquely. First notice, that by looking at the underlying boolean algebras, we certainly get a unique map $\psi: B \to C$.  It only remains to show it is measure-preserving, so let $a \in B_i$.
+\[
+\nu(\psi [a]) = \nu(f_i a) = \nu_i(a) = \mu_i(a) = \mu([a]),
+\]
+so we have shown how to construct filtered colimits.
+\end{proof}
+
+Now we are ready to prove the following fact:
+
+\begin{theorem} \label{ind} We have an equivalence of categories
+\[
+Ind(BPAlg_f) \simeq BPAlg
+\]
+given by sending a formal filtered colimit to the corresponding filtered colimit of boolean probability algebras.
+\end{theorem}
+\begin{proof}
+Morphisms between two diagrams $F$, $G$ in $BPAlg_f$ in the $Ind$-completion are defined by
+\[
+lim_d colim_c BPAlg_f(F d, G c).
+\]
+In order to define the equivalence on morphisms, we would like to construct an isomorphism
+\[
+lim_d colim_c BPAlg_f(F d, G c) \cong BPAlg(colim F, colim G).
+\]
+We do this by showing compactness of the finite probability algebras. Let $(C, \mu)$ be a finite probability algebra and $(B_i, \mu_i)$ be a filtered diagram with colimit $(B, \mu)$. We want to show that the map
+\[
+\kappa: colim_i Hom((C, \nu), (B_i, \nu_i)) \to Hom((C,\nu), (B,\mu))
+\]
+is in fact a bijection.
+
+To show it is injective, let $\kappa([f]) = \kappa([g])$ with WLOG $f,g \in Hom((C,\nu), (B_i, \nu_i))$. This means we have a fork
+\[
+\begin{tikzcd}
+{(C,\nu)} \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & {(B_i,\mu_i)} \arrow[r] & {(B,\mu)},
+\end{tikzcd}
+\]
+which of course gives us a fork
+\[
+\begin{tikzcd}
+C \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & B_i \arrow[r] & B,
+\end{tikzcd}
+\]
+which by compactness of $C$ implies that $[f] = [g]$ in $colim_i Hom(C,B_i)$ and thus also in $colim_i Hom((C,\nu), (B_i, \nu_i))$. This shows injectivity.
+
+To prove surjectivity, let $f:(C, \nu) \to (B,\mu)$ be a map. By compactness of $C$, it factors through an inclusion:
+\[
+\begin{tikzcd}
+{(C,\nu)} \arrow[r, "\hat{f}" description, dotted] \arrow[rd, "f"'] & {(B_i,\mu_i)} \arrow[d, "\iota_i"] \\
+                                                                & {(B,\mu)}                         ,
+\end{tikzcd}
+\]
+where in fact $\hat{f}$ is measure-preserving since $\mu_i(\hat{f} x) = \mu(\iota \hat{f} x) = \nu x$. This concludes the proof of surjectivity and thus we have proven that we have a fully faithful functor $Ind(BPAlg_f) \to BPAlg$.
+
+In order to show this functor is essentially surjective on objects, we need to show that every boolean probability algebra is a filtered colimit of finite probability algebras. So let $(B, \mu)$ be a boolean probability algebra. Certainly, we can write the underlying boolean algebra as a filtered colimit of finite boolean algebras
+\[
+B \cong colim_i B_i.
+\]
+Then the inclusions $\iota_i: B_i \to B$ let us induce a measure $\mu_i$ on $B_i$ ($\mu_i(x) := \mu(\iota_i x)$). To show that this is a diagram in $BPAlg$, notice that for an arrow $f: i \to j$ in the indexing category, we get a commutative diagram
+\[
+\begin{tikzcd}
+{(B_i,\mu_i)} \arrow[r, "B_f"] \arrow[rd, "\iota_i"'] & {(B_j,\mu_j)} \arrow[d, "\iota_j"] \\
+                                                      & {(B,\mu)}                         ,
+\end{tikzcd}
+\]
+where in fact, $B_f$ is measure-preserving since $\iota_i$ and $\iota_j$ are measure-preserving.
+
+Now the colimit of the $(B_i, \mu_i)$ is in fact $(B, \mu)$ by the previous theorem. This concludes the proof.
+\end{proof}
+
+Before the reader reads the next proof, he is advised to read the remarks about boolean probability algebras in \ref{partitions}.
+
+\begin{theorem} The category of points of the topos $\textbf{Sh}(FinProb,J_{at})$ is equivalent to the full subcategory of $BPAlg$ of boolean probability algebras $(B,\mu)$ such that for each $r\in (0,1)$ and each $b\in B$ there exist $b', b''\in B$ with $b'\vee b''=b$, $b'\wedge b''=0$ and $\mu(b')=r\mu(b)$.\end{theorem}
+\begin{proof} The category of points is given by the category of $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$.  The equivalence 
+\[
+Flat(BPAlg_f^{op}, Set) \simeq Ind(BPAlg_f) \simeq BPAlg
+\]
+shows that the flat functors are precisely the $BPAlg(-,(B,\nu))$ for a boolean probability algebra $(B,\nu)$. As the covering sieves consist of single morphisms, the $J_{at}$-flat functors will consist of the $BPAlg(-,(B,\nu))$ for which all maps in $BPAlg_f$ are sent to epimorphisms. This is equivalent to the existence of measure-preserving lifts:
+\begin{center}
+\begin{tikzcd}
+{(A_1, \mu_1)} \arrow[r, "g"] \arrow[rd, "f"'] & {(A_2,\mu_2)} \arrow[d, "\bar{f}" description, dotted] \\
+                                               & {(B,\nu)}                                 
+\end{tikzcd}
+\end{center}
+for any $(A_1,\mu_1), (B_1,\mu_1)$ in $BPAlg_f$ and measure-preserving maps $f,g$. The atoms $a_i$ in $A_1$ give us a partition that gets preserved by $f$ and $g$. Thus we get decompositions (see \ref{partitions}) of $A_2$ and $B$ and our problem decomposes into finding measure-preserving lifts
+
+\begin{center}
+\begin{tikzcd}
+2 \arrow[r] \arrow[rd] & I(g a_i) \arrow[d, "\bar{f}^i" description, dotted] \\
+                                               & I(f a_i)
+\end{tikzcd}.
+\end{center}
+But $2 := \{0, 1\}$ can be ignored. Furthermore, $I(g a_i)$ is finite, so by $\ref{partitions}$, such a map $\bar{f}^i$ is precisely a partition $x_1, \cdots, x_m$ of $B^i$ into a fixed number of elements that have a predetermined measure.
+
+We can summarize our findings as follows: $BPAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $I(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
+\end{proof}
+
+
 \begin{thebibliography}{9}
 \bibitem{sheaves_geometry_logic} 
 Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First Introduction to Topos Theory.
@@ -1047,6 +1108,10 @@ Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First
 ELEPHANT
 \bibitem{caramello_book}
 Theories, Sites, Toposes - Caramello
+\bibitem{fremlin}
+FREMLIN
+\bibitem{riehl}
+Category theory in context
 \end{thebibliography}
 
 \end{document}
