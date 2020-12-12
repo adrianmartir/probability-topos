@@ -12,14 +12,14 @@
 
 \theoremstyle{plain}
  \newtheorem{theorem}{Theorem}[section]
- \newtheorem{proposition}{Proposition}[section]
- \newtheorem{lemma}{Lemma}[section]
- \newtheorem{corollary}{Corollary}[section]
+ \newtheorem{proposition}[theorem]{Proposition}
+ \newtheorem{lemma}[theorem]{Lemma}
+ \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
- \newtheorem{example}{Example}[section]
- \newtheorem{definition}{Definition}[section]
+ \newtheorem{example}[theorem]{Example}
+ \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
- \newtheorem{remark}{Remark}[section]
+ \newtheorem{remark}[theorem]{Remark}
  \numberwithin{equation}{section}
  
 \newcommand{\ldoub}{[\![ }
@@ -878,10 +878,42 @@ Hence $f$ is necessarily a complete boolean algebra homomorphism.
 \end{proof}
 \begin{lemma} The universal model $U$ of the theory of probability intervals is $(I,\lambda)$ acting on itself via its automorphisms. Moreover, it is an internal complete boolean algebra.
 \end{lemma}
-\begin{proof} We apply the bridge $\text{Cont}(\text{Aut}_{BPAlg}(I,\lambda))\simeq \text{Set}[\mathbb{T}_{int}]$. Under this equivalence, the universal model gets sent to:
+\begin{proof} We apply the bridge $\text{Cont}(\text{Aut}_{BPAlg}(I,\lambda))\simeq \text{Sh}(FinProb^{op},J_{at})$. Recall that this is given as the Lan extension of the functor 
+\[F:FinProb^{op}\rightarrow \text{Cont}(\text{Aut}_{BPAlg}(I,\lambda))\]
+ sending $(B,\mu)$ to $\text{Hom}_{BProbAlg}((B,\mu),(I,\lambda))$ with action by post composition and sending maps to their pre-compositions. Under this equivalence, the universal model gets sent to:
 \[\bigsqcup_{r\in [0,1]} \text{Hom}_{BPAlg}(U_r, (I,\lambda))\simeq I \]
-The isomorphism is given by sending $f\in \text{Hom}_{BPAlg}(U_r, (I,\lambda))$ to the image of the element with measure $r$ in $(I,\lambda)$. We need to check that the boolean algebra structure of the universal model coincides with the one of $I$. But this can be done exactly as in the proof of [classifying shit]:\newline
-\indent Thus $U$ is a complete boolean algebra acting on itself via automorphisms. By the preceding lemma, these are even automorphisms of complete boolean algebras, in particular locales. Locales in $\text{Set}^G$ are simply locales upon which $G$ acts by locale-automorphisms by C2.5.8(d) so the universal model is a  $[\text{Aut}(I,\lambda),\text{Set}]$-indexed locale. B2.3.10 states that, for any closure operator $j$ on a topos $\mathcal{S}$ an $\mathcal{S}$-indexed cocomplete category is a  $sh_j\mathcal{S}$-indexed cocomplete category iff it is a $j$-sheaf. Applying this result to the closure operator associated to the inclusion $\text{Cont}_\tau(\text{Aut}(I,\lambda))\hookrightarrow [\text{Aut}(I,\lambda),\text{Set}]$ proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
+The isomorphism $\chi$ is given by sending $f\in \text{Hom}_{BPAlg}(U_r, (I,\lambda))$ to the image of the element with measure $r$ in $(I,\lambda)$. We need to check that the boolean algebra structure of the universal model coincides with the one of $I$. But this can be done exactly as in the proof of [classifying shit]. We already know that the following diagram commutes:
+\begin{center}
+\begin{tikzcd}[column sep=small]
+      & {(b_1,b_2,b_3,b_4)} \arrow[r, maps to]                                                  & {(b_1\vee b_2,b_1\vee b_3)}                                 \\
+{(b_1,b_2,b_3,b_4)} \arrow[d, maps to] & \bigsqcup yU_{r_1\cdots r_4} \arrow[d, "\bigsqcup (p_1)_*"'] \arrow[r, "\alpha_1^{-1}"] & (\bigsqcup yU_r)\times (\bigsqcup yU_s) \arrow[d, "\wedge"] \\
+{(b_1,b_2\vee b_3\vee b_4)}            & \bigsqcup yU_r \arrow[r]                                                                & \bigsqcup yU_r                                             
+\end{tikzcd}
+\end{center}
+Now we apply our equivalence of categories and it remains to check that the following diagram commutes. This can be done on underlying sets. The underlying set of $I\times I$ as computed in $\text{Cont}_{\tau}(\text{Aut}_{BPalg})$ is also $I\times I$ as forgetting the group action is the inverse image of a geometric morphism.
+\begin{center}
+\begin{tikzcd}
+{\bigsqcup \text{Hom}(U_{r_1\cdots r_4},I)} \arrow[d, "\bigsqcup Lan_F(p_1)_*"'] \arrow[rrr, "Lan_F(\alpha_1^{-1})\circ(\chi\times\chi)"] &  &  & I\times I \arrow[d, "\wedge"] \\
+{\bigsqcup \text{Hom}(U_r,I)} \arrow[rrr, "\chi"']                                                                                        &  &  & I                            
+\end{tikzcd}
+\end{center}
+Take an element $f:U_{r_1\cdots r_4}\rightarrow I$ in the top left corner, call the images of the elements in $I$ $x_1\cdots x_4$. We need to compute $Lan_F(\alpha_1)(f)$. % The Lan extension of $(p_1)_*\circ\alpha_1$ is given by precomposing with $\wedge$. Understand this!
+$\alpha^{-1}_1$ is induced by the universal property of the product and then coproduct, so its Lan extension is easier to compute: $\alpha^{-1}_1=\bigsqcup \beta_{r_1\cdots r_4}\times \bigsqcup \gamma_{r_1\cdots r_4}$ for
+\[\beta_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow \bigsqcup yU_r, \, \gamma_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow \bigsqcup yU_s\]
+$\beta_{r_1\cdots r_4}$ factors over the inclusion $yU_{r_1+r_2}\rightarrow \bigsqcup yU_r$ and $\gamma_{r_1\cdots r_4}$ factors over $yU_{r_1+r_3}\rightarrow \bigsqcup yU_s$ . For this, by the Yoneda lemma, the map $\beta_{r_1\cdots r_4}$ comes from the map $b_{r_1\cdots r_4}:U_{r_1\cdots r_4}\rightarrow U_{r_1+r_2}$ of finite probability spaces sending the first two element of the left hand side to the first on the right hand side. Analogously we get $\gamma_{r_1\cdots r_4}=yc_{r_1\cdots r_4}$. This can finally be Lan extended easily: (Note our abusive notation. We identify the finite probability spaces with their corresponding finite probability algebras, so the morphisms of finite probability algebras point in the other direction)
+\begin{center}
+\begin{tikzcd}
+{\text{Hom}(U_{r_1+r_2},I)} \arrow[rrd]                                                                                                            &  &                                                              \\
+{ \text{Hom}(U_{r_1\cdots r_4},I)} \arrow[rr, "Lan_F(\alpha_1^{-1})"] \arrow[d, "-\circ c_{r_1\cdots r_4}"'] \arrow[u, "-\circ b_{r_1\cdots r_4}"] &  & {\text{Hom}(U_{r_1+ r_2},I)\times \text{Hom}(U_{r_1+r_3},I)} \\
+{\text{Hom}(U_{r_1+r_3},I)} \arrow[rru]                                                                                                            &  &                                                             
+\end{tikzcd}
+\end{center}
+We compute $Lan_F(\alpha^{-1}_1)(f)=(f\circ b_{r_1\cdots r_4}, f\circ c_{r_1\cdots r_4})$. One easily computes that $(\chi\times \chi)(f\circ b_{r_1\cdots r_4}, f\circ c_{r_1\cdots r_4})=(x_1\vee x_2, x_1\vee x_3)$ and $\wedge (x_1\vee x_2, x_1\vee x_3) = x_1$.\newline
+\indent Likewise, $(p_1)_*$ factors over $\rho_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow yU_{r_1}$ and this is the Yoneda embedding of $p_{r_1\cdots r_4}$. Thus $Lan_F((p_1)_*)(f)=f\circ p_{r_1\cdots r_4}$ and one can easily see that $\chi(f\circ p_{r_1\cdots r_4})=x_1$. This concludes the proof. As the poset structure can be recovered from this via $a\leq b\iff a\wedge b=a$, this shows $Lan_y(U)$ and $I$ have the same poset structure. As all the other operators can be induces as limits and colimits in Set, the boolean algebras are isomorphic.
+
+\indent Thus $U$ is a complete boolean algebra acting on itself via automorphisms. By the preceding lemma, these are even automorphisms of complete boolean algebras, in particular locales. Locales in $\text{Set}^G$ are simply locales upon which $G$ acts by locale-automorphisms by C2.5.8(d) so the universal model is a  $[\text{Aut}(I,\lambda),\text{Set}]$-indexed locale. B2.3.10 states that, for any closure operator $j$ on a topos $\mathcal{S}$ an $\mathcal{S}$-indexed cocomplete category is a  $sh_j\mathcal{S}$-indexed cocomplete category iff it is a $j$-sheaf. Applying this result to the closure operator associated to the inclusion
+\[\text{Cont}_\tau(\text{Aut}(I,\lambda))\hookrightarrow [\text{Aut}(I,\lambda),\text{Set}]\]
+ proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
 \end{proof}
 This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is quite a different from the situation of the theory of atomless boolean algebras. There, the automorphism need not preserve the complete boolean algebra structure. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
 \begin{lemma}[Trivial lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by complete boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
@@ -894,10 +926,24 @@ This result is highly unexpected. Fixing only finitary data, we have forced the 
 Here $\text{Sh}^{(G,\tau)}(\mathcal{B})$ denotes the topos of $(G,\tau)$-equivariant sheaves on $\mathcal{B}$ and $f^*$, $\bar{f}^*$ just forget the group action.\newline
 \indent In particular, $\bar{f}$ is an open surjective geometric morphism.
 \end{lemma}
-\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms are again localic. Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale. We know $f$ is open geometric as points of atomic toposes are always open surjective by C3.5.6. By C3.1.28 $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
+\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms are again localic. Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square commuting up to natural iso $\eta$. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale. We know $f$ is open geometric as points of atomic toposes are always open surjective by C3.5.6. By C3.1.28 $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
 \[ \mathcal{B}=f^*\Gamma^{(G,\tau)}\Omega\simeq \Gamma e^*\Omega\simeq \Gamma e^*(1\sqcup 1)\simeq \Gamma (1\sqcup 1)\simeq\Gamma \Omega_\mathcal{E}  \]
 \newline
-In the first step we use the well-known description of subobject classifiers of localic topoi [ref]. In the second steps we use that for boolean topoi we have $\Omega=1\sqcup 1$. We now need to chase around the boolean algebra structure (only the Beck-Chevalley morphism is questionable.) This is immediate as all functors in question preserve finite limits and thus the algebraic structure of boolean algebras.
+In the first step we use the well-known description of subobject classifiers of localic topoi [ref]. In the second steps we use that for boolean topoi we have $(\top,\bot):1\sqcup 1\simeq \Omega$. That the boolean algebra structure is preserved  by the Beck-Chevalley morphism is immediate as all functors in question preserve finite limits and thus the algebraic structure of boolean algebras. It remains to check whether the boolean algebra structure of $ e^*\Omega$ coincides with the one of $ \Omega_\mathcal{E}$. Recall that this is induced by the $\Omega$-axiom using the characteristic arrows of various subobjects defined by pullbacks [do we need diagrams?]. $e^*$ preserves the subobject classifier, the inclusions $\top:1\rightarrow \Omega$ as well as pullbacks, the terminal object and injectivity of morphisms. Thus 
+\begin{center}
+\begin{tikzcd}
+e^*S \arrow[r] \arrow[d, hook] & 1=e^*1 \arrow[d, "\top=i_1=e^* i_1=e^*\top"]              \\
+e^*X \arrow[r, "\chi_{e^*S}"']      & \Omega=1\sqcup 1=e^*(1\sqcup 1)=e^*\Omega
+\end{tikzcd}
+\end{center}
+\indent is a pullback if the following is:
+\begin{center}
+\begin{tikzcd}
+S \arrow[r] \arrow[d, hook] & 1 \arrow[d, "\top"] \\
+X \arrow[r, "\chi_S"']      & \Omega             
+\end{tikzcd}
+\end{center}
+Hence by the uniqueness condition of the $\Omega$-axiom, $e^*\chi_S=\chi_{e^*S}$. In particular, all the structure defined in this way gets preserved. This proves that the square is indeed a 2-pullback.
 
 \indent Pullbacks of open surjections are again open surjections by C3.1.23, thus $\bar{f}$ has this property. 
 \end{proof}
@@ -907,7 +953,7 @@ In the first step we use the well-known description of subobject classifiers of 
 \begin{center}
 \begin{tikzcd}
 \text{Sh}(\mathcal{B}) \arrow[r, "\Gamma"] \arrow[d, "\bar{f}"']   & \text{Set} \arrow[d, "{f_{(\mathcal{B},\mu)}}"] \\
-{\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)} \arrow[r, "\Gamma"'] & {\text{Set}[\mathbb{T}_{int}]}                 
+{\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)} \arrow[r, "\Gamma^{(G,\tau)}"'] & {\text{Set}[\mathbb{T}_{int}]}                 
 \end{tikzcd}
 \end{center}
 Impressively, $\bar{f}$ is an open surjective geometric morphism. It preserves and reflects infinitary first order logic.
@@ -928,6 +974,38 @@ Fixing the notation as in the following diagram:
 The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sheaf on $\mathcal{B}$ and $\theta:\pi_1^*A\simeq \pi_2^*A$ is an isomorphism such that $\Delta^*\theta=\text{id}$ and the cocycle condition $\pi_{13}^*\theta=\pi_{12}^*\theta\circ \pi_{23}^*\theta$ is fulfilled. Morphisms of descent data are natural transformations $\psi:A\rightarrow B$ commuting with all the structure.
 \end{corollary}
 \begin{proof} Open surjections are descent morphisms by C5.1.6.
+\end{proof}
+As before, to make this theory workable, we need a lot of different, insightful site presentations. There are two given in [elephant] first continuous equivariant sheaves A2.1.11(c)%is this a thing? Also C5.4.6
+, secondly an explicit site given in C2.5.8(e). We quote:\newline
+\indent For an open subgroup $U\subseteq G$, define $I_U$ as the subset of $I$ invariant under the action of $U$. We obtain a site $(\mathcal{I},J)$ with $\mathcal{I}$ the category with objects pairs $(U,x)$ of open subgroups $U$ and $x\in I_U$ and morphisms $(U,x)\rightarrow (V,y)$ labelled by cosets $gV$ of $V$ such that $U\subseteq gVg^{-1}$ and $x\leq g(y)$ in $I$.  A sieve $R$ on $(V,y)$ is $J$-covering if $y$ is the join of all those $x$ for which there exists $U$ such that $x\in I_U$ and $V:(U,x)\rightarrow (V,y)\in R$. This site is nice as the projection to the subgroups is cover-reflecting and induces the functor $\Gamma^{(G,\tau)}$ as in the theorem as they note.
+\begin{lemma} $\mathfrak{Prob}(U)$ is equivalent to the category of sheaves over the following site: $(FinProb\rtimes U ,J_{at}\rtimes J_{can})$ where the category $FinProb\rtimes U$ is the category with objects pairs $(X,\mu,x)$, where $(X,\mu)$ is a finite probability space and $x\in \mathcal{P}(X)$, and morphisms $f_{\leq}:(X,\mu, x)\rightarrow (Y,\nu, y)$ are measurable functions $f:(X,\mu)\rightarrow (Y,\nu)$ such that $f(x)\subseteq y$. A sieve $R$ on $(Y,\nu, y)$ is $J_{at}\rtimes J_{can}$-covering if $y$ is the union of all those $f(x)$ such that there exists a $f_{\leq}:(X,\mu,x)\rightarrow (Y,\nu,y)\in R$. In particular the single morphism $f_{\leq}:(X,\mu,f^{-1}(y))\rightarrow (Y,\nu,y)$ is covering for any measurable function $f$ and the map $FinProb\rtimes U\rightarrow FinProb$ is cover-reflecting.
+
+\end{lemma}
+\begin{proof}
+One just computes the Grothendieck construction "$\rtimes$" for the indexed category $U$ over $FinProb$ as explained in C2.5.4. We use that $U(X,\mu)=\mathcal{P}(X)$ and $U(f):U(Y,\nu)\rightarrow U(X,\mu)$ is given by $f^{-1}:\mathcal{P}(Y)\rightarrow \mathcal{P}(X)$.\footnote{This had been remarked earlier and is fairly obvious. We might actually want to prove it explicitly anyway though.} Thus $FinProb\rtimes U$ has as objects as described in the lemma and as morphisms pairs $(f,\leq)$ where $f:(X,\mu, x)\rightarrow (Y,\nu, y)$ and $\leq: x\rightarrow f^{-1}(y)$ in $\mathcal{P}(X)$ this is equivalent to $f(x)\subseteq y$ in $\mathcal{P}(Y)$. Now we use the same line of argument as in C2.5.8(e). Evidently, any morphism in $FinProb\rtimes U$ can be factored as follows:
+\begin{center}
+\begin{tikzcd}
+(X,\mu,x)\arrow[r, "id_{\leq}"]\arrow[rr,"f_{\leq}", bend right]& (X,\mu, f^{-1}(y))\arrow[r,"\overline{f_{\leq}}"]& (Y,\nu,y) \\
+\end{tikzcd}
+\end{center} 
+$\overline{f_{\leq}}$ is covering as it consists of a $J_{at}$-cover $f:(X,\mu)\rightarrow (Y,\nu)$ and an isomorphism in $\mathcal{P}(X)$ [Is this an argument?]. Thus we may define [insert formal argument!] a sieve $R$ on $(Y,\nu,y)$ to be $J_{at}\rtimes J_{can}$-covering if $y$ is the union of all those $f(x)$ such that there exists a $f_{\leq}:(X,\mu,x)\rightarrow (Y,\nu,y)\in R$.
+\end{proof}
+This proof is super sketchy, which is especially bad as I don't formally understand what is going on. I'm going to have to revisit that. Assuming this holds true, we can also give a very nice condition when a presheaf is a sheaf for this topology:
+\begin{lemma} A presheaf $F:(FinProb\rtimes U)^{op}\rightarrow \text{Set}$ is a $J_{at}\rtimes J_{can}$-sheaf iff:
+\begin{enumerate}
+\item For any $(X,\mu,x)$ such that $x=\{x_1,\cdots, x_n \}$ we have:
+\[F(X,\mu,x)\simeq \prod_{i=1}^n F(X,\mu,\{x_ i \})   \]
+via the the product of the restriction maps.
+\item For any measure preserving map $f:(X,\mu)\rightarrow (Y,\nu)$, element $y\in Y$ and element $a\in F(X,\mu, f^{-1}(\{y\}))$, if for all forks of measurable functions
+\begin{center}
+\begin{tikzcd}
+{(Z,\lambda)} \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & {(X,\mu)} \arrow[r, "f"] & {(Y,\nu),}
+\end{tikzcd}
+\end{center}
+interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y\})$, $g_{\leq}:(Z,\lambda, (f\circ g)^{-1}(\{ y\} ))\rightarrow (X,\mu, f^{-1}(\{ y \}))$ resp. $h_{\leq}:(Z,\lambda, (f\circ g)^{-1}(\{ y\} ))\rightarrow (X,\mu, f^{-1}(\{ y \}))$, we have $F(g_{\leq})(a)=F(h_{\leq})(a)$ then this implies $a=F(f_{\leq})(b)$ for some $b\in F(Y,\nu, \{y\})$.
+\end{enumerate}
+\end{lemma}
+\begin{proof} Any sheaf has this properties. (i) is just how the canonical topology is defined and (ii) follows from III4 Lemma 2 of [MacLaneMoerdijk]. This is not that hard to show.
 \end{proof}
 
 
