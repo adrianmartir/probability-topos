@@ -30,13 +30,24 @@
 \date{}
 \begin{document}
 \maketitle 
-\section{Introduction}
+
+\section{Motivation}
 
 Talk about the challenge of using topos theory for talking about topological phenomena involving completeness properties in a logical way(obviously one can consider sheaves on a space, but it is hard to consider classifying toposes of some kind of space). Completeness kind of provides a solution to this dilemma.
 
 Talk about 'bookkeeping' in probability theory. Nobody cares about the choice of base $\sigma$-algebra, as long as it has good properties. Yet, a $\sigma$-algebra must be chosen. One may try to exploit this by imposing restrictions(of functorial or topological nature) on how statements/sets may depend on the base $\sigma$-algebra. These techniques will lead to an approach to probability theory that works without a choice of $\sigma$-algebra.
 
-The basic ingredient of our theory will be the following category of finite probability spaces.
+\section{Conventions} \label{conventions}
+
+When there is need to be completely formal, the lim and colim operators in our sheaf toposes will not be defined only 'up to isomorphism', but rather taken the to be canonical constructions in sheaf toposes given by sheafifying the (co-)limit taken pointwise is $Set$. In case the sheaf topos is a presheaf topos, we will omit the sheafification step. The same will hold for Kan extensions, as in our examples these are always computed as (co-)limits. When considering what is traditionally thought of different 'representatives' of an isomorphism class given by a limit or colimit, we will formalize this as simply claiming that an object (together with a corresponding universal (co-)cone) \emph{has} a universal property.
+
+This explicit approach clears up some of the confusion that arises when one thinks of e.g. a limit $\text{lim } c_i$ simply as some sort of object defined only up to isomorphism that takes the form of the correct representative of the isomorphism class when convenient. Admittedly, this explicit viewpoint will only be taken in the rare occasion where one needs to prove that certain diagrams involving isomorphisms given by universal properties commute.
+
+For a small category $\mathcal{C}$, we will denote the Yoneda embedding by $y: \mathcal{C} \to Set^{\mathcal{C}^{op}}$. For a morphism $f$ in $\mathcal{C}$, we will denote $y(f)$(also known as postcomposition) by $f_*$.
+
+\section{Constructing $\mathfrak{Prob}$}
+
+In this section we will introduce the topos $\mathfrak{Prob}$, by exhibiting a site based on the following category of finite probability spaces.
 
 \begin{definition}
 \begin{enumerate}
@@ -91,7 +102,7 @@ We use our construction of the measure on the pullback in \ref{pullback_measure}
 (X \times_Y X, \bar{\mu}) \arrow[r, two heads, shift left=2] \arrow[r, two heads, shift right] & (X,\mu) \arrow[r, "f" description, two heads] & (Y,\nu)
 \end{tikzcd}
 \]
-Since this is clearly a coequalizer on the underlying sets, the only thing to show is that the uniquely induced map is measure-preserving. This can either be directly computed or more concisely calculated by using \ref{Imnotdumb}.
+Since this is clearly a coequalizer on the underlying sets, the only thing to show is that the uniquely induced map is measure-preserving. This can either be directly computed or more concisely calculated by using \ref{finprob_equiv}.
 \end{proof}
 %More generally;
 %\begin{theorem}
@@ -126,10 +137,25 @@ Define the topos $\mathfrak{Prob}$ to be $Sh(FinProb, J_{at})$.
 
 Much of this paper is dedicated to finding other equivalent ways of describing $\mathfrak{Prob}$.
 
+There is a simple criterion that helps us determine whether a presheaf on $FinProb$ is a sheaf.
+
+\begin{proposition} \label{sheaf_condition}
+n
+\end{proposition}
+\begin{proof}
+Recall that by \cite{sheaves_geometry_logic}, III.4 Lemma 2 , we can check that $U$ is a sheaf on the atomic topology by checking the following for any morphism $f: \alpha \to \beta$ and any $a \in U(\alpha)$: If for all diagrams
+
+\[
+\begin{tikzcd}
+\gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \alpha \arrow[r, "f"] & \beta
+\end{tikzcd}
+\]
+with $f g = f h$ we have that $U(g)(a) = U(h)(a)$, then there is a unique lift $b \in U(\beta)$ with the property that $U(f)(b) = a$.
+\end{proof}
 
 \section{$\mathfrak{Prob}$ as a classifying topos}
 
-In this section we will determine what $Sh(FinProb, J_{at})$ classifies. By default, we will use the notations and definitions as in part D.1 of \cite{elephant}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}. If the reader still wants an intuition about why \ref{classifying} should be true, we have provided an independent proof of a weaker theorem in the appendix. There prove our result only for the models of $Sh(FinProb, J_{at})$ in $Set$ in a way that should be accessible to a reader only familiar with $Ind$-completions and flat functors into $Set$.
+In this section we will determine what $Sh(FinProb, J_{at})$ classifies. By default, we will use the notations and definitions as in part D.1 of \cite{elephant}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}. If the reader still wants an intuition about why \ref{classifying} should be true, we have provided an independent proof of a weaker theorem in the appendix. There prove our result only for the models of $Sh(FinProb, J_{at})$ in $Set$ in a way that should be accessible to a reader only familiar with $Ind$-completions and flat functors into $Set$. There we do not use any formal logic.
 
 \begin{definition}
 Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
@@ -185,7 +211,8 @@ Denote the category models of $\mathbb{T}_{bpalg}$ in $Set$ by $BPAlg$. Denote t
 
 The first thing to note is that this gives us an equivalent site for topos.
 
-\begin{proposition} We have an equivalence of categories
+\begin{proposition} \label{finprob_equiv}
+We have an equivalence of categories
 \[
 FinProb^{op} \simeq BPAlg_f
 \]
@@ -196,7 +223,15 @@ defined by sending a finite probability space $(X, \mu)$ to the finite boolean p
 A map in $FinProb$ is sent to the preimage map on powersets.
 \end{proposition}
 \begin{proof}
-See \ref{Imnotdumb}.
+First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is sent to a measure-preserving map $f^{-1}: (\mathcal{P}X, \bar{\mu}) \to (\mathcal{P}Y, \bar{\nu})$. So let $S \in \mathcal{P} Y$.
+\begin{align*}
+\bar{\mu}(f^{-1} S) &= \sum_{x \in f^{-1} S} \mu x \\
+&= \sum_{y \in S} \sum_{x \in f^{-1} y} \mu x \\
+&= \sum_{y \in S} \nu y \\
+&= \bar{\nu} S
+\end{align*}
+
+The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
 \end{proof}
 
 We would like to show that the topos $Set^{FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. Proving this fact requires a bit of work. The difficulty is mainly the fact that  $FinProb$ does not have all finite limits, so the flat functors on $FinProb$ are not as straightforward to understand. We will prove the equivalence
@@ -211,7 +246,7 @@ The above gives us some inspiration as to how to guess the universal model. We w
 \[
 \coprod_{r \in [0,1]} y U_r \in Set^{FinProb^{op}} .
 \]
-One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
+One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. This means that map $f$ between probability spaces gets sent to the map that takes the preimage of a subset. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
 
 \begin{lemma} \label{universal model}
 $U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$. This yields a left-exact, colimit-preserving functor $Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}_{bpalg}]$.
@@ -508,7 +543,7 @@ Next, we need to show that the above isomorphism actually is an isomorphism of $
     y \{a . \top \}                                                                                           & Lan_F U                            
 \end{tikzcd}
 \]
-in the category of arrows in $Set[\mathbb{T}]$. The upper isomorphim is induced by the data of the respective universal cones exhibiting the upper objects as cartesian products. We also need the analogous statement for relation symbols.
+in the category of arrows in $Set[\mathbb{T}]$. The upper isomorphim is induced by the data of the respective universal cones exhibiting the upper objects as cartesian products. We also need the analogous statement for relation symbols. In particular this apply this remark to Kan-extensions. Notice that here and also in what follows, we are taken the viewpoint on objects defined by universal property described in section \ref{conventions}. 
 
 We first consider the 0-ary function $U(0): * \to U$. We get the chain of isomorphisms
 
@@ -536,15 +571,15 @@ We start with the left isomorphism. Notice that we can also write $U \times U$ a
 \[
 (a,b) \mapsto (a \wedge b, a \wedge \neg b, \neg a \wedge b, \neg a \wedge \neg b) .
 \]
-Going in the other direction, we get the commutative square which after applying $Lan_F$ yields the required commutative square above on the left
+Using the inverse of this isomorphism $(b_1,b_2,b_3,b_4) \mapsto (b_1 \vee b_2, b_1 \vee b_3)$, we get the commutative square which after applying $Lan_F$ yields the required commutative square above on the left
 \[
 \begin{tikzcd}
-U \times U \arrow[d, "U(\wedge)"'] & \coprod y U_{r_1 \cdots r_4} \arrow[d, "\coprod (p_1)_*"] \arrow[l, "\cong"'] \\
+U \times U \arrow[d, "U(\wedge)"'] & \coprod y U_{r_1 \cdots r_4} \arrow[d, "\coprod f"] \arrow[l, "\cong"'] \\
 U                                  & \coprod y U_r \arrow[l, "\cong"]                          ,
 \end{tikzcd}
 \]
 
-where the upper map is given by $(b_1,b_2,b_3,b_4) \mapsto (b_1 \vee b_2, b_1 \vee b_3)$ and the right map projects onto the first element. Since we do not only need any isomorphism $Lan_F (U \times U) \cong \coprod y F (U_{r_1 \cdots r_4})$, but a specific one induced on the components on the cartesian product, we check that the upper isomorphism in our diagram is in fact induced by the required isomorphism. We do this by noting that the map $U \times U \xleftarrow{\cong} \coprod y U_{r_1 \cdots r_4}$ commutes with the required map on projections:
+where $f$ sends a partition into four subsets onto the first subset. Since we do not only need any isomorphism $Lan_F (U \times U) \cong \coprod y F (U_{r_1 \cdots r_4})$, but a specific one induced on the components on the cartesian product, we check that the upper isomorphism in our diagram is in fact induced by the required isomorphism. We do this by noting that the map $U \times U \xleftarrow{\cong} \coprod y U_{r_1 \cdots r_4}$ commutes with the required map on the first projection of the cartesian products:
 
 \[
 \begin{tikzcd}
@@ -552,7 +587,7 @@ U \times U \arrow[d, "p_1"'] & \coprod y U_{r_1 \cdots r_4} \arrow[d, "\alpha_1"
 U                            & \coprod y U_r \arrow[l, "\cong"]                                    ,
 \end{tikzcd}
 \]
-where $\alpha_1$ is the map induced by the maps on finite probability spaces $U_{r_1 \cdots r_4} \to U_r = U_{r,1-r}$ given by $(b_1,\cdots,b_4) \mapsto (b_1 \vee b_2, b_3 \vee b_4)$. This works analogously for the projections onto the second component. Now the two isomorphims on the the diagram above imply that $\alpha_1$ and the analogous map for the second projection together form the universal cone for a cartesian product. This immediately implies that the isomorphism $U \times U \cong \coprod y U_{r_1 \cdots r_4}$ is the one induced by the universal properties of the product and moreover, by flatness of $F$, this fact gets preserved when applying $Lan_F$. Now that we have shown the first part of the isomorphism, we wish to show that we have an isomorphism
+where $\alpha_1$ is the map induced by the maps on finite probability spaces $U_{r_1 \cdots r_4} \to U_r = U_{r,1-r}$ given by $(b_1,\cdots,b_4) \mapsto (b_1 \vee b_2, b_3 \vee b_4)$. There is an analogous map $\alpha_2$ that has a similar relation to the second projection $p_2$. Now the two isomorphims on the the diagram above imply that $\alpha_1$ and $\alpha_2$ form a universal cone for a cartesian product. This immediately implies that the isomorphism $U \times U \cong \coprod y U_{r_1 \cdots r_4}$ is the one induced by the universal properties of the product and moreover, by flatness of $F$, this fact gets preserved when applying $Lan_F$. Now that we have shown the first part of the isomorphism, we wish to show that we have an isomorphism
 \[
 \begin{tikzcd}
 {\coprod y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d, "{\coprod [b = b_1]_*}"'] \arrow[r, "\phi"] & {y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1 \wedge a_2]_*}"] \\
@@ -567,7 +602,7 @@ where $\phi$ is given by $[(a_1 = b_1 \vee b_2) \wedge (a_2 = b_1 \vee b_3)]_*$.
 \coprod y \{b.B_rb\} \arrow[r, "\cong"']                                                            & y\{a.\top\}
 \end{tikzcd}
 \]
-commutes. But this time, we already know that $\alpha_1$ and the corresponding second projection are the universal cone of a product and similarly, $[a=a_1]_*$ are the projections of a product. This already implies that $\phi$ is induced by the correct isomorphisms and moreover that $\phi$ itself is an isomorphism. This concludes the proof that $Lan_F U(\wedge)$ matches the corresponding operation on the universal model in $Set[\mathbb{T}]$. The argument for $\vee$ should be very similar.
+commutes. But this time, we already know that $\alpha_1$ and $\alpha_2$ are a universal cone of a product and similarly, $[a=a_1]_*$ and $[a=a_2]_*$ are the projections of a product. This already implies that $\phi$ is induced by the correct isomorphisms and moreover that $\phi$ itself is an isomorphism. This concludes the proof that $Lan_F U(\wedge)$ matches the corresponding operation on the universal model in $Set[\mathbb{T}]$. The argument for $\vee$ should be very similar.
 
 We show that $Lan_F U(\neg)$ matches the corresponding operation on the universal model, by showing that we don't need to show it. Let $\mathbb{T}_{BAlg}$ denote the theory of boolean algebras and $\mathbb{T}_{DLat'}$ be the theory of distributive lattices together with the axiom
 \[
@@ -652,7 +687,7 @@ for each morphism $f: \alpha \to \beta$ in $FinProb$. One can easily see that th
 \]
 suffice, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. Now, the axioms above are precisely reformulations of the interval axioms.
 
-Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf. Recall that by \cite{sheaves_geometry_logic}, III.4 Lemma 2 , we can check that $U$ is a sheaf on the atomic topology by checking the following for any morphism $f: \alpha \to \beta$ and any $a \in U(\alpha)$: If for all diagrams
+Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed \footnote{One can use the commutative square in theorem 8.1.3 to see this, with a similar argument as in the remark below.}, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf. Recall that by \cite{sheaves_geometry_logic}, III.4 Lemma 2 , we can check that $U$ is a sheaf on the atomic topology by checking the following for any morphism $f: \alpha \to \beta$ and any $a \in U(\alpha)$: If for all diagrams
 
 \[
 \begin{tikzcd}
@@ -675,16 +710,36 @@ But this means, that we can lift the subset $a \in U(\alpha)$ to a subset $b \in
 Thus we can conclude that $U$ is in fact the universal model in $Sh(FinProb, J_{at})$.
 \end{proof}
 
-\begin{corollary}
-A geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds generally in $\mathbb{T}_{int}$. In particular, a geometric sequent in $\mathbb{T}_{int}$ holds for the interval if and only if it holds for all atomless probability algebras.
-\end{corollary}
+\begin{remark} \label{classifying_equiv_data}
+Using the commutative square(it only commutes up to isomorphism) for any Grothendieck topos $\mathcal{E}$
+\[
+\begin{tikzcd}
+\mathbb{T}_{int}\text{-}mod(\mathcal{E}) \arrow[d] \arrow[r, "\simeq"] & {Geom(\mathcal{E},Sh(FinProb,J_{at}))} \arrow[d, "j \circ -"] \\
+\mathbb{T}_{bpalg}\text{-}mod(\mathcal{E}) \arrow[r, "\simeq"]         & {Geom(\mathcal{E},Set^{FinProb^{op}})}                       
+\end{tikzcd}
+\]
+in theorem 8.1.3 in \cite{caramello_book}, one can extract more information about how to compute the equivalence. Here $j$ denotes the sheafification functor. First, note that the inclusion on the left hand side is fully faithful and that the functor on the bottom is given by the functor in \ref{inverse}. Thus we can choose the equivalence on the top such that it is precisely defined by the interpretation in \ref{inverse}.
+
+Thus, we can explicitly describe the equivalence of categories
+\[
+    \mathbb{T}_{int}\text{-}mod(\mathcal{E}) \simeq Geom(\mathcal{E},Sh(FinProb,J_{at}))
+\]
+by giving the functor going to the right as the interpretation in \ref{inverse} and the functor going to the left by Yoneda embedding the universal model $U$.
+
+In particular, if we have a model $(A,\mu)$ of $\mathbb{T}_{int}$ in $Set$, we can view it as a geometric morphism $Set \to Sh(FinProb, J_{at})$ by specifying it as the $J_{at}$-flat functor $FinProb \to Set$ given by sending a finite probability space $(X,\nu)$ to the set
+\[
+\{(a_i)_{i \in X} | a_i \in A \text{ are pairwise disjoint, } \nu(a_i) = \mu(i) \}
+\]
+and by sending a map $(X,\nu_1) \to (Y,\nu_2)$ the map
+\[
+(a_j)_{j \in X} \mapsto \big (\bigvee_{f(j) = i} a_j \big )_{i \in Y} .
+\]
+\end{remark}
 
 \begin{corollary}
 Every infinitary first-order formula over the signature of $\mathbb{T}_{int}$ is provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{int}$.
 \end{corollary}
-This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{int}$ can be thought as a synthetic context for studying geometric properties of the measure-theoretic interval.
-
-TODO: Give a completeness statement for infinitary logic (with LEM?).
+% This result is particularly remarkable. The study of the geometric logic of $Sh(FinSet, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{int}$ can be thought as a synthetic context for studying geometric properties of the measure-theoretic interval.
 
 
 \section{Galois theory}
@@ -1042,7 +1097,7 @@ Note that we do not allow any nontrivial elements of measure zero. Moreover, the
 
 Before we get to prove anything interesting, we need to get the following out of the way:
 
-\begin{proposition}\label{Imnotdumb} We have an equivalence of categories
+\begin{proposition} We have an equivalence of categories
 \[
 FinProb^{op} \simeq BPAlg_f
 \]
@@ -1053,15 +1108,7 @@ defined by sending a finite probability space $(X, \mu)$ to the finite boolean p
 A map in $FinProb$ is sent to the preimage map on powersets.
 \end{proposition}
 \begin{proof}
-First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is sent to a measure-preserving map $f^{-1}: (\mathcal{P}X, \bar{\mu}) \to (\mathcal{P}Y, \bar{\nu})$. So let $S \in \mathcal{P} Y$.
-\begin{align*}
-\bar{\mu}(f^{-1} S) &= \sum_{x \in f^{-1} S} \mu x \\
-&= \sum_{y \in S} \sum_{x \in f^{-1} y} \mu x \\
-&= \sum_{y \in S} \nu y \\
-&= \bar{\nu} S
-\end{align*}
-
-The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
+See \ref{finprob_equiv}.
 \end{proof}
 
 From now on we will implicitly use this equivalence and use $FinProb$ or $BPAlg_f$ depending on which variance more convenient.
