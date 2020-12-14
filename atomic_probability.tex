@@ -136,19 +136,19 @@ Much of this paper is dedicated to finding other equivalent ways of describing $
 
 There is some very convenient notation for finite probability spaces emphasizing their combinatorial nature.
 
-\begin{definition} \label{U-notation}
+\begin{definition}[U-notation] \label{U-notation}
 \begin{enumerate}
 \item For $r_1, \cdots r_n \in [0,1]$ such that $r_1 + \cdots + r_n = 1$, denote by $U_{r_1 \cdots r_n}$ or simply by $U_{r_i}$ the finite probability space on the set 
 \[
 \{i | r_i \neq 0 \}
 \]
 equipped with the measure $\mu(i) = r_i$.
-\item When denoting the presheaf $y U_{r_i}$, this will be interpreted as the functor sending a finite probability space $(X,\mu)$ to the set its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$.
-\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in (0,1)$ and think of the functor $y U_r$ as the functor sending a finite probability space to the set of subsets of measure $r$.
+\item When denoting the presheaf $y U_{r_i}$, this will be interpreted as the functor sending a finite probability space $(X,\mu)$ to the set of its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$.
+\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$ and think of the functor $y U_r$ as the functor sending a finite probability space to the set of subsets of measure $r$.
 \end{enumerate}
 \end{definition}
 
-As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$. Part (ii) of the definition is reasonable, since a morphism $(X,\mu) \to U_{r_i}$ of finite probability spaces consists precisely of a partition $(a_i)_i$ of $(X,\mu)$ into subsets of measure $r_i$.
+As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$. Part (ii) of the definition is reasonable, since a morphism $(X,\mu) \to U_{r_i}$ of finite probability spaces consists precisely of a partition $(a_i)_i$ of $X$ into subsets of measure $r_i$.
 
 Before continuing, we will derive a better criterion for determining whether a presheaf in $Set^{FinProb^{op}}$ is a sheaf. First, notice that we have the following universal property \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
 
