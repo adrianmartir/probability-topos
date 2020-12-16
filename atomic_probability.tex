@@ -52,12 +52,9 @@ In this section we will introduce the topos $\mathfrak{Prob}$, by exhibiting a s
 
 \begin{definition}
 \begin{enumerate}
-\item A finite probability space is a finite set $X$ equipped with a map(called probability measure) $\mu: X \to \mathbb{R}_{>0}$ such that $\sum_{x \in X} \mu(x) = 1$. A map of finite probability spaces $(X,\mu) \to (Y,\nu)$ is defined as a map of finite sets $f: X \to Y$ that is measure-preserving, i.e. $\sum_{x \in f^{-1}(y)} \mu(x) = \nu(y)$. Denote the category of finite probability spaces by $FinProb$.
-\item For $r_1, \cdots r_n \in [0,1]$ such that $r_1 + \cdots + r_n = 1$, denote by $U_{r_1 \cdots r_n}$ or $U_{r_i}$ the finite probability space on the set 
-\[
-    \{i | r_i \neq 0 \}
-\]
-equipped with the measure $\mu(i) = r_i$.
+\item A finite probability space is a finite set $X$ equipped with a map(called probability measure) $\mu: X \to \mathbb{R}_{>0}$ such that \\ $\sum_{x \in X} \mu(x) = 1$.
+\item For a finite probability space $(X,\mu)$ and a subset $a \subset X$, we define $\mu(a) := \sum_{x \in a} \mu(x)$.
+\item A map of finite probability spaces $(X,\mu) \to (Y,\nu)$ is defined as a map of finite sets $f: X \to Y$ that is measure-preserving, i.e. $\mu(f^{-1}(y)) = \nu(y)$. Denote the category of finite probability spaces by $FinProb$.
 \end{enumerate}
 \end{definition}
 
@@ -138,72 +135,115 @@ Define the topos $\mathfrak{Prob}$ to be $Sh(FinProb, J_{at})$.
 
 Much of this paper is dedicated to finding other equivalent ways of describing $\mathfrak{Prob}$. When we wish to leave the particular description of $\mathfrak{Prob}$ vague, we will use the notation $\mathfrak{Prob}$.
 
-Before continuing, we will look at we will derive a better criterion for determining whether a presheaf in $Set^{FinProb^{op}}$ is a sheaf.
+There is some very convenient notation for finite probability spaces emphasizing their combinatorial nature.
+
+\begin{definition}[U-notation] \label{U-notation}
+\begin{enumerate}
+\item For $r_1, \cdots r_n \in [0,1]$ such that $r_1 + \cdots + r_n = 1$, denote by $U_{r_1 \cdots r_n}$ or simply by $U_{r_i}$ the finite probability space on the set 
+\[
+\{i | r_i \neq 0 \}
+\]
+equipped with the measure $\mu(i) = r_i$.
+\item When denoting the presheaf $y U_{r_i}$, this will be interpreted as the functor sending a finite probability space $(X,\mu)$ to the set of its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$.
+\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$ and think of the functor $y U_r$ as the functor sending a finite probability space to the set of subsets of measure $r$.
+\end{enumerate}
+\end{definition}
+
+As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$. Part (ii) of the definition is reasonable, since a morphism $(X,\mu) \to U_{r_i}$ of finite probability spaces consists precisely of a partition $(a_i)_i$ of $X$ into subsets of measure $r_i$.
+
+Before continuing, we will derive a better criterion for determining whether a presheaf in $Set^{FinProb^{op}}$ is a sheaf. First, notice that we have the following universal property \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
 
 \begin{lemma} \label{multipullback}
-\begin{enumerate}
-We have the following universal properties \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
-\item For a diagram
+For a diagram
 \[
 \begin{tikzcd}
-& U_{r_1\cdots r_n} \arrow[d, "g"] \\
-U_{r'_1 \cdots r'_{n}} \arrow[r, "f"'] & U_{s_1,\cdots s_m} ,
+& U_{r_i} \arrow[d, "g"] \\
+U_{r'_i} \arrow[r, "f"'] & U_{s_i} ,
 \end{tikzcd}
 \]
-we have a natural bijection
-\[
-y U_{r_i} \times_f y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
-\]
-where $t_{ij} \geq 0$ is indexed by pairs $(i, j)$ with $f(i) = g(j)$ such that for each $i$,
+we consider the finite probability spaces $U_{t_{ij}}$ with the projections $p_1: U_{t_{ij}} \to U_{r_i}$, $(x_{ij}) \mapsto (\bigvee_j x_{ij})$ and $p_2: U_{t_{ij}} \to U_{r'_i}$, $(x_{ij}) \mapsto (\bigvee_i x_{ij})$, where the $t_{ij} \geq 0$ are indexed by pairs $(i, j)$ with $f(i) = g(j)$ such that for each $i$,
 \[
 \sum_j t_{ij} = r_i
 \]
 and for each $j$
 \[
-\sum_i t_{ij} = s_j .
+\sum_i t_{ij} = r'_j .
 \]
-
-\item In particular, for two finite probability spaces $U_{r_1\cdots r_n}$, $U_{s_j\cdots s_m}$, we have a natural bijection
+These cones have the universal property
 \[
-y U_{r_i} \times y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
+y U_{r_i} \times_f y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} .
 \]
-where $t_{ij} \geq 0$ with $i = 0, \cdots n, j = 0, \cdots m$ such that
-\[
-\sum_j t_{ij} = r_i
-\]
-and
-\[
-\sum_i t_{ij} = s_j .
-\]
-\end{enumerate}
 \end{lemma}
 \begin{proof}
-It is easy to see, that a morphism $\alpha \to U_{r_i}$ of finite probability spaces consists precisely of a partition $(a_i)_i$ of $\alpha$ into subsets of measure $r_i$. Thus, to show,
+The $t_{ij}$ where precisely chosen such that the projections are measure preserving and such that they form the required commutative square. To show
 \[
 y U_{r_i} \times_f y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
 \]
-send a pair of partitions $((a_i),(b_j))$ to the family $(a_i \wedge b_j)_{ij}$. The inverse of this map is given by joining the family in the correct way.
+send a pair of partitions $((a_i),(b_j))$ to the family $(a_i \wedge b_j)_{ij}$. The inverse of this map is given by joining the family with the universal maps described above.
 \end{proof}
 
-\begin{proposition} \label{sheaf_condition}
-$\mathcal{F} \in Set^{FinProb^{op}}$ is a sheaf over the atomic topology if and only if for all maps of finite probability spaces $f: (X,\mu) \to (Y,\mu')$, we have
+
+We could have presented the universal property in a more traditional style by saying that cones over our diagram factor through one of the $U_{t_{ij}}$.
+
+We can use this lemma in order to simplify the following sheaf condition for sheaves over categories equipped with the atomic topology found in \cite{sheaves_geometry_logic}, III.4 Lemma 2:
+
+A presheaf $\mathcal{F}$ on a $FinProb$ is a sheaf over the atomic topology if and only if one can check that for any morphism $f: \alpha \to \beta$ and any $a \in \mathcal{F}(\alpha)$: If for all diagrams
+
 \[
-\mathcal{F} (Y,\mu') \cong eq(\begin{tikzcd}
-\mathcal{F} (X,\mu) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \prod_{t_{ij}} \mathcal{F} U_{t_{ij}}
-\end{tikzcd} ),
+\begin{tikzcd}
+\gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \alpha \arrow[r, "f"] & \beta
+\end{tikzcd}
 \]
-where the $t_{ij}$ are as in \ref{multipullback}.
+with $f g = f h$ we have that $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$, then there is a unique lift $b \in \mathcal{F}(\beta)$ with the property that $\mathcal{F}(f)(b) = a$.
+
+\begin{proposition} \label{sheaf_condition}
+A presheaf $\mathcal{F}$ on $FinProb$ is a sheaf over the atomic topology if and only if for all maps of finite probability spaces $f: U_{r_i} \to U_{s_i}$, we have an equalizer diagram
+\[
+\begin{tikzcd}
+\mathcal{F} U_{s_i} \arrow[r, "\mathcal{F}f"] & 
+\mathcal{F} U_{r_i} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \prod_{t_{ij}} \mathcal{F} U_{t_{ij}}
+\end{tikzcd},
+\]
+where the $t_{ij}$ are as in \ref{multipullback} and the projection $\pi_1$ and $\pi_2$ are induced by the universal 'projection maps' defined in \ref{multipullback}.
 \end{proposition}
 \begin{proof}
-TODO: Add proof.
-% Recall that by \cite{sheaves_geometry_logic}, III.4 Lemma 2 , we can check that $U$ is a sheaf on the atomic topology by checking the following for any morphism $f: \alpha \to \beta$ and any $a \in U(\alpha)$: If for all diagrams
+Since for each $U_{t_{ij}}$ we have the commuting square
+\[
+\begin{tikzcd}
+U_{t_{ij}} \arrow[r] \arrow[d] & {U_{r_i}} \arrow[d, "f"] \\
+{U_{r_i}} \arrow[r, "f"']            & {U_{s_i}} ,
+\end{tikzcd}
+\]
+$f$ certainly gives us a diagram
+\[
+\begin{tikzcd}
+\mathcal{F} U_{s_i} \arrow[r, "\mathcal{F}f"] & \mathcal{F} U_{r_i} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \prod_{t_{ij}} \mathcal{F} U_{t_{ij}}
+\end{tikzcd}
+\]
+with $\pi_1 \mathcal{F}(f) = \pi_2 \mathcal{F}(f)$. Claiming that this is an equalizer means saying that for every $a \in \mathcal{F}U_{r_i}$ with the property that for all the projections $p_1: U_{t_{ij}} \to U_{r_i}$, $p_2: U_{t_{ij}} \to U_{r'_i}$ the equation $\mathcal{F}(p_1)(a) = \mathcal{F}(p_2)(a)$ is satisfied, implies that there is a unique lift $b \in \mathcal{F}U_{s_i}$ of $a$.
 
-% \[
-% \begin{tikzcd}
-% \gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \alpha \arrow[r, "f"] & \beta
-% \end{tikzcd}
-% \]
-% with $f g = f h$ we have that $U(g)(a) = U(h)(a)$, then there is a unique lift $b \in U(\beta)$ with the property that $U(f)(b) = a$.
+So our claim is that the criterion described above needs only be checked on the $U_{t_{ij}}$. Thus we assume that the equation above holds for the $U_{t_{ij}}$ with their projection maps. We need to show that the equation $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$ already holds for all the \[
+\begin{tikzcd}
+\gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & U_{r_i}
+\end{tikzcd}
+\]
+with $fg = fh$. But this certainly holds, since we can factor $g$ and $h$ through one of the $U_{t_{ij}}$ by \ref{multipullback}.
+\end{proof}
+
+Note that this proposition actually had little to do with finite probability spaces and is really about a sheaf condition for atomic topologies where the base category has multipullbacks.
+
+In some cases, one can prove the following condition that is much stronger than being a sheaf. It is especially useful when the sheaf doesn't really use the measure in its definition.
+
+\begin{proposition} \label{sheaf_condition_weak}
+Let $\mathcal{F}$ be a presheaf on $FinProb$. If for all morphisms $f: (X,\mu) \to (Y,\nu)$, we have an equalizer
+\[
+\begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (X,\mu) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (X \times_f X,\bar{\mu})
+\end{tikzcd} ,
+\]
+where $\bar{\mu}$ is as in \ref{pullback_measure}, then $\mathcal{F}$ is a sheaf.
+\end{proposition}
+\begin{proof}
+This is the condition from \cite{sheaves_geometry_logic} described above, but weakened by choosing $\gamma = (X \times_f X,\bar{\mu})$.
 \end{proof}
 
 \section{$\mathfrak{Prob}$ as a classifying topos}
@@ -295,7 +335,7 @@ by purely syntactical means. The functor in one direction will be given by an ap
 
 To get an idea of what the universal model might be, one can for example look at the universal models in classifying toposes of cartesian theories $\mathbb{T}$. In those cases the universal model in $[\mathbb{T} \text{-} Mod(Set)_{f.p.}, Set]$ just corresponds to the forgetful functor sending a (finitely presented) $\mathbb{T}$-model to its underlying set. Of course, the forgetful functor comes equipped with the required $\mathbb{T}$-model structure. For more details, see D3.1.2 of \cite{elephant}.
 
-The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_f}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description. First, we introduce the shorthand $U_r := U_{r,r-1}$ for $r \in (0,1)$. Notice that $y U_r$ sends a finite probability space to the set of subsets of measure $r$. Then we can define $U$ to be
+The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $Set^{BPAlg_f}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $Set^{FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description. First, we introduce the shorthand $U_r := U_{r,r-1}$ for $r \in (0,1)$. We will think of the functor $y U_r$ as the functor sending a finite probability space to the set of subsets of measure $r$. Similarly, we will think of the functor $y U_{r_i}$ as the functor sending a finite probability space $(X,\mu)$ to the set its partitions $(a_i)$ with $\mu(a_i) = r_i$. Then we can define $U$ to be
 \[
 \coprod_{r \in [0,1]} y U_r \in Set^{FinProb^{op}} .
 \]
@@ -620,7 +660,7 @@ Lan_F(U \times U) \arrow[d, "Lan_F(U(\wedge))"'] \arrow[r, phantom, shift right=
 Lan_F U                                          & \coprod y \{b.B_rb\} & y\{a.\top\} .
 \end{tikzcd}
 \]
-We start with the left isomorphism. Notice that we can also write $U \times U$ as a coproduct of representables by using the isomorphism $U \times U \to \coprod y U_{r_1 \cdots r_4}$ given on components by 
+We start with the left isomorphism. We can use \ref{multipullback} to rewrite $U \times U$ as a coproduct of representables by using the isomorphism $U \times U \to \coprod y U_{r_1 \cdots r_4}$ given on components by 
 \[
 (a,b) \mapsto (a \wedge b, a \wedge \neg b, \neg a \wedge b, \neg a \wedge \neg b) .
 \]
@@ -640,7 +680,7 @@ U \times U \arrow[d, "p_1"'] & \coprod y U_{r_1 \cdots r_4} \arrow[d, "\alpha_1"
 U                            & \coprod y U_r \arrow[l, "\cong"]                                    ,
 \end{tikzcd}
 \]
-where $\alpha_1$ is the map induced by the maps on finite probability spaces $U_{r_1 \cdots r_4} \to U_r = U_{r,1-r}$ given by $(b_1,\cdots,b_4) \mapsto (b_1 \vee b_2, b_3 \vee b_4)$. There is an analogous map $\alpha_2$ that has a similar relation to the second projection $p_2$. Now the two isomorphims on the the diagram above imply that $\alpha_1$ and $\alpha_2$ form a universal cone for a cartesian product. This immediately implies that the isomorphism $U \times U \cong \coprod y U_{r_1 \cdots r_4}$ is the one induced by the universal properties of the product and moreover, by flatness of $F$, this fact gets preserved when applying $Lan_F$. Now that we have shown the first part of the isomorphism, we wish to show that we have an isomorphism
+where $\alpha_1$ is the map induced by the maps $y U_{r_1 \cdots r_4} \to y U_r$ given by $(b_1,\cdots,b_4) \mapsto b_1 \vee b_2$, where the $b_i$ are seen as partitions. There is an analogous map $\alpha_2$ that has a similar relation to the second projection $p_2$. Now the two isomorphims on the the diagram above imply that $\alpha_1$ and $\alpha_2$ form a universal cone for a cartesian product. This immediately implies that the isomorphism $U \times U \cong \coprod y U_{r_1 \cdots r_4}$ is the one induced by the universal properties of the product and moreover, by flatness of $F$, this fact gets preserved when applying $Lan_F$. Now that we have shown the first part of the isomorphism, we wish to show that we have an isomorphism
 \[
 \begin{tikzcd}
 {\coprod y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d, "{\coprod [b = b_1]_*}"'] \arrow[r, "\phi"] & {y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1 \wedge a_2]_*}"] \\
@@ -740,16 +780,7 @@ for each morphism $f: \alpha \to \beta$ in $FinProb$. One can easily see that th
 \]
 suffice, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. Now, the axioms above are precisely reformulations of the interval axioms.
 
-Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed \footnote{One can use the commutative square in theorem 8.1.3 to see this, with a similar argument as in the remark below.}, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf. Recall that by \cite{sheaves_geometry_logic}, III.4 Lemma 2 , we can check that $U$ is a sheaf on the atomic topology by checking the following for any morphism $f: \alpha \to \beta$ and any $a \in U(\alpha)$: If for all diagrams
-
-\[
-\begin{tikzcd}
-\gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \alpha \arrow[r, "f"] & \beta
-\end{tikzcd}
-\]
-with $f g = f h$ we have that $U(g)(a) = U(h)(a)$, then there is a unique lift $b \in U(\beta)$ with the property that $U(f)(b) = a$.
-
-So lets fix an $f$ and an $a$ as above. Then we can choose $\gamma$ to be the pullback of $f$ along itself (as in \ref{pullback_measure}) and $g = p_1$, $h = p_2$ to be the two projections. This tells us that $p_1^{-1}(a) = p_2^{-1}(a)$, which means that
+Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed \footnote{One can use the commutative square in theorem 8.1.3 to see this, with a similar argument as in the remark below.}, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf by using \ref{sheaf_condition_weak}. This tells us that $p_1^{-1}(a) = p_2^{-1}(a)$, which means that
 
 \[
 \forall x,y \text{ such that } f(x) = f(y): x \in a \Leftrightarrow y \in a .
@@ -882,17 +913,47 @@ It follows that the atoms of the topos correspond to open subgroups of $G$. We s
 
 \section{$\mathfrak{Prob}$ as a set-theoretical universe}
 
-\begin{proposition} The internal language of $\mathfrak{Prob}$ is a model of ZFA (Zermelo-Frenkel with atoms).
+\begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA (Zermelo-Frenkel with atoms or urelements). It is a so called \emph{Fraenkel-Mostowski model}. This is formulated as a single-sorted first order language with equality $=$, membership relation $\in$ and a constant $A$ set of atoms and fulfilling the following axioms:
+\begin{center}\begin{tabular}{ |p{3.5 cm}|p{7.5 cm}| }
+\hline
+Decidability&  $\forall x. (x\in A\vee \neg(x\in A))$  \\ % This seems to be obsolete in classical interpretations
+\hline
+Set & $\forall y. (\exists x.x\in y\implies \neg (y\in A))$\\
+\hline
+Extensionality & $\forall x,y. \neg(x\in A)\wedge \neg(y\in A)\implies [ x=y\iff \forall z.(z\in x \iff z\in y) ] $\\
+\hline
+Pairing & $\forall x,y \exists z. (x\in z \wedge y\in z)$ \\
+\hline
+Separation & $\forall x \exists y. \neg (y\in A)  \wedge\exists z. (z\in y\iff z\in x \wedge \phi)$ for $x$ not free in $\phi$. \\
+\hline
+Union &$\forall x \exists y\forall z. (z\in y\iff \exists w\in x.z\in w)$ \\
+\hline
+Power-set &$\forall x\exists y \forall z. (z\in y\iff \forall w\in z.w\in x)$ \\
+\hline
+Infinity & $\exists x(\exists y.y\in x\wedge \forall y\in x.\exists w\in x.y\in w)$\\
+\hline
+$\in$-induction &$\forall x.(\forall y\in x. \phi(y)\implies \phi(x))\implies \forall x.\phi(x)$ \\
+\hline
+Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y\in x \exists w\in z. \phi)$\\
+\hline 
+\end{tabular}
+\end{center}
 \end{proposition}
-\begin{proof} Quote some shit.
+\begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
+\indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of $G$-equivariant maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality and the element symbols is interpreted using the cartesian closed structure of the topos.
 \end{proof}
-
+Again, it would be nice to have a more combinatorial, workable interpretation of these objects:
+\begin{theorem}
+In the combinatorial interpretation of our topos we have that $A$ is interpreted as $\bigsqcup_{\text{tuples }(r_1\cdots r_n)} yU_{r_1\cdots r_n}\sqcup \{\text{Exotic atoms}\}$, the exponential is given by ... and ...% This really hinges upon the atoms as computed in this site
+\end{theorem}
 \begin{proposition} The internal language of our topos proves the negation of countable choice.
 \end{proposition}
 \begin{proof} We construct a countable product of non-empty objects, which is empty. Take $X_n$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n X_n=0$.
 \end{proof}
 
 This proof can, in fact be adapted in many situations, to suggest that most countable products of objects are empty. So there is really not much hope to extend the transfer principle to statements containing countably infinitely many variables or more.
+\begin{remark} All this is not too exotic, so in practice one may just pretend to work formally in ZFA as one usually pretends to do so in ZFC. The only thing one has to be vary of is the failure of the axiom of choice. But as the proof of the last proposition suggests, the failure of the axiom of choice can be strictly controlled using fairly straight forward multi-product calculations.
+\end{remark}
 \section{Forgetting how to measure}
 In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
 \begin{theorem} The first-order theory of atomless, decidable boolean algebras is complete. Moreover, the atomic topos on the site  $FinSur$ given by non-empty finite sets and surjections is its classifying topos and that is Morita equivalent to the automorphism group of boolean algebras of the Cantor space $\mathfrak{C}$ fixing finite partitions.
@@ -1024,7 +1085,7 @@ We can use Theorem 7.3 (and remark 7.2) to see $(M,\alpha)$ is a special model o
 \[\text{Cont}_\tau(\text{Aut}(I,\lambda))\hookrightarrow [\text{Aut}(I,\lambda),\text{Set}]\]
  proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
 \end{proof}
-This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is quite a different from the situation of the theory of atomless boolean algebras. There, the automorphism need not preserve the complete boolean algebra structure. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
+This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is also possible in the situation of the theory of atomless boolean algebras. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
 \begin{lemma}[Trivial lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by complete boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
 \begin{center}
 \begin{tikzcd}
