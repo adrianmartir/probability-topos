@@ -90,7 +90,7 @@ The only thing to show is that the projections are measure-preserving, since tha
 \end{align*}
 \end{proof}
 
-\begin{lemma}\label{subcanonical} All morphisms in $FinProb$ are regular epimorphisms. In particular $J_{at}$ is a subcanonical topology on $FinProb$[reference?].
+\begin{lemma}\label{subcanonical} All morphisms in $FinProb$ are regular epimorphisms. In particular $J_{at}$ is a subcanonical topology on $FinProb$.
 \end{lemma}
 \begin{proof}
 We use our construction of the measure on the pullback in \ref{pullback_measure}. Given a morphism $f:(X,\mu)\rightarrow (Y, \nu)$, we have the following fork:
@@ -100,6 +100,8 @@ We use our construction of the measure on the pullback in \ref{pullback_measure}
 \end{tikzcd}
 \]
 Since this is clearly a coequalizer on the underlying sets, the only thing to show is that the uniquely induced map is measure-preserving. This can either be directly computed or more concisely calculated by using \ref{finprob_equiv}.
+
+The fact that this implies that $J_{at}$ on $FinProb$ is subcanonical is a standard fact, or it can alternatively also seen with \ref{sheaf_condition_weak}, which we will prove soon.
 \end{proof}
 %More generally;
 %\begin{theorem}
@@ -144,13 +146,13 @@ There is some very convenient notation for finite probability spaces emphasizing
 \]
 equipped with the measure $\mu(i) = r_i$.
 \item When denoting the presheaf $y U_{r_i}$, this will be interpreted as the functor sending a finite probability space $(X,\mu)$ to the set of its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$.
-\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$ and think of the functor $y U_r$ as the functor sending a finite probability space to the set of subsets of measure $r$.
+\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$ and the functor $y U_r$ will be interpreted as the functor sending a finite probability space to the set of subsets of measure $r$.
 \end{enumerate}
 \end{definition}
 
 As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$. Part (ii) of the definition is reasonable, since a morphism $(X,\mu) \to U_{r_i}$ of finite probability spaces consists precisely of a partition $(a_i)_i$ of $X$ into subsets of measure $r_i$.
 
-Before continuing, we will derive a better criterion for determining whether a presheaf in $Set^{FinProb^{op}}$ is a sheaf. First, notice that we have the following universal property \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
+Before continuing, we will derive a better criterion for determining whether a presheaf on $FinProb$ is a sheaf. First, notice that we have the following universal property \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
 
 \begin{lemma} \label{multipullback}
 For a diagram
@@ -843,7 +845,6 @@ For an element $a \in B$ of a boolean algebra, we will denote the ideal of eleme
 \item In the category of boolean algebras, if one has a \\ boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = 1$ and $a \wedge b = 0$). A decomposition $B \times C$ induces the partition $(1,0), (0,1)$ on $A$ and conversely the partition $a,b$ induces the decomposition \\ $A \cong I(a) \times I(b)$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
 \item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
 \item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BPAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
-\item Notice that if $(A,\mu)$ is a finite boolean measure algebra and $(B,\nu)$ a boolean measure algebra, then a map $(A,\mu) \to (B,\nu)$ consists precisely of a partition of $B$ into elements $b_a$ for each atom of $A$ such that $\mu(b_a) = \mu(a)$.
 \end{enumerate}
 \end{remark}
 
@@ -1151,7 +1152,7 @@ interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y
 
 In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
 
-The models we want to compute are given by the $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$[reference?], so first we will use 
+The models we want to compute are given by the $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$ so first we will use 
 \[
 Flat(FinProb, Set) \simeq Ind(FinProb^{op})
 \]
