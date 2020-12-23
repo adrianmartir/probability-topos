@@ -942,7 +942,76 @@ Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y
 \begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
 \indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of $G$-equivariant maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality but how to get a global membership relation is a bit less obvious. One uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory. On each of these objects one gets a membership relation using the cartesian closed structure of our topos. So at least presenting the topos using the skeleton given by elements of the objects in the hierarchy, one obtains a classical model of ZFA as described above.
 \end{proof}
-Again, it would be nice to have a more combinatorial, workable interpretation of these objects:
+Again, it would be nice to have a more combinatorial, workable interpretation of these objects. First we need to classify the atoms (as sheaves on the atomic site on $FinProb$) and thereby inadvertently the open subgroups of our topological groups.
+\begin{theorem}
+The atoms of the topos $\mathfrak{Prob}$ are given in the following list: ...
+\end{theorem}
+\begin{proof}
+We will utilize the combinatorial method outlined in [Lafforge, Olivia] Prop 6.7. For this, we will need to understand internal equivalence relations on the sheaves $yU_{r_1\cdots r_n}$ as the atoms will be reconstructed as quotients of these relations. We use \ref{multipullback} to yield the following description of an equivalence relation. \newline
+\indent It is a subobject 
+\[R\hookrightarrow yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}=\bigsqcup_{\substack{\sum_i t_{ij}=r_j \\ \sum_j t_{ij}=r_i}  }yU_{t_{ij}}\]
+As these representable functors are atoms, this is equivalent to giving a subset of the set $S_{r_1\cdots r_n}:=\{(t_{ij})_{0\leq i,j \leq n} | \sum_i t_{ij}=r_j,\, \sum_j t_{ij}=r_i \}$ of matrices whose rows and columns sum to the $r_i$'s. Now we use Definition 6.5 (iii) to check when this is an equivalence relation.
+\begin{enumerate}
+\item Reflexivity:  The element induced by the diagonal $\Delta: yU_{r_1\cdots r_n}\rightarrow $\linebreak $ yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}$ is in $R$ i.e. the following matrix is in $R$:
+\[ \begin{bmatrix}
+    r_{1}       & 0 & \dots & 0 \\
+    0      & r_2 &  \dots &0 \\
+    \vdots & \vdots &  \ddots& \vdots\\
+    0       & 0& \dots & r_n
+\end{bmatrix} \] 
+\item Symmetry: $R$ is invariant under swapping the factors of the product $ yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}$ i.e. if $T\in R$ then so is its conjugate $T^\top$.
+\item Transitivity: Given $(t^{(1)}_{ij})\in R$ and $(t^{(2)}_{jk})\in R$ and $(t_{ijk})$ corresponding to an atom of $yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n} \times yU_{r_1\cdots r_n}$ such that its images in the product of the first resp. last two components are $(t^{(1)}_{ij})$ resp. $(t^{(2)}_{jk})$ i.e.:
+\[\sum_k t_{ijk}=t^{(1)}_{ij} \quad \sum_i t_{ijk}=t^{(2)}_{jk} \]
+Then its image in the product of the first and third component lies in $R$ i.e.:
+\[(t^{(3)}_{ik})\in R \text{ where }t^{(3)}_{ik}:=\sum_j t_{ijk}    \]
+Geometrically, this means that for every $3$-dimensional matrix, if the sums projecting to two of the sides are in $R$, then so is the third.
+\end{enumerate}
+\end{proof}
+To illustrate that these do not all correspond to atoms in our site, we calculate the easiest possible such failure.
+\begin{example} Given $U_{\frac{1}{2},\frac{1}{2}}$, we generate the equivalence relation given the matrix $M:=\begin{bmatrix}
+0& \frac{1}{2}\\
+\frac{1}{2} &0
+\end{bmatrix} $. It turns out to just be $R=\{
+\begin{bmatrix}
+ \frac{1}{2}&0\\
+0& \frac{1}{2}
+\end{bmatrix} ,
+\begin{bmatrix}
+0& \frac{1}{2}\\
+\frac{1}{2} &0
+\end{bmatrix}
+ \}$.
+\end{example}
+\begin{proof}
+By reflexivity, all equivalence relations containing $M$, contain $R$. The relation is obviously symmetric. So it remains to show it is transitive. In the case of $2\times 2$ matrices, we can just solve linear equations, given $(t^{(1)}_{ij})$, $(t^{(2)}_{jk})$ to calculate $t_{ijk}$. Using this, it is easy to see that if $(t^{(1)}_{ij})=\begin{bmatrix}
+0& \frac{1}{2}\\
+\frac{1}{2} &0
+\end{bmatrix}$ and $(t^{(2)}_{jk})= \begin{bmatrix}
+ \frac{1}{2}&0\\
+0& \frac{1}{2}
+\end{bmatrix}$ then $(t_{ik}^{(3)})=\begin{bmatrix}
+0& \frac{1}{2}\\
+\frac{1}{2} &0
+\end{bmatrix}$. If $(t^{(1)}_{ij})=(t^{(2)}_{jk})= \begin{bmatrix}
+ \frac{1}{2}&0\\
+0& \frac{1}{2}
+\end{bmatrix}$ then $(t_{ik}^{(3)})= \begin{bmatrix}
+\frac{1}{2}&0\\
+0& \frac{1}{2}
+\end{bmatrix}$. And finally, if $(t^{(1)}_{ij})=(t^{(2)}_{jk})=\begin{bmatrix}
+0& \frac{1}{2}\\
+\frac{1}{2} &0
+\end{bmatrix}$  then $(t_{ik}^{(3)})= \begin{bmatrix}
+\frac{1}{2}&0\\
+0& \frac{1}{2}
+\end{bmatrix}$.
+\end{proof}
+
+
+
+
+
+
 \begin{theorem}
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as $\bigsqcup_{\text{tuples }(r_1\cdots r_n)} yU_{r_1\cdots r_n}\sqcup \{\text{Exotic atoms}\}$, the exponential is given by ... and ...% This really hinges upon the atoms as computed in this site
 \end{theorem}
@@ -1086,7 +1155,7 @@ We can use Theorem 7.3 (and remark 7.2) to see $(M,\alpha)$ is a special model o
  proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
 \end{proof}
 This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is also possible in the situation of the theory of atomless boolean algebras. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
-\begin{lemma}[Trivial lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by complete boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
+\begin{lemma}[Trivial lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
 \begin{center}
 \begin{tikzcd}
 \text{Sh}(\mathcal{B}) \arrow[d, "\bar{f}"'] \arrow[r, "\Gamma"]      & \text{Set} \arrow[d, "f"] \\
@@ -1119,10 +1188,10 @@ Hence by the uniqueness condition of the $\Omega$-axiom, $e^*\chi_S=\chi_{e^*S}$
 \end{proof}
 
 
-\begin{theorem}[Very strong completeness] Given a probability interval $(\mathcal{B},\mu)$ in Set with classifying morphism $f_{(\mathcal{B},\mu)}:\text{Set}\rightarrow \text{Set}[\mathbb{T}_{int}]$, we get the following 2-pullback diagram of topoi and geometric morphisms:
+\begin{theorem}[Very strong completeness] Given a probability algebra $(M,\alpha)$ of homogeneous-Maharam-type with classifying morphism as a model of the theory of probability intervals $f_{(M,\alpha)}:\text{Set}\rightarrow \text{Set}[\mathbb{T}_{int}]$, we get the following 2-pullback diagram of topoi and geometric morphisms:
 \begin{center}
 \begin{tikzcd}
-\text{Sh}(\mathcal{B}) \arrow[r, "\Gamma"] \arrow[d, "\bar{f}"']   & \text{Set} \arrow[d, "{f_{(\mathcal{B},\mu)}}"] \\
+\text{Sh}(M) \arrow[r, "\Gamma"] \arrow[d, "\bar{f}"']   & \text{Set} \arrow[d, "{f_{(M,\alpha)}}"] \\
 {\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)} \arrow[r, "\Gamma^{(G,\tau)}"'] & {\text{Set}[\mathbb{T}_{int}]}                 
 \end{tikzcd}
 \end{center}
@@ -1130,7 +1199,7 @@ Impressively, $\bar{f}$ is an open surjective geometric morphism. It preserves a
 \end{theorem}
 \begin{proof} 
 Follows immediately from the last two theorems and the bridge 
-\[\text{Cont}_\tau(\text{Aut}_{BPRobAlg}(\mathcal{B},\mu))\simeq \text{Set}[\mathbb{T}_{int}]\]
+\[\text{Cont}_\tau(\text{Aut}_{BPRobAlg}(M,\alpha))\simeq \text{Set}[\mathbb{T}_{int}]\]
  for homogeneous Maharam-type measure algebras under which, as shown in these lemmas, the universal model corresponds to $\mathcal{B}$.%is this the correct wording?
 \end{proof}
 The following might be rather boring as descent for torsors is just giving a "global trivialisation"!
@@ -1138,10 +1207,10 @@ The following might be rather boring as descent for torsors is just giving a "gl
 Fixing the notation as in the following diagram:
 \begin{center}
 \begin{tikzcd}
-{\text{Sh}(\mathcal{B})\times_\mathcal{F}\text{Sh}(\mathcal{B})\times_\mathcal{F}\text{Sh}(\mathcal{B})} \arrow[r, "\pi_{13}" description] \arrow[r, "\pi_{12}", shift left=3] \arrow[r, "\pi_{23}"', shift right=3]  & {\text{Sh}(\mathcal{B})\times_\mathcal{F}\text{Sh}(\mathcal{B})} \arrow[r, "\pi_2"', shift right=3] \arrow[r, "\pi_1", shift left=3] & {\text{Sh}(\mathcal{B})} \arrow[l, "\Delta" description]
+{\text{Sh}(M)\times_\mathcal{F}\text{Sh}(M)\times_\mathcal{F}\text{Sh}(M)} \arrow[r, "\pi_{13}" description] \arrow[r, "\pi_{12}", shift left=3] \arrow[r, "\pi_{23}"', shift right=3]  & {\text{Sh}(M)\times_\mathcal{F}\text{Sh}(M)} \arrow[r, "\pi_2"', shift right=3] \arrow[r, "\pi_1", shift left=3] & {\text{Sh}(M)} \arrow[l, "\Delta" description]
 \end{tikzcd}
 \end{center}
-The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sheaf on $\mathcal{B}$ and $\theta:\pi_1^*A\simeq \pi_2^*A$ is an isomorphism such that $\Delta^*\theta=\text{id}$ and the cocycle condition $\pi_{13}^*\theta=\pi_{12}^*\theta\circ \pi_{23}^*\theta$ is fulfilled. Morphisms of descent data are natural transformations $\psi:A\rightarrow B$ commuting with all the structure.
+The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sheaf on $M$ and $\theta:\pi_1^*A\simeq \pi_2^*A$ is an isomorphism such that $\Delta^*\theta=\text{id}$ and the cocycle condition $\pi_{13}^*\theta=\pi_{12}^*\theta\circ \pi_{23}^*\theta$ is fulfilled. Morphisms of descent data are natural transformations $\psi:A\rightarrow B$ commuting with all the structure.
 \end{corollary}
 \begin{proof} Open surjections are descent morphisms by C5.1.6.
 \end{proof}
@@ -1173,6 +1242,11 @@ via the the product of the restriction maps.
 \end{tikzcd}
 \end{center}
 interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y\})$, $g_{\leq}:(Z,\lambda, (f\circ g)^{-1}(\{ y\} ))\rightarrow (X,\mu, f^{-1}(\{ y \}))$ resp. $h_{\leq}:(Z,\lambda, (f\circ g)^{-1}(\{ y\} ))\rightarrow (X,\mu, f^{-1}(\{ y \}))$, we have $F(g_{\leq})(a)=F(h_{\leq})(a)$ then this implies $a=F(f_{\leq})(b)$ for some $b\in F(Y,\nu, \{y\})$.
+\item[(ii)'] Equivalent to (ii) is that for any map of finite probability spaces $f:U_{r_i}\rightarrow U_{s_j}$ and element $y\in U_{s_j}$ we have an equalizer diagram, with notation as in \ref{sheaf_condition}:
+\begin{center}
+\begin{tikzcd}F(U_{s_j},\{ y\}	)\arrow[r,"Ff_\leq"]& F(U_{r_i},f^{-1}\{y\})\arrow[r, shift left, "F(p_{1,\leq})"]\arrow[r, shift right, "F(p_{2,\leq})", swap] & \prod_{t_{ij}}F(U_{t_{ij}},(f\circ p_1)^{-1}\{y \})
+\end{tikzcd}
+\end{center}
 \end{enumerate}
 \end{lemma}
 \begin{proof} Any sheaf has this properties. (i) is just how the canonical topology is defined and (ii) follows from III4 Lemma 2 of [MacLaneMoerdijk]. This is not that hard to show.
@@ -1184,9 +1258,9 @@ finite probability spaces equipped with subsets.  Given $(X,\mu, x)$ we seek to 
 
 \section{Appendix: Models in Set}
 
-In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
+In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seeing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
 
-The models we want to compute are given by the $J_{at}$-flat functors $Flat_{J_{at}}(FinProb, Set)$[reference?], so first we will use 
+The models we want to compute are given by the $J_{at}$-flat functors \linebreak $Flat_{J_{at}}(FinProb, Set)$ [reference?], so first we will use 
 \[
 Flat(FinProb, Set) \simeq Ind(FinProb^{op})
 \]
@@ -1346,7 +1420,24 @@ But $2 := \{0, 1\}$ can be ignored. Furthermore, $I(g a_i)$ is finite, so by $\r
 
 We can summarize our findings as follows: $BPAlg(-, (B,\nu))$ is $J_{at}$-flat if and only if every $x \in B$ and numbers $p_1, \cdots, p_m \in \mathbb{R}_{>0}$ such that $p_1 + \cdots + p_m = \nu(x)$, there exists a partition of $I(x)$ into elements $x_i$ of measure $p_i$. Of course, the binary case suffices and we get our claim.
 \end{proof}
-\section{Appendix: Interpretations}
+
+
+\begin{thebibliography}{9}
+\bibitem{sheaves_geometry_logic} 
+Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First Introduction to Topos Theory.
+\bibitem{elephant}
+ELEPHANT
+\bibitem{caramello_book}
+Theories, Sites, Toposes - Caramello
+\bibitem{fremlin}
+FREMLIN
+\bibitem{riehl}
+Category theory in context
+\bibitem{caramello_lafforgue}
+Some aspects of topological Galois theory
+\end{thebibliography}
+
+\section{Appendix: Illustrations}
 
 
 \begin{landscape}
@@ -1364,19 +1455,5 @@ We can summarize our findings as follows: $BPAlg(-, (B,\nu))$ is $J_{at}$-flat i
 
 
 
-\begin{thebibliography}{9}
-\bibitem{sheaves_geometry_logic} 
-Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First Introduction to Topos Theory.
-\bibitem{elephant}
-ELEPHANT
-\bibitem{caramello_book}
-Theories, Sites, Toposes - Caramello
-\bibitem{fremlin}
-FREMLIN
-\bibitem{riehl}
-Category theory in context
-\bibitem{caramello_lafforgue}
-Some aspects of topological Galois theory
-\end{thebibliography}
 
 \end{document}
