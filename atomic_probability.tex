@@ -943,11 +943,8 @@ Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y
 \begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
 \indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of $G$-equivariant maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality but how to get a global membership relation is a bit less obvious. One uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory. On each of these objects one gets a membership relation using the cartesian closed structure of our topos. So at least presenting the topos using the skeleton given by elements of the objects in the hierarchy, one obtains a classical model of ZFA as described above.
 \end{proof}
-Again, it would be nice to have a more combinatorial, workable interpretation of these objects. First we need to classify the atoms (as sheaves on the atomic site on $FinProb$) and thereby inadvertently the open subgroups of our topological groups.
-\begin{theorem}
-The atoms of the topos $\mathfrak{Prob}$ are given in the following list: ...
-\end{theorem}
-\begin{proof}
+Again, it would be nice to have a more combinatorial, workable interpretation of these objects. First we need to classify the atoms (as sheaves on the atomic site on $FinProb$) and thereby inadvertently the open subgroups of our topological groups.\newline
+
 We will utilize the combinatorial method outlined in [Lafforge, Olivia] Prop 6.7. For this, we will need to understand internal equivalence relations on the sheaves $yU_{r_1\cdots r_n}$ as the atoms will be reconstructed as quotients of these relations. We use \ref{multipullback} to yield the following description of an equivalence relation. \newline
 \indent It is a subobject 
 \[R\hookrightarrow yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}=\bigsqcup_{\substack{\sum_i t_{ij}=r_j \\ \sum_j t_{ij}=r_i}  }yU_{t_{ij}}\]
@@ -965,60 +962,80 @@ As these representable functors are atoms, this is equivalent to giving a subset
 \[\sum_k t_{ijk}=t^{(1)}_{ij} \quad \sum_i t_{ijk}=t^{(2)}_{jk} \]
 Then its image in the product of the first and third component lies in $R$ i.e.:
 \[(t^{(3)}_{ik})\in R \text{ where }t^{(3)}_{ik}:=\sum_j t_{ijk}    \]
-Geometrically, this means that for every $3$-dimensional matrix, if the sums projecting to two of the sides are in $R$, then so is the third.
+Geometrically:
+%Geometrically, this means that for every $3$-dimensional matrix with values in $\mathbb{R}_{\geq 0}$, if the sums of the entries in two of the directions are  matrices in $R$, then so is the third:
 \end{enumerate}
-\end{proof}
-To illustrate that these do not all correspond to atoms in our site, we calculate the easiest possible such failure.
-\begin{example} Given $U_{\frac{1}{2},\frac{1}{2}}$, we generate the equivalence relation given the matrix $M:=\begin{bmatrix}
-0& \frac{1}{2}\\
-\frac{1}{2} &0
-\end{bmatrix} $. It turns out to just be $R=\{
-\begin{bmatrix}
- \frac{1}{2}&0\\
-0& \frac{1}{2}
-\end{bmatrix} ,
-\begin{bmatrix}
-0& \frac{1}{2}\\
-\frac{1}{2} &0
-\end{bmatrix}
- \}$.
+\begin{center}
+\begin{tikzcd}[row sep=small, column sep= small]
+             & t^{(2)}_{n1}                                  &              & t^{(2)}_{nn}                                                     &              &                                               &              \\
+t^{(3)}_{n1} & t_{n11} \arrow[l, "\sum"'] \arrow[u, "\sum"'] & \cdots       & t_{n1n} \arrow[u, "\sum"']                                       &              &                                               &              \\
+             & \vdots                                        & \ddots       & t_{11}^{(2)}                                                     & \ddots       & t^{(2)}_{1n}                                  &              \\
+t^{(3)}_{nn} & t_{nn1} \arrow[l, "\sum"']                    & t^{(3)}_{11} & t_{111} \arrow[rd, "\sum"] \arrow[l, "\sum"'] \arrow[u, "\sum"'] & \cdots       & t_{11n} \arrow[rd, "\sum"] \arrow[u, "\sum"'] &              \\
+             &                                               & \ddots       & \vdots                                                           & t^{(1)}_{11} & \vdots                                        & t^{(1)}_{1n} \\
+             &                                               & t^{(3)}_{1n} & t_{1n1} \arrow[rd, "\sum"] \arrow[l, "\sum"']                    & \cdots       & t_{1nn} \arrow[rd, "\sum"]                    &              \\
+             &                                               &              &                                                                  & t^{(1)}_{n1} &                                               & t^{(1)}_{nn}
+\end{tikzcd}
+\end{center}
+\indent We call such sets equivalence relations. One can generate an equivalence relation by intersecting all those, which contain a given set of the matrices. This can be seen as some kind of \emph{game}, where on starts with some matrices and then constructs all other possible ones with these $3$ "moves".
+
+\begin{example}[Block diagonal forms]
+Given a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets, consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that the only nonzero entries are at the indices $i\in A_l, j \in A_l$ for some $l$. This is an equivalence relation.
 \end{example}
+
+We can generalize this example.
+
+\begin{example}[Block diagonal forms with permutations]
+Again, fix a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets. Additionally, fix a subgroup $H$ of the following group of permutations on $m$ elements:
+\[
+\big \{ \sigma \in S_m | \sum_{i \in A_m} r_i = \sum_{i \in A_{\sigma(m)}} r_i \big \}\footnote{This group is isomorphic to the group of measure preserving automorphisms of the finite probability space with elements of measure $r_1, \cdots, r_m$.}
+\]
+Consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that for some $\sigma \in H$ the only nonzero entries are at the indices $i\in A_{\sigma(l)}, j \in A_l$ for some $l$. This is an equivalence relation.
+
+One can analyze in more detail how the permutations dictate where the non-zero entries can be and how this interacts with the equivalence relation axioms. Reflexivity corresponds to the identity permutation. Symmetry corresponds to transposition of the matrix and thus to taking the inverse permutation. Given matrices $(t^{(1)}_{jk})\in R$ and $(t^{(2)}_{ik})\in R$, where for the first matrix, the permutation $\sigma$ dictates where the nonzero entries can be and for the second matrix, $\tau$ dictates where the non-zero entries can be, the possible matrices $(t^{(3)}_{ij})\in R$ that can be yielded will have non-zero entries dictated by the permutation $\tau^{-1} \sigma$.
+
+This motivates the fact that we actually want $H$ to be a subgroup.
+\end{example}
+
+Now before we prove that these already describe all the equivalence relations, we need some theorems from actual combinatorics/ optimal transport. Similar constructions have already been investigated under the name "3-way axial transportation matrix".
+
+\begin{definition} 
+Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the polytope $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
+\end{definition}
+\begin{definition} Given a non-negative real matrix $M\in \mathbb{R}^{n^2}_{\geq 0}$, define the \emph{graph }$\Gamma(M)$\emph{ of }$M$ as the bipartite graph on $\{1, \cdots, n\}\sqcup \{1, \cdots, n\}$ with an edge between $i$ and $j$ iff $x_{ij}\neq 0$.
+\end{definition}
+\begin{theorem}
+The extreme points $E(a,b)$ of the polytope $\mathcal{N}(a,b)$ can be, equivalently, described as follows:
+\begin{enumerate}
+\item Matrices $M\in \mathcal{N}(a,b)$ with $\Gamma(M)$ a forest. 
+\item Matrices $M\in \mathcal{N}(a,b)$ such that there exists no different $N\in \mathcal{N}(a,b)$ such that  $\Gamma(N)$ is a subgraph of $\Gamma(M)$.
+\end{enumerate}
+The forest which appear (and then uniquely appear) as graphs of matrices in $\mathcal{N}(a,b)$ can be described as forests $\gamma$ such that the following conditions are fulfilled:
+\begin{enumerate}
+%\item If $\gamma_0\subseteq \gamma$ is a connected component with vertices $A\sqcup B$ then $\sum_{i\in A} a_i=\sum_{j\in B} b_j$.
+%\item For any vertex $i$ in the first component of $\{1, \cdots, n\}\sqcup \{1, \cdots, n\}$, we have $a_i\leq \sum_{j\text{ is a neighbor of }i} b_j$
+\item Given $A\sqcup B\subset \{1,\cdots, n\}\sqcup \{1,\cdots, n\}$ such that there are no edges in $\gamma$ from $i\in A$ to $j\in \{1,\cdots, n\}\setminus B$, then 
+\[ \sum_{i\in A} a_i\leq \sum_{j\in B} b_j\]
+\item Equality holds iff there are also no edges from $i\in \{1,\cdots, n\}\setminus A$ to $j\in B$.
+\end{enumerate}
+\end{theorem}
 \begin{proof}
-By reflexivity, all equivalence relations containing $M$, contain $R$. The relation is obviously symmetric. So it remains to show it is transitive. In the case of $2\times 2$ matrices, we can just solve linear equations, given $(t^{(1)}_{ij})$, $(t^{(2)}_{jk})$ to calculate $t_{ijk}$. Using this, it is easy to see that if $(t^{(1)}_{ij})=\begin{bmatrix}
-0& \frac{1}{2}\\
-\frac{1}{2} &0
-\end{bmatrix}$ and $(t^{(2)}_{jk})= \begin{bmatrix}
- \frac{1}{2}&0\\
-0& \frac{1}{2}
-\end{bmatrix}$ then $(t_{ik}^{(3)})=\begin{bmatrix}
-0& \frac{1}{2}\\
-\frac{1}{2} &0
-\end{bmatrix}$. If $(t^{(1)}_{ij})=(t^{(2)}_{jk})= \begin{bmatrix}
- \frac{1}{2}&0\\
-0& \frac{1}{2}
-\end{bmatrix}$ then $(t_{ik}^{(3)})= \begin{bmatrix}
-\frac{1}{2}&0\\
-0& \frac{1}{2}
-\end{bmatrix}$. And finally, if $(t^{(1)}_{ij})=(t^{(2)}_{jk})=\begin{bmatrix}
-0& \frac{1}{2}\\
-\frac{1}{2} &0
-\end{bmatrix}$  then $(t_{ik}^{(3)})= \begin{bmatrix}
-\frac{1}{2}&0\\
-0& \frac{1}{2}
-\end{bmatrix}$.
+The first statement is just 8.1.2 of [matrix trash]. This follows from 8.1.7 \emph{ibid.} by noting that for forests, if there exists a matrix in $\mathcal{N}(a,b)$ with it as its graph, it is unique.
 \end{proof}
-
-
-
-
-
-
+\begin{lemma} Given matrices $M, N\in S=\mathcal{N}(r,r)$ we can characterise the polytope $\mathcal{N}(M,N)\subset S$ of matrices $L$ such that there exists a 3d matrix $t_{ijk}$ such that $t^{(1)}_{ij}=M,\, t^{(2)}_{jk}=N, \, t^{(3)}_{ik}=L$. Its set of extreme points is the element-wise sum $\sum_{j} E(M_j, N_j)$ where $M_j$ resp. $N_j$ are the $j$-th column resp. row vectors of the matrices. In particular, the extreme points of $\mathcal{N}(M,N)$ which are also extreme points of $\mathcal{N}(r,r)$ can be described as follows:\newline
+\indent Matrices $K\in \mathcal{N}(r,r)$ with forests $\Gamma(K)$ such that there exist matrices $K_j\in E(M_j, N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$.
+\end{lemma}
+\begin{proof}
+The matrices in $\mathcal{N}(M,N)$ are computed by adding up matrices in $\mathcal{N}(M_j,N_j)$ level-by-level in the 3d-matrix, so the first statement follows.\newline
+\indent Now let $L\in E(r,r)$ be a matrix in $\mathcal{N}(M,N)$ and choose some 3d matrix $t_{ijk}$ such that $t^{(1)}_{ij}=M,\, t^{(2)}_{jk}=N, \, t^{(3)}_{ik}=L$. For fixed $j$, the matrices $T_{ik}^j=t_{ijk}$ have to have graphs $\Gamma (T_{ik}^j)\subseteq \Gamma(L)$ as all matrices have only non-negative entries so $\Gamma(L)=\bigcup_j \Gamma (T_{ik}^j)$. Hence if $\Gamma(L)$ is a forest, so are all the $\Gamma (T_{ik}^j)$.\newline 
+\indent Conversely, given a graph $\Gamma(K)$ for some matrix $K\in \mathcal{N}(r,r)$ and matrices $K_j\in E(M_j,N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$ then $\Gamma(\sum_j K_j)\subseteq \Gamma(K)$. But the only matrix inside $\mathcal{N}(r,r)$ with a graph contained in $\Gamma(K)$, is $K$ whence $\sum_j K_j=K\in \mathcal{N}(M,N)$.
+\end{proof}
+Note that the latter condition is purely graph theoretical. 
 \begin{theorem}
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as $\bigsqcup_{\text{tuples }(r_1\cdots r_n)} yU_{r_1\cdots r_n}\sqcup \{\text{Exotic atoms}\}$, the exponential is given by ... and ...% This really hinges upon the atoms as computed in this site
 \end{theorem}
 \begin{proposition} The internal language of our topos proves the negation of countable choice.
 \end{proposition}
-\begin{proof} We construct a countable product of non-empty objects, which is empty. Take $X_n$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n X_n=0$.
+\begin{proof} We construct a countable product of non-empty objects, which is empty. Take $yU_{1/n}$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n yU_{1/n}=0$.
 \end{proof}
 
 This proof can, in fact be adapted in many situations, to suggest that most countable products of objects are empty. So there is really not much hope to extend the transfer principle to statements containing countably infinitely many variables or more.
