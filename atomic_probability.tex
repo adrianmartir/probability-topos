@@ -996,7 +996,7 @@ One can analyze in more detail how the permutations dictate where the non-zero e
 This motivates the fact that we actually want $H$ to be a subgroup.
 \end{example}
 
-Now before we prove that these already describe all the equivalence relations, we need some theorems from actual combinatorics/ optimal transport. Similar constructions have already been investigated under the name "3-way axial transportation matrix".
+Now before we prove that these already describe all the equivalence relations, we need some theorems from actual combinatorics/ optimal transport. Similar constructions have already been investigated under the name "3-way axial transportation polytope".
 
 \begin{definition} 
 Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the polytope $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
@@ -1019,7 +1019,7 @@ The forest which appear (and then uniquely appear) as graphs of matrices in $\ma
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-The first statement is just 8.1.2 of [matrix trash]. This follows from 8.1.7 \emph{ibid.} by noting that for forests, if there exists a matrix in $\mathcal{N}(a,b)$ with it as its graph, it is unique.
+The first statement is just 8.1.2 of [matrix trash]. This follows from 8.1.7 \emph{ibid.} by noting that for forests, if there exists a matrix in $\mathcal{N}(a,b)$ with it as its graph, it is unique. %8.4.3, 8.4.6 might also be interesting
 \end{proof}
 \begin{lemma} Given matrices $M, N\in S=\mathcal{N}(r,r)$ we can characterise the polytope $\mathcal{N}(M,N)\subset S$ of matrices $L$ such that there exists a 3d matrix $t_{ijk}$ such that $t^{(1)}_{ij}=M,\, t^{(2)}_{jk}=N, \, t^{(3)}_{ik}=L$. Its set of extreme points is the element-wise sum $\sum_{j} E(M_j, N_j)$ where $M_j$ resp. $N_j$ are the $j$-th column resp. row vectors of the matrices. In particular, the extreme points of $\mathcal{N}(M,N)$ which are also extreme points of $\mathcal{N}(r,r)$ can be described as follows:\newline
 \indent Matrices $K\in \mathcal{N}(r,r)$ with forests $\Gamma(K)$ such that there exist matrices $K_j\in E(M_j, N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$.
