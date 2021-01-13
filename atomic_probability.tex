@@ -1044,10 +1044,10 @@ Given an equivalence relation $R$ on $yU_{r_1\cdots r_n},$ we will conclude the 
     \vdots & \vdots & \vdots &  \ddots& \vdots\\
     0       & 0& 0 & \dots & r_n
 \end{bmatrix} \] 
-such that $a_{12}\neq 0$. One can achieve this by setting for $j\neq l$: $t_{ijk}=\begin{cases}  m_{ij} &\text{if }i=k \\ 0 & \text{else}  \end{cases}$ and $(t_{ilk})_{0\leq i,k\leq n}$ to be the following matrix:
+such that $a_{12}\neq 0$. One can achieve this by setting for $j\neq l$: $t_{ijk}=\begin{cases}  m_{ij} &\text{if }i=k \\ 0 & \text{else}  \end{cases}$ and $(t_{ilk})_{0\leq i,k\leq n}$ to be the following matrix (possibly with small $\epsilon\geq 0$ such that non of the entries in the 2x2 square are zero):
 \[ \begin{bmatrix}
-    m_{1l}- \min \{m_{1l},m_{2l}\}   & \min \{m_{1l},m_{2l}\} & 0&\dots & 0 \\
-   \min \{ m_{1l},m_{2l}\}     &m_{2l}- \min\{ m_{1l},m_{2l}\} &  0&\dots &0 \\
+    m_{1l}- \min \{m_{1l},m_{2l} \} +\epsilon  & \min \{m_{1l},m_{2l}\}-\epsilon & 0&\dots & 0 \\
+   \min \{ m_{1l},m_{2l}\}-\epsilon     &m_{2l}- \min\{ m_{1l},m_{2l}\}+\epsilon &  0&\dots &0 \\
     0 & 0& m_{3l} &\dots & 0\\
     \vdots & \vdots & \vdots &  \ddots& \vdots\\
     0       & 0& 0 & \dots & m_{nl}
@@ -1055,7 +1055,7 @@ such that $a_{12}\neq 0$. One can achieve this by setting for $j\neq l$: $t_{ijk
 $L$ is then defined to be the sum of these matrices.
 \newline
 \newline
-\emph{Step 2.} Now we can generate the smallest equivalence relation containing $L$. We set $t_{ij}^{(1)}=t^{(2)}_{jk}=L$ and construct all 3-dimensional matrices $t_{ijk}$ with these faces. Clearly, for tuples $ijk$ such that at least one $i>2$, $j>2$ or $k>2$, we must have $t_{ijk}=\begin{cases} r_i &\text{if }i=j=k \\ 0 &\text{else}  \end{cases}$. Hence the problem reduces (up to scaling) to the statement of the previous lemma \ref{2x2x2}. The smallest equivalence relation containing $L$ is thus the set of all matrices in the same block-diagonal form as $L$. This can easily be seen to be the equivalence relation $R_{1,2}$ associated the quotient map  $yU_{r_1\cdots r_n}\rightarrow yU_{(r_1+r_2),r_3\cdots r_n}$ sending $1, 2\mapsto 1$ and $j\mapsto j-1$ for $j> 2$.
+\emph{Step 2.} Now we can generate the smallest equivalence relation containing $L$. We set $t_{ij}^{(1)}=t^{(2)}_{jk}=L$ and construct all 3-dimensional matrices $t_{ijk}$ with these faces. Clearly, for tuples $ijk$ such that at least one $i>2$, $j>2$ or $k>2$, we must have $t_{ijk}=\begin{cases} r_i &\text{if }i=j=k \\ 0 &\text{else}  \end{cases}$. Hence the problem reduces (up to scaling) to the statement of the previous lemma \ref{2x2x2}. It is applicable as non of the entries is zero and hence the $a$, in the notation of the lemma, is neither $0$ nor $\frac{1}{2}$. The smallest equivalence relation containing $L$ is thus the set of all matrices in the same block-diagonal form as $L$. This can easily be seen to be the equivalence relation $R_{1,2}$ associated the quotient map  $yU_{r_1\cdots r_n}\rightarrow yU_{(r_1+r_2),r_3\cdots r_n}$ sending $1, 2\mapsto 1$ and $j\mapsto j-1$ for $j> 2$.
 \newline
 \newline
 \emph{Step 3.} Replace $R$ on $yU_{r_1\cdots r_n}$ by  the equivalence relation $\tilde{R}$ on $yU_{(r_1+r_2),r_3\cdots r_n}$ defined as what is left over after quotienting out $R_{1,2}$. Repeat these steps until the condition of step 1 is no longer fulfilled. This will terminate as $n$ is finite.\newline
