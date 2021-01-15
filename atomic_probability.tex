@@ -992,10 +992,12 @@ Given a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoin
 We can generalize this example.
 
 \begin{example}[Block diagonal forms with permutations]
-Again, fix a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets. Additionally, fix a subgroup $H$ of the following group of permutations on $m$ elements:
+Again, fix a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets. Additionally, fix a subgroup $H$ of $Aut(U_{s_i})$, for $s_1, \cdots, s_m$ with
 \[
-\big \{ \sigma \in S_m | \sum_{i \in A_m} r_i = \sum_{i \in A_{\sigma(m)}} r_i \big \}\footnote{This group is isomorphic to the group of measure preserving automorphisms of the finite probability space with elements of measure $r_1, \cdots, r_m$.}
+    s_i = \sum_{j \in A_m} r_j ,
 \]
+and where $Aut$ denotes the automorphisms in $FinProb$.
+
 Consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that for some $\sigma \in H$ the only nonzero entries are at the indices $i\in A_{\sigma(l)}, j \in A_l$ for some $l$. This is an equivalence relation.
 
 One can analyze in more detail how the permutations dictate where the non-zero entries can be and how this interacts with the equivalence relation axioms. Reflexivity corresponds to the identity permutation. Symmetry corresponds to transposition of the matrix and thus to taking the inverse permutation. Given matrices $(t^{(1)}_{jk})\in R$ and $(t^{(2)}_{ik})\in R$, where for the first matrix, the permutation $\sigma$ dictates where the nonzero entries can be and for the second matrix, $\tau$ dictates where the non-zero entries can be, the possible matrices $(t^{(3)}_{ij})\in R$ that can be yielded will have non-zero entries dictated by the permutation $\tau^{-1} \sigma$.
