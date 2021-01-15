@@ -1044,10 +1044,10 @@ Given an equivalence relation $R$ on $yU_{r_1\cdots r_n},$ we will conclude the 
     \vdots & \vdots & \vdots &  \ddots& \vdots\\
     0       & 0& 0 & \dots & r_n
 \end{bmatrix} \] 
-such that $a_{12}\neq 0$. One can achieve this by setting for $j\neq l$: $t_{ijk}=\begin{cases}  m_{ij} &\text{if }i=k \\ 0 & \text{else}  \end{cases}$ and $(t_{ilk})_{0\leq i,k\leq n}$ to be the following matrix (possibly with small $\epsilon\geq 0$ such that non of the entries in the 2x2 square are zero):
+such that $a_{ij}\neq 0$. One can achieve this by setting for $j\neq l$: $t_{ijk}=\begin{cases}  m_{ij} &\text{if }i=k \\ 0 & \text{else}  \end{cases}$ and $(t_{ilk})_{0\leq i,k\leq n}$ to be the following matrix for some $\min\{m_{1l},m_{2l}\}>\epsilon> 0$:
 \[ \begin{bmatrix}
-    m_{1l}- \min \{m_{1l},m_{2l} \} +\epsilon  & \min \{m_{1l},m_{2l}\}-\epsilon & 0&\dots & 0 \\
-   \min \{ m_{1l},m_{2l}\}-\epsilon     &m_{2l}- \min\{ m_{1l},m_{2l}\}+\epsilon &  0&\dots &0 \\
+    m_{1l}-\epsilon  & \epsilon & 0&\dots & 0 \\
+  \epsilon     &m_{2l}-\epsilon &  0&\dots &0 \\
     0 & 0& m_{3l} &\dots & 0\\
     \vdots & \vdots & \vdots &  \ddots& \vdots\\
     0       & 0& 0 & \dots & m_{nl}
@@ -1065,8 +1065,35 @@ $L$ is then defined to be the sum of these matrices.
 \newline
 This concludes the proof as all atoms are quotients of equivalence relations and the relations, that we found in this proof are genuinely non-isomorphic. [insert pretty argument]. The representable functors appear as $(X,\mu, \{id\})$.
 \end{proof}
+\begin{lemma} Given a finite probability space $(X,\mu)$ and a subgroup $U$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\text{Sh}(FinProb,J_{at})$ to be:
+\[ \mathcal{F} :(N,\nu)\mapsto\text{FinProb}((M,\mu),(N,\nu))/\sim  \]
+where $f\sim g$ if there exists $\sigma\in U$ with $f\circ \sigma=g$. These are partitions up to permutation by elements in $U$.
+\end{lemma}
+\begin{proof}
+One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf: IS THIS TRUE? We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
+\[
+\begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (Z,\lambda) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (Z \times_f Z,\bar{\lambda})
+\end{tikzcd} ,
+\]
+%This should work. It should still force it to be constant on fibers. And the same up to permutation making it lift.
 
-
+\end{proof}
+\begin{remark} The automorphism groups aren't all that complicated. Note that $\text{Aut}(X,\mu)\simeq \prod_{r\in (0,1)} S_{\{x\in X| \mu(x)=r \}}$.
+\end{remark}
+\begin{definition} Define the \emph{category of atoms }$FinProb_{at}$\emph{ of }$FinProb$ as the full subcategory of $\mathfrak{Prob}$ of atoms.
+\end{definition}
+This yields a new site presentation, which is set theoretic in spirit.
+\begin{proposition} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$.
+\end{proposition}
+\begin{proof}
+\cite{caramello_lafforgue}
+\end{proof}
+We are also equipped to characterise this category in combinatorial term.
+\begin{theorem} The category $FinProb_{at}$ is equivalent to the following category. Its objects are given by tuples $(M,\mu, U)$ where $(M,\mu)$ is a finite probability space and $U$ is a subgroup of its automorphism group. The morphisms $(M,\mu, U)\rightarrow (N,\nu, V)$ are given by measure-preserving functions such that ....
+\end{theorem}
+\begin{proof}
+We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma, a morphism $y(M,\mu)\rightarrow y(N,\nu)/R$ corresponds to an element of $(y(N,\nu)/R)(M,\mu)$. This has been computed to be .... A morphism $y(M,\mu)/R \rightarrow y(N,\nu)/R'$ is simply a morphism such that $y(M,\mu)\rightarrow y(N,\nu)/R'$ factors over $R$...
+\end{proof}
 %\begin{definition} 
 %Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the \emph{transportation polytope} $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}_{\geq 0}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
 %\end{definition}
