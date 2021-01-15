@@ -1055,28 +1055,27 @@ such that $a_{ij}\neq 0$. One can achieve this by setting for $j\neq l$: $t_{ijk
 $L$ is then defined to be the sum of these matrices.
 \newline
 \newline
-\emph{Step 2.} Now we can generate the smallest equivalence relation containing $L$. We set $t_{ij}^{(1)}=t^{(2)}_{jk}=L$ and construct all 3-dimensional matrices $t_{ijk}$ with these faces. Clearly, for tuples $ijk$ such that at least one $i>2$, $j>2$ or $k>2$, we must have $t_{ijk}=\begin{cases} r_i &\text{if }i=j=k \\ 0 &\text{else}  \end{cases}$. Hence the problem reduces (up to scaling) to the statement of the previous lemma \ref{2x2x2}. It is applicable as non of the entries is zero and hence the $a$, in the notation of the lemma, is neither $0$ nor $\frac{1}{2}$. The smallest equivalence relation containing $L$ is thus the set of all matrices in the same block-diagonal form as $L$. This can easily be seen to be the equivalence relation $R_{1,2}$ associated the quotient map  $yU_{r_1\cdots r_n}\rightarrow yU_{(r_1+r_2),r_3\cdots r_n}$ sending $1, 2\mapsto 1$ and $j\mapsto j-1$ for $j> 2$.
+\emph{Step 2.} Now we can generate the smallest equivalence relation containing $L$. We set $t_{ij}^{(1)}=t^{(2)}_{jk}=L$ and construct all 3-dimensional matrices $t_{ijk}$ with these faces. Clearly, for tuples $ijk$ such that at least one $i>2$, $j>2$ or $k>2$, we must have $t_{ijk}=\begin{cases} r_i &\text{if }i=j=k \\ 0 &\text{else}  \end{cases}$. Hence the problem reduces (up to scaling) to the statement of the previous lemma \ref{2x2x2}. It is applicable as non of the entries are zero and hence the $a$, in the notation of the lemma, is neither $0$ nor $\frac{1}{2}$. The smallest equivalence relation containing $L$ is thus the set of all matrices in the same block-diagonal form as $L$. This can easily be seen to be the equivalence relation $R_{1,2}$ associated the quotient map  $yU_{r_1\cdots r_n}\rightarrow yU_{(r_1+r_2),r_3\cdots r_n}$ sending $1, 2\mapsto 1$ and $j\mapsto j-1$ for $j> 2$.
 \newline
 \newline
 \emph{Step 3.} Replace $R$ on $yU_{r_1\cdots r_n}$ by  the equivalence relation $\tilde{R}$ on $yU_{(r_1+r_2),r_3\cdots r_n}$ defined as what is left over after quotienting out $R_{1,2}$. Repeat these steps until the condition of step 1 is no longer fulfilled. This will terminate as $n$ is finite.\newline
 \newline
-\emph{Step 4.} The $(0,1)$-matrices of all matrices in $R$ are permutation matrices. The conditions on matrices in $S$ impose that these matrices are automorphisms of $U_{r_1\cdots r_n}$. It remains to prove that they form a subgroup of $S_n$. One can check that $\sigma^\top=\sigma^{-1}$ and the only matrix that can appear as $t^{(3)}_{ik}$ if we set $t^{(1)}_{ij}=\sigma$ and $t^{(2)}_{jk}=\tau$, is $\sigma \tau^{-1}$. It also contains the unit of $S_n$ by identity. Hence it is a subgroup.
+\emph{Step 4.} The $(0,1)$-matrices of all matrices in $R$ are permutation matrices. The conditions on matrices in $S$ impose that these matrices are automorphisms of $U_{r_1\cdots r_n}$. It remains to prove that they form a subgroup of $S_n$. One can check that $\sigma^\top=\sigma^{-1}$ and the only matrix that can appear as $t^{(3)}_{ik}$ if we set $t^{(1)}_{ij}=\sigma$ and $t^{(2)}_{jk}=\tau$, is $\sigma \tau^{-1}$. It also contains the unit of $S_n$ by reflexivity. Hence it is a subgroup.
 \newline
 \newline
 This concludes the proof as all atoms are quotients of equivalence relations and the relations, that we found in this proof are genuinely non-isomorphic. [insert pretty argument]. The representable functors appear as $(X,\mu, \{id\})$.
 \end{proof}
 \begin{lemma} Given a finite probability space $(X,\mu)$ and a subgroup $U$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\text{Sh}(FinProb,J_{at})$ to be:
-\[ \mathcal{F} :(N,\nu)\mapsto\text{FinProb}((M,\mu),(N,\nu))/\sim  \]
-where $f\sim g$ if there exists $\sigma\in U$ with $f\circ \sigma=g$. These are partitions up to permutation by elements in $U$.
+\[ \mathcal{F} :(N,\nu)\mapsto\text{FinProb}((N,\nu), (M,\mu))/\sim  \]
+where $f\sim g$ if there exists $\sigma\in U$ with $ \sigma\circ f=g$. These are partitions up to permutation by elements in $U$.
 \end{lemma}
 \begin{proof}
-One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf: IS THIS TRUE? We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
+One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
 \[
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (Z,\lambda) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (Z \times_f Z,\bar{\lambda})
 \end{tikzcd} ,
 \]
-%This should work. It should still force it to be constant on fibers. And the same up to permutation making it lift.
-
+For any measure-preserving map $g: (Z,\lambda) \rightarrow (X,\mu)$ such that $g\circ \pi_1=\sigma \circ g\circ \pi_2$ for some $\sigma\in U$, we see that $f^{-1}\{y\} \cap g^{-1}\{x\} =f^{-1}\{y\} \cap g^{-1}\{\sigma^{-1}x\} \in \{f^{-1}\{y\} ,\emptyset \}$ for any $y\in Y$ and $x\in X$. Hence we can define $\tilde{g}: (Y,\nu)\rightarrow (X,\mu)$ via $y\mapsto x$ if $f^{-1}\{y\}\subseteq g^{-1}\{x\} $. This yields a map $ \mathcal{F} (Y,\nu)\rightarrow Eq(\pi_1, \pi_2)$. WHY IS THIS WELL DEFINED. WE NEED TO THINK ABOUT PERMUTATIONS ON Z
 \end{proof}
 \begin{remark} The automorphism groups aren't all that complicated. Note that $\text{Aut}(X,\mu)\simeq \prod_{r\in (0,1)} S_{\{x\in X| \mu(x)=r \}}$.
 \end{remark}
@@ -1088,7 +1087,7 @@ This yields a new site presentation, which is set theoretic in spirit.
 \begin{proof}
 \cite{caramello_lafforgue}
 \end{proof}
-We are also equipped to characterise this category in combinatorial term.
+We are also equipped to characterise this category in combinatorial terms.
 \begin{theorem} The category $FinProb_{at}$ is equivalent to the following category. Its objects are given by tuples $(M,\mu, U)$ where $(M,\mu)$ is a finite probability space and $U$ is a subgroup of its automorphism group. The morphisms $(M,\mu, U)\rightarrow (N,\nu, V)$ are given by measure-preserving functions such that ....
 \end{theorem}
 \begin{proof}
