@@ -48,6 +48,14 @@ This explicit approach clears up some of the confusion that arises when one thin
 
 For a small category $\mathcal{C}$, we will denote the Yoneda embedding by $y: \mathcal{C} \to Set^{\mathcal{C}^{op}}$. For a morphism $f$ in $\mathcal{C}$, we will denote $y(f)$(also known as postcomposition) by $f_*$.
 
+We will call a diagram
+\[
+\begin{tikzcd}
+\alpha \arrow[r, "f"] & \beta \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \gamma
+\end{tikzcd}
+\]
+in a category $\mathcal{C}$ a fork if $fg = hg$.
+
 \section{A combinatorial construction of $\mathfrak{Prob}$}
 
 In this section we will introduce the topos $\mathfrak{Prob}$, by exhibiting a site based on the following category of finite probability spaces.
@@ -208,14 +216,14 @@ A presheaf $\mathcal{F}$ on a $FinProb$ is a sheaf over the atomic topology if a
 with $f g = f h$ we have that $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$, then there is a unique lift $b \in \mathcal{F}(\beta)$ with the property that $\mathcal{F}(f)(b) = a$.
 
 \begin{proposition} \label{sheaf_condition}
-A presheaf $\mathcal{F}$ on $FinProb$ is a sheaf over the atomic topology if and only if for all maps of finite probability spaces $f: U_{r_i} \to U_{s_i}$, we have an equalizer diagram
+A presheaf $\mathcal{F}$ on $FinProb$ is a sheaf over the atomic topology if and only if for all maps of finite probability spaces $f: U_{r_i} \to U_{s_i}$ the fork
 \[
 \begin{tikzcd}
 \mathcal{F} U_{s_i} \arrow[r, "\mathcal{F}f"] & 
 \mathcal{F} U_{r_i} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \prod_{t_{ij}} \mathcal{F} U_{t_{ij}}
-\end{tikzcd},
+\end{tikzcd}
 \]
-where the $t_{ij}$ are as in \ref{multipullback} and the projection $\pi_1$ and $\pi_2$ are induced by the universal 'projection maps' defined in \ref{multipullback}.
+is an equalizer diagram, where the $t_{ij}$ are as in \ref{multipullback} and the projection $\pi_1$ and $\pi_2$ are induced by the universal 'projection maps' defined in \ref{multipullback}.
 \end{proposition}
 \begin{proof}
 Since for each $U_{t_{ij}}$ we have the commuting square
@@ -246,12 +254,12 @@ Note that this proposition actually had little to do with finite probability spa
 In some cases, one can prove the following condition that is much stronger than being a sheaf. It is especially useful when the sheaf doesn't really use the measure in its definition.
 
 \begin{proposition} \label{sheaf_condition_weak}
-Let $\mathcal{F}$ be a presheaf on $FinProb$. If for all morphisms $f: (X,\mu) \to (Y,\nu)$, we have an equalizer
+Let $\mathcal{F}$ be a presheaf on $FinProb$. If for all morphisms $f: (X,\mu) \to (Y,\nu)$ the fork
 \[
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (X,\mu) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (X \times_f X,\bar{\mu})
-\end{tikzcd} ,
+\end{tikzcd}
 \]
-where $\bar{\mu}$ is as in \ref{pullback_measure}, then $\mathcal{F}$ is a sheaf.
+is an equalizer, where $\bar{\mu}$ is as in \ref{pullback_measure}, then $\mathcal{F}$ is a sheaf.
 \end{proposition}
 \begin{proof}
 This is the condition from \cite{sheaves_geometry_logic} described above, but weakened by choosing $\gamma = (X \times_f X,\bar{\mu})$.
@@ -1291,7 +1299,7 @@ This result is highly unexpected. Fixing only finitary data, we have forced the 
 Here $\text{Sh}^{(G,\tau)}(\mathcal{B})$ denotes the topos of $(G,\tau)$-equivariant sheaves on $\mathcal{B}$ and $f^*$, $\bar{f}^*$ just forget the group action.\newline
 \indent In particular, $\bar{f}$ is an open surjective geometric morphism.
 \end{lemma}
-\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms are again localic. Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square commuting up to natural iso $\eta$. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale. We know $f$ is open geometric as points of atomic toposes are always open surjective by C3.5.6. By C3.1.28 $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
+\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms are again localic. Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square commuting up to natural iso $\eta$. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale. We know $f$ is open geometric as points of (do you need 2-valued here?) atomic toposes are always open surjective by C3.5.6. By C3.1.28 $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
 \[ \mathcal{B}=f^*\Gamma^{(G,\tau)}\Omega\simeq \Gamma e^*\Omega\simeq \Gamma e^*(1\sqcup 1)\simeq \Gamma (1\sqcup 1)\simeq\Gamma \Omega_\mathcal{E}  \]
 \newline
 In the first step we use the well-known description of subobject classifiers of localic topoi [ref]. In the second steps we use that for boolean topoi we have $(\top,\bot):1\sqcup 1\simeq \Omega$. That the boolean algebra structure is preserved  by the Beck-Chevalley morphism is immediate as all functors in question preserve finite limits and thus the algebraic structure of boolean algebras. It remains to check whether the boolean algebra structure of $ e^*\Omega$ coincides with the one of $ \Omega_\mathcal{E}$. Recall that this is induced by the $\Omega$-axiom using the characteristic arrows of various subobjects defined by pullbacks [do we need diagrams?]. $e^*$ preserves the subobject classifier, the inclusions $\top:1\rightarrow \Omega$ as well as pullbacks, the terminal object and injectivity of morphisms. Thus 
