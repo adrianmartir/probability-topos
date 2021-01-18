@@ -1090,7 +1090,15 @@ This concludes the proof as all atoms are quotients of equivalence relations and
 where $f\sim g$ if there exists $\sigma\in H$ with $ \sigma\circ f=g$. These are partitions up to permutation by elements in $H$.
 \end{lemma}
 \begin{proof}
-One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
+One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. The quotient the equivalence relation $R$ associated to $U$ is given by the coequalizer of the composition of the  maps%Maybe explain previously what they quotients of equivalence relations are
+\begin{center}
+
+\begin{tikzcd}
+\bigsqcup_{\sigma \in H}y(X,\mu) \arrow[r, hook] & {y(X,\mu)\times y(X,\mu)} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & {y(X,\mu)}
+\end{tikzcd}
+\end{center}
+Here the components on the left are included as permutation matrices. These compositions are coproducts of the Yoneda embeddings of $id: (X,\mu)\rightarrow (X,\mu)$ resp. $\sigma: (X,\mu)\rightarrow (X,\mu)$. Thus the quotient presheaf is the sheaf described in the statement.\newline
+\indent Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
 \[
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (Z,\lambda) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (Z \times_f Z,\bar{\lambda})
 \end{tikzcd} ,
