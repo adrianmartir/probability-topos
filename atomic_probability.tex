@@ -1084,9 +1084,10 @@ $L$ is then defined to be the sum of these matrices.
 \newline
 This concludes the proof as all atoms are quotients of equivalence relations and the relations, that we found in this proof are genuinely non-isomorphic. [insert pretty argument]. The representable functors appear as $(X,\mu, \{id\})$.
 \end{proof}
-\begin{lemma} Given a finite probability space $(X,\mu)$ and a subgroup $U$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\text{Sh}(FinProb,J_{at})$ to be:
-\[ \mathcal{F} :(N,\nu)\mapsto\text{FinProb}((N,\nu), (M,\mu))/\sim  \]
-where $f\sim g$ if there exists $\sigma\in U$ with $ \sigma\circ f=g$. These are partitions up to permutation by elements in $U$.
+
+\begin{lemma} Given a finite probability space $(X,\mu)$ and a subgroup $H$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\text{Sh}(FinProb,J_{at})$ to be:
+\[ \mathcal{F} :(N,\nu)\mapsto\text{FinProb}((N,\nu), (X,\mu))/\sim  \]
+where $f\sim g$ if there exists $\sigma\in H$ with $ \sigma\circ f=g$. These are partitions up to permutation by elements in $H$.
 \end{lemma}
 \begin{proof}
 One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
@@ -1094,11 +1095,20 @@ One calculates coequalizers in sheaf topoi by calculating the section-wise coequ
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (Z,\lambda) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (Z \times_f Z,\bar{\lambda})
 \end{tikzcd} ,
 \]
-For any measure-preserving map $g: (Z,\lambda) \rightarrow (X,\mu)$ such that $g\circ \pi_1=\sigma \circ g\circ \pi_2$ for some $\sigma\in U$, we see that $f^{-1}\{y\} \cap g^{-1}\{x\} =f^{-1}\{y\} \cap g^{-1}\{\sigma^{-1}x\} \in \{f^{-1}\{y\} ,\emptyset \}$ for any $y\in Y$ and $x\in X$. Hence we can define $\tilde{g}: (Y,\nu)\rightarrow (X,\mu)$ via $y\mapsto x$ for some choice of $x$ with $f^{-1}\{y\}\subseteq g^{-1}\{x\} $. This yields a map $ \mathcal{F} (Y,\nu)\rightarrow Eq(\pi_1, \pi_2)$ as the maps on partitions are all $U$-equivariant. Evidently, the definition of $\tilde{g}$ is unique up to permutation by $\sigma\in U$. Hence the map is an isomorphism.
+
+First notice that $\mathcal{F} f$ is injective and its image consists of precisely the $[s] \in \mathcal{F}(Z,\lambda)$ such that $s$ is constant on each fiber of $f$. We want to prove that these elements are precisely the ones with $\pi_1([s]) = \pi_2([s])$.
+
+Since the diagram above is always a fork, we just need to to prove that the elements $[s] \in \mathcal{F}(Z,\lambda)$ such that for some $\sigma \in H$, $s \circ \pi_1 = \sigma \circ s \circ \pi_2$, are already constant on the fibers of $f$. Elementwise, our assumtion on $s$ is that for all $x,y$ with $f(x) = f(y)$ we have that
+\[
+    s (x) = \sigma (s y) .
+\]
+
+Notice that this immediately implies that $s$ must be constant on the fibers of $f$.
 \end{proof}
+
 \begin{remark} The automorphism groups aren't all that complicated. Note that $\text{Aut}(X,\mu)\simeq \prod_{r\in (0,1)} S_{\{x\in X| \mu(x)=r \}}$.
 \end{remark}
-\begin{definition} Define the \emph{category of atoms }$FinProb_{at}$\emph{ of }$FinProb$ as the full subcategory of $\mathfrak{Prob}$ of atoms.
+\begin{definition} Define the \emph{category of atoms} $FinProb_{at}$\emph{ of }$FinProb$ as the full subcategory of $\mathfrak{Prob}$ of atoms.
 \end{definition}
 This yields a new site presentation, which is set theoretic in spirit.
 \begin{proposition} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$.
