@@ -1000,27 +1000,33 @@ t^{(3)}_{nn} & t_{nn1} \arrow[l, "\sum"']                    & t^{(3)}_{11} & t_
 
 %We dont really need these examples anymore right?
 
-\begin{example}[Block diagonal forms]
-Given a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets, consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that the only nonzero entries are at the indices $i\in A_l, j \in A_l$ for some $l$. This is an equivalence relation.
-\end{example}
+%\begin{example}[Block diagonal forms]
+%Given a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets, consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that the only nonzero entries are at the indices $i\in A_l, j \in A_l$ for some $l$. This is an equivalence relation.
+%\end{example}
 
-We can generalize this example.
+%We can generalize this example.
 
-\begin{example}[Block diagonal forms with permutations]
-Again, fix a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets. Additionally, fix a subgroup $H$ of $Aut(U_{s_i})$, for $s_1, \cdots, s_m$ with
-\[
-    s_i = \sum_{j \in A_m} r_j ,
-\]
-and where $Aut$ denotes the automorphisms in $FinProb$.
+%\begin{example}[Block diagonal forms with permutations]
+%Again, fix a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets. Additionally, fix a subgroup $H$ of $Aut(U_{s_i})$, for $s_1, \cdots, s_m$ with
+%\[
+%    s_i = \sum_{j \in A_m} r_j ,
+%\]
+%and where $Aut$ denotes the automorphisms in $FinProb$.
 
-Consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that for some $\sigma \in H$ the only nonzero entries are at the indices $i\in A_{\sigma(l)}, j \in A_l$ for some $l$. This is an equivalence relation.
+%Consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that for some $\sigma \in H$ the only nonzero entries are at the indices $i\in A_{\sigma(l)}, j \in A_l$ for some $l$. This is an equivalence relation.
 
-One can analyze in more detail how the permutations dictate where the non-zero entries can be and how this interacts with the equivalence relation axioms. Reflexivity corresponds to the identity permutation. Symmetry corresponds to transposition of the matrix and thus to taking the inverse permutation. Given matrices $(t^{(1)}_{jk})\in R$ and $(t^{(2)}_{ik})\in R$, where for the first matrix, the permutation $\sigma$ dictates where the nonzero entries can be and for the second matrix, $\tau$ dictates where the non-zero entries can be, the possible matrices $(t^{(3)}_{ij})\in R$ that can be yielded will have non-zero entries dictated by the permutation $\tau^{-1} \sigma$.
+%One can analyze in more detail how the permutations dictate where the non-zero entries can be and how this interacts with the equivalence relation axioms. Reflexivity corresponds to the identity permutation. Symmetry corresponds to transposition of the matrix and thus to taking the inverse permutation. Given matrices $(t^{(1)}_{jk})\in R$ and $(t^{(2)}_{ik})\in R$, where for the first matrix, the permutation $\sigma$ dictates where the nonzero entries can be and for the second matrix, $\tau$ dictates where the non-zero entries can be, the possible matrices $(t^{(3)}_{ij})\in R$ that can be yielded will have non-zero entries dictated by the permutation $\tau^{-1} \sigma$.
 
-This motivates the fact that we actually want $H$ to be a subgroup.
-\end{example}
+%This motivates the fact that we actually want $H$ to be a subgroup.
+
+
+\begin{remark} 
+$3$-dimensional non-negative real matrices whose rows sum to three prescribed matrices on the sides have been investigated in combinatorics literature under the name "\emph{3-way axial transportation polytope}", which they form as a subset of $\mathbb{R}^{n\times n\times n}$. See for instance \cite{3way}.\end{remark}%Do we need this?
+
+
+%\end{example}
 %We probably don't need these examples
-Now before we prove that these already describe all the equivalence relations, we need some theorems from actual combinatorics/ optimal transport. Similar constructions have already been investigated under the name "3-way axial transportation polytope".%This remark is obsolete. But I think we should include as many autistic "maybe it's connected to XYZ" remarks as possible
+%Now before we prove that these already describe all the equivalence relations, we need some theorems from actual combinatorics/ optimal transport. Similar constructions have already been investigated under the name "3-way axial transportation polytope".%This remark is obsolete. But I think we should include as many autistic "maybe it's connected to XYZ" remarks as possible
 \begin{definition} Given a non-negative real matrix $M\in \mathbb{R}^{n^2}_{\geq 0}$, define the \emph{graph }$\Gamma(M)$\emph{ of }$M$ as the bipartite graph on $\{1, \cdots, n\}\sqcup \{1, \cdots, n\}$ with an edge between $i$ and $j$ iff $M_{ij}\neq 0$. One can also interpret this as a $(0,1)$-matrix.
 \end{definition}
 \begin{lemma}\label{2x2x2} Given $0<r_1<1$, setting $r_2=1-r_1$, and  a matrix $\begin{bmatrix}
@@ -1187,31 +1193,31 @@ This proof can, in fact be adapted in many situations, to suggest that most coun
 In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
 \begin{theorem} The first-order theory of atomless, decidable boolean algebras is complete. Moreover, the atomic topos on the site  $FinSur$ given by non-empty finite sets and surjections is its classifying topos and that is Morita equivalent to the automorphism group of boolean algebras of the Cantor space $\mathfrak{C}$ fixing finite partitions.
 \[ \text{Sh}(FinSur, J_{at})\simeq \text{Cont}(Aut_{Bool}(\mathfrak{C}))\]
-Its universal model is given by $h_2\sqcup h_1 \sqcup h_1$ i.e. the functor assigning each set its power-set algebra.
+Its universal model is given by $y(2)\sqcup y(1) \sqcup y(1)$ for any one-element set $1$ and the two-element set $2$ i.e. the functor assigning each set its power-set algebra.
 \end{theorem}
-\begin{proof}Elephant, Olivia
+\begin{proof} For everything besides the universal model, see \cite{caramello}.  What is given is the universal model as it is the universal model of the algebraic theory of boolean algebras by D.3.1.2 \cite{elephant} and a $J_{at}$-sheaf as the site is subcanonical.
 \end{proof}
 \begin{remark} Instead of $\mathfrak{C}$ one could take the boolean algebra $I$, again with the automorphism group fixing finite partitions. This follows from the argument given in Olivia.
 \end{remark}
 \begin{lemma} The evident forgetful functor $U: FinProb\rightarrow FinSur$ is a comorphism of sites. The corresponding geometric morphism 
 \[U^*\dashv U_*: \text{Sh}(FinProb, J_{at})\rightarrow  \text{Sh}(FinSur, J_{at})\]
  is surjective and localic. We also get on representable functors:
- \[U^*h_X=\bigsqcup_{\mu\text{ is a measure on }X}h_{(X,\mu)}\]
+ \[U^*yX=\bigsqcup_{\mu\text{ is a measure on }X} y(X,\mu)\]
 \end{lemma}
 \begin{proof} We need to show the covering-lifting property. It is enough to check this on sieves with one morphism as the atomic topology is generated by them. Given any finite probability space $(X,\mu)$ and cover $\{f: Y\rightarrow U(X,\mu) \}$, we can equip $Y$ with a measure $\nu$ making $\{f: (Y,\nu)\rightarrow (X,\mu) \}$ measure preserving. Define:
 \[\nu(y)=\frac{\mu(f(y))}{\# f^{-1}(f(y))} \]
 This is a measure as $\nu(y)>0$ and
 \[  \sum_{y\in Y}\nu(y)=\sum_{y\in Y}\frac{\mu(f(y))}{\# f^{-1}(f(y))}=\sum_{x\in X}\sum_{y\in f^{-1}(x)}\frac{\mu(f(y))}{\# f^{-1}(f(y))} =\sum_{x\in X}\mu(x)=1\]
 where the penultimate step holds as $f$ is surjective. This line of reasoning also shows that $f$ is measure preserving. 
-\newline \indent To show it is surjective, it suffices to show $U^*$, which is the composition of sheafification and precomposition by $U$, is faithful. Sheafification is always faithful, so we need only check $-\circ U$ is. As $U$ is essentially surjective on objects we can apply the argument of A4.2.7(b) to see this.
-\newline \indent It is localic as $U$ is faithful and both topologies are subcanonical, so the argument of A4.6.2(c) applies.
+\newline \indent To show it is surjective, it suffices to show $U^*$, which is the composition of sheafification and precomposition by $U$, is faithful. Sheafification is always faithful, so we need only check $-\circ U$ is. As $U$ is essentially surjective on objects we can apply the argument of A4.2.7(b) \cite{elephant} to see this.
+\newline \indent It is localic as $U$ is faithful and both topologies are subcanonical, so the argument of A4.6.2(c) \cite{elephant} applies.
 \newline\indent The explicit equation follows by the following observation, probing both functors at some finite probability space $(Y,\nu)$:
-\[U^*h_X(Y,\nu)=FinSur(Y,X)=\bigsqcup_{\mu\text{ is a measure on }X}FinProb((Y,\nu),(X,\mu))\]
+\[U^*yX(Y,\nu)=FinSur(Y,X)=\bigsqcup_{\mu\text{ is a measure on }X}FinProb((Y,\nu),(X,\mu))\]
 This holds as any surjective map $f:Y\rightarrow X$ induces a unique measure $\mu(x)=\sum_{y\in f^{-1}(x)} \nu(y)$ on $X$ making $f$ measure preserving. On maps $f:X\rightarrow Y$, we get for the representable functors:
 \begin{center}
 \begin{tikzcd}
-{U^*h_X(Z,\lambda)} \arrow[d, "{U^*h_f(Z,\lambda)}"'] \arrow[r, dash] & {FinSur(Z,X)} \arrow[d, "f\circ -" description]\arrow[r, dash]  & {\bigsqcup_{\mu}FinProb((Z,\lambda),(X,\mu))} \arrow[d, "\alpha_f (Z{,} \lambda)"] \\
-{U^*h_Y(Z,\lambda)} \arrow[r, dash]                                   & {FinSur(Z,Y)}\arrow[r, dash]                    & {\bigsqcup_\nu FinProb((Z,\lambda),(Y,\nu))}                     
+{U^*yX(Z,\lambda)} \arrow[d, "{U^*y(f)(Z,\lambda)}"'] \arrow[r, dash] & {FinSur(Z,X)} \arrow[d, "f\circ -" description]\arrow[r, dash]  & {\bigsqcup_{\mu}FinProb((Z,\lambda),(X,\mu))} \arrow[d, "\alpha_f (Z{,} \lambda)"] \\
+{U^*yY(Z,\lambda)} \arrow[r, dash]                                   & {FinSur(Z,Y)}\arrow[r, dash]                    & {\bigsqcup_\nu FinProb((Z,\lambda),(Y,\nu))}                     
 \end{tikzcd}
 \end{center}
 There is at most one non-empty $FinProb((Z,\lambda),(X,\mu))$ respectively \linebreak $FinProb((Z,\lambda),(Y,\mu))$. And $\nu(y)=\sum_{x\in f^{-1}(y)} \mu(x)$ for all $y\in Y$, so  $\alpha_f (Z{,} \lambda)$ is simply post composition between these hom-sets.
@@ -1220,22 +1226,22 @@ The fact that it is localic hints to the fact that the theory which "our topos" 
 \begin{corollary} The geometric morphism $(U^*\vdash U_*)$ corresponds to the map exhibiting the universal model of the theory of continuum boolean probability algebras as an atomic boolean algebra. The inequality predicate is $\bigvee_{r>0} B_r ( A\Delta B )$.%edited this here!
 \end{corollary}
 \begin{proof} We compute 
-\[U^*(h_2\sqcup h_1 \sqcup h_1)= (U^*h_2)\sqcup (U^*h_1)\sqcup (U^*h_1)=\bigsqcup_{r\in (0,1)}h_{(2,r)}\sqcup h_1 \sqcup h_1, \] which is the universal model of the theory of continuum boolean probability algebras. It is easily checked that this identification induces an isomorphism of the boolean algebra structures.
+\[U^*(Y(2)\sqcup y(1) \sqcup y(1))= (U^*y(2))\sqcup (U^*y(1))\sqcup (U^*y(1))=\bigsqcup_{r\in (0,1)}yU_{(2,r)}\sqcup yU_1 \sqcup yU_1, \] which is the universal model of the theory of continuum boolean probability algebras. It is easily checked that this identification induces an isomorphism of the boolean algebra structures.
 \end{proof}%Super technical detail allert!!!!!!! r=0, r=1 !!!!!!!! a single point missing !!!!!!!!!!!!!
 We can also characterise the internal complete boolean algebra, the sheaves over which are equivalent to our topos.
 \begin{lemma} Given the sheaf of boolean algebras $\mathbb{M}$ which assigns to a finite sets the power set of the set of probability measures on it and a set map $f:X\rightarrow Y$ to the map given by $\{\nu \}\mapsto \{\mu| \forall y\in Y. \nu(y)=\sum_{x\in f^{-1}(y)}\mu(y)  \}$. Then we get:
 \[\text{Sh}(FinProb,J_{at})\simeq \text{Sh}_{\text{Sh}(FinSur,J_{at})}(\mathbb{M}) \]
 \end{lemma}
-\begin{proof} By [elephant], we need to compute $U_*\Omega$ for the subobject classifier $\Omega$:
-\[(U_*\Omega)(X)\simeq \text{Hom}(h_X,U_*\Omega)\simeq \text{Hom}(U^*h_X,\Omega)\simeq \text{Hom}(\bigsqcup_{\mu \text{ is a measure on }X}h_{(X,\mu)},\Omega)\]
-\[\simeq \prod_{\mu \text{ is a measure on }X}\text{Hom}(h_{X,\mu},\Omega)\simeq \prod_{\mu \text{ is a measure on }X} 2\simeq 2^{\{\mu \text{ is a measure on }X\} } 
+\begin{proof} By [elephant], we need to compute $U_*\Omega$ for the subobject classifyer $\Omega$:
+\[(U_*\Omega)(X)\simeq \text{Hom}(yX,U_*\Omega)\simeq \text{Hom}(U^*yX,\Omega)\simeq \text{Hom}(\bigsqcup_{\mu \text{ is a measure on }X}y(X,\mu),\Omega)\]
+\[\simeq \prod_{\mu \text{ is a measure on }X}\text{Hom}(y(X,\mu),\Omega)\simeq \prod_{\mu \text{ is a measure on }X} 2\simeq 2^{\{\mu \text{ is a measure on }X\} } 
  \]
  Here we used, that the representable functors are atoms and the $\Omega$-axiom.
  On maps, a similar calculation can be done to compute $(U_*\Omega)(f)$ for $f:X\rightarrow Y$:
  \begin{center}
  \begin{tikzcd}
-{\text{Hom}(U^*h_Y,\Omega)} \arrow[d, "-\circ U^*h_f"'] \arrow[r,dash] & {\text{Hom}(\bigsqcup_\nu h_{(Y,\nu)},\Omega)} \arrow[d, "-\circ \alpha_f" description] \arrow[r,dash]  & {\text{Sub}(\bigsqcup_\nu h_{(Y,\nu)})} \arrow[d, "\text{pull back along }\alpha_f"] \\
-{\text{Hom}(U^*h_X,\Omega)} \arrow[r,dash]                                        & {\text{Hom}(\bigsqcup_{\mu} h_{(X,\mu)},\Omega)}          \arrow[r,dash]                                & {\text{Sub}(\bigsqcup_\mu h_{(X,\mu)})}                                             
+{\text{Hom}(U^*yY,\Omega)} \arrow[d, "-\circ U^*y(f)"'] \arrow[r,dash] & {\text{Hom}(\bigsqcup_\nu y(Y,\nu),\Omega)} \arrow[d, "-\circ \alpha_f" description] \arrow[r,dash]  & {\text{Sub}(\bigsqcup_\nu y(Y,\nu))} \arrow[d, "\text{pull back along }\alpha_f"] \\
+{\text{Hom}(U^*yX,\Omega)} \arrow[r,dash]                                        & {\text{Hom}(\bigsqcup_{\mu} y(X,\mu),\Omega)}          \arrow[r,dash]                                & {\text{Sub}(\bigsqcup_\mu y(X,\mu))}                                             
 \end{tikzcd}
 \end{center}
 Pulling back $\alpha_f$ is given by sending $\{\nu\}$ to the set of all possible measures $\mu$ on $X$ whose pushforward measure is $\nu$.  
@@ -1312,7 +1318,7 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 %\indent Likewise, $(p_1)_*$ factors over $\rho_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow yU_{r_1}$ and this is the Yoneda embedding of $p_{r_1\cdots r_4}$. Thus $Lan_F((p_1)_*)(f)=f\circ p_{r_1\cdots r_4}$ and one can easily see that $\chi(f\circ p_{r_1\cdots r_4})=x_1$. This concludes the proof. As the poset structure can be recovered from this via $a\leq b\iff a\wedge b=a$, this shows $Lan_y(U)$ and $I$ have the same poset structure. As all the other operators can be induces as limits and colimits in Set, the boolean algebras are isomorphic.
 We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the correct ref?
  to see $(M,\alpha)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(M,\alpha))$ is $(M,\alpha)$ with the canonical continuous group action.\newline 
-\indent Thus $U$ is a complete boolean algebra acting on itself via automorphisms.  As isomorphisms of lattices preserve all meets and joints, these are even automorphisms of complete boolean algebras, in particular locales. Locales in $\text{Set}^G$ are simply locales upon which $G$ acts by locale-automorphisms by C2.5.8(d) so the universal model is a  $[\text{Aut}(I,\lambda),\text{Set}]$-indexed locale. B2.3.10 states that, for any closure operator $j$ on a topos $\mathcal{S}$ an $\mathcal{S}$-indexed cocomplete category is a  $sh_j\mathcal{S}$-indexed cocomplete category iff it is a $j$-sheaf. Applying this result to the closure operator associated to the inclusion
+\indent Thus $U$ is a complete boolean algebra acting on itself via automorphisms.  As isomorphisms of lattices preserve all meets and joints, these are even automorphisms of complete boolean algebras, in particular locales. Locales in $\text{Set}^G$ are simply locales upon which $G$ acts by locale-automorphisms by C2.5.8(d) \cite{elephant} so the universal model is a  $[\text{Aut}(I,\lambda),\text{Set}]$-indexed locale. B2.3.10 \cite{elephant} states that, for any closure operator $j$ on a topos $\mathcal{S}$ an $\mathcal{S}$-indexed cocomplete category is a  $sh_j\mathcal{S}$-indexed cocomplete category iff it is a $j$-sheaf. Applying this result to the closure operator associated to the inclusion
 \[\text{Cont}_\tau(\text{Aut}(I,\lambda))\hookrightarrow [\text{Aut}(I,\lambda),\text{Set}]\]
  proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
 \end{proof}
@@ -1327,7 +1333,7 @@ This result is highly unexpected. Fixing only finitary data, we have forced the 
 Here $\text{Sh}^{(G,\tau)}(\mathcal{B})$ denotes the topos of $(G,\tau)$-equivariant sheaves on $\mathcal{B}$ and $f^*$, $\bar{f}^*$ just forget the group action.\newline
 \indent In particular, $\bar{f}$ is an open surjective geometric morphism.
 \end{lemma}
-\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms are again localic. Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square commuting up to natural iso $\eta$. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale. We know $f$ is open geometric as points of (do you need 2-valued here?) atomic toposes are always open surjective by C3.5.6. By C3.1.28 $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
+\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms (along any geometric morphism) are again localic by B3.3.6 \cite{elephant}.  Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square commuting up to natural iso $\eta$. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale [find proper ref]. We know $f$ is open geometric as points of atomic toposes are always open surjective by C3.5.6 \cite{elephant}. By C3.1.28 \cite{elephant} $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
 \[ \mathcal{B}=f^*\Gamma^{(G,\tau)}\Omega\simeq \Gamma e^*\Omega\simeq \Gamma e^*(1\sqcup 1)\simeq \Gamma (1\sqcup 1)\simeq\Gamma \Omega_\mathcal{E}  \]
 \newline
 In the first step we use the well-known description of subobject classifiers of localic topoi [ref]. In the second steps we use that for boolean topoi we have $(\top,\bot):1\sqcup 1\simeq \Omega$. That the boolean algebra structure is preserved  by the Beck-Chevalley morphism is immediate as all functors in question preserve finite limits and thus the algebraic structure of boolean algebras. It remains to check whether the boolean algebra structure of $ e^*\Omega$ coincides with the one of $ \Omega_\mathcal{E}$. Recall that this is induced by the $\Omega$-axiom using the characteristic arrows of various subobjects defined by pullbacks [do we need diagrams?]. $e^*$ preserves the subobject classifier, the inclusions $\top:1\rightarrow \Omega$ as well as pullbacks, the terminal object and injectivity of morphisms. Thus 
@@ -1346,7 +1352,7 @@ X \arrow[r, "\chi_S"']      & \Omega
 \end{center}
 Hence by the uniqueness condition of the $\Omega$-axiom, $e^*\chi_S=\chi_{e^*S}$. In particular, all the structure defined in this way gets preserved. This proves that the square is indeed a 2-pullback.
 
-\indent Pullbacks of open surjections are again open surjections by C3.1.23, thus $\bar{f}$ has this property. 
+\indent Pullbacks of open surjections (along bounded geometric morphisms, so in particular localic geometric morphisms) are again open surjections by C3.1.23 \cite{elephant}, thus $\bar{f}$ has this property. 
 \end{proof}
 
 
@@ -1374,16 +1380,16 @@ Fixing the notation as in the following diagram:
 \end{center}
 The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sheaf on $M$ and $\theta:\pi_1^*A\simeq \pi_2^*A$ is an isomorphism such that $\Delta^*\theta=\text{id}$ and the cocycle condition $\pi_{13}^*\theta=\pi_{12}^*\theta\circ \pi_{23}^*\theta$ is fulfilled. Morphisms of descent data are natural transformations $\psi:A\rightarrow B$ commuting with all the structure.
 \end{corollary}
-\begin{proof} Open surjections are descent morphisms by C5.1.6.
+\begin{proof} Open surjections are descent morphisms by C5.1.6 \cite{elephant}.
 \end{proof}
-As before, to make this theory workable, we need a lot of different, insightful site presentations. There are two given in [elephant] first continuous equivariant sheaves A2.1.11(c)%is this a thing? Also C5.4.6
+As before, to make this theory workable, we need a lot of different, insightful site presentations. There are two given in \cite{elephant}, first continuous equivariant sheaves A2.1.11(c)%is this a thing? Also C5.4.6
 , secondly an explicit site given in C2.5.8(e). We quote:\newline
 \indent For an open subgroup $U\subseteq G$, define $I_U$ as the subset of $I$ invariant under the action of $U$. We obtain a site $(\mathcal{I},J)$ with $\mathcal{I}$ the category with objects pairs $(U,x)$ of open subgroups $U$ and $x\in I_U$ and morphisms $(U,x)\rightarrow (V,y)$ labelled by cosets $gV$ of $V$ such that $U\subseteq gVg^{-1}$ and $x\leq g(y)$ in $I$.  A sieve $R$ on $(V,y)$ is $J$-covering if $y$ is the join of all those $x$ for which there exists $U$ such that $x\in I_U$ and $V:(U,x)\rightarrow (V,y)\in R$. This site is nice as the projection to the subgroups is cover-reflecting and induces the functor $\Gamma^{(G,\tau)}$ as in the theorem as they note.
 \begin{lemma}\label{Rand_site} $\mathfrak{Rand}$ is equivalent to the category of sheaves over the following site: $(FinProb\rtimes U ,J_{at}\rtimes J_{can})$ where the category $FinProb\rtimes U$ is the category with objects pairs $(X,\mu,x)$, where $(X,\mu)$ is a finite probability space and $x\in \mathcal{P}(X)$, and morphisms $f_{\leq}:(X,\mu, x)\rightarrow (Y,\nu, y)$ are measurable functions $f:(X,\mu)\rightarrow (Y,\nu)$ such that $f(x)\subseteq y$. A sieve $R$ on $(Y,\nu, y)$ is $J_{at}\rtimes J_{can}$-covering if $y$ is the union of all those $f(x)$ such that there exists a $f_{\leq}:(X,\mu,x)\rightarrow (Y,\nu,y)\in R$. In particular the single morphism $f_{\leq}:(X,\mu,f^{-1}(y))\rightarrow (Y,\nu,y)$ is covering for any measure-preserving  function $f$ and the map $FinProb\rtimes U\rightarrow FinProb$ is cover-reflecting.
 
 \end{lemma}
 \begin{proof}
-One just computes the Grothendieck construction "$\rtimes$" for the indexed category $U$ over $FinProb$ as explained in C2.5.4. We use that $U(X,\mu)=\mathcal{P}(X)$ and $U(f):U(Y,\nu)\rightarrow U(X,\mu)$ is given by $f^{-1}:\mathcal{P}(Y)\rightarrow \mathcal{P}(X)$.\footnote{This had been remarked earlier and is fairly obvious. We might actually want to prove it explicitly anyway though.} Thus $FinProb\rtimes U$ has as objects as described in the lemma and as morphisms pairs $(f,\leq)$ where $f:(X,\mu, x)\rightarrow (Y,\nu, y)$ and $\leq: x\rightarrow f^{-1}(y)$ in $\mathcal{P}(X)$ this is equivalent to $f(x)\subseteq y$ in $\mathcal{P}(Y)$. Now we use the same line of argument as in C2.5.8(e). Evidently, any morphism in $FinProb\rtimes U$ can be factored as follows:
+One just computes the Grothendieck construction "$\rtimes$" for the indexed category $U$ over $FinProb$ as explained in C2.5.4 \cite{elephant}. We use that $U(X,\mu)=\mathcal{P}(X)$ and $U(f):U(Y,\nu)\rightarrow U(X,\mu)$ is given by $f^{-1}:\mathcal{P}(Y)\rightarrow \mathcal{P}(X)$.\footnote{This had been remarked earlier and is fairly obvious. We might actually want to prove it explicitly anyway though.} Thus $FinProb\rtimes U$ has as objects as described in the lemma and as morphisms pairs $(f,\leq)$ where $f:(X,\mu, x)\rightarrow (Y,\nu, y)$ and $\leq: x\rightarrow f^{-1}(y)$ in $\mathcal{P}(X)$ this is equivalent to $f(x)\subseteq y$ in $\mathcal{P}(Y)$. Now we use the same line of argument as in C2.5.8(e) \cite{elephant}. Evidently, any morphism in $FinProb\rtimes U$ can be factored as follows:
 \begin{center}
 \begin{tikzcd}
 (X,\mu,x)\arrow[r, "id_{\leq}"]\arrow[rr,"f_{\leq}", bend right]& (X,\mu, f^{-1}(y))\arrow[r,"\overline{f_{\leq}}"]& (Y,\nu,y) \\
@@ -1411,7 +1417,7 @@ interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y
 \end{center}
 \end{enumerate}
 \end{lemma}
-\begin{proof} Any sheaf has this properties. (i) is just how the canonical topology is defined and (ii) follows from III4 Lemma 2 of [MacLaneMoerdijk]. This is not that hard to show.
+\begin{proof} Any sheaf has this properties. (i) is just how the canonical topology is defined and (ii) follows from III4 Lemma 2 of \cite{sheaves_geometry_logic}. This is not that hard to show.
 \end{proof}
 %To make sure that this abstract nonsense is correct or, at least, all the errors within suitably "cancel out" we shall compute the subobject classifier of $\mathfrak{Rand}$ using the description in \ref{Rand_site}.
 %\begin{example} The global sections of the subobject classifier $\Omega$ of $\mathfrak{Rand}$ is given by $J_{at}\rtimes J_{can}$-closed sieves on %$(\{\star\}, 1, \{\star\} )$ (the probability space with one object equipped with itself as a subset), which is the terminal object of $FinProb\rtimes U$.
@@ -1592,13 +1598,20 @@ Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First
 \bibitem{elephant}
 ELEPHANT
 \bibitem{caramello_book}
-Caramello, Olivia, and Laurent Lafforgue. "Some aspects of topological Galois theory." Journal of Geometry and Physics 142 (2019): 287-317.
+
 \bibitem{fremlin}
 FREMLIN
 \bibitem{riehl}
 Category theory in context
 \bibitem{caramello_lafforgue}
-Some aspects of topological Galois theory
+Caramello, Olivia, and Laurent Lafforgue. "Some aspects of topological Galois theory." Journal of Geometry and Physics 142 (2019): 287-317.
+\bibitem{caramello}
+ Caramello, Olivia. "Topological Galois Theory". arXiv e-prints (2013):  1301.0300
+\bibitem{set_theory}
+Michael P. Fourman. "Sheaf models for set theory". Journal of Pure and Applied Algebra 19 (1980): 91 - 101
+\bibitem{matrix}
+Brualdi, R."Combinatorial Matrix Classes".Encyclopedia of Mathematics and its Applications. Cambridge  (2006): Cambridge University Press.
+\bibitem{3way} Jesús A. De Loera and Edward D. Kim and Shmuel Onn and Francisco Santos. "Graphs of transportation polytopes". Journal of Combinatorial Theory, Series A 116 8 (2009): 1306-1325
 \end{thebibliography}
 
 \section{Appendix: Illustrations}
