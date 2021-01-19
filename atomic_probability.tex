@@ -1169,8 +1169,12 @@ We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma,
 %Note that the latter condition is purely graph theoretical. 
 \begin{theorem}
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{r_1, \cdots, r_n> 0 \\ \sum_i r_i=1 \\V\subset Aut(U_{r_1\cdots r_n})\text{ subgroup}}} yU_{r_1\cdots r_n}/V\]
- the exponential is given by ... and ...% This really hinges upon the atoms as computed in this site
+ the exponential is given by %expand the domain where this works by calculating the muliproducts of the atoms
+ \[ (yU_{s_j})^{yU_{p_k}}(U_{r_i})=\prod_{\substack{\sum_i t_{ik}=p_k \\ \sum_k t_{ik}=r_i }} FinProb(U_{t_{ik}}, U_{s_j})=\bigsqcup_{\substack{\sum_i t_{ik}=p_k\\ \sum_k t_{ik}\neq 0}}yU_{\sum_k t_{ik}}\sqcup \cdots\]
 \end{theorem}
+\begin{proof}
+The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry_logic}.
+\end{proof}
 \begin{proposition} The internal language of our topos proves the negation of countable choice.
 \end{proposition}
 \begin{proof} We construct a countable product of non-empty objects, which is empty. Take $yU_{1/n}$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n yU_{1/n}=0$.
