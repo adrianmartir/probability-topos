@@ -1128,7 +1128,7 @@ This yields a new site presentation, which is set theoretic in spirit.
 \begin{proposition} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$.
 \end{proposition}
 \begin{proof}
-\cite{caramello_lafforgue}
+The statement is Proposition 4.21 of \cite{caramello}.
 \end{proof}
 We are also equipped to characterise this category in combinatorial terms.
 \begin{theorem} The category $FinProb_{at}$ is equivalent to the following category. \begin{enumerate}
@@ -1141,6 +1141,15 @@ We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma,
 \end{proof}
 \begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
 \end{remark}
+We know from \cite{caramello_lafforgue} that the category of atoms also has all multilimits, which will again come handy when actually doing computations.
+\begin{lemma} Given atoms $yU_{r_1\cdots r_n}/G$ and $yU_{s_1\cdots s_m}/H$, we have:
+\[ yU_{r_1\cdots r_n}/G\times yU_{s_1\cdots s_m}/H\simeq \bigsqcup_{\substack{t_{ij}\\ K\subseteq \text{Aut}(U_{t_{ij}})\text{ maximal w.r.t. property }P}}yU_{t_{ij}}/K  \]
+The measurable functions underlying the projection maps are the same as in \ref{multipullback} (more precisely the equivalences classes thereof) also $t_{ij}$ are as in that lemma.
+Here a subgroup $K$ is said to have property P if for any $\sigma\in K$ there exists $\psi\in G$ and $\tau\in H$ such that $\pi_1\circ \sigma=\psi\circ \pi_1$ and $\pi_2\circ\sigma=\tau\circ \pi_2$.
+\end{lemma}
+\begin{proof}
+IS THIS TRUE?
+\end{proof}
 %\begin{definition} 
 %Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the \emph{transportation polytope} $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}_{\geq 0}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
 %\end{definition}
@@ -1174,9 +1183,13 @@ We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma,
 %\end{proof}
 %Note that the latter condition is purely graph theoretical. 
 \begin{theorem}
-In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{r_1, \cdots, r_n> 0 \\ \sum_i r_i=1 \\V\subset Aut(U_{r_1\cdots r_n})\text{ subgroup}}} yU_{r_1\cdots r_n}/V\]
- the exponential is given by %expand the domain where this works by calculating the muliproducts of the atoms
- \[ (yU_{s_j})^{yU_{p_k}}(U_{r_i})=\prod_{\substack{\sum_i t_{ik}=p_k \\ \sum_k t_{ik}=r_i }} FinProb(U_{t_{ik}}, U_{s_j})=\bigsqcup_{\substack{\sum_i t_{ik}=p_k\\ \sum_k t_{ik}\neq 0}}yU_{\sum_k t_{ik}}\sqcup \cdots\]
+In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\V\subset Aut(U_{r_1\cdots r_n})\text{ subgroup}}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
+ the power object is given by %expand the domain where this works by calculating the muliproducts of the atoms
+ \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\mathcal{P}\{ (t_{ij})| \sum_i t_{ij}=s_j,\, \sum_j t_{ij}=r_i,\, t_{ij}\geq 0 \} \]%does the group play in here?
+ decomposing into atoms as
+ \[ \Omega^{yU_{s_j}} =\bigsqcup_{\substack{\sum_i t_{ik}=p_k\\ \sum_k t_{ik}\neq 0}}yU_{\sum_k t_{ik}}\sqcup \cdots   \]
+ with element-hood relation given by:
+\[ \in=\bigsqcup_{subset}\hookrightarrow \bigsqcup=yU_{s_j}/G\times \Omega^{yU_{s_j}/G}\]
 \end{theorem}
 \begin{proof}
 The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry_logic}.
