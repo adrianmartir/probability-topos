@@ -931,39 +931,25 @@ Notice that by using 331I in \cite{fremlin} we have implicitly used the axiom of
 %It follows that the atoms of the topos correspond to open subgroups of $G$. We shall classify them. %give ref
 \begin{proposition} The automorphism group of a homogeneous-Maharam-type probability algebra is simple by 383Ib \cite{fremlin}. In particular, all topos-theoretic invariants involving any sort of normal subgroup listed in \cite{caramello_lafforgue} are trivial.
 \end{proposition}
-
-\section{$\mathfrak{Prob}$ as a set-theoretical universe}
-
-\begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA (Zermelo-Frenkel with atoms or urelements). It is a so called \emph{Fraenkel-Mostowski model}. This is formulated as a single-sorted first order language with equality $=$, membership relation $\in$ and a constant $A$ set of atoms and fulfilling the following axioms:
-\begin{center}\begin{tabular}{ |p{3.5 cm}|p{7.5 cm}| }
-\hline
-Decidability&  $\forall x. (x\in A\vee \neg(x\in A))$  \\ % This seems to be obsolete in classical interpretations
-\hline
-Set & $\forall y. (\exists x.x\in y\implies \neg (y\in A))$\\
-\hline
-Extensionality & $\forall x,y. \neg(x\in A)\wedge \neg(y\in A)\implies [ x=y\iff \forall z.(z\in x \iff z\in y) ] $\\
-\hline
-Pairing & $\forall x,y \exists z. (x\in z \wedge y\in z)$ \\
-\hline
-Separation & $\forall x \exists y. \neg (y\in A)  \wedge\exists z. (z\in y\iff z\in x \wedge \phi)$ for $x$ not free in $\phi$. \\
-\hline
-Union &$\forall x \exists y\forall z. (z\in y\iff \exists w\in x.z\in w)$ \\
-\hline
-Power-set &$\forall x\exists y \forall z. (z\in y\iff \forall w\in z.w\in x)$ \\
-\hline
-Infinity & $\exists x(\exists y.y\in x\wedge \forall y\in x.\exists w\in x.y\in w)$\\
-\hline
-$\in$-induction &$\forall x.(\forall y\in x. \phi(y)\implies \phi(x))\implies \forall x.\phi(x)$ \\
-\hline
-Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y\in x \exists w\in z. \phi)$\\
-\hline 
-\end{tabular}
-\end{center}
-\end{proposition}
-\begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
-\indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality but how to get a global membership relation is a bit less obvious. One uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory. On each of these objects one gets a membership relation using the cartesian closed structure of our topos. So at least presenting the topos using the skeleton given by elements of the objects in the hierarchy, one obtains a classical model of ZFA as described above.
+\section{The atoms of $\mathfrak{Prob}$ }
+\begin{definition} An \emph{atom} of a topos is an object whose only subobjects are trivial or itself.
+\end{definition}
+This concept is very relevant, as any sheaf in an atomic topos is a coproduct of atoms \cite{XYZ}. This means, that all information contained in the topos is already given by its atoms. If one understands them well, it is quite easy to calculate things in an atomic topos.
+\begin{definition} The \emph{category of atoms} of a topos is the full subcategory of objects, which are atoms.
+\end{definition}
+\begin{theorem}
+Given an atomic topos $\mathcal{E}$ and its category of atoms $\mathcal{E}_{at}$, then $\mathcal{E}_{at}$ fulfils the right Ore condition and we have
+\[\text{Sh}(\mathcal{E}_{at},J_{at})\simeq \mathcal{E} \]
+More concretely, $\mathcal{E}$ is the $\infty$-positivisation of $\mathcal{E}_{at}$ i.e. the free completion w.r.t. small coproducts.
+\end{theorem}
+\begin{proof}
+The statement is Proposition 4.21 of \cite{caramello}.
 \end{proof}
-Again, it would be nice to have a more combinatorial, workable interpretation of these objects. First we need to classify the atoms (as sheaves on the atomic site on $FinProb$) and thereby inadvertently the open subgroups of our topological groups.\newline
+We can quickly give a first description of the category of atoms in our case. But this will be not very workable.
+\begin{proposition} Given a topological group $(G,\tau)$, the category of atoms of the topos $\text{Cont}_\tau (G)$ is equivalent to its subcategory of transitive, continuous actions. \cite{XYZ}
+\end{proposition}
+As our topos is equivalent to $\text{Cont}_\tau(\text{Aut}_{BPAlg}(I,\lambda))$, this immediately gives a description of its atoms.
+But again, it would be nice to have a more combinatorial, workable interpretation of these objects. First we need to classify the atoms (as sheaves on the atomic site on $FinProb$) and thereby inadvertently the open subgroups of our topological groups.\newline
 
 We will utilize the combinatorial method outlined in \cite{caramello_lafforgue} Prop 6.7. For this, we will need to understand internal equivalence relations on the sheaves $yU_{r_1\cdots r_n}$ as the atoms will be reconstructed as quotients of these relations. We use \ref{multipullback} to yield the following description of an equivalence relation. \newline
 \indent It is a subobject 
@@ -1125,11 +1111,9 @@ Notice that this immediately implies that $s$ must be constant on the fibers of 
 \begin{definition} Define the \emph{category of atoms} $FinProb_{at}$\emph{ of }$FinProb$ as the full subcategory of $\mathfrak{Prob}$ of atoms.
 \end{definition}
 This yields a new site presentation, which is set theoretic in spirit.
-\begin{proposition} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$.
-\end{proposition}
-\begin{proof}
-The statement is Proposition 4.21 of \cite{caramello}.
-\end{proof}
+\begin{corollary} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$.
+\end{corollary}
+
 We are also equipped to characterise this category in combinatorial terms.
 \begin{theorem} The category $FinProb_{at}$ is equivalent to the following category. \begin{enumerate}
 \item Objects are given by tuples $(M,\mu, V)$ where $(M,\mu)$ is a finite probability space and $V$ is a subgroup of its automorphism group. 
@@ -1148,7 +1132,7 @@ The measurable functions underlying the projection maps are the same as in \ref{
 Here a subgroup $K$ is said to have property P if for any $\sigma\in K$ there exists $\psi\in G$ and $\tau\in H$ such that $\pi_1\circ \sigma=\psi\circ \pi_1$ and $\pi_2\circ\sigma=\tau\circ \pi_2$.
 \end{lemma}
 \begin{proof}
-IS THIS TRUE?
+IS THIS TRUE? PROBABLY NOT
 \end{proof}
 %\begin{definition} 
 %Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the \emph{transportation polytope} $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}_{\geq 0}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
@@ -1182,18 +1166,67 @@ IS THIS TRUE?
 %\indent Conversely, given a graph $\Gamma(K)$ for some matrix $K\in \mathcal{N}(r,r)$ and matrices $K_j\in E(M_j,N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$ then $\Gamma(\sum_j K_j)\subseteq \Gamma(K)$. But the only matrix inside $\mathcal{N}(r,r)$ with a graph contained in $\Gamma(K)$, is $K$ whence $\sum_j K_j=K\in \mathcal{N}(M,N)$.
 %\end{proof}
 %Note that the latter condition is purely graph theoretical. 
+\section{$\mathfrak{Prob}$ as a set-theoretical universe}
+
+\begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA  (Zermelo-Frenkel with atoms or urelements). It is a so called \emph{Fraenkel-Mostowski model}. This is formulated as a single-sorted first order language with equality $=$, membership relation $\in$ and a constant $A$ set of atoms and fulfilling the following axioms:
+\begin{center}\begin{tabular}{ |p{3.5 cm}|p{7.5 cm}| }
+\hline
+Decidability&  $\forall x. (x\in A\vee \neg(x\in A))$  \\ % This seems to be obsolete in classical interpretations
+\hline
+Set & $\forall y. (\exists x.x\in y\implies \neg (y\in A))$\\
+\hline
+Extensionality & $\forall x,y. \neg(x\in A)\wedge \neg(y\in A)\implies [ x=y\iff \forall z.(z\in x \iff z\in y) ] $\\
+\hline
+Pairing & $\forall x,y \exists z. (x\in z \wedge y\in z)$ \\
+\hline
+Separation & $\forall x \exists y. \neg (y\in A)  \wedge\exists z. (z\in y\iff z\in x \wedge \phi)$ for $x$ not free in $\phi$. \\
+\hline
+Union &$\forall x \exists y\forall z. (z\in y\iff \exists w\in x.z\in w)$ \\
+\hline
+Power-set &$\forall x\exists y \forall z. (z\in y\iff \forall w\in z.w\in x)$ \\
+\hline
+Infinity & $\exists x(\exists y.y\in x\wedge \forall y\in x.\exists w\in x.y\in w)$\\
+\hline
+$\in$-induction &$\forall x.(\forall y\in x. \phi(y)\implies \phi(x))\implies \forall x.\phi(x)$ \\
+\hline
+Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y\in x \exists w\in z. \phi)$\\
+\hline 
+\end{tabular}
+\end{center}
+\end{proposition}
+\begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
+\indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality but how to get a global membership relation is a bit less obvious. One uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory. On each of these objects one gets a membership relation using the cartesian closed structure of our topos. So at least presenting the topos using the skeleton given by elements of the objects in the hierarchy, one obtains a classical model of ZFA as described above. %Clean this up
+\end{proof}
 \begin{theorem}
-In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\V\subset Aut(U_{r_1\cdots r_n})\text{ subgroup}}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
+In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\ [V]\text{ conjugacy class of subgroup }V\subset Aut(U_{r_1\cdots r_n})}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
  the power object is given by %expand the domain where this works by calculating the muliproducts of the atoms
- \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\mathcal{P}\{ (t_{ij})| \sum_i t_{ij}=s_j,\, \sum_j t_{ij}=r_i,\, t_{ij}\geq 0 \} \]%does the group play in here?
+ \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\mathcal{P}\{ (t_{ij})| \sum_i t_{ij}=s_j,\, \sum_j t_{ij}=r_i,\, t_{ij}\geq 0 \} \]%does the group play in here? Most likely incorrect
  decomposing into atoms as
  \[ \Omega^{yU_{s_j}} =\bigsqcup_{\substack{\sum_i t_{ik}=p_k\\ \sum_k t_{ik}\neq 0}}yU_{\sum_k t_{ik}}\sqcup \cdots   \]
  with element-hood relation given by:
 \[ \in=\bigsqcup_{subset}\hookrightarrow \bigsqcup=yU_{s_j}/G\times \Omega^{yU_{s_j}/G}\]
 \end{theorem}
 \begin{proof}
-The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry_logic}.
+The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry_logic}. We have
+ \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\text{Hom}(yU_{s_j}/G\times yU_{r_i}/H, \Omega) =\]
+ \[\text{Hom}(\bigsqcup_{\substack{ \sum_i t_{ij}=s_j,\\ \sum_j t_{ij}=r_i,\\ t_{ij}\geq 0 \\ K \text{ maximal subgroup with property P}}}yU_{t_{ij}}/K,\Omega)=\prod_{"-"} \text{Hom}(yU_{t_{ij}}/K,\Omega)=\prod_{"-"}2  \]
+where the last step follows as atoms only have $2$ subsheaves, themselves and the trivial one. Note that the data of the subgroup can be ignored here as it is canonically induced. To decompose it into atoms, we need to find all its subsheaves, which are atoms
 \end{proof}
+\begin{remark}[Non-standard probability theory] We can also use language analogous to that used in the set theoretic constructions of non-standard analysis here \cite{XYZ} . One may call sets containing only elements of the form $yU_1$ as \emph{standard sets} and these containing at least one different atom \emph{non-standard}.This works well as the following theorem shows.
+\end{remark}
+\begin{theorem} If there is any statement of higher order logic $\phi$ about \emph{standard} sets then $\mathfrak{Prob}\vDash \phi \iff \text{Set}\vDash \phi$.
+\end{theorem}
+\begin{proof}
+We essentially use that the topos $\mathfrak{Prob}$ is atomic. This means, that the inverse image functor $\Delta: \text{Set}\rightarrow \mathfrak{Prob}$ of the global sections functor is logical. This means it preserves higher order logic \cite{XYZ}. Now we use the site $\mathfrak{Prob}\simeq \text{Sh}(FinProb,J_{at})$. Given a set $A$, $\Delta(A)$ is the sheafification of the constant presheaf with values $A$ by \cite{XYZ}. This presheaf can be given as $\bigsqcup_{a\in A}yU_1$, which is already a sheaf as the site is subcanonical.
+Hence an object in $\mathfrak{Prob}$ is in its essential image iff it is a standard set. 
+\end{proof}
+This means, dealing with standard sets is really cheap and easy. Quite the contrast to the monstrous descriptions of e.g. power sets of non-standard sets we have seen above. This has some immediate applications.
+\begin{example} The natural numbers $\mathbb{N}$ of $\mathfrak{Prob}$ are a standard set. In particular, all of arithmetic works just the same.
+\end{example}
+\begin{proof}
+The natural numbers object of a Grothendieck topos is always the constant sheaf with value $\mathbb{N}$. \cite{XYZ}.
+\end{proof}
+Given a probability interval $(\mathcal{B},\mu)$, we get an interpretation (is this the right word?) of $\mathfrak{Prob}$ in $\text{Set}$. %Do this properly with proper language
 \begin{proposition} The internal language of our topos proves the negation of countable choice.
 \end{proposition}
 \begin{proof} We construct a countable product of non-empty objects, which is empty. Take $yU_{1/n}$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n yU_{1/n}=0$.
@@ -1204,7 +1237,7 @@ This proof can, in fact be adapted in many situations, to suggest that most coun
 \end{remark}
 \section{Forgetting how to measure}
 In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
-\begin{theorem} The first-order theory of atomless, decidable boolean algebras is complete. Moreover, the atomic topos on the site  $FinSur$ given by non-empty finite sets and surjections is its classifying topos and that is Morita equivalent to the automorphism group of boolean algebras of the Cantor space $\mathfrak{C}$ fixing finite partitions.
+\begin{theorem} The first-order theory of atomless, decidable boolean algebras is complete. Moreover, the atomic topos on the site  $FinSur$ given by non-empty finite sets and surjections is its classifying topos and that is Morita equivalent to the automorphism group of boolean algebras of the Cantor space $\mathfrak{C}$ topologised via the subgroups fixing finite partitions.
 \[ \text{Sh}(FinSur, J_{at})\simeq \text{Cont}(Aut_{Bool}(\mathfrak{C}))\]
 Its universal model is given by $y(2)\sqcup y(1) \sqcup y(1)$ for any one-element set $1$ and the two-element set $2$ i.e. the functor assigning each set its power-set algebra.
 \end{theorem}
@@ -1215,7 +1248,7 @@ Its universal model is given by $y(2)\sqcup y(1) \sqcup y(1)$ for any one-elemen
 \begin{lemma} The evident forgetful functor $U: FinProb\rightarrow FinSur$ is a comorphism of sites. The corresponding geometric morphism 
 \[U^*\dashv U_*: \text{Sh}(FinProb, J_{at})\rightarrow  \text{Sh}(FinSur, J_{at})\]
  is surjective and localic. We also get on representable functors:
- \[U^*yX=\bigsqcup_{\mu\text{ is a measure on }X} y(X,\mu)\]
+ \[U^*yX=\bigsqcup_{\mu\text{ is a measure on }X} y(X,\mu)\]%mention explicit description of maps
 \end{lemma}
 \begin{proof} We need to show the covering-lifting property. It is enough to check this on sieves with one morphism as the atomic topology is generated by them. Given any finite probability space $(X,\mu)$ and cover $\{f: Y\rightarrow U(X,\mu) \}$, we can equip $Y$ with a measure $\nu$ making $\{f: (Y,\nu)\rightarrow (X,\mu) \}$ measure preserving. Define:
 \[\nu(y)=\frac{\mu(f(y))}{\# f^{-1}(f(y))} \]
@@ -1336,7 +1369,7 @@ We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the 
  proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
 \end{proof}
 This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is also possible in the situation of the theory of atomless boolean algebras. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
-\begin{lemma}[Trivial lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
+\begin{lemma}[Lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
 \begin{center}
 \begin{tikzcd}
 \text{Sh}(\mathcal{B}) \arrow[d, "\bar{f}"'] \arrow[r, "\Gamma"]      & \text{Set} \arrow[d, "f"] \\
