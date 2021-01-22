@@ -38,7 +38,7 @@ Talk about the challenge of using topos theory for talking about topological phe
 
 Talk about 'bookkeeping' in probability theory. Nobody cares about the choice of base $\sigma$-algebra, as long as it has good properties. Yet, a $\sigma$-algebra must be chosen. One may try to exploit this by imposing restrictions(of functorial or topological nature) on how statements/sets may depend on the base $\sigma$-algebra. These techniques will lead to an approach to probability theory that works without a choice of $\sigma$-algebra.
 
-Talk about how this is a substantial application justifying the use of geometric/infinitary logic, since first order logic doesn't suffice.
+Talk about how this is a substantial application justifying the use of geometric/infinitary logic, since first order logic doesn't suffice. Talk about how one can't even define probability intervals in first order logics. Also say that usual Galois theory a la SGA1 does not suffice to capture the group action flavour. The group is simple but profinite groups are completely determined by their closed normal subgroups (or smth. similar).
 
 \section{Conventions} \label{conventions}
 
@@ -1197,6 +1197,7 @@ Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y
 \begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
 \indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality but how to get a global membership relation is a bit less obvious. One uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory. On each of these objects one gets a membership relation using the cartesian closed structure of our topos. So at least presenting the topos using the skeleton given by elements of the objects in the hierarchy, one obtains a classical model of ZFA as described above. %Clean this up
 \end{proof}
+%Maybe remark that this datum of a set theory is equivalent to that of a topos. Quote the paper corresponding to this fact
 \begin{theorem}
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\ [V]\text{ conjugacy class of subgroup }V\subset Aut(U_{r_1\cdots r_n})}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
  the power object is given by %expand the domain where this works by calculating the muliproducts of the atoms
@@ -1212,16 +1213,16 @@ The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry
  \[\text{Hom}(\bigsqcup_{\substack{ \sum_i t_{ij}=s_j,\\ \sum_j t_{ij}=r_i,\\ t_{ij}\geq 0 \\ K \text{ maximal subgroup with property P}}}yU_{t_{ij}}/K,\Omega)=\prod_{"-"} \text{Hom}(yU_{t_{ij}}/K,\Omega)=\prod_{"-"}2  \]
 where the last step follows as atoms only have $2$ subsheaves, themselves and the trivial one. Note that the data of the subgroup can be ignored here as it is canonically induced. To decompose it into atoms, we need to find all its subsheaves, which are atoms
 \end{proof}
-\begin{remark}[Non-standard probability theory] We can also use language analogous to that used in the set theoretic constructions of non-standard analysis here \cite{XYZ} . One may call sets containing only elements of the form $yU_1$ as \emph{standard sets} and these containing at least one different atom \emph{non-standard}.This works well as the following theorem shows.
+\begin{remark}[Non-standard probability theory] We can also use language analogous to that used in the set theoretic constructions of non-standard analysis here \cite{XYZ} . One may call sets containing only elements of the form $yU_1$ \emph{standard sets} and these containing at least one different atom \emph{non-standard}. This works well as the following theorem shows. %Maybe also define "standard parts" of a set as the global sections i.e. the yU1 part. This preserves at least finite limits. Also one asign to an internal set its set of atoms i.e the left adjoint to the inclusion of standard sets. This doesn't preserve finite limits however.
 \end{remark}
-\begin{theorem} If there is any statement of higher order logic $\phi$ about \emph{standard} sets then $\mathfrak{Prob}\vDash \phi \iff \text{Set}\vDash \phi$.
+\begin{theorem} If there is any statement of higher order logic $\phi$ where all quantification is bounded over \emph{standard} sets then $\mathfrak{Prob}\vDash \phi \iff \text{Set}\vDash \phi$.
 \end{theorem}
 \begin{proof}
 We essentially use that the topos $\mathfrak{Prob}$ is atomic. This means, that the inverse image functor $\Delta: \text{Set}\rightarrow \mathfrak{Prob}$ of the global sections functor is logical. This means it preserves higher order logic \cite{XYZ}. Now we use the site $\mathfrak{Prob}\simeq \text{Sh}(FinProb,J_{at})$. Given a set $A$, $\Delta(A)$ is the sheafification of the constant presheaf with values $A$ by \cite{XYZ}. This presheaf can be given as $\bigsqcup_{a\in A}yU_1$, which is already a sheaf as the site is subcanonical.
 Hence an object in $\mathfrak{Prob}$ is in its essential image iff it is a standard set. 
 \end{proof}
 This means, dealing with standard sets is really cheap and easy. Quite the contrast to the monstrous descriptions of e.g. power sets of non-standard sets we have seen above. This has some immediate applications.
-\begin{example} The natural numbers $\mathbb{N}$ of $\mathfrak{Prob}$ are a standard set. In particular, all of arithmetic works just the same.
+\begin{example} The natural numbers $\mathbb{N}$ of $\mathfrak{Prob}$ are a standard set. In particular, all of arithmetic works just the same. %Is the same true for reals? I believe so.
 \end{example}
 \begin{proof}
 The natural numbers object of a Grothendieck topos is always the constant sheaf with value $\mathbb{N}$. \cite{XYZ}.
@@ -1236,7 +1237,8 @@ This proof can, in fact be adapted in many situations, to suggest that most coun
 \begin{remark} All this is not too exotic, so in practice one may just pretend to work formally in ZFA as one usually pretends to do so in ZFC. The only thing one has to be vary of is the failure of the axiom of choice. But as the proof of the last proposition suggests, the failure of the axiom of choice can be strictly controlled using fairly straight forward multi-product calculations.
 \end{remark}
 \section{Forgetting how to measure}
-In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
+There is a fifth and last interpretation of our topos. We put it here, last, as we haven't really used it in this paper. It can however turn out to be an interesting tool, if we want to consider structures on our topos, which don't really concern themselves with the measure. It allows us to reduce to the underlying boolean algebras, whose combinatorics are far simpler.\newline
+\indent In the case of "bare" boolean algebras, in particular, atomless ones, there is a well-known, classical model theoretic theorem. It has some less classical consequences which mirror quite closely what we have done above.
 \begin{theorem} The first-order theory of atomless, decidable boolean algebras is complete. Moreover, the atomic topos on the site  $FinSur$ given by non-empty finite sets and surjections is its classifying topos and that is Morita equivalent to the automorphism group of boolean algebras of the Cantor space $\mathfrak{C}$ topologised via the subgroups fixing finite partitions.
 \[ \text{Sh}(FinSur, J_{at})\simeq \text{Cont}(Aut_{Bool}(\mathfrak{C}))\]
 Its universal model is given by $y(2)\sqcup y(1) \sqcup y(1)$ for any one-element set $1$ and the two-element set $2$ i.e. the functor assigning each set its power-set algebra.
@@ -1244,6 +1246,8 @@ Its universal model is given by $y(2)\sqcup y(1) \sqcup y(1)$ for any one-elemen
 \begin{proof} For everything besides the universal model, see \cite{caramello}.  What is given is the universal model as it is the universal model of the algebraic theory of boolean algebras by D.3.1.2 \cite{elephant} and a $J_{at}$-sheaf as the site is subcanonical.
 \end{proof}
 \begin{remark} Instead of $\mathfrak{C}$ one could take the boolean algebra $I$, again with the automorphism group fixing finite partitions. This follows from the argument given in Olivia.
+\end{remark}
+\begin{remark} In the same way as before, we may interpret the topos as a model of ZFA equipped with a good notion of "standard" and "non-standard" sets.
 \end{remark}
 \begin{lemma} The evident forgetful functor $U: FinProb\rightarrow FinSur$ is a comorphism of sites. The corresponding geometric morphism 
 \[U^*\dashv U_*: \text{Sh}(FinProb, J_{at})\rightarrow  \text{Sh}(FinSur, J_{at})\]
@@ -1275,7 +1279,7 @@ The fact that it is localic hints to the fact that the theory which "our topos" 
 \[U^*(Y(2)\sqcup y(1) \sqcup y(1))= (U^*y(2))\sqcup (U^*y(1))\sqcup (U^*y(1))=\bigsqcup_{r\in (0,1)}yU_{(2,r)}\sqcup yU_1 \sqcup yU_1, \] which is the universal model of the theory of continuum boolean probability algebras. It is easily checked that this identification induces an isomorphism of the boolean algebra structures.
 \end{proof}%Super technical detail allert!!!!!!! r=0, r=1 !!!!!!!! a single point missing !!!!!!!!!!!!!
 We can also characterise the internal complete boolean algebra, the sheaves over which are equivalent to our topos.
-\begin{lemma} Given the sheaf of boolean algebras $\mathbb{M}$ which assigns to a finite sets the power set of the set of probability measures on it and a set map $f:X\rightarrow Y$ to the map given by $\{\nu \}\mapsto \{\mu| \forall y\in Y. \nu(y)=\sum_{x\in f^{-1}(y)}\mu(y)  \}$. Then we get:
+\begin{lemma} Given the sheaf of boolean algebras $\mathbb{M}$ which assigns to a finite sets the power set of the set of probability measures on it and a set map $f:X\rightarrow Y$ the map given by $\{\nu \}\mapsto \{\mu| \forall y\in Y. \nu(y)=\sum_{x\in f^{-1}(y)}\mu(y)  \}$. Then we get:
 \[\text{Sh}(FinProb,J_{at})\simeq \text{Sh}_{\text{Sh}(FinSur,J_{at})}(\mathbb{M}) \]
 \end{lemma}
 \begin{proof} By [elephant], we need to compute $U_*\Omega$ for the subobject classifyer $\Omega$:
@@ -1292,7 +1296,7 @@ We can also characterise the internal complete boolean algebra, the sheaves over
 \end{center}
 Pulling back $\alpha_f$ is given by sending $\{\nu\}$ to the set of all possible measures $\mu$ on $X$ whose pushforward measure is $\nu$.  
 \end{proof} 
-This construction looks strikingly similar to the distribution (or finitary Giry) monad used in other category theoretic investigations of probability.
+This construction looks strikingly similar to the distribution (or finitary Giry) monad used in other category theoretic investigations of probability (composed with the contravariant power set functor) .
 %[quote some paper] We can recover $\mathbb{M}$ as the following composite:
 %\begin{center}
 %\begin{tikzcd}
