@@ -1474,6 +1474,84 @@ interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y
 %finite probability spaces equipped with subsets.  Given $(X,\mu, x)$ we seek to calculate this set of sieves. The covering sieves are precisely sieves of morphisms $\{f_i: (Y_i,\nu_i,y_i)\rightarrow (X,\mu,x)\}$ such that $\bigcup_i f_i(y_i)=x$.
 %\end{example}
 
+
+\section{Applications}
+
+In this section we aim to ilustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
+
+% TODO: We should throughly explain why stuff like L^0 doesn't work and the philosophical ramifications of this. Because it is very nonobvious and philosophically interpreting Prob has been and still is one of the hardest problems we have faced. It would be retarded not to write about it.
+
+% We need better notation for those coproducts
+
+% TODO: This should be moved to the appropriate section:
+\begin{definition}
+    \begin{enumerate}
+        \item $P^1_n := \{ (r_i) \in \mathbb{R}^n | \sum_{i=1}^n, r_i \geq 0 \}$
+        \item $P^2_{r_i,s_i} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} | \sum_{i=1}^n t_{ij} = s_j, \sum_{j=1}^m t_{ij} = r_i, t_{ij} \geq 0 \}$
+        \item $P^2_{n,m} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} | \sum_{i,j = 1}^{n,m} t_{ij} = 1 , t_ij \geq 0 \}$
+    \end{enumerate}
+\end{definition}
+% TODO: Write out multiproduct using this, maybe write a more general definition, though not sure whether we need it.
+
+\begin{definition}
+    Let the sheaf of simple functions $\mathcal{S} \in Sh(FinProb, J_{at})$ be defined by
+    \[
+        \mathcal{S}(X,\mu) := \mathbb{R}^X,
+    \]
+    where we send a map $f: (X,\mu) \to (Y,\nu)$ to precomposition with $f$.
+\end{definition}
+
+We check the sheaf condition:
+
+\begin{proposition}
+    $S$ is a sheaf.
+\end{proposition}
+\begin{proof}
+    We check the sheaf condition in \ref{sheaf_condition_weak} by checking that the fork
+    \[
+        \begin{tikzcd} \mathbb{R}^Y \arrow[r, "f^*"] & \mathbb{R}^X \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] &  \mathbb{R}^{X \times_f X}
+        \end{tikzcd}
+    \]
+    is actually an equalizer. Since $f$ is surjective, $f^*$ is injective and moreover we know that its image consists of the $s \in \mathbb{R}^X$ that are constant on the fibers of $f$ (by fibers we mean $f^{-1}(y)$ for $y \in Y$).
+
+    Thus it only remains to show that if for an $s \in \mathbb{R}^X$ we have that $\pi_1(s) = \pi_2(s)$, then $s$ is constant on the fibers of $f$.
+
+    So assume that $\pi_1(s) = \pi_2(s)$. Then $s \circ \pi_1 = s \circ \pi_2$, which elementwise sais that for all $x,y \in X$ with $f(x) = f(y)$, we have that $s(x) = s(y)$. This implies that $s$ is constant on the fibers of $f$, concluding the proof.
+\end{proof}
+
+Using this, we can define simple functions over any interval.
+
+\begin{definition}
+    \begin{enumerate}
+        \item Equip $S$ with $\mathbb{R}$-algebra structure, with poset structure and with unary relations indicating the expected value. Call such an object an expectation algebra. % TODO: Impose some axioms for the sake of an expectation algebra being a sensical concept.
+        \item Define expectation algebra structure on $\mathcal{S}$.
+        \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
+    \end{enumerate}
+\end{definition}
+
+In order to understand what the simple functions mean on the models, we need to decompose it into atoms, since then we can exploit that the inverse image preserves coproducts.
+
+% TODO: We really need better notation for those coproducts......
+\begin{proposition}
+    $\mathcal{S} \cong \coprod_{n, r_i \in P^1_n, y_1 \le \cdots y_n} yU_{r_i}$
+    % also describe this on the other symbols of an integration algebra.
+\end{proposition}
+\begin{proof}
+    Check this objectwise and on morphisms.
+\end{proof}
+
+We check that this concept of a simple function corresponds to the classical concept that is given in \cite{fremlin}. % TODO: Elaborate on this and explain how fremlin shows that this abstract def of simple functions corresponds to the usual one on actual sigma-algebras.
+
+\begin{proposition}
+    Let $(A,\mu)$ be an interval in $Set$. Then the simple functions over $(A,\mu)$ can be given by:
+\end{proposition}
+
+\begin{theorem}
+    The simple functions over an interval are all geometrically (infinitary first order?) equivalent as expectation algebras.
+\end{theorem}
+
+This actually is quite a cool theorem. Does it actually mean what I think it means in that no free vars are allowed?
+
 \section{Appendix: Models in Set}
 
 In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seeing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
