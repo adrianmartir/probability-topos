@@ -1123,7 +1123,8 @@ We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma,
 \end{proof}
 
 This yields a new site presentation, which we will see is extremely easy to work with.
-\begin{corollary} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$. % What is this even supposed to mean???
+\begin{corollary} \label{coprod_representation}
+    $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$. % What is this even supposed to mean???
 \end{corollary}
 
 Using this site for substantial applications will result in having to write coproducts whose index will be many lines long. This is very inconvenient to write down and moreover we don't find it very transparent when it comes to understanding what is going on. Thus, we give a more convenient notation for coproducts.
@@ -1143,18 +1144,20 @@ Using this site for substantial applications will result in having to write copr
         \[
             \langle T(x) | x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} A_x , 
         \]
-        where we Yoneda embedd the objects of $FinProb_{at}$ into $\mathfrak{Prob}$ and then coproduct them.
+        where we Yoneda embedd the objects of $FinProb_{at}$ into $\mathfrak{Prob}$ and then coproduct them. We will call a sheaf written in this notation a \emph{set of atoms}.
     \end{enumerate}
 \end{definition}
 
 This notation is the payoff of the efforts that had been directed towards a combinatorial understanding of $FinProb_{at}$. One should be aware that the coproduct that results in this notation will contain many atoms twice, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order. This means that we can only think of $\mathcal{A}$ and $\mathcal{A}^{re}$ as sets that we can use to index our atoms, but not as the actual objects in the category of atoms.
 
-We give some examples as how to it makes things easier. Note that we omit wrting down the trivial subgroup in the triple below when the subsets of $\mathcal{A}$ we have are even subsets of $\mathcal{A}^{re}$.
+The crucial thing about this notation, is that \ref{coprod_representation} gurantees that every sheaf can be written this way. Moreover, when the subsets of $\mathcal{A}$ are even subsets of $\mathcal{A}^{re}$, we will be able to precisely describe the sheaves that are coproducts of sheaves representable over the site $(FinProb, J_{at})$. In this case, we omit writing down trivial subgroups everywhere in our notation.
+
+We give some examples as how to it makes things easier. 
 
 \begin{example}
     \begin{enumerate}
         \item The binary multiproducts we have dealt with so often, can now be written as:
-        \[ y U_{r_i} \times y U_{s_j} = \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \]
+        \[ y U_{r_i} \times y U_{s_j} = \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \] % TODO: Define the P stuff earlier.
         where $1$ denotes the one-object set
         \item We can also express the universal model $U$ in the following way:
         \[ U = \langle 1 | (r_1,r_2) \in P^1_1 \rangle. \]
@@ -1162,6 +1165,8 @@ We give some examples as how to it makes things easier. Note that we omit wrting
 \end{example}
 
 The previous examples may be too easy to fully make use of the notation. In chapter \ref{applications} we will see that describing the simple functions will heavily rely on it. For that example, we will also need to understand maps between sets written in our notation.
+
+One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The striking thing, is that naively defining such a concept of a parameterized set, would most likely end in failture, for the simple reason that on an elementary level(if one were to expand all the topos theory), these semantics are ridiculously complicated. Especially because of the fact that there exist 'imaginary atoms' which took considerable efforts to classify.
 
 \begin{proposition}
     Describe maps between two sets in this notation $\langle .. \rangle$.
