@@ -1110,11 +1110,9 @@ Notice that this immediately implies that $s$ must be constant on the fibers of 
 \end{remark}
 \begin{definition} Define the \emph{category of atoms} $FinProb_{at}$\emph{ of }$FinProb$ as the full subcategory of $\mathfrak{Prob}$ of atoms.
 \end{definition}
-This yields a new site presentation, which is set theoretic in spirit.
-\begin{corollary} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$.
-\end{corollary}
 
-We are also equipped to characterise this category in combinatorial terms.
+Before we actually use $FinProb_{at}$, we describe this category in a straightforward combinatorial manner.
+
 \begin{theorem} The category $FinProb_{at}$ is equivalent to the following category. \begin{enumerate}
 \item Objects are given by tuples $(M,\mu, V)$ where $(M,\mu)$ is a finite probability space and $V$ is a subgroup of its automorphism group. 
 \item Morphisms $(M,\mu, V)\rightarrow (N,\nu, U)$ are given by measure-preserving functions $f:(M,\mu)\rightarrow (N,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $, up to post composition by elements in $U$.\end{enumerate}
@@ -1123,8 +1121,53 @@ We are also equipped to characterise this category in combinatorial terms.
 %We use Theorem 6.7 of \cite{caramello_lafforgue}.
 We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma, a morphism $y(M,\mu)\rightarrow y(N,\nu)/U$ corresponds to an element of $(y(N,\nu)/U)(M,\mu)$. This has been computed to be maps $(M,\mu)\rightarrow (N,\nu)$ up to permutation by $\sigma\in U$. A morphism $y(M,\mu)/V \rightarrow y(N,\nu)/U$ is simply a morphism such that $y(M,\mu)\rightarrow y(N,\nu)/U$ factors over the quotient map $y(M,\mu)\rightarrow y(M,\mu)/V$. This means it is a morphism $f:(X,\mu)\rightarrow (Y,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $. Hence the statement follows.
 \end{proof}
-\begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
-\end{remark}
+
+This yields a new site presentation, which we will see is extremely easy to work with.
+\begin{corollary} $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$. % What is this even supposed to mean???
+\end{corollary}
+
+Using this site for substantial applications will result in having to write coproducts whose index will be many lines long. This is very inconvenient to write down and moreover we don't find it very transparent when it comes to understanding what is going on. Thus, we give a more convenient notation for coproducts.
+
+\begin{definition}
+    \begin{enumerate}
+        \item Let $\mathcal{A}$ denote the set 
+        \[
+            \{((r_i)_{i=1,\cdots, n}, H) | r_i \geq 0, \sum r_i = 1, H \leq Aut(U_{r_i})\}.
+        \]
+        \item For any $x \in \mathcal{A}$ with $x = (r_i, H)$, denote by $A_x \in \mathfrak{Prob}$ the atom corresponding to the finite probability space $U_{r_i}$ divided by the group of permutations $H$.
+        \item Let $\mathcal{A}^{re}$ denote the set
+        \[
+            \{(r_i)_{i=1,\cdots, n} | r_i \geq 0, \sum r_i = 1\}.
+        \]
+        \item Let $S$ be a subset of $\mathcal{A}$ and let for for each $x \in S$, $T(x)$ be any set. Then we can introduce the following notation:
+        \[
+            \langle T(x) | x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} A_x , 
+        \]
+        where we Yoneda embedd the objects of $FinProb_{at}$ into $\mathfrak{Prob}$ and then coproduct them.
+    \end{enumerate}
+\end{definition}
+
+This notation is the payoff of the efforts that had been directed towards a combinatorial understanding of $FinProb_{at}$. One should be aware that the coproduct that results in this notation will contain many atoms twice, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order. This means that we can only think of $\mathcal{A}$ and $\mathcal{A}^{re}$ as sets that we can use to index our atoms, but not as the actual objects in the category of atoms.
+
+We give some examples as how to it makes things easier. Note that we omit wrting down the trivial subgroup in the triple below when the subsets of $\mathcal{A}$ we have are even subsets of $\mathcal{A}^{re}$.
+
+\begin{example}
+    \begin{enumerate}
+        \item The binary multiproducts we have dealt with so often, can now be written as:
+        \[ y U_{r_i} \times y U_{s_j} = \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \]
+        where $1$ denotes the one-object set
+        \item We can also express the universal model $U$ in the following way:
+        \[ U = \langle 1 | (r_1,r_2) \in P^1_1 \rangle. \]
+    \end{enumerate}
+\end{example}
+
+The previous examples may be too easy to fully make use of the notation. In chapter \ref{applications} we will see that describing the simple functions will heavily rely on it. For that example, we will also need to understand maps between sets written in our notation.
+
+\begin{proposition}
+    Describe maps between two sets in this notation $\langle .. \rangle$.
+\end{proposition}
+
+
 We know from \cite{caramello_lafforgue} that the category of atoms also has all multilimits, which will again come handy when actually doing computations.
 \begin{lemma} Given atoms $yU_{r_1\cdots r_n}/G$ and $yU_{s_1\cdots s_m}/H$, we have:
 \[ yU_{r_1\cdots r_n}/G\times yU_{s_1\cdots s_m}/H\simeq \bigsqcup_{\substack{t_{ij}\\ K\subseteq \text{Aut}(U_{t_{ij}})\text{ maximal w.r.t. property }P}}yU_{t_{ij}}/K  \]
@@ -1134,6 +1177,12 @@ Here a subgroup $K$ is said to have property P if for any $\sigma\in K$ there ex
 \begin{proof}
 IS THIS TRUE? PROBABLY NOT
 \end{proof}
+
+TODO: Insert subsection on group-action perspective on all of this here.
+
+\begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
+\end{remark}
+
 %\begin{definition} 
 %Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the \emph{transportation polytope} $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}_{\geq 0}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
 %\end{definition}
@@ -1166,6 +1215,7 @@ IS THIS TRUE? PROBABLY NOT
 %\indent Conversely, given a graph $\Gamma(K)$ for some matrix $K\in \mathcal{N}(r,r)$ and matrices $K_j\in E(M_j,N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$ then $\Gamma(\sum_j K_j)\subseteq \Gamma(K)$. But the only matrix inside $\mathcal{N}(r,r)$ with a graph contained in $\Gamma(K)$, is $K$ whence $\sum_j K_j=K\in \mathcal{N}(M,N)$.
 %\end{proof}
 %Note that the latter condition is purely graph theoretical. 
+
 \section{$\mathfrak{Prob}$ as a set-theoretical universe}
 
 \begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA  (Zermelo-Frenkel with atoms or urelements). It is a so called \emph{Fraenkel-Mostowski model}. This is formulated as a single-sorted first order language with equality $=$, membership relation $\in$ and a constant $A$ set of atoms and fulfilling the following axioms:
@@ -1473,7 +1523,8 @@ interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y
 %\begin{example} The global sections of the subobject classifier $\Omega$ of $\mathfrak{Rand}$ is given by $J_{at}\rtimes J_{can}$-closed sieves on %$(\{\star\}, 1, \{\star\} )$ (the probability space with one object equipped with itself as a subset), which is the terminal object of $FinProb\rtimes U$.
 %finite probability spaces equipped with subsets.  Given $(X,\mu, x)$ we seek to calculate this set of sieves. The covering sieves are precisely sieves of morphisms $\{f_i: (Y_i,\nu_i,y_i)\rightarrow (X,\mu,x)\}$ such that $\bigcup_i f_i(y_i)=x$.
 %\end{example}
-\section{Applications}
+
+\section{Applications} \label{applications}
 
 In this section we aim to ilustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
 
@@ -1521,17 +1572,18 @@ Using this, we can define simple functions over any interval.
 
 \begin{definition}
     \begin{enumerate}
-         \item Equip $S$ with $\mathbb{R}$-algebra structure, with poset structure and with unary relations indicating the expected value. Call such an object an expectation algebra. % TODO: Impose some axioms for the sake of an expectation algebra being a sensical concept.
+        \item Equip $S$ with $\mathbb{R}$-algebra structure, with poset structure and with unary relations indicating the expected value. Call such an object an expectation algebra. % TODO: Impose some axioms for the sake of an expectation algebra being a sensical concept.
         \item Define expectation algebra structure on $\mathcal{S}$.
-                \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
-   \end{enumerate}
+        \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
+    \end{enumerate}
 \end{definition}
 
 In order to understand what the simple functions mean on the models, we need to decompose it into atoms, since then we can exploit that the inverse image preserves coproducts.
 
 % TODO: We really need better notation for those coproducts......
 \begin{proposition}
-    $\mathcal{S} \cong \coprod_{n, r_i \in P^1_n, y_1 \le \cdots y_n} yU_{r_i}$    % also describe this on the other symbols of an integration algebra.
+    $\mathcal{S} \cong \coprod_{n, r_i \in P^1_n, y_1 \le \cdots y_n} yU_{r_i}$
+    % also describe this on the other symbols of an integration algebra.
 \end{proposition}
 \begin{proof}
     Check this objectwise and on morphisms.
