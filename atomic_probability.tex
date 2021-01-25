@@ -1547,7 +1547,7 @@ In this section we aim to ilustrate how we can use $\mathfrak{Prob}$ in order to
 
 % We need better notation for those coproducts
 
-% TODO: This should be moved to the appropriate section:
+% TODO: This should be moved to the appropriate section.
 \begin{definition}
     \begin{enumerate}
         \item $P^1_n := \{ (r_i) \in \mathbb{R}^n | \sum_{i=1}^n, r_i \geq 0 \}$
@@ -1565,23 +1565,6 @@ In this section we aim to ilustrate how we can use $\mathfrak{Prob}$ in order to
     where we send a map $f: (X,\mu) \to (Y,\nu)$ to precomposition with $f$.
 \end{definition}
 
-We check the sheaf condition:
-
-\begin{proposition}
-    $S$ is a sheaf.
-\end{proposition}
-\begin{proof}
-    We check the sheaf condition in \ref{sheaf_condition_weak} by checking that the fork
-    \[
-        \begin{tikzcd} \mathbb{R}^Y \arrow[r, "f^*"] & \mathbb{R}^X \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] &  \mathbb{R}^{X \times_f X}
-        \end{tikzcd}
-    \]
-    is actually an equalizer. Since $f$ is surjective, $f^*$ is injective and moreover we know that its image consists of the $s \in \mathbb{R}^X$ that are constant on the fibers of $f$ (by fibers we mean $f^{-1}(y)$ for $y \in Y$).
-
-    Thus it only remains to show that if for an $s \in \mathbb{R}^X$ we have that $\pi_1(s) = \pi_2(s)$, then $s$ is constant on the fibers of $f$.
-
-    So assume that $\pi_1(s) = \pi_2(s)$. Then $s \circ \pi_1 = s \circ \pi_2$, which elementwise sais that for all $x,y \in X$ with $f(x) = f(y)$, we have that $s(x) = s(y)$. This implies that $s$ is constant on the fibers of $f$, concluding the proof.
-\end{proof}
 
 Using this, we can define simple functions over any interval.
 
