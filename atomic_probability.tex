@@ -1558,44 +1558,95 @@ In this section we aim to ilustrate how we can use $\mathfrak{Prob}$ in order to
 % TODO: Write out multiproduct using this, maybe write a more general definition, though not sure whether we need it.
 
 \begin{definition}
-    Let the sheaf of simple functions $\mathcal{S} \in Sh(FinProb, J_{at})$ be defined as the set of atoms
+    Let the simple functions $\mathcal{S} \in \mathfrak{Prob}$ be defined as the set of atoms
     \[
-        \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
+        \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle .
     \]
 \end{definition}
 
-The motivated reader can check that this definition yields that $\mathcal{S}(X,\mu) := \mathbb{R}^X$ and that maps get sent to precomposition with them. The essential point is that we can describe any $s \in \mathbb{R}^X$ by looking at the ordered set of values in $\mathbb{R}$ that the function $s$ takes.
+The motivated reader can check that this definition yields the following on the $FinProb$ site: $\mathcal{S}(X,\mu) \cong \mathbb{R}^X$ and maps get sent to precomposition with them. The essential point is that we can describe any $s \in \mathbb{R}^X$ by looking at the ordered set of values in $\mathbb{R}$ that the function $s$ takes.
 
-Using this, we can define simple functions over any interval.
+We will show that on models these simple functions yield the usual concept. Of course we don't want to compare the different concepts of simple functions as sets, but we rather want to equip them with suitable structure.
+
+\begin{definition}
+    Define the theory of expectation algebras to be the geometric theory of $\mathbb{R}$-algebras together with a unary relation symbol $E_r$ for each $r \in \mathbb{R}$, adding the following geometric sequents:
+    \begin{enumerate}
+        \item \textit{$E_r$ form a partition}. For all $r, s \in \mathbb{R}$ with $r \neq s$ we have an axiom
+        \[
+        E_r(a)  \wedge E_s(a) \vdash \bot
+        \]
+        and we also have an axiom
+        \[
+        \top \vdash \bigvee_{r \in \mathbb{R}} E_r(a).
+        \]
+        \item \textit{Linearity}. For all $r, s \in \mathbb{R}$, we require the sequents
+        \[
+        E_r(a) \wedge E_s(a) \vdash E_{r+s}(a + b)
+        \]
+        and for all $r \in \mathbb{R}$ and $\lambda \in \mathbb{R}$, we also need
+        \[
+        E_r(a) \vdash E_{\lambda r} (\lambda \cdot a) .
+        \]
+        \item \textit{Positivity}.
+        \[
+            \top \vdash \bigvee_{r \geq 0} E_r a^2
+        \]
+        \item \textit{Expectation}.
+        \[
+            \top \vdash E_1 1
+        \]
+    \end{enumerate}
+    %     \item Define expectation algebra structure on $\mathcal{S}$.
+    %     \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
+    % \end{enumerate}
+\end{definition}
+
+Here we made use of the same trick we used when defining the theory of boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra, since we can consider $\lambda \cdot 1$. This means that if $A$ is an $\mathbb{R}$-algebra in any topos, we get a canonical operator $\mathbb{E}: A \to A$, which can be thought of an expectation operator.
+
+% TODO: Is this even true?
+Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
+
+% TODO: ref this:https://terrytao.wordpress.com/2014/06/28/algebraic-probability-spaces/
+We now define expectation algebra structure on $\mathcal{S}$, without checking that the axioms hold. We will get that later for free. Before we do that, we need to compute $\mathcal{S} \times \mathcal{S}$:
+
+\begin{align*}
+    S \times S &\cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle \\
+    &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m | y_i, z_j \in \mathbb{R} \} | (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}^{re} \rangle
+\end{align*}
+
+We use \ref{atom_coprod_maps} to specify the operations $\mathcal{S} \times \mathcal{S} \to \mathcal{S}$.
 
 \begin{definition}
     \begin{enumerate}
-        \item Equip $S$ with $\mathbb{R}$-algebra structure, with poset structure and with unary relations indicating the expected value. Call such an object an expectation algebra. % TODO: Impose some axioms for the sake of an expectation algebra being a sensical concept.
-        \item Define expectation algebra structure on $\mathcal{S}$.
-        \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
+        \item Define addition on an element $(t_{ij}, y_i, z_j)$ to be $(t_{ij}, y_i + z_j)$ and the corresponding morphisms of atoms to be the identity.
+        \item Define multiplication of an element $(t_{ij}, y_i, z_j)$ to be $(t_{ij}, y_i \cdot z_j)$ and the corresponding morphisms of atoms to be the identity.
+        \item Define $E_r \to \mathcal{S}$ to be the subobject
+        \[
+            \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R}, \sum r_i y_i = r \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle .
+        \]
     \end{enumerate}
 \end{definition}
 
-In order to understand what the simple functions mean on the models, we need to decompose it into atoms, since then we can exploit that the inverse image preserves coproducts.
-
-% TODO: We really need better notation for those coproducts......
-\begin{proposition}
-    $\mathcal{S} \cong \coprod_{n, r_i \in P^1_n, y_1 \le \cdots y_n} yU_{r_i}$
-    % also describe this on the other symbols of an integration algebra.
-\end{proposition}
-\begin{proof}
-    Check this objectwise and on morphisms.
-\end{proof}
 
 We check that this concept of a simple function corresponds to the classical concept that is given in \cite{fremlin}. % TODO: Elaborate on this and explain how fremlin shows that this abstract def of simple functions corresponds to the usual one on actual sigma-algebras.
 
+% Should I use a sigma algebra?
 \begin{proposition}
-    Let $(A,\mu)$ be an interval in $Set$. Then the simple functions over $(A,\mu)$ can be given by:
+    Let $(A,\mu)$ be an interval in $Set$. Then the simple functions over $(A,\mu)$ can be given by are the usual simple functions or sth.
 \end{proposition}
+
+One of the most fascinating things about the set of atoms notation, or more generally the combinatorial sites $(FinProb,J_{at})$ and $(FinProb_{at}, J_{at})$, is that partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. Similarly, in the way we defined the simple functions, we never had to deal with issues about \emph{where} exactly the simple function took a specific value.
+
+Applying the inverse image functors of models, somehow inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
 
 \begin{theorem}
     The simple functions over an interval are all geometrically (infinitary first order?) equivalent as expectation algebras.
 \end{theorem}
+\begin{proof}
+    Use that the topos is two-valued.
+\end{proof}
+
+% TODO: Say that poset structure also matches, since x \leq y iff y - x is a square.
 
 This actually is quite a cool theorem. Does it actually mean what I think it means in that no free vars are allowed? This is one of those theorems that I am not sure how classical model theory would even be able to prove.
 
