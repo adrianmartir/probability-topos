@@ -1142,9 +1142,10 @@ Using this site for substantial applications will result in having to write copr
         \]
         \item Let $S$ be a subset of $\mathcal{A}$ and let for for each $x \in S$, $T(x)$ be any set. Then we can introduce the following notation:
         \[
-            \langle T(x) | x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} A_x , 
+            \langle T(x) | x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} A_x .
         \]
-        where we Yoneda embedd the objects of $FinProb_{at}$ into $\mathfrak{Prob}$ and then coproduct them. We will call a sheaf written in this notation a \emph{set of atoms}.
+        We will call a sheaf written in this notation a \emph{set of atoms}.
+        \item We define an \emph{element} of a set of atoms $\langle T(x) | x \in S \rangle$ to be a tuple $(x,t) \in \coprod_{x \in S} T(x)$.
     \end{enumerate}
 \end{definition}
 
@@ -1157,21 +1158,30 @@ We give some examples as how to it makes things easier.
 \begin{example}
     \begin{enumerate}
         \item The binary multiproducts we have dealt with so often, can now be written as:
-        \[ y U_{r_i} \times y U_{s_j} = \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \] % TODO: Define the P stuff earlier.
+        \[ y U_{r_i} \times y U_{s_j} \cong \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \] % TODO: Define the P stuff earlier.
         where $1$ denotes the one-object set
         \item We can also express the universal model $U$ in the following way:
-        \[ U = \langle 1 | (r_1,r_2) \in P^1_1 \rangle. \]
+        \[ U \cong \langle 1 | (r_1,r_2) \in P^1_1 \rangle. \]
     \end{enumerate}
 \end{example}
 
-The previous examples may be too easy to fully make use of the notation. In chapter \ref{applications} we will see that describing the simple functions will heavily rely on it. For that example, we will also need to understand maps between sets written in our notation.
+The previous examples may be too easy to fully make use of the notation. In chapter \ref{applications} we will see be a more interesting application when we look at simple functions.
 
-One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The striking thing, is that naively defining such a concept of a parameterized set, would most likely end in failture, for the simple reason that on an elementary level(if one were to expand all the topos theory), these semantics are ridiculously complicated. Especially because of the fact that there exist 'imaginary atoms' which took considerable efforts to classify.
+One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The convenient thing, is that when writing down sheaves in this way, one does not need to check neither functoriality nor sheaf conditions. Of course, this is does not mean that our topos is equivalent to $Set^{\mathcal{A}}$, because while the objects match, the morphisms are different:
 
-\begin{proposition}
-    Describe maps between two sets in this notation $\langle .. \rangle$.
+\begin{proposition}\label{atom_coprod_maps}
+    Let $\mathcal{F} = \langle T(x) | x \in S \rangle$ and $\mathcal{G} = \langle T'(x) | x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely maps $(g, (f_x))$, where $g$ is a map between the sets of elements
+    \[
+        \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
+    \]
+    and for each element $(x,t) \in \coprod_{x \in S} T(x)$ with $(x',t') = g(x,t)$, $f_{x,t}$ is a morphism
+    \[
+        A_x \xrightarrow{f_{x,t}} A_{x'} .
+    \]
 \end{proposition}
-
+\begin{proof}
+    Use the universal property of the coproduct of atoms and then use that each map needs to factor through one of the images because the image of an atom needs to be an atom again.
+\end{proof}
 
 We know from \cite{caramello_lafforgue} that the category of atoms also has all multilimits, which will again come handy when actually doing computations.
 \begin{lemma} Given atoms $yU_{r_1\cdots r_n}/G$ and $yU_{s_1\cdots s_m}/H$, we have:
