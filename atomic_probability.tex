@@ -1371,111 +1371,12 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 \end{proof}
 \begin{remark} The same argument would apply for any homogeneous measure algebra instead of $I$.
 \end{remark}
-\section{Advanced, general tools}
-\begin{lemma}[Lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
-\begin{center}
-\begin{tikzcd}
-\text{Sh}(\mathcal{B}) \arrow[d, "\bar{f}"'] \arrow[r, "\Gamma"]      & \text{Set} \arrow[d, "f"] \\
-{\text{Sh}^{(G,\tau)}(\mathcal{B})} \arrow[r, "{\Gamma^{(G,\tau)}}"'] & \text{Cont}_\tau(G)      
-\end{tikzcd}
-\end{center}
-Here $\text{Sh}^{(G,\tau)}(\mathcal{B})$ denotes the topos of $(G,\tau)$-equivariant sheaves on $\mathcal{B}$ and $f^*$, $\bar{f}^*$ just forget the group action.\newline
-\indent In particular, $\bar{f}$ is an open surjective geometric morphism.
-\end{lemma}
-\begin{proof} To see that this is a pullback, note that $\Gamma^{(G,\tau)}$ is a localic geometric morphism and pullbacks of such morphisms (along any geometric morphism) are again localic by B3.3.6 \cite{elephant}.  Denote by $(\mathcal{E},e,\Gamma)$ some choice of pullback of the square commuting up to natural iso $\eta$. Then it is determined by $\Gamma \Omega_\mathcal{E}$ which is a locale [find proper ref]. We know $f$ is open geometric as points of atomic toposes are always open surjective by C3.5.6 \cite{elephant}. By C3.1.28 \cite{elephant} $f$ is a left Beck-Chevalley morphism, hence we compute, denoting the subobject classifier of $\text{Sh}^{(G,\tau)}(\mathcal{B})$ by $\Omega$:
-\[ \mathcal{B}=f^*\Gamma^{(G,\tau)}\Omega\simeq \Gamma e^*\Omega\simeq \Gamma e^*(1\sqcup 1)\simeq \Gamma (1\sqcup 1)\simeq\Gamma \Omega_\mathcal{E}  \]
-\newline
-In the first step we use the well-known description of subobject classifiers of localic topoi [ref]. In the second steps we use that for boolean topoi we have $(\top,\bot):1\sqcup 1\simeq \Omega$. That the boolean algebra structure is preserved  by the Beck-Chevalley morphism is immediate as all functors in question preserve finite limits and thus the algebraic structure of boolean algebras. It remains to check whether the boolean algebra structure of $ e^*\Omega$ coincides with the one of $ \Omega_\mathcal{E}$. Recall that this is induced by the $\Omega$-axiom using the characteristic arrows of various subobjects defined by pullbacks [do we need diagrams?]. $e^*$ preserves the subobject classifier, the inclusions $\top:1\rightarrow \Omega$ as well as pullbacks, the terminal object and injectivity of morphisms. Thus 
-\begin{center}
-\begin{tikzcd}
-e^*S \arrow[r] \arrow[d, hook] & 1=e^*1 \arrow[d, "\top=i_1=e^* i_1=e^*\top"]              \\
-e^*X \arrow[r, "\chi_{e^*S}"']      & \Omega=1\sqcup 1=e^*(1\sqcup 1)=e^*\Omega
-\end{tikzcd}
-\end{center}
-\indent is a pullback if the following is:
-\begin{center}
-\begin{tikzcd}
-S \arrow[r] \arrow[d, hook] & 1 \arrow[d, "\top"] \\
-X \arrow[r, "\chi_S"']      & \Omega             
-\end{tikzcd}
-\end{center}
-Hence by the uniqueness condition of the $\Omega$-axiom, $e^*\chi_S=\chi_{e^*S}$. In particular, all the structure defined in this way gets preserved. This proves that the square is indeed a 2-pullback.
-
-\indent Pullbacks of open surjections (along bounded geometric morphisms, so in particular localic geometric morphisms) are again open surjections by C3.1.23 \cite{elephant}, thus $\bar{f}$ has this property. 
-\end{proof}
 
 
-\begin{theorem}[Very strong completeness] Given a probability algebra $(M,\alpha)$ of homogeneous-Maharam-type with classifying morphism as a model of the theory of probability intervals $f_{(M,\alpha)}:\text{Set}\rightarrow \text{Set}[\mathbb{T}_{int}]$, we get the following 2-pullback diagram of topoi and geometric morphisms:
-\begin{center}
-\begin{tikzcd}
-\text{Sh}(M) \arrow[r, "\Gamma"] \arrow[d, "\bar{f}"']   & \text{Set} \arrow[d, "{f_{(M,\alpha)}}"] \\
-{\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)} \arrow[r, "\Gamma^{(G,\tau)}"'] & {\text{Set}[\mathbb{T}_{int}]}                 
-\end{tikzcd}
-\end{center}
-Impressively, $\bar{f}$ is an open surjective geometric morphism. It preserves and reflects infinitary first order logic.
-\end{theorem}
-\begin{proof} 
-Follows immediately from the last two theorems and the bridge 
-\[\text{Cont}_\tau(\text{Aut}_{BPRobAlg}(M,\alpha))\simeq \text{Set}[\mathbb{T}_{int}]\]
- for homogeneous Maharam-type measure algebras under which, as shown in these lemmas, the universal model corresponds to $\mathcal{B}$.%is this the correct wording?
-\end{proof}
-The following might be rather boring as descent for torsors is just giving a "global trivialisation"!
-\begin{corollary}[Descent] The morphism $\bar{f}$ has descent. This means $\mathcal{F}:=\text{Sh}_{\text{Set}[\mathbb{T}_{int}]}(U)$ is equivalent to the category of the descent data.
-Fixing the notation as in the following diagram:
-\begin{center}
-\begin{tikzcd}
-{\text{Sh}(M)\times_\mathcal{F}\text{Sh}(M)\times_\mathcal{F}\text{Sh}(M)} \arrow[r, "\pi_{13}" description] \arrow[r, "\pi_{12}", shift left=3] \arrow[r, "\pi_{23}"', shift right=3]  & {\text{Sh}(M)\times_\mathcal{F}\text{Sh}(M)} \arrow[r, "\pi_2"', shift right=3] \arrow[r, "\pi_1", shift left=3] & {\text{Sh}(M)} \arrow[l, "\Delta" description]
-\end{tikzcd}
-\end{center}
-The category of descent data is defined by tuples $(A,\theta)$ where $A$ is a sheaf on $M$ and $\theta:\pi_1^*A\simeq \pi_2^*A$ is an isomorphism such that $\Delta^*\theta=\text{id}$ and the cocycle condition $\pi_{13}^*\theta=\pi_{12}^*\theta\circ \pi_{23}^*\theta$ is fulfilled. Morphisms of descent data are natural transformations $\psi:A\rightarrow B$ commuting with all the structure.
-\end{corollary}
-\begin{proof} Open surjections are descent morphisms by C5.1.6 \cite{elephant}.
-\end{proof}
-As before, to make this theory workable, we need a lot of different, insightful site presentations. There are two given in \cite{elephant}, first continuous equivariant sheaves A2.1.11(c)%is this a thing? Also C5.4.6
-, secondly an explicit site given in C2.5.8(e). We quote:\newline
-\indent For an open subgroup $U\subseteq G$, define $I_U$ as the subset of $I$ invariant under the action of $U$. We obtain a site $(\mathcal{I},J)$ with $\mathcal{I}$ the category with objects pairs $(U,x)$ of open subgroups $U$ and $x\in I_U$ and morphisms $(U,x)\rightarrow (V,y)$ labelled by cosets $gV$ of $V$ such that $U\subseteq gVg^{-1}$ and $x\leq g(y)$ in $I$.  A sieve $R$ on $(V,y)$ is $J$-covering if $y$ is the join of all those $x$ for which there exists $U$ such that $x\in I_U$ and $V:(U,x)\rightarrow (V,y)\in R$. This site is nice as the projection to the subgroups is cover-reflecting and induces the functor $\Gamma^{(G,\tau)}$ as in the theorem as they note.
-\begin{lemma}\label{Rand_site} $\mathfrak{Rand}$ is equivalent to the category of sheaves over the following site: $(FinProb\rtimes U ,J_{at}\rtimes J_{can})$ where the category $FinProb\rtimes U$ is the category with objects pairs $(X,\mu,x)$, where $(X,\mu)$ is a finite probability space and $x\in \mathcal{P}(X)$, and morphisms $f_{\leq}:(X,\mu, x)\rightarrow (Y,\nu, y)$ are measurable functions $f:(X,\mu)\rightarrow (Y,\nu)$ such that $f(x)\subseteq y$. A sieve $R$ on $(Y,\nu, y)$ is $J_{at}\rtimes J_{can}$-covering if $y$ is the union of all those $f(x)$ such that there exists a $f_{\leq}:(X,\mu,x)\rightarrow (Y,\nu,y)\in R$. In particular the single morphism $f_{\leq}:(X,\mu,f^{-1}(y))\rightarrow (Y,\nu,y)$ is covering for any measure-preserving  function $f$ and the map $FinProb\rtimes U\rightarrow FinProb$ is cover-reflecting.
-
-\end{lemma}
-\begin{proof}
-One just computes the Grothendieck construction "$\rtimes$" for the indexed category $U$ over $FinProb$ as explained in C2.5.4 \cite{elephant}. We use that $U(X,\mu)=\mathcal{P}(X)$ and $U(f):U(Y,\nu)\rightarrow U(X,\mu)$ is given by $f^{-1}:\mathcal{P}(Y)\rightarrow \mathcal{P}(X)$.\footnote{This had been remarked earlier and is fairly obvious. We might actually want to prove it explicitly anyway though.} Thus $FinProb\rtimes U$ has as objects as described in the lemma and as morphisms pairs $(f,\leq)$ where $f:(X,\mu, x)\rightarrow (Y,\nu, y)$ and $\leq: x\rightarrow f^{-1}(y)$ in $\mathcal{P}(X)$ this is equivalent to $f(x)\subseteq y$ in $\mathcal{P}(Y)$. Now we use the same line of argument as in C2.5.8(e) \cite{elephant}. Evidently, any morphism in $FinProb\rtimes U$ can be factored as follows:
-\begin{center}
-\begin{tikzcd}
-(X,\mu,x)\arrow[r, "id_{\leq}"]\arrow[rr,"f_{\leq}", bend right]& (X,\mu, f^{-1}(y))\arrow[r,"\overline{f_{\leq}}"]& (Y,\nu,y) \\
-\end{tikzcd}
-\end{center} 
-$\overline{f_{\leq}}$ is covering as it consists of a $J_{at}$-cover $f:(X,\mu)\rightarrow (Y,\nu)$ and an isomorphism in $\mathcal{P}(X)$ [Is this an argument?]. Thus we may define [insert formal argument!] a sieve $R$ on $(Y,\nu,y)$ to be $J_{at}\rtimes J_{can}$-covering if $y$ is the union of all those $f(x)$ such that there exists a $f_{\leq}:(X,\mu,x)\rightarrow (Y,\nu,y)\in R$.
-\end{proof}
-This proof is super sketchy, which is especially bad as I don't formally understand what is going on. I'm going to have to revisit that. Assuming this holds true, we can also give a very nice condition when a presheaf is a sheaf for this topology:
-\begin{lemma}\label{Rand_combinatorics} A presheaf $F:(FinProb\rtimes U)^{op}\rightarrow \text{Set}$ is a $J_{at}\rtimes J_{can}$-sheaf iff:
-\begin{enumerate}
-\item For any $(X,\mu,x)$ such that $x=\{x_1,\cdots, x_n \}$ we have:
-\[F(X,\mu,x)\simeq \prod_{i=1}^n F(X,\mu,\{x_ i \})   \]
-via the the product of the restriction maps.
-\item For any measure preserving map $f:(X,\mu)\rightarrow (Y,\nu)$, element $y\in Y$ and element $a\in F(X,\mu, f^{-1}(\{y\}))$, if for all forks of measurable functions
-\begin{center}
-\begin{tikzcd}
-{(Z,\lambda)} \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & {(X,\mu)} \arrow[r, "f"] & {(Y,\nu),}
-\end{tikzcd}
-\end{center}
-interpreting these maps as $f_{\leq}:(X,\mu,f^{-1}(\{y\}))\rightarrow (Y,\nu,\{y\})$, $g_{\leq}:(Z,\lambda, (f\circ g)^{-1}(\{ y\} ))\rightarrow (X,\mu, f^{-1}(\{ y \}))$ resp. $h_{\leq}:(Z,\lambda, (f\circ g)^{-1}(\{ y\} ))\rightarrow (X,\mu, f^{-1}(\{ y \}))$, we have $F(g_{\leq})(a)=F(h_{\leq})(a)$ then this implies $a=F(f_{\leq})(b)$ for some $b\in F(Y,\nu, \{y\})$.
-\item[(ii)'] Equivalent to (ii) is that for any map of finite probability spaces $f:U_{r_i}\rightarrow U_{s_j}$ and element $y\in U_{s_j}$ we have an equalizer diagram, with notation as in \ref{sheaf_condition}:
-\begin{center}
-\begin{tikzcd}F(U_{s_j},\{ y\}	)\arrow[r,"Ff_\leq"]& F(U_{r_i},f^{-1}\{y\})\arrow[r, shift left, "F(p_{1,\leq})"]\arrow[r, shift right, "F(p_{2,\leq})", swap] & \prod_{t_{ij}}F(U_{t_{ij}},(f\circ p_1)^{-1}\{y \})
-\end{tikzcd}
-\end{center}
-\end{enumerate}
-\end{lemma}
-\begin{proof} Any sheaf has this properties. (i) is just how the canonical topology is defined and (ii) follows from III4 Lemma 2 of \cite{sheaves_geometry_logic}. This is not that hard to show.
-\end{proof}
-%To make sure that this abstract nonsense is correct or, at least, all the errors within suitably "cancel out" we shall compute the subobject classifier of $\mathfrak{Rand}$ using the description in \ref{Rand_site}.
-%\begin{example} The global sections of the subobject classifier $\Omega$ of $\mathfrak{Rand}$ is given by $J_{at}\rtimes J_{can}$-closed sieves on %$(\{\star\}, 1, \{\star\} )$ (the probability space with one object equipped with itself as a subset), which is the terminal object of $FinProb\rtimes U$.
-%finite probability spaces equipped with subsets.  Given $(X,\mu, x)$ we seek to calculate this set of sieves. The covering sieves are precisely sieves of morphisms $\{f_i: (Y_i,\nu_i,y_i)\rightarrow (X,\mu,x)\}$ such that $\bigcup_i f_i(y_i)=x$.
-%\end{example}
 
 \section{Applications} \label{applications}
 
-In this section we aim to ilustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
+In this section we aim to illustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
 
 % TODO: We should throughly explain why stuff like L^0 doesn't work and the philosophical ramifications of this. Because it is very nonobvious and philosophically interpreting Prob has been and still is one of the hardest problems we have faced. It would be retarded not to write about it.
 
@@ -1584,7 +1485,8 @@ Applying the inverse image functors of models, somehow inserts that missing loca
 
 This actually is quite a cool theorem. Does it actually mean what I think it means in that no free vars are allowed? This is one of those theorems that I am not sure how classical model theory would even be able to prove.
 
-
+\section{Outlook for further research}
+Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
 \section{Appendix: Models in Set}
 
 In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seeing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
