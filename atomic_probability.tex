@@ -1203,8 +1203,8 @@ IS THIS TRUE? PROBABLY NOT
 \end{remark}
 
 \section{$\mathfrak{Prob}$ as a set-theoretical universe}
-
-\begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA  (Zermelo-Frenkel with atoms or urelements). It is a so called \emph{Fraenkel-Mostowski model}. This is formulated as a single-sorted first order language with equality $=$, membership relation $\in$ and a constant $A$ set of atoms and fulfilling the following axioms:
+The findings of the last chapter are so striking, that they allow us to reformulate our constructions, which heavily featured topos theory, in such a way as to not mention topoi in any way whatsoever. The notation introduced there already hints to this possibility. We hope that this makes our theory understandable to a far greater audience. So this chapter is concerned with translating everything into the language of set theory.
+\begin{definition}[ZFA]  A model of Zermelo-Fraenkel set theory with atoms (or urelements) is a model of the single-sorted first order language with equality relation $=$, membership relation $\in$ and a constant $A$, the set of atoms, with the following axioms:
 \begin{center}\begin{tabular}{ |p{3.5 cm}|p{7.5 cm}| }
 \hline
 Decidability&  $\forall x. (x\in A\vee \neg(x\in A))$  \\ % This seems to be obsolete in classical interpretations
@@ -1227,12 +1227,21 @@ $\in$-induction &$\forall x.(\forall y\in x. \phi(y)\implies \phi(x))\implies \f
 \hline
 Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y\in x \exists w\in z. \phi)$\\
 \hline 
-\end{tabular}
+\end{tabular}%what is phi?
 \end{center}
+\end{definition}
+\begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA.
 \end{proposition}
-\begin{proof} Quote [ref: sheaf models for set theory] chapter 2 and 3 \newline%later we will also use chapter 5
-\indent In any of the continuous group action interpretations, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials are computed as sets of maps $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is coset of open subgroup}} gH$. Equality is equality but how to get a global membership relation is a bit less obvious. One uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory. On each of these objects one gets a membership relation using the cartesian closed structure of our topos. So at least presenting the topos using the skeleton given by elements of the objects in the hierarchy, one obtains a classical model of ZFA as described above. %Clean this up
+\begin{proof} Our presentation follows [ref: sheaf models for set theory] chapter 2 and 3, where much more detail can be found. It is also proven there, that the structure we will give in this proof actually fulfils the axioms. \newline%later we will also use chapter 5
+\indent
+We use the site presentation $\mathfrak{Prob}\simeq \text{Cont}_\tau(\text{Aut}_{BPAlg})(I,\lambda)$.\newline
+\indent In any of the continuous group action, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials of group actions $X$ by $Y$ are computed as sets of functions $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is the set of cosets of open subgroup}} gH$. %This seems incorrect, we want the set of cosets
+ Equality is equality but constructing a global membership relation from the datum of a topos is a bit less easy.\newline
+\indent We can get bounded membership relations $\in_X\hookrightarrow X\times \Omega^X$ using the cartesian closed structure of our topos.\newline
+\indent Now one uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory.
 \end{proof}
+\begin{remark} Models of ZFA like the one given by $\mathfrak{Prob}$ are known as \emph{Fraenkel-Mostowski models} or \emph{permutation models}.
+\end{remark}
 %Maybe remark that this datum of a set theory is equivalent to that of a topos. Quote the paper corresponding to this fact
 \begin{theorem}
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\ [V]\text{ conjugacy class of subgroup }V\subset Aut(U_{r_1\cdots r_n})}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
@@ -1247,7 +1256,7 @@ In the combinatorial interpretation of our topos we have that $A$ is interpreted
 The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry_logic}. We have
  \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\text{Hom}(yU_{s_j}/G\times yU_{r_i}/H, \Omega) =\]
  \[\text{Hom}(\bigsqcup_{\substack{ \sum_i t_{ij}=s_j,\\ \sum_j t_{ij}=r_i,\\ t_{ij}\geq 0 \\ K \text{ maximal subgroup with property P}}}yU_{t_{ij}}/K,\Omega)=\prod_{"-"} \text{Hom}(yU_{t_{ij}}/K,\Omega)=\prod_{"-"}2  \]
-where the last step follows as atoms only have $2$ subsheaves, themselves and the trivial one. Note that the data of the subgroup can be ignored here as it is canonically induced. To decompose it into atoms, we need to find all its subsheaves, which are atoms
+where the last step follows as atoms only have $2$ subsheaves, themselves and the trivial one. Note that the data of the subgroup can be ignored here as it is canonically induced. To decompose it into atoms, we need to find all its subsheaves, which are atoms %TODO outsource this proof into the previous section
 \end{proof}
 \begin{remark}[Non-standard probability theory] We can also use language analogous to that used in the set theoretic constructions of non-standard analysis here \cite{XYZ} . One may call sets containing only elements of the form $yU_1$ \emph{standard sets} and these containing at least one different atom \emph{non-standard}. This works well as the following theorem shows. %Maybe also define "standard parts" of a set as the global sections i.e. the yU1 part. This preserves at least finite limits. Also one asign to an internal set its set of atoms i.e the left adjoint to the inclusion of standard sets. This doesn't preserve finite limits however.
 \end{remark}
