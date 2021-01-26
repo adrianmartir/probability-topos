@@ -1011,37 +1011,13 @@ t^{(3)}_{nn} & t_{nn1} \arrow[l, "\sum"']                    & t^{(3)}_{11} & t_
              &                                               &              &                                                                  & t^{(1)}_{n1} &                                               & t^{(1)}_{nn}
 \end{tikzcd}
 \end{center}
-\indent We call such sets equivalence relations. One can generate an equivalence relation by intersecting all those, which contain a given set of the matrices. This can be seen as some kind of \emph{game}, where on starts with some matrices and then constructs all other possible ones with these $3$ "moves".
-
-%We dont really need these examples anymore right?
-
-%\begin{example}[Block diagonal forms]
-%Given a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets, consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that the only nonzero entries are at the indices $i\in A_l, j \in A_l$ for some $l$. This is an equivalence relation.
-%\end{example}
-
-%We can generalize this example.
-
-%\begin{example}[Block diagonal forms with permutations]
-%Again, fix a partition $A_1\cup\cdots\cup A_m=\{1,\cdots, n\}$ into non-empty disjoint sets. Additionally, fix a subgroup $H$ of $Aut(U_{s_i})$, for $s_1, \cdots, s_m$ with
-%\[
-%    s_i = \sum_{j \in A_m} r_j ,
-%\]
-%and where $Aut$ denotes the automorphisms in $FinProb$.
-
-%Consider the set $R\subseteq S_{r_1\cdots r_n}$ of matrices $(t_{ij})$, such that for some $\sigma \in H$ the only nonzero entries are at the indices $i\in A_{\sigma(l)}, j \in A_l$ for some $l$. This is an equivalence relation.
-
-%One can analyze in more detail how the permutations dictate where the non-zero entries can be and how this interacts with the equivalence relation axioms. Reflexivity corresponds to the identity permutation. Symmetry corresponds to transposition of the matrix and thus to taking the inverse permutation. Given matrices $(t^{(1)}_{jk})\in R$ and $(t^{(2)}_{ik})\in R$, where for the first matrix, the permutation $\sigma$ dictates where the nonzero entries can be and for the second matrix, $\tau$ dictates where the non-zero entries can be, the possible matrices $(t^{(3)}_{ij})\in R$ that can be yielded will have non-zero entries dictated by the permutation $\tau^{-1} \sigma$.
-
-%This motivates the fact that we actually want $H$ to be a subgroup.
+\indent One can generate an equivalence relation by intersecting all those, which contain a given set of the matrices. This can be seen as some kind of \emph{game}, where on starts with some matrices and then constructs all other possible ones with these $3$ "moves".
 
 
 \begin{remark} 
 $3$-dimensional non-negative real matrices whose rows sum to three prescribed matrices on the sides have been investigated in combinatorics literature under the name "\emph{3-way axial transportation polytope}", which they form as a subset of $\mathbb{R}^{n\times n\times n}$. See for instance \cite{3way}.\end{remark}%Do we need this?
 
 
-%\end{example}
-%We probably don't need these examples
-%Now before we prove that these already describe all the equivalence relations, we need some theorems from actual combinatorics/ optimal transport. Similar constructions have already been investigated under the name "3-way axial transportation polytope".%This remark is obsolete. But I think we should include as many autistic "maybe it's connected to XYZ" remarks as possible
 \begin{definition} Given a non-negative real matrix $M\in \mathbb{R}^{n^2}_{\geq 0}$, define the \emph{graph }$\Gamma(M)$\emph{ of }$M$ as the bipartite graph on $\{1, \cdots, n\}\sqcup \{1, \cdots, n\}$ with an edge between $i$ and $j$ iff $M_{ij}\neq 0$. One can also interpret this as a $(0,1)$-matrix.
 \end{definition}
 \begin{lemma}\label{2x2x2} Given $0<r_1<1$, setting $r_2=1-r_1$, and  a matrix $\begin{bmatrix}
@@ -1221,43 +1197,10 @@ Here a subgroup $K$ is said to have property P if for any $\sigma\in K$ there ex
 IS THIS TRUE? PROBABLY NOT
 \end{proof}
 
-TODO: Insert subsection on group-action perspective on all of this here.
+%TODO: Insert subsection on group-action perspective on all of this here.
 
 \begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
 \end{remark}
-
-%\begin{definition} 
-%Given two vectors of non-negative real numbers $a, b\in \mathbb{R}^n_{\geq 0}$ such that $\sum_i a_i=\sum_j b_j$, define the \emph{transportation polytope} $\mathcal{N}(a,b)\subset \mathbb{R}^{n^2}_{\geq 0}$ of matrices $x_{ij}$ such that $\sum_i x_{ij}=b_j$ and $\sum_j x_{ij}=a_i$.
-%\end{definition}
-%\begin{definition} Given a non-negative real matrix $M\in \mathbb{R}^{n^2}_{\geq 0}$, define the \emph{graph }$\Gamma(M)$\emph{ of }$M$ as the bipartite graph on $\{1, \cdots, n\}\sqcup \{1, \cdots, n\}$ with an edge between $i$ and $j$ iff $M_{ij}\neq 0$.
-%\end{definition}
-%\begin{theorem}
-%The extreme points $E(a,b)$ of the polytope $\mathcal{N}(a,b)$ can be, equivalently, described as follows:
-%\begin{enumerate}
-%\item Matrices $M\in \mathcal{N}(a,b)$ with $\Gamma(M)$ a forest. 
-%\item Matrices $M\in \mathcal{N}(a,b)$ such that there exists no different $N\in \mathcal{N}(a,b)$ such that  $\Gamma(N)$ is a subgraph of $\Gamma(M)$.
-%\end{enumerate}
-%The forest which appear (and then uniquely appear) as graphs of matrices in $\mathcal{N}(a,b)$ can be described as forests $\gamma$ such that the following conditions are fulfilled:
-%\begin{enumerate}
-%\item If $\gamma_0\subseteq \gamma$ is a connected component with vertices $A\sqcup B$ then $\sum_{i\in A} a_i=\sum_{j\in B} b_j$.
-%\item For any vertex $i$ in the first component of $\{1, \cdots, n\}\sqcup \{1, \cdots, n\}$, we have $a_i\leq \sum_{j\text{ is a neighbor of }i} b_j$
-%\item Given $A\sqcup B\subset \{1,\cdots, n\}\sqcup \{1,\cdots, n\}$ such that there are no edges in $\gamma$ from $i\in A$ to $j\in \{1,\cdots, n\}\setminus B$, then 
-%\[ \sum_{i\in A} a_i\leq \sum_{j\in B} b_j\]
-%\item Equality holds iff there are also no edges from $i\in \{1,\cdots, n\}\setminus A$ to $j\in B$.
-%\end{enumerate}
-%\end{theorem}
-%\begin{proof}
-%The first statement is just 8.1.2 of [matrix trash]. This follows from 8.1.7 \emph{ibid.} by noting that for forests, if there exists a matrix in $\mathcal{N}(a,b)$ with it as its %graph, it is unique. %8.4.3, 8.4.6 might also be interesting
-%\end{proof}
-%\begin{lemma} Given matrices $M, N\in S=\mathcal{N}(r,r)$ we can characterise the polytope $\mathcal{N}(M,N)\subset S$ of matrices $L$ such that there exists a 3d matrix $t_{ijk}$ such that $t^{(1)}_{ij}=M,\, t^{(2)}_{jk}=N, \, t^{(3)}_{ik}=L$. Its set of extreme points is the element-wise sum $\sum_{j} E(M_j, N_j)$ where $M_j$ resp. $N_j$ are the $j$-th column resp. row vectors of the matrices. In particular, the extreme points of $\mathcal{N}(M,N)$ which are also extreme points of $\mathcal{N}(r,r)$ can be described as follows:\newline
-%\indent Matrices $K\in \mathcal{N}(r,r)$ with forests $\Gamma(K)$ such that there exist matrices $K_j\in E(M_j, N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$.
-%\end{lemma}
-%\begin{proof}
-%The matrices in $\mathcal{N}(M,N)$ are computed by adding up matrices in $\mathcal{N}(M_j,N_j)$ level-by-level in the 3d-matrix, so the first statement follows.%\newline
-%\indent Now let $L\in E(r,r)$ be a matrix in $\mathcal{N}(M,N)$ and choose some 3d matrix $t_{ijk}$ such that $t^{(1)}_{ij}=M,\, t^{(2)}_{jk}=N, \, t^{(3)}_{ik}=L$. For fixed $j$, the matrices $T_{ik}^j=t_{ijk}$ have to have graphs $\Gamma (T_{ik}^j)\subseteq \Gamma(L)$ as all matrices have only non-negative entries so $\Gamma(L)=\bigcup_j \Gamma (T_{ik}^j)$. Hence if $\Gamma(L)$ is a forest, so are all the $\Gamma (T_{ik}^j)$.\newline 
-%\indent Conversely, given a graph $\Gamma(K)$ for some matrix $K\in \mathcal{N}(r,r)$ and matrices $K_j\in E(M_j,N_j)$ with $\Gamma(K_j)\subseteq \Gamma(K)$ then $\Gamma(\sum_j K_j)\subseteq \Gamma(K)$. But the only matrix inside $\mathcal{N}(r,r)$ with a graph contained in $\Gamma(K)$, is $K$ whence $\sum_j K_j=K\in \mathcal{N}(M,N)$.
-%\end{proof}
-%Note that the latter condition is purely graph theoretical. 
 
 \section{$\mathfrak{Prob}$ as a set-theoretical universe}
 
