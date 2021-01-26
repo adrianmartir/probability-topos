@@ -937,28 +937,31 @@ Another feature of this description is that toposes of continuous group actions 
 \[I: L\rightarrow \mathcal{P}(L) \]
 sending ... has a right adjoint. An \emph{internal complete boolean algebra} is accordingly a sheaf of boolean algebras that is an internal locale.
 \end{definition}
-One can easily see that internal locales in $Set$ are precisely locales.
+Now we can glue some theorems from the literature to get quite the surprising result.
 \begin{theorem} The universal model of $\mathbb{T}_{int}$ is an internal complete boolean algebra.
 \end{theorem}
 \begin{proof} 
-
+We use the following equivalence of categories:
+\[ \text{Cont}_\tau(\text{Aut}_{BPAlg}(I,\lambda))\simeq \text{Set}[\mathbb{T}_{int}]  \]
 We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the correct ref?
- to see $(M,\alpha)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(M,\alpha))$ is $(M,\alpha)$ with the canonical continuous group action.\newline 
+ to see $(I,\lambda)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(I,\lambda))$ is $(I,\lambda)$ with the canonical continuous group action.\newline 
 \indent Thus $U_{\mathbb{T}_{int}}$ is a complete boolean algebra acting on itself via automorphisms.  By C2.5.8(e) \cite{elephant} this proves that the universal model is an internal locale. Hence it is a complete boolean algebra.
 \end{proof}
-
+This theorem is remarkable as we get some completeness condition from definitions, which essentially only use statements about finite sets of variables.
 
 
 \section{The atoms of $\mathfrak{Prob}$ }
+Sheaves on sites are a very complicated data type. Not only does one need to give a set for each object in the site, one also has to specify functions between these set for any morphism in the site. On top of that, all this has to satisfy the sheaf condition. Similarly convoluted is the data of a morphism of sheaves.\newline
+\indent Almost miraculously, this complexity can be reduced to next to non. This will require quite a lot of work though. We will see that any sheaf decomposes into a coproduct of \emph{atoms} and morphisms of sheaves are coproducts of maps between these atoms.
 \begin{definition} An \emph{atom} of a topos is an object whose only subobjects are trivial or itself.
 \end{definition}
-This concept is very relevant, as any sheaf in an atomic topos is a coproduct of atoms \cite{XYZ}. This means, that all information contained in the topos is already given by its atoms. If one understands them well, it is quite easy to calculate things in an atomic topos.
-\begin{definition} The \emph{category of atoms} of a topos is the full subcategory of objects, which are atoms.
+
+\begin{definition} Given a topos, the \emph{category of atoms} of a topos is the full subcategory of objects, which are atoms.
 \end{definition}
 \begin{theorem}
 Given an atomic topos $\mathcal{E}$ and its category of atoms $\mathcal{E}_{at}$, then $\mathcal{E}_{at}$ fulfils the right Ore condition and we have
 \[\text{Sh}(\mathcal{E}_{at},J_{at})\simeq \mathcal{E} \]
-More concretely, $\mathcal{E}$ is the $\infty$-positivisation of $\mathcal{E}_{at}$ i.e. the free completion w.r.t. small coproducts.
+More concretely, $\mathcal{E}$ is the $\infty$-positivisation of $\mathcal{E}_{at}$. This means any sheaf is a coproduct of atoms and any morphism of sheaves $f: F\rightarrow G$, where $F=\bigsqcup_{i\in M} A_i$ and $G=\bigsqcup_{j\in N} B_j$ for $A_i,B_j\in ob\mathcal{E}_{at}$, is a coproduct of maps $A_i\rightarrow B_{g(i)}$ in $\mathcal{E}_{at}$ for some function $g:M\rightarrow N$.
 \end{theorem}
 \begin{proof}
 The statement is Proposition 4.21 of \cite{caramello}. % TODO: Why is this the same statement? Why is the topology on \mathcal{E}_{at} the atomic topology? There is at least some sort of commentary necessary here. Also, I don't like the usage of undefined terms like infinity positivasation and free completion, because it is not clear what that is even supposed to mean.
@@ -1402,9 +1405,6 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 \begin{remark} The same argument would apply for any homogeneous measure algebra instead of $I$.
 \end{remark}
 \section{Advanced, general tools}
-
-
-This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is also possible in the situation of the theory of atomless boolean algebras. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
 \begin{lemma}[Lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
 \begin{center}
 \begin{tikzcd}
