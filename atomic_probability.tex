@@ -931,6 +931,24 @@ Notice that by using 331I in \cite{fremlin} we have implicitly used the axiom of
 %It follows that the atoms of the topos correspond to open subgroups of $G$. We shall classify them. %give ref
 \begin{proposition} The automorphism group of a homogeneous-Maharam-type probability algebra is simple by 383Ib \cite{fremlin}. In particular, all topos-theoretic invariants involving any sort of normal subgroup listed in \cite{caramello_lafforgue} are trivial.
 \end{proposition}
+
+Another feature of this description is that toposes of continuous group actions are quite well understood. The interest in researching them comes from their connection to set theory and representation theory. So called \emph{permutation models} are one of the main tools of forcing, and they will also appear later in this paper as another interpretation of $\mathfrak{Prob}$. In a totally separate field of mathematics, a representation of a topological group on a $k$-vector space (with discrete topology) is nothing but an internal $k$-vector space \cite{XYZ} i.e. a sheaf of $k$-vector spaces in the topos of continuous group actions of that group.
+\begin{definition} A sheaf $L$ of posets with finite meets and top element is called an \emph{internal locale} if the map 
+\[I: L\rightarrow \mathcal{P}(L) \]
+sending ... has a right adjoint. An \emph{internal complete boolean algebra} is accordingly a sheaf of boolean algebras that is an internal locale.
+\end{definition}
+One can easily see that internal locales in $Set$ are precisely locales.
+\begin{theorem} The universal model of $\mathbb{T}_{int}$ is an internal complete boolean algebra.
+\end{theorem}
+\begin{proof} 
+
+We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the correct ref?
+ to see $(M,\alpha)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(M,\alpha))$ is $(M,\alpha)$ with the canonical continuous group action.\newline 
+\indent Thus $U_{\mathbb{T}_{int}}$ is a complete boolean algebra acting on itself via automorphisms.  By C2.5.8(e) \cite{elephant} this proves that the universal model is an internal locale. Hence it is a complete boolean algebra.
+\end{proof}
+
+
+
 \section{The atoms of $\mathfrak{Prob}$ }
 \begin{definition} An \emph{atom} of a topos is an object whose only subobjects are trivial or itself.
 \end{definition}
@@ -1384,59 +1402,8 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 \begin{remark} The same argument would apply for any homogeneous measure algebra instead of $I$.
 \end{remark}
 \section{Advanced, general tools}
-%Before we can begin providing a connection between the different categories of sheaves over the underlying boolean algebras of Set-based probability intervals, we will require a crucial measure theoretic lemma.
-%\begin{lemma} Given a measure algebra $(\mathcal{B},\mu)$ with $\mu(\top)=1$ (here we assume that the measure is additive) then any measure preserving automorphism of boolean algebras $f:(\mathcal{B},\mu)\rightarrow (\mathcal{B},\mu)$ preserves all meets and joins.
-%\end{lemma}
-%\begin{proof} Because in the reference \cite{fremlin}, they use many definitions and theorems, that the reader may not be familiar with, we choose to sketch the proof of 324Kb from which our claim immediately follows.\newline
-%\indent First note that a morphism of boolean algebra between complete boolean algebras preserves all meets and joins iff it preserves meets of the form $\bigwedge_i A_i=\bot$ for decreasing $A_i$. This can be seen as follows:\newline 
-%\indent  Given arbitrary $A_i$ prove preservation of $\inf A_i$ using that for any ordering $<$ of the index set $I$ we get
-%\[\bigwedge_{i\in I} \bigwedge_{j<i} (A_j \Delta \inf A_i)=\bot\] %Do we need this much detail?
-%\indent Given $\sup A_i$ use $\sup A_i=\neg \inf \neg A_i$\newline
-%$\mu$ is additive hence for decreasing $A_i$ we have $\bigwedge_i A_i=\bot$ iff $\inf \mu(A_i)=0$. Now the measure preservation comes in:
-%\[ \inf \mu f(A_i)=\inf \mu(A_i)=0\]
-%Hence $f$ is necessarily a complete boolean algebra homomorphism.
-%\end{proof}
-\begin{lemma} The universal model $U$ of the theory of probability intervals is $(M,\alpha)$ acting on itself via its automorphisms when interpreted as a set with continuous group action by the group of automorphisms of a Maharam-type-homogeneous probability algebra $(M,\alpha)$ as in \ref{Galois}. Moreover, it is an internal complete boolean algebra.
-\end{lemma}
-\begin{proof} 
-%We apply the bridge $\text{Cont}(\text{Aut}_{BPAlg}(I,\lambda))\simeq \text{Sh}(FinProb^{op},J_{at})$. Recall that this is given as the Lan extension of the functor 
-%\[F:FinProb^{op}\rightarrow \text{Cont}(\text{Aut}_{BPAlg}(I,\lambda))\]
-% sending $(B,\mu)$ to $\text{Hom}_{BProbAlg}((B,\mu),(I,\lambda))$ with action by post composition and sending maps to their pre-compositions. Under this equivalence, the universal model gets sent to:
-%\[\bigsqcup_{r\in [0,1]} \text{Hom}_{BPAlg}(U_r, (I,\lambda))\simeq I \]
-%The isomorphism $\chi$ is given by sending $f\in \text{Hom}_{BPAlg}(U_r, (I,\lambda))$ to the image of the element with measure $r$ in $(I,\lambda)$. We need to check that the boolean algebra structure of the universal model coincides with the one of $I$. But this can be done exactly as in the proof of [classifying shit]. We already know that the following diagram commutes:
-%\begin{center}
-%\begin{tikzcd}[column sep=small]
-%      & {(b_1,b_2,b_3,b_4)} \arrow[r, maps to]                                                  & {(b_1\vee b_2,b_1\vee b_3)}                                 \\
-%{(b_1,b_2,b_3,b_4)} \arrow[d, maps to] & \bigsqcup yU_{r_1\cdots r_4} \arrow[d, "\bigsqcup (p_1)_*"'] \arrow[r, "\alpha_1^{-1}"] & (\bigsqcup yU_r)\times (\bigsqcup yU_s) \arrow[d, "\wedge"] \\
-%{(b_1,b_2\vee b_3\vee b_4)}            & \bigsqcup yU_r \arrow[r]                                                                & \bigsqcup yU_r                                             
-%\end{tikzcd}
-%\end{center}
-%Now we apply our equivalence of categories and it remains to check that the following diagram commutes. This can be done on underlying sets. The underlying set of $I\times I$ as computed in $\text{Cont}_{\tau}(\text{Aut}_{BPalg})$ is also $I\times I$ as forgetting the group action is the inverse image of a geometric morphism.
-%\begin{center}
-%\begin{tikzcd}
-%{\bigsqcup \text{Hom}(U_{r_1\cdots r_4},I)} \arrow[d, "\bigsqcup Lan_F(p_1)_*"'] \arrow[rrr, %"Lan_F(\alpha_1^{-1})\circ(\chi\times\chi)"] &  &  & I\times I \arrow[d, "\wedge"] \\
-%{\bigsqcup \text{Hom}(U_r,I)} \arrow[rrr, "\chi"']                                                                                        &  &  & I                            
-%\end{tikzcd}
-%\end{center}
-%Take an element $f:U_{r_1\cdots r_4}\rightarrow I$ in the top left corner, call the images of the elements in $I$ $x_1\cdots x_4$. We need to compute $Lan_F(\alpha_1)(f)$. % The Lan extension of $(p_1)_*\circ\alpha_1$ is given by precomposing with $\wedge$. Understand this!
-%$\alpha^{-1}_1$ is induced by the universal property of the product and then coproduct, so its Lan extension is easier to compute: $\alpha^{-1}_1=\bigsqcup \beta_{r_1\cdots r_4}\times \bigsqcup \gamma_{r_1\cdots r_4}$ for
-%\[\beta_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow \bigsqcup yU_r, \, \gamma_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow \bigsqcup yU_s\]
-%$\beta_{r_1\cdots r_4}$ factors over the inclusion $yU_{r_1+r_2}\rightarrow \bigsqcup yU_r$ and $\gamma_{r_1\cdots r_4}$ factors over $yU_{r_1+r_3}\rightarrow \bigsqcup yU_s$ . For this, by the Yoneda lemma, the map $\beta_{r_1\cdots r_4}$ comes from the map $b_{r_1\cdots r_4}:U_{r_1\cdots r_4}\rightarrow U_{r_1+r_2}$ of finite probability spaces sending the first two element of the left hand side to the first on the right hand side. Analogously we get $\gamma_{r_1\cdots r_4}=yc_{r_1\cdots r_4}$. This can finally be Lan extended easily: (Note our abusive notation. We identify the finite probability spaces with their corresponding finite probability algebras, so the morphisms of finite probability algebras point in the other direction)
-%\begin{center}
-%\begin{tikzcd}
-%{\text{Hom}(U_{r_1+r_2},I)} \arrow[rrd]                                                                                                            &  &                                                              \\
-%{ \text{Hom}(U_{r_1\cdots r_4},I)} \arrow[rr, "Lan_F(\alpha_1^{-1})"] \arrow[d, "-\circ c_{r_1\cdots r_4}"'] \arrow[u, "-\circ b_{r_1\cdots r_4}"] &  & {\text{Hom}(U_{r_1+ r_2},I)\times \text{Hom}(U_{r_1+r_3},I)} \\
-%{\text{Hom}(U_{r_1+r_3},I)} \arrow[rru]                                                                                                            &  &                                                             
-%\end{tikzcd}
-%\end{center}
-%We compute $Lan_F(\alpha^{-1}_1)(f)=(f\circ b_{r_1\cdots r_4}, f\circ c_{r_1\cdots r_4})$. One easily computes that $(\chi\times \chi)(f\circ b_{r_1\cdots r_4}, f\circ c_{r_1\cdots r_4})=(x_1\vee x_2, x_1\vee x_3)$ and $\wedge (x_1\vee x_2, x_1\vee x_3) = x_1$.\newline
-%\indent Likewise, $(p_1)_*$ factors over $\rho_{r_1\cdots r_4}:yU_{r_1\cdots r_4}\rightarrow yU_{r_1}$ and this is the Yoneda embedding of $p_{r_1\cdots r_4}$. Thus $Lan_F((p_1)_*)(f)=f\circ p_{r_1\cdots r_4}$ and one can easily see that $\chi(f\circ p_{r_1\cdots r_4})=x_1$. This concludes the proof. As the poset structure can be recovered from this via $a\leq b\iff a\wedge b=a$, this shows $Lan_y(U)$ and $I$ have the same poset structure. As all the other operators can be induces as limits and colimits in Set, the boolean algebras are isomorphic.
-We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the correct ref?
- to see $(M,\alpha)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(M,\alpha))$ is $(M,\alpha)$ with the canonical continuous group action.\newline 
-\indent Thus $U$ is a complete boolean algebra acting on itself via automorphisms.  As isomorphisms of lattices preserve all meets and joints, these are even automorphisms of complete boolean algebras, in particular locales. Locales in $\text{Set}^G$ are simply locales upon which $G$ acts by locale-automorphisms by C2.5.8(d) \cite{elephant} so the universal model is a  $[\text{Aut}(I,\lambda),\text{Set}]$-indexed locale. B2.3.10 \cite{elephant} states that, for any closure operator $j$ on a topos $\mathcal{S}$ an $\mathcal{S}$-indexed cocomplete category is a  $sh_j\mathcal{S}$-indexed cocomplete category iff it is a $j$-sheaf. Applying this result to the closure operator associated to the inclusion
-\[\text{Cont}_\tau(\text{Aut}(I,\lambda))\hookrightarrow [\text{Aut}(I,\lambda),\text{Set}]\]
- proves that the universal model is internally cocomplete. Hence it is a complete boolean algebra (cocompleteness implies completeness and conversely).
-\end{proof}
+
+
 This result is highly unexpected. Fixing only finitary data, we have forced the maps to preserve some infinitary structure! Note that this is also possible in the situation of the theory of atomless boolean algebras. We can nicely exploit this using the following lemma, which will relate all this to the category of sheaves over homogeneous Maharam-type measure algebras.
 \begin{lemma}[Lemma on iterated forcing] Given a complete boolean algebra $\mathcal{B}$, a group $G\subseteq \text{Aut}(\mathcal{B})$ of complete boolean algebra automorphisms of $\mathcal{B}$ and a topology $\tau$ on $G$ such that the canonical action $G\curvearrowright \mathcal{B}$ is $\tau$-continuous.\footnote{More generally, one could take any group $G$ and topology $\tau$ with a $\tau$-continuous action $G\curvearrowright \mathcal{B}$ by boolean algebra automorphisms.} Then we get a 2-pullback diagram in the 2-category of topoi, geometric morphisms and natural transformations:
 \begin{center}
