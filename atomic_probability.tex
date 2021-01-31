@@ -1005,9 +1005,9 @@ R \arrow[r, hook] & {y(X,\mu)\times y(X,\mu)} \arrow[r, "\pi_1", shift left] \ar
 \end{center}
 
 To exploit this, we will utilize the combinatorial method outlined in \cite{caramello_lafforgue} Prop 6.7. For this, we will need to understand internal equivalence relations on the sheaves $yU_{r_1\cdots r_n}$. We use \ref{multipullback} to yield the following description of an equivalence relation. \newline
-\indent It is a subobject 
+\indent A relation is a subobject 
 \[R\hookrightarrow yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}=\bigsqcup_{\substack{\sum_i t_{ij}=r_j \\ \sum_j t_{ij}=r_i}  }yU_{t_{ij}}\]
-As these representable functors are atoms, this is equivalent to giving a subset of the set $S_{r_1\cdots r_n}:=\{(t_{ij})_{0\leq i,j \leq n} | \sum_i t_{ij}=r_j,\, \sum_j t_{ij}=r_i \}$ of matrices whose rows and columns sum to the $r_i$'s. Now we use Definition 6.5 (iii) to check when this is an equivalence relation.
+As these representable functors are atoms, this is equivalent to giving a subset of the set $S_{r_1\cdots r_n}:=\{(t_{ij})_{0\leq i,j \leq n} | \sum_i t_{ij}=r_j,\, \sum_j t_{ij}=r_i \}$ of matrices whose rows and columns sum to the $r_i$'s. We use Definition 6.5 (iii) \cite{caramello_lafforgue} to see that a relation is an equivalence relation iff it fulfils the following conditions:
 \begin{enumerate}
 \item Reflexivity:  The element induced by the diagonal $\Delta: yU_{r_1\cdots r_n}\rightarrow $\linebreak $ yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}$ is in $R$ i.e. the following matrix is in $R$:
 \[ \begin{bmatrix}
@@ -1254,12 +1254,11 @@ Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y
 \end{tabular}%what is phi?
 \end{center}
 \end{definition}
-\begin{proposition} The internal language of $\mathfrak{Prob}$ is a classical model of ZFA.
+\begin{proposition} The internal language of a two-valued atomic topos is a classical model of ZFA.
 \end{proposition}
-\begin{proof} Our presentation follows [ref: sheaf models for set theory] chapter 2 and 3, where much more detail can be found. It is also proven there, that the structure we will give in this proof actually fulfils the axioms. \newline%later we will also use chapter 5
-\indent
-We use the site presentation $\mathfrak{Prob}\simeq \text{Cont}_\tau(\text{Aut}_{BPAlg})(I,\lambda)$.\newline
-\indent In any of the continuous group action, the subobject classifier resp. natural numbers object is given by the two element set resp. $\mathbb{N}$ with trivial actions. The exponentials of group actions $X$ by $Y$ are computed as sets of functions $X\rightarrow Y$ whose stabilizer under the action $g.f(x)=g.f(g^{-1}.x)$ is open. $A$ is interpreted as $\bigsqcup_{gH\text{is the set of cosets of open subgroup}} gH$. %This seems incorrect, we want the set of cosets
+\begin{proof} 
+This is essentially proved in \cite{set_theory}.
+Let $A$ be the coproduct of all the atoms (i.e. one of each isomorphism class).
  Equality is equality but constructing a global membership relation from the datum of a topos is a bit less easy.\newline
 \indent We can get bounded membership relations $\in_X\hookrightarrow X\times \Omega^X$ using the cartesian closed structure of our topos.\newline
 \indent Now one uses an analogue of the cumulative hierarchy, starting with the set of atoms and then taking power objects and directed colimits just as one would in set-theory.
