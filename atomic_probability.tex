@@ -1146,8 +1146,12 @@ Now we are able to describe the category of atoms of $\mathfrak{Prob}$ in a very
 \end{theorem}
 \begin{proof}
 %We use Theorem 6.7 of \cite{caramello_lafforgue}.
-We can Yoneda embed $FinProb_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma, a morphism $y(M,\mu)\rightarrow y(N,\nu)/U$ corresponds to an element of $(y(N,\nu)/U)(M,\mu)$. This has been computed to be maps $(M,\mu)\rightarrow (N,\nu)$ up to permutation by $\sigma\in U$. A morphism $y(M,\mu)/V \rightarrow y(N,\nu)/U$ is simply a morphism such that $y(M,\mu)\rightarrow y(N,\nu)/U$ factors over the quotient map $y(M,\mu)\rightarrow y(M,\mu)/V$. This means it is a morphism $f:(X,\mu)\rightarrow (Y,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $. Hence the statement follows.
+We can Yoneda embed $\mathfrak{Prob}_{at}$ into $\mathfrak{Prob}$.  By the Yoneda lemma, a morphism $y(M,\mu)\rightarrow y(N,\nu)/U$ corresponds to an element of $(y(N,\nu)/U)(M,\mu)$. This has been computed to be maps $(M,\mu)\rightarrow (N,\nu)$ up to permutation by $\sigma\in U$. A morphism $y(M,\mu)/V \rightarrow y(N,\nu)/U$ is simply a morphism such that $y(M,\mu)\rightarrow y(N,\nu)/U$ factors over the quotient map $y(M,\mu)\rightarrow y(M,\mu)/V$. This means it is a morphism $f:(X,\mu)\rightarrow (Y,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $. Hence the statement follows.
 \end{proof}
+
+\begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
+\end{remark}
+
 \begin{definition} Denote the category given above by $FinProb_{at}$ and call it the atomic completion of $FinProb$ in accordance with notation in \cite{caramello_lafforgue}.
 \end{definition}
 This yields a new site presentation, which we will see is extremely easy to work with.
@@ -1211,6 +1215,8 @@ One of the most intriguing things about this notation, is that it almost feels l
     Use the universal property of the coproduct of atoms and then use that each map needs to factor through one of the images because the image of an atom needs to be an atom again.
 \end{proof}
 
+
+
 We know from \cite{caramello_lafforgue} that the category of atoms also has all multilimits, which will again come handy when actually doing computations.
 \begin{lemma} Given atoms $yU_{r_1\cdots r_n}/G$ and $yU_{s_1\cdots s_m}/H$, we have:
 \[ yU_{r_1\cdots r_n}/G\times yU_{s_1\cdots s_m}/H\simeq \bigsqcup_{\substack{t_{ij}\\ K\subseteq \text{Aut}(U_{t_{ij}})\text{ maximal w.r.t. property }P}}yU_{t_{ij}}/K  \]
@@ -1223,8 +1229,6 @@ IS THIS TRUE? PROBABLY NOT
 
 %TODO: Insert subsection on group-action perspective on all of this here.
 
-\begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
-\end{remark}
 
 \section{$\mathfrak{Prob}$ as a set-theoretical universe}
 The findings of the last chapter are so striking, that they allow us to reformulate our constructions, which heavily featured topos theory, in such a way as to not mention topoi in any way whatsoever. The notation introduced there already hints to this possibility. We hope that this makes our theory understandable to a far greater audience. So this chapter is concerned with translating everything into the language of set theory.
@@ -1254,7 +1258,7 @@ Collection & $\forall x (\forall y\in x\exists w.\phi\implies \exists z\forall y
 \end{tabular}%what is phi?
 \end{center}
 \end{definition}
-\begin{proposition} The internal language of a two-valued atomic topos is a classical model of ZFA.
+\begin{proposition}\label{ZFA} The internal language of a two-valued atomic topos is a classical model of ZFA.
 \end{proposition}
 \begin{proof} 
 This is essentially proved in \cite{set_theory}.
@@ -1268,19 +1272,8 @@ Let $A$ be the coproduct of all the atoms (i.e. one of each isomorphism class).
 %Maybe remark that this datum of a set theory is equivalent to that of a topos. Quote the paper corresponding to this fact
 \begin{theorem}
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\ [V]\text{ conjugacy class of subgroup }V\subset Aut(U_{r_1\cdots r_n})}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
- the power object is given by %expand the domain where this works by calculating the muliproducts of the atoms
- \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\mathcal{P}\{ (t_{ij})| \sum_i t_{ij}=s_j,\, \sum_j t_{ij}=r_i,\, t_{ij}\geq 0 \} \]%does the group play in here? Most likely incorrect
- decomposing into atoms as
- \[ \Omega^{yU_{s_j}} =\bigsqcup_{\substack{\sum_i t_{ik}=p_k\\ \sum_k t_{ik}\neq 0}}yU_{\sum_k t_{ik}}\sqcup \cdots   \]
- with element-hood relation given by:
-\[ \in=\bigsqcup_{subset}\hookrightarrow \bigsqcup=yU_{s_j}/G\times \Omega^{yU_{s_j}/G}\]
-\end{theorem}
-\begin{proof}
-The statement on the exponential is Proposition 1 of III6 \cite{sheaves_geometry_logic}. We have
- \[ \Omega^{yU_{s_j}/G}(U_{r_i},H)=\text{Hom}(yU_{s_j}/G\times yU_{r_i}/H, \Omega) =\]
- \[\text{Hom}(\bigsqcup_{\substack{ \sum_i t_{ij}=s_j,\\ \sum_j t_{ij}=r_i,\\ t_{ij}\geq 0 \\ K \text{ maximal subgroup with property P}}}yU_{t_{ij}}/K,\Omega)=\prod_{"-"} \text{Hom}(yU_{t_{ij}}/K,\Omega)=\prod_{"-"}2  \]
-where the last step follows as atoms only have $2$ subsheaves, themselves and the trivial one. Note that the data of the subgroup can be ignored here as it is canonically induced. To decompose it into atoms, we need to find all its subsheaves, which are atoms %TODO outsource this proof into the previous section
-\end{proof}
+ with element-hood relation given as in \ref{ZFA}.
+ \end{theorem}
 \begin{remark}[Non-standard probability theory] We can also use language analogous to that used in the set theoretic constructions of non-standard analysis here \cite{XYZ} . One may call sets containing only elements of the form $yU_1$ \emph{standard sets} and these containing at least one different atom \emph{non-standard}. This works well as the following theorem shows. %Maybe also define "standard parts" of a set as the global sections i.e. the yU1 part. This preserves at least finite limits. Also one asign to an internal set its set of atoms i.e the left adjoint to the inclusion of standard sets. This doesn't preserve finite limits however.
 \end{remark}
 \begin{theorem} If there is any statement of higher order logic $\phi$ where all quantification is bounded over \emph{standard} sets then $\mathfrak{Prob}\vDash \phi \iff \text{Set}\vDash \phi$.
