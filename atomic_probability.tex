@@ -1142,7 +1142,8 @@ Now we are able to describe the category of atoms of $\mathfrak{Prob}$ in a very
 
 \begin{theorem} The category $\mathfrak{Prob}_{at}$ is equivalent to the following category. \begin{enumerate}
 \item Objects are given by tuples $(M,\mu, V)$ where $(M,\mu)$ is a finite probability space and $V$ is a subgroup of its automorphism group. 
-\item Morphisms $(M,\mu, V)\rightarrow (N,\nu, U)$ are given by measure-preserving functions $f:(M,\mu)\rightarrow (N,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $, up to post composition by elements in $U$.\end{enumerate}
+\item Morphisms $[f]:(M,\mu, V)\rightarrow (N,\nu, U)$ are given by equivalence classses of measure-preserving functions $f:(M,\mu)\rightarrow (N,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ with $f\circ \sigma =\psi\circ f $; with $f\sim g$ if there exists $\sigma\in U$ with $f=\sigma\circ g$.
+\end{enumerate}
 \end{theorem}
 \begin{proof}
 %We use Theorem 6.7 of \cite{caramello_lafforgue}.
@@ -1274,6 +1275,7 @@ Let $A$ be the coproduct of all the atoms (i.e. one of each isomorphism class).
 In the combinatorial interpretation of our topos we have that $A$ is interpreted as \\\[\bigsqcup_{\substack{0<r_1\leq  \cdots\leq r_n \\ \sum_i r_i=1 \\ [V]\text{ conjugacy class of subgroup }V\subset Aut(U_{r_1\cdots r_n})}} yU_{r_1\cdots r_n}/V\]%it would be better to choose one subgroup per conjugacy class
  with element-hood relation and equality given as in \ref{ZFA}.
  \end{theorem}
+ This puts the previous intuition that our topos consists of \emph{sets parametrized by partitions of unity (with subgroups of permutations)} on a firm footing.
 \begin{remark}[Non-standard probability theory] We can also use language analogous to that used in the set theoretic constructions of non-standard analysis here \cite{XYZ} . One may call sets containing only elements of the form $yU_1$ \emph{standard sets} and these containing at least one different atom \emph{non-standard}. This works well as the following theorem shows. %Maybe also define "standard parts" of a set as the global sections i.e. the yU1 part. This preserves at least finite limits. Also one asign to an internal set its set of atoms i.e the left adjoint to the inclusion of standard sets. This doesn't preserve finite limits however.
 \end{remark}
 \begin{theorem} If there is any statement of higher order logic $\phi$ where all quantification is bounded over \emph{standard} sets then $\mathfrak{Prob}\vDash \phi \iff \text{Set}\vDash \phi$.
@@ -1514,13 +1516,26 @@ We can give subobjects $(\mathcal{S}^n)_m\hookrightarrow \mathcal{S}^n$ accordin
 \[f(x_1,\cdots, x_n) =\sum_{j=1}^m f(\lambda_{1,j},\cdots, \lambda_{n,j})\chi_{a_j}  \] 
 Thus $\phi(x_1,\cdots, x_n)$ is equivalent to:
 \[ \sum_{j=1}^m f(\lambda_{1,j},\cdots, \lambda_{n,j})\mu(a_j)=0\]
-One immediately sees that this is a polynomial in $\mathbb{R}[\lambda_{ij}, \mu(a_j)]_{1\leq i\leq n, 1\leq j \leq m}$. Together with the restriction, that the $a_j$ are a partition of unity i.e. $\mu(a_j)> 0$ and $\sum_j \mu(a_j)=1$, this forms a system of polynomial equations. Call the semi-algebraic set of solutions $\mathcal{S}_{\phi,m}\hookrightarrow (\mathcal{S}^n)_m$. Hence we find, that $\ldoub \phi \rdoub \hookrightarrow \mathcal{S}^n$ can be seen as the countable disjoint union of semi-algebraic sets $\bigcup_{m\in \mathbb{N}} \mathcal{S}_{\phi,m}$. If one weakens the condition to $\mu(a_j)\geq 0$, it is evidently even a increasing union. % symbolically, these all only depend on f, so intuitively one should be able to apply Seidenberg-Tarski. But this isn't super straight forward, sadly
+One immediately sees that this is a polynomial in $\mathbb{R}[\lambda_{ij}, \mu(a_j)]_{1\leq i\leq n, 1\leq j \leq m}$. Together with the restriction, that the $a_j$ are a partition of unity i.e. $\mu(a_j)> 0$ and $\sum_j \mu(a_j)=1$, this forms a system of polynomial equations. Call the semi-algebraic set of solutions $\mathcal{S}_{\phi,m}\hookrightarrow (\mathcal{S}^n)_m$. Hence we find, that $\ldoub \phi \rdoub_\mathcal{S} \hookrightarrow \mathcal{S}^n$ can be seen as the countable disjoint union of semi-algebraic sets $\bigcup_{m\in \mathbb{N}} \mathcal{S}_{\phi,m}$. If one weakens the condition to $\mu(a_j)\geq 0$, it is evidently even a increasing union. % symbolically, these all only depend on f, so intuitively one should be able to apply Seidenberg-Tarski. But this isn't super straight forward, sadly
 \end{proof}
 
-\begin{theorem}[Seidenberg-Tarski]
-
+\begin{theorem}[Seidenberg-Tarski] Every infinitary-first-order statement $\phi$ in the signature of $\mathbb{T}_{exp}$ is equivalent to a (possibly) infinite disjunction of atomic statements.
 \end{theorem}
-
+\begin{proof}
+We use symbolic recursion. $\top$, $\neg$ and $\vee$ are clear. It remains to prove the statement for $(\exists x) (\phi(x,y_1,\cdots, y_n))$ where $\phi$ is an atomic statement. Again, we have
+\begin{center}
+\begin{tikzcd}
+\ldoub\phi\rdoub_\mathcal{S} \arrow[r, hook] \arrow[d, two heads] & \mathcal{S}^{n+1} \arrow[d, "\pi" description] \\
+\ldoub (\exists x)\phi \rdoub_\mathcal{S} \arrow[r, hook]         & \mathcal{S}^n                                 
+\end{tikzcd}
+\end{center}
+On levels $(\mathcal{S}^n)_{m}$ this yields the equations $\exists \lambda_1\cdots \exists \lambda_m. \sum_{j=1}^m f(\lambda_j,\lambda_{2,j},\cdots \lambda_{n,j})\mu_j=0$. Call this polynomial $p_0$ and call $p_{0,1}:=f(\lambda_1,\cdots, \lambda_{n,1})$. Now we use quantifier elimination for real closed fields. For this, we need to differentiate the formula w.r.t. $\lambda_1$ yielding:
+\[ \mu_1\cdot p_{1,1}:=\frac{\partial}{\partial \lambda_1} \sum_{j=1}^m f(\lambda_j,\lambda_{2,j},\cdots \lambda_{n,j})\mu_j= \mu_1 \frac{\partial}{\partial \lambda_1}f(\lambda_1,\lambda_{2,1}\cdots \lambda_{n,1}) \]
+The remainder (denote it rem) when dividing is 
+\[\mu_1 \text{rem}(p_{0,1},p_{1,1})+\sum_{j=2}^{m}f(\lambda_j,\lambda_{2,j},\cdots \lambda_{n,j})\mu_j\]
+Call the first term of sum $\mu_1 \cdot p_{2,1}$. Note that $\text{rem}(p_{1,1},p_{2,1})=0$ unless\linebreak
+ $\sum^m_{j=2}f(\lambda_j,\lambda_{2,j},\cdots,\lambda_{n,j})\mu_j=0$. This reduces to the case $\exists \lambda_2 \cdots \exists \lambda m.$ \linebreak $\sum^m_{j=2}f(\lambda_j,\lambda_{2,j},\cdots,\lambda_{n,j})\mu_j=0$. Keeping this in mind, we consider the case $m=1$. Here we use Seidenberg-Tarski to yield polynomials $g_1,\cdots, g_k$ and $h_1,\cdots h_l$ in $\lambda_2,\cdots, \lambda_n$ with $g_i(\lambda_2,\cdots, \lambda_n)> 0$ and $h_i(\lambda_2,\cdots, \lambda_n)=0$ iff $\exists \lambda_1.f(\lambda_1,\cdots,\lambda_n)=0$.
+\end{proof}
 
 \section{Outlook for further research}
 Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
