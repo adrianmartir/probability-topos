@@ -383,6 +383,7 @@ We diverge from the notation in D.1 of \cite{elephant} in that we will sometimes
 
 Since the theory of flat functors we will apply this lemma to has no relation symbols, we restrict ourselves to the case where $\Sigma$ has no relation symbols
 
+TODO: KILL THIS
 \begin{lemma} [Computing interpretations] \label{interpretations}
 Let $\mathbb{T}$ be a geometric theory and $\mathcal{C}^{\mathbb{T}}$ its syntactic category. Let $\Sigma$ be a signature without relation symbols and $M$ be a $\Sigma$-structure in $\mathcal{C}^{\mathbb{T}}$.
 \begin{itemize}
@@ -466,6 +467,7 @@ For (iv), letting $\pi$ denote the projection onto the components given by the $
 
 The following two facts allow us to interpret statements $t = s$ into an easier form without noise given by redundant variables.
 
+TODO: KILL THIS
 \begin{lemma} With the same setup as in \ref{interpretations}, we have that for a function symbol $f$ in $\Sigma$,
 \[
 \ldoub \vec{x} . f(\vec{x}) \rdoub_M \cong [ \theta_f^{\vec{a}, \vec{b}} ]
@@ -496,6 +498,9 @@ so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F
 The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
 
 \begin{proof}
+TODO: THIS PROOF SHOULD BE DONE ENTIRELY WITHOUT INTERPRETATIONS BY INSTEAD USING MULTIPRODUCTS
+% Concretly, I want to use that by Makkai's 'Accessible categories', 1.2.2 v) iff iv), it suffices to check that F preserves finite limits of representables. Thus we only need to check lim F x_i can be computed as the coproduct of the multiproduct.
+
 First notice that $[\theta_f^{\vec{a}, \vec{b}}]$ has actually the correct codomain by additivity of the measure. It is also easily seen to be provably functional.
 
 The challenge is showing that this is actually a model of the theory of flat functors on $FinProb$.  Now we check that the five axioms of the theory $\mathbb{T}^{FinProb}$ are satisfied in the above interpretation. We will heavily and implicitly make use of the previous two lemmas.
@@ -657,6 +662,7 @@ given by the inclusions $\iota_r : \{b . B_r b\} \to \{b . \top\}$. Applying the
 But this can be checked by applying the sheaf condition to the cover of $\{b . \top\}$ given by the $\{b . B_r b\}$. Notice that here we are using the two partition axioms.
 
 Next, we need to show that the above isomorphism actually is an isomorphism of $\mathbb{T}$-models. Explicitly, we have to show that for each function symbol $f$ our isomorphism induces an iso
+% TODO: This should be improved on.
 \[
 \begin{tikzcd}[column sep=tiny]
     {y \{a_1,\cdots,a_n . \top \}} \arrow[d, "{[f(a_1,\cdots,a_n) = a]}"'] \arrow[r, "\cong"',phantom, shift right=7] & Lan_F U^n \arrow[d, "Lan_F U(f)"] \\
@@ -734,6 +740,7 @@ We even have that $\mathcal{C}^{\mathbb{T}_{BAlg}} \simeq \mathcal{C}^{\mathbb{T
 [(x\wedge y=0) \wedge (x\vee y=1)] : \{x.\top\} \to \{y.\top\}  .
 \]
 
+% TODO: Clean this up. Say something like that one can trivially see that the set-models match.
 One can verify that this actually is an equivalence by using \ref{interpretations} and the fact that
 \[
 [y=\neg x] = [(x\wedge y=0) \wedge (x\vee y=1)] 
