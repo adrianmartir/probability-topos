@@ -1505,8 +1505,26 @@ This actually is quite a cool theorem. Does it actually mean what I think it mea
 \[ E_r(f(x_1,\cdots, x_n))\dashv \vdash E_0(f(x_1,\cdots, x_n)-r\cdot 1)    \]
 \[ f(x_1,\cdots, x_n)=g(x_1,\cdots ,x_n)\dashv\vdash E_0((f(x_1,\cdots, x_n)-g(x_1,\cdots ,x_n))^2)  \]
 \end{proof}
+It seems now to be a reasonable next step to, as one does usually in functional analysis, complete the metric space of simple functions to get $\mathcal{L}^2$. But this might not work as one might expect. Firstly, $\mathcal{L}^2(I,\lambda)$ with the action by automorphisms of the Lebesgue interval (usually called the Koopman operator representation) is not continuous w.r.t. our topology as we shall see. Secondly, more strikingly, the metric space of simple functions is already Cauchy complete in a suitable sense.\newline
+\indent Sequences of functions are strangely behaved in our topos, so the defintion of a complete metric space using Cauchy filters is more appropriate.%constructively, it is not true that this kind of completeness implies sequential completeness.
+\begin{definition} \begin{enumerate}
+\item Given a topos $\mathcal{E}$, an internal metric space $(X,d)$ is an object $X$ of  $\mathcal{E}$ together with a sequence of subobjects $d_r\hookrightarrow X\times X$ indexed by $r\in\mathbb{R}_{\geq 0}$ fulfilling the following axioms:...
+\item Given an internal metric space $(X,d)$, the object of Cauchy filters $CF(X,d)$ is the subobject of the object of filters $\mathcal{F}\in \Omega^{(\Omega^X)}$ such that the statement $\bigwedge_{\epsilon\in\mathbb{R}}\exists A\in\mathcal{F}\forall x,y\in A. \bigvee_{r\leq \epsilon} d_r(x,y)$ is fulfilled in the internal language. This is an internal lattice via inclusions of filters. %A filter is a map $\mathcal{P}(X)\rightarrow 2$
+\item We call $(X,d)$ an internal complete metric space if the map
+\[\mathcal{N}:X\rightarrow CF(X,d)   \]
+sending $x$ to its neighbourhood filter has a right adjoint i.e. every Cauchy filter converges. %we need to equip X with the trivial partial ordering
+\end{enumerate}
+\end{definition}
+\begin{theorem}
+Given any hyperconnected morphism of topoi $f:\mathcal{E}\rightarrow \mathcal{F}$ and complete metric space $(X,d)$ in $\mathcal{F}$, then $(f^*X, f^*d)$, with $(f^*d)_r:=f^*(d_r)$, is a complete metric space.
+\end{theorem}
+\begin{proof}
+\end{proof}
 
-
+\begin{lemma} Let $f:\text{Cont}_{\tau}(\text{Aut}(I,\lambda))\rightarrow \text{Set}^{\text{Aut}(I,\lambda)}$ be the natural inclusion. The internal metric space $\mathcal{L}^2(I,\lambda)$ in the codomain is complete and $f^*\mathcal{L}^2(I,\lambda)=\mathcal{S}$.
+\end{lemma} 
+\begin{corollary} The internal metric space $\mathcal{S}$ with $\mathcal{L}^2$-metric is an internal complete metric space.
+\end{corollary} 
 \section{Outlook for further research}
 Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
 \section{Appendix: Models in Set}
