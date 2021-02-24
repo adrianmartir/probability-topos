@@ -780,6 +780,7 @@ Measure algebras are the correct setting for doing measure theory while ignoring
 \[
 S := \{ b \leq a | \mu(b) \leq s \}.
 \]
+HUH? WHAT THE FUCK IS HAPPENING HERE THIS LOOKS UNNECESSARY
 Since every chain has a supremum, we can use Zorn's lemma to get a maximal element $b \in S$. Now consider the set
 \[
 T := \{ b' \leq a | b' \geq b\} .
@@ -815,7 +816,7 @@ for each morphism $f: \alpha \to \beta$ in $FinProb$. One can easily see that th
 suffice, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. Now, the axioms above are precisely reformulations of the interval axioms.
 
 Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed \footnote{One can use the commutative square in theorem 8.1.3 to see this, with a similar argument as in the remark below.}, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf by using \ref{sheaf_condition_weak}. This tells us that $p_1^{-1}(a) = p_2^{-1}(a)$, which means that
-
+IT IS A SHEAF BY ATOM NOTATION! % Explain why we don't need to sheafify coproducts!!!
 \[
 \forall x,y \text{ such that } f(x) = f(y): x \in a \Leftrightarrow y \in a .
 \]
@@ -900,6 +901,7 @@ For an element $a \in B$ of a boolean algebra, we will denote the ideal of eleme
 We could now start proving that the Lebesgue interval satisfies the required properties, but in order to emphasize that the Lebesgue interval is not really special, we will will prove that a well-known more general class of measure algebras is $BPAlg_f$-universal and $BPAlg_f$-ultrahomogeneous. The reader can ignore this and pretend that he is dealing with the Lebesgue interval.
 
 \begin{definition} \label{maharam_type_homogeneous}
+% TODO: Maharam-type homogeneous should be emphazised less by intead always requiring the 'ultrahomogeneous' hypothesis.
 \begin{enumerate}
 \item Let $A$ be a complete boolean algebra. We say that a subset $S \subset A$ generates $A$ if $A$ is the only complete boolean subalgebra of $A$ containing $S$.
 \item Let $A$ be a complete boolean algebra. We say that the Maharam type of $A$ is the smallest possible cardinality of a generating set.
@@ -1160,11 +1162,11 @@ We can Yoneda embed $\mathfrak{Prob}_{at}$ into $\mathfrak{Prob}$.  By the Yoned
 \begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
 \end{remark}
 
-\begin{definition} Denote the category given above by $FinProb_{at}$ and call it the atomic completion of $FinProb$ in accordance with notation in \cite{caramello_lafforgue}.
+\begin{definition} Denote the category given above by $\mathfrak{Prob}_{at}$ and call it the atomic completion of $FinProb$ in accordance with notation in \cite{caramello_lafforgue}.
 \end{definition}
 This yields a new site presentation, which we will see is extremely easy to work with.
 \begin{corollary} \label{coprod_representation}
-    $\mathfrak{Prob}\simeq \text{Sh}(FinProb_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $FinProb_{at}$. % What is this even supposed to mean???
+    $\mathfrak{Prob}\simeq \text{Sh}(\mathfrak{Prob}_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $\mathfrak{Prob}_{at}$. % What is this even supposed to mean???
 \end{corollary}
 
 Using this site for substantial applications will result in having to write coproducts whose index will be many lines long. This is very inconvenient to write down and moreover we don't find it very transparent when it comes to understanding what is going on. Thus, we give a more convenient notation for coproducts.
@@ -1189,7 +1191,7 @@ Using this site for substantial applications will result in having to write copr
     \end{enumerate}
 \end{definition}
 
-This notation is the payoff of the efforts that had been directed towards a combinatorial understanding of $FinProb_{at}$. One should be aware that the coproduct that results in this notation will contain many atoms twice, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order. This means that we can only think of $\mathcal{A}$ and $\mathcal{A}^{re}$ as sets that we can use to index our atoms, but not as the actual objects in the category of atoms.
+This notation is the payoff of the efforts that had been directed towards a combinatorial understanding of $\mathfrak{Prob}_{at}$. One should be aware that the coproduct that results in this notation will contain many atoms twice, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order. This means that we can only think of $\mathcal{A}$ and $\mathcal{A}^{re}$ as sets that we can use to index our atoms, but not as the actual objects in the category of atoms.
 
 The crucial thing about this notation, is that \ref{coprod_representation} gurantees that every sheaf can be written this way. Moreover, when the subsets of $\mathcal{A}$ are even subsets of $\mathcal{A}^{re}$, we will be able to precisely describe the sheaves that are coproducts of sheaves representable over the site $(FinProb, J_{at})$. In this case, we omit writing down trivial subgroups everywhere in our notation.
 
@@ -1491,7 +1493,7 @@ We check that this concept of a simple function corresponds to the classical con
     Let $(A,\mu)$ be an interval in $Set$. Then the simple functions over $(A,\mu)$ can be given by are the usual simple functions or sth.
 \end{proposition}
 
-One of the most fascinating things about the set of atoms notation, or more generally the combinatorial sites $(FinProb,J_{at})$ and $(FinProb_{at}, J_{at})$, is that partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. Similarly, in the way we defined the simple functions, we never had to deal with issues about \emph{where} exactly the simple function took a specific value.
+One of the most fascinating things about the set of atoms notation, or more generally the combinatorial sites $(FinProb,J_{at})$ and $(\mathfrak{Prob}_{at}, J_{at})$, is that partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. Similarly, in the way we defined the simple functions, we never had to deal with issues about \emph{where} exactly the simple function took a specific value.
 
 Applying the inverse image functors of models, somehow inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
 
