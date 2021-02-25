@@ -1207,7 +1207,7 @@ We give some examples as how to it makes things easier.
     \end{enumerate}
 \end{example}
 
-The previous examples may be too easy to fully make use of the notation. In chapter \ref{applications} we will see be a more interesting application when we look at simple functions.
+The previous examples may be too easy to fully make use of the notation. In chapter \ref{simple_functions} we will see be a more interesting application when we look at simple functions.
 
 One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The convenient thing, is that when writing down sheaves in this way, one does not need to check neither functoriality nor sheaf conditions. Of course, this is does not mean that our topos is equivalent to $Set^{\mathcal{A}}$, because while the objects match, the morphisms are different:
 
@@ -1393,13 +1393,11 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 
 
 
-\section{Applications} \label{applications}
+\section{Simple functions} \label{simple_functions}
 
 In this section we aim to illustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
 
 % TODO: We should throughly explain why stuff like L^0 doesn't work and the philosophical ramifications of this. Because it is very nonobvious and philosophically interpreting Prob has been and still is one of the hardest problems we have faced. It would be retarded not to write about it.
-
-% We need better notation for those coproducts
 
 % TODO: This should be moved to the appropriate section.
 \begin{definition}
@@ -1468,16 +1466,32 @@ Now under the usual functional-analytic correspondence of finitely additive meas
 We now define expectation algebra structure on $\mathcal{S}$, without checking that the axioms hold. We will get that later for free. Before we do that, we need to compute $\mathcal{S} \times \mathcal{S}$:
 
 \begin{align*}
-    S \times S &\cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle \\
+    S \times S &\cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle^2 \\
     &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m | y_i, z_j \in \mathbb{R} \} | (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}^{re} \rangle
 \end{align*}
 
-We use \ref{atom_coprod_maps} to specify the operations $\mathcal{S} \times \mathcal{S} \to \mathcal{S}$.
+We use \ref{atom_coprod_maps} to specify the operations $\mathcal{S} \times \mathcal{S} \to \mathcal{S}$ in a combinatorial fashion.
 
 \begin{definition}
     \begin{enumerate}
-        \item Define addition on an element $(t_{ij}, y_i, z_j)$ to be $(t_{ij}, y_i + z_j)$ and the corresponding morphisms of atoms to be the identity.
-        \item Define multiplication of an element $(t_{ij}, y_i, z_j)$ to be $(t_{ij}, y_i \cdot z_j)$ and the corresponding morphisms of atoms to be the identity.
+        \item We will define addition on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i + z_j | i,j \}$. Then we define addition on elements to be
+        \[
+            (t_{ij},y_i,z_j) \mapsto (\sum_{y_i + z_j = x_k} t_{ij}, x_k) 
+        \]
+        and the corresponding map on atoms
+        \[
+            U_{t_{ij}} \to U_{\sum_{y_i + z_j = x_k} t_{ij}}
+        \]
+        to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i + z_j = y_{i'} + z_{j'}$ holds.
+        \item We will define multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j | i,j \}$. Then we define multiplication on elements to be
+        \[
+            (t_{ij},y_i,z_j) \mapsto (\sum_{y_i \cdot z_j = x_k} t_{ij}, x_k) 
+        \]
+        and the corresponding map on atoms
+        \[
+            U_{t_{ij}} \to U_{\sum_{y_i \cdot z_j = x_k} t_{ij}}
+        \]
+        to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i \cdot z_j = y_{i'} \cdot z_{j'}$ holds.
         \item Define $E_r \to \mathcal{S}$ to be the subobject
         \[
             \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R}, \sum r_i y_i = r \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle .
@@ -1485,17 +1499,34 @@ We use \ref{atom_coprod_maps} to specify the operations $\mathcal{S} \times \mat
     \end{enumerate}
 \end{definition}
 
+While insisting on defining the operations $+$ and $\cdot$ on atoms gives a purely combinatorial, but a bit long-winded, definition, the reader can check that these operations yield the usual pointwise addition and pointwise multiplication on the more intuitive sheaf $(X,\mu) \mapsto \mathbb{R}^X$ on $FinProb$. But the idea behind our longer definitions should be clear: When adding(or multiplying) two functions, we need to ensure that the values at each pair $(i,j)$ are distinct again and thus we need to join some of those pairs.
 
-We check that this concept of a simple function corresponds to the classical concept that is given in \cite{fremlin}. % TODO: Elaborate on this and explain how fremlin shows that this abstract def of simple functions corresponds to the usual one on actual sigma-algebras.
+Having defined the simple functions in $\mathfrak{Prob}$, we can define simple functions in great generality.
 
-% Should I use a sigma algebra?
+\begin{definition}
+    Let $F: \mathcal{E} \to \mathfrak{Prob}$ be an interval in $\mathcal{E}$. Then we can define the simple functions over $F$ to be $F^*(\mathcal{S})$ equipped with the corresponding expectation algebra structure.
+\end{definition}
+
+For the sake of comparing this unusual definition of the set of simple functions to the more standard one, we recall the following:
+
+\begin{definition}
+    Define the expectation algebra of simple functions $S(X,\Sigma, \mu)$ on a probability space $(X, \Sigma, \mu)$ to be the set of measurable maps $X \to \mathbb{R}$ of finite image modulo equality almost everywhere equipped with pointwise addition, pointwise multiplication and expectation.
+\end{definition}
+
 \begin{proposition}
-    Let $(A,\mu)$ be an interval in $Set$. Then the simple functions over $(A,\mu)$ can be given by are the usual simple functions or sth.
+    Let $(X, \Sigma, \mu)$ be a probability space such that the corresponding measure algebra is atomless. Then $S(X,\Sigma,\mu)$ is isomorphic to the expectation algebra over the corresponding interval.
 \end{proposition}
+\begin{proof}
+    The atomless measure algebra of $(X, \Sigma, \mu)$ is an inteval and thus can be viewed as a geometric morphism $F: Set \to \mathfrak{Prob}$. $F^*$ sends an atom $U_{r_i}$ to the set of partitions of the interval with measures $r_1,\cdots,r_n$. Thus, since $F^*$ is colimit preserving, $S$ gets sent to
+    \[
+        \coprod_{r_i \in \mathcal{A}^{re}} \{x_1 < \cdots x_n | x_i \in \mathbb{R}\} \times F^*(U_{r_1\cdots r_n}) .
+    \]
+    It should be clear that this corresponds to the traditional set of simple functions. It is a straightforward calculation that expectation, addition and multiplication are the correct ones. The necessary setup has already been done, since addition and multiplication have already been decomposed into their components on atoms.
+\end{proof}
 
-One of the most fascinating things about the set of atoms notation, or more generally the combinatorial sites $(FinProb,J_{at})$ and $(\mathfrak{Prob}_{at}, J_{at})$, is that partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. Similarly, in the way we defined the simple functions, we never had to deal with issues about \emph{where} exactly the simple function took a specific value.
+This proof ilustrates one of the most fascinating things about the set of atoms notation(the same goes for the $(FinProb, J_{at})$ site). Partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. The way we defined the simple functions, we never had to deal with issues about \emph{where} exactly a simple function took a specific value, but instead just specified the measure of the preimages.
 
-Applying the inverse image functors of models, somehow inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
+Applying the inverse image functors of models inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
 
 \begin{theorem}
     The simple functions over an interval are all geometrically (infinitary first order?) equivalent as expectation algebras.
@@ -1506,8 +1537,9 @@ Applying the inverse image functors of models, somehow inserts that missing loca
 
 % TODO: Say that poset structure also matches, since x \leq y iff y - x is a square.
 
-This actually is quite a cool theorem. Does it actually mean what I think it means in that no free vars are allowed? This is one of those theorems that I am not sure how classical model theory would even be able to prove.\newline
-\indent We will now investigate even further what can be said in the theory of expectation algebras about simple functions on probability intervals.
+This actually is quite a cool theorem. Does it actually mean what I think it means in that no free vars are allowed? This is one of those theorems that I am not sure how classical model theory would even be able to prove.
+
+We will now investigate even further what can be said in the theory of expectation algebras about simple functions on probability intervals.
 \begin{lemma} Any atomic formula in $\mathbb{T}_{exp}$ is $\mathbb{T}_{exp}$-provably equivalent to one of the form $x_1,\cdots, x_n. E_0(f(x_1,\cdots,x_n))$ where $f\in \mathbb{R}[X_1,\cdots, X_n]$ is a real polynomial. 
 \end{lemma}
 \begin{proof}
