@@ -122,31 +122,7 @@ Since this is clearly a coequalizer on the underlying sets, the only thing to sh
 
 The fact that this implies that $J_{at}$ on $FinProb$ is subcanonical is a standard fact, or it can alternatively also seen with \ref{sheaf_condition_weak}, which we will prove soon.
 \end{proof}
-%More generally;
-%\begin{theorem}
-%The category $FinProb$ has all multi-limits and connected colimits.
-%\end{theorem}
-%\begin{proof} We prove it has all coequalizer, pushouts, multi-products and multi-equalizer.
-%\begin{enumerate}
-%\item Given a diagram as follows, where $\eta'([x])=\eta(x)$ for any equivalence class $[x]$:
-%\begin{center}
-%\begin{tikzcd}
-%{(X,\mu)} \arrow[r, "g"', shift right] \arrow[r, "f", shift left] & {(Y,\nu)} \arrow[r] \arrow[rd] & {(CoEq(f,g),\nu')} \arrow[d, dotted] \\
-%                                                                  &                                & {(L,\eta)}                        
-%\end{tikzcd} 
-%\end{center}
-%The induced map by the universal property is measure preserving by \ref{Imnotdumb}. We need only show that $(CoEq(f,g),\nu')$ is a finite probability space. 
-%\item Given a diagram as follows, where $\eta'([x])=\eta(x)$ or $\eta'([x])=\lambda(x)$ depending on which set $x$ belongs, for any equivalence class $[x]$. This is a finite probability space ...:
-%\begin{center}\begin{tikzcd}
-%{(X,\mu)} \arrow[d, "f"'] \arrow[r, "g"]    & {(L,\lambda)} \arrow[rdd, bend left] \arrow[d] &            \\
-%{(Y,\nu)} \arrow[rrd, bend right] \arrow[r] & (Y\cup_X L,\mu') \arrow[rd, dotted]                 &            \\
-%                                            &                                                & {(M,\eta)}
-%\end{tikzcd}\end{center}
-%Again the induced map is measure preserving by \ref{Imnotdumb}. Note that this also works for infinite pushouts, since the pushout is also finite given it has a surjection from a finite set.
-%\item It has mulit-products. Given a family of finite probability spaces $(X_i,\mu_i)$ and any family of measure preserving maps $f_i:(Y,\nu)\rightarrow (X_i,\mu_i)$, the inverse images of elements of the $X_i$ generate a sub finite probability algebra of $\mathcal{P}(Y)$. We can take $(\tilde{Y},\tilde{\nu})$ the corresponding finite probability space. All the $f_i$ factor through  $(\tilde{Y},\tilde{\nu})$. Take the set of all such finite probability spaces. We claim it is the multi-product of $(X_i,\mu_i)$. This is like painfully obvious.
-%\item The same argument applies to all multi-limits.
-%\end{enumerate}
-%\end{proof}
+
 Now we can introduce the topos that we wish to study in this paper.
 
 \begin{definition}
