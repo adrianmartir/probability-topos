@@ -155,7 +155,15 @@ Define the topos $\mathfrak{Prob}$ to be $Sh(FinProb, J_{at})$.
 
 Much of this paper is dedicated to finding other equivalent ways of describing $\mathfrak{Prob}$. When we wish to leave the particular description of $\mathfrak{Prob}$ vague, we will use the notation $\mathfrak{Prob}$.
 
-There is some very convenient notation for finite probability spaces emphasizing their combinatorial nature.
+\subsection{Finite Limits and a Calculus of Polytopes}
+
+Our goal in the next section will be to understand the logic of $\mathfrak{Prob}$. Successfully doing so requires a very good understanding of what the flat functors on $FinProb$ are and thus also requires a good understanding of finite limits in $\mathfrak{Prob}$. This will be our goal in this section.
+
+But the situation is not as simple as one may hope: these finite limits only very rarely exist. But naturally, in the topos $\mathfrak{Prob}$, these finite limits do actually exist, and we will see that luckily these have a straightforward form. This will give rise to a weakened form of the notion of a limit will be called multilimit. It will be essential in all our discussions about logic.
+
+The most surprising thing about multilimits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an overwhelming amount of statements in this paper(beyond statements about flat functors) are proved by computations with multilimits and polytopes. One could say that this subsection gives us a first look at the computational meat of $\mathfrak{Prob}$.
+
+There is some very convenient notation for finite probability spaces emphasizing their combinatorial nature, where we see that phenomena involving polytopes are starting to arise.
 
 \begin{definition}[U-notation] \label{U-notation}
 \begin{enumerate}
@@ -164,14 +172,20 @@ There is some very convenient notation for finite probability spaces emphasizing
 \{i | r_i \neq 0 \}
 \]
 equipped with the measure $\mu(i) = r_i$.
-\item When denoting the presheaf $y U_{r_i}$, this will be interpreted as the functor sending a finite probability space $(X,\mu)$ to the set of its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$.
-\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$ and the functor $y U_r$ will be interpreted as the functor sending a finite probability space to the set of subsets of measure $r$.
+\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$.
 \end{enumerate}
 \end{definition}
 
-As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$. Part (ii) of the definition is reasonable, since a morphism $(X,\mu) \to U_{r_i}$ of finite probability spaces consists precisely of a partition $(a_i)_i$ of $X$ into subsets of measure $r_i$.
+As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$.
+
+\begin{remark}
+    TODO: $(U_{r_i})$ classifies partitions. finite probability space $(X,\mu)$ to the set of its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. % This is needed for the multiproduct proof and for motivation for the universal model.
+\end{remark}
 
 Before continuing, we will derive a better criterion for determining whether a presheaf on $FinProb$ is a sheaf. First, notice that we have the following universal property \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
+
+% TODO: First do multiproduct and cite \cite{caramello_lafforgue}. Then multiequalizer.
+% Then introduce the P^n_{r_i} and et of atoms notation and also do lemma about set of atoms notation morphims
 
 \begin{lemma} \label{multipullback}
 For a diagram
@@ -212,6 +226,13 @@ We could have presented the universal property in a more traditional style by sa
 are in one-to-one correspondence with elements of the multiproduct. These matrices form a polytope inside $\mathbb{R}^{n\times m}$ called \emph{transportation polytope}. Any element of a polytope is a convex sum of its extreme points. These and much more about this polytope are explored in Chapter 8 of [Matrix book]. \newline
 \indent $yU_{r_i}\times_{yU_{s_i}}yU_{r'_i}$ corresponds to the subset of matrices in the block diagonal from with non-zero entries at $(i,j)$ only if $g(i)=f(j)$.
 \end{remark}
+
+\subsection{Sheaf Conditions}
+
+Here we give our first application of our calculus of polytopes. We use it to give a straightforward criterion for when a preasheaf over $FinProb$ is actually a sheaf. This sounds very useful, but the sheaves we use in practise, are usually coproducts of representables and are thus automatically sheaves. In fact, we only use the results of this subsection when we later compute the set of atoms of $\mathfrak{Prob}$ and we show that the new atoms we found are in fact sheaves (see \ref{atoms_are_sheaves}). This means that the uninterested reader can safely skip this subsection.
+
+% TODO: MULTIPULLBACKS
+
 We can use this lemma in order to simplify the following sheaf condition for sheaves over categories equipped with the atomic topology found in \cite{sheaves_geometry_logic}, III.4 Lemma 2:
 
 A presheaf $\mathcal{F}$ on a $FinProb$ is a sheaf over the atomic topology if and only if one can check that for any morphism $f: \alpha \to \beta$ and any $a \in \mathcal{F}(\alpha)$: If for all diagrams
@@ -1114,12 +1135,13 @@ $L$ is then defined to be the sum of these matrices.
 This concludes the proof as all atoms are quotients of equivalence relations and the relations. The representable functors appear as $(X,\mu, \{id\})$.
 \end{proof}
 
-\begin{lemma} Given a finite probability space $(X,\mu)$ and a subgroup $H$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\text{Sh}(FinProb,J_{at})$ to be:
+\begin{lemma} \label{atoms_are_sheaves} Given a finite probability space $(X,\mu)$ and a subgroup $H$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\text{Sh}(FinProb,J_{at})$ to be:
 \[ \mathcal{F} :(N,\nu)\mapsto\text{FinProb}((N,\nu), (X,\mu))/\sim  \]
 where $f\sim g$ if there exists $\sigma\in H$ with $ \sigma\circ f=g$. These are partitions up to permutation by elements in $H$.
 \end{lemma}
 \begin{proof}
-One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. The quotient the equivalence relation $R$ associated to $U$ is given by the coequalizer of the composition of the  maps%Maybe explain previously what they quotients of equivalence relations are
+One calculates coequalizers in sheaf topoi by calculating the section-wise coequalizer and then sheafifying. The quotient the equivalence relation $R$ associated to $U$ is given by the coequalizer of the composition of the maps
+% TODO: Maybe explain previously what they quotients of equivalence relations are
 \begin{center}
 
 \begin{tikzcd}
