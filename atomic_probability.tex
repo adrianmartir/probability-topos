@@ -30,13 +30,14 @@
 
 \date{}
 \begin{document}
-\maketitle
 
 \begin{center}
 \begin{minipage}{\textwidth}
 \begin{abstract}
 Yo guys we solved probability theory. %TODO do this but properly
 \end{abstract}
+
+\maketitle
 \end{minipage}
 \end{center}
 \tableofcontents 
@@ -135,7 +136,7 @@ Much of this paper is dedicated to finding other equivalent ways of describing $
 
 Our goal in the next section will be to understand the logic of $\mathfrak{Prob}$. Successfully doing so requires a very good understanding of what the flat functors on $FinProb$ are and thus also requires a good understanding of finite limits in $\mathfrak{Prob}$. This will be our goal in this section.
 
-But the situation is not as simple as one may hope: these finite limits only very rarely exist. But naturally, in the topos $\mathfrak{Prob}$, these finite limits do actually exist, and we will see that luckily these have a straightforward form. This will give rise to a weakened form of the notion of a limit will be called multilimit. It will be essential in all our discussions about logic.
+But the situation is not as simple as one may hope: these finite limits only very rarely exist. But naturally, in the topos $\mathfrak{Prob}$, these finite limits do actually exist, and we will see that luckily these have a straightforward form. This will give rise to a weakened form of the notion of a limit which we will call multilimit. It will be essential in all our discussions about logic.
 
 The most surprising thing about multilimits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an overwhelming amount of statements in this paper(beyond statements about flat functors) are proved by computations with multilimits and polytopes. One could say that this subsection gives us a first look at the computational meat of $\mathfrak{Prob}$.
 
@@ -152,62 +153,196 @@ equipped with the measure $\mu(i) = r_i$.
 \end{enumerate}
 \end{definition}
 
-As promised, this is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$.
+This is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$.
 
 \begin{remark}
-    TODO: $(U_{r_i})$ classifies partitions. finite probability space $(X,\mu)$ to the set of its partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. % This is needed for the multiproduct proof and for motivation for the universal model.
+    Notice that for a finite probability space $(X,\mu)$, $Hom((X,\mu), U_{r_i})$ precisely consists of partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. This may seems like quite a harmless observation, but being aware of this fact makes some calculations with $y U_{r_i}$ much more intuitive. Moreover, we will later see that the $U_{r_i}$ in fact precisely correspond to logical formulas specifying a partition with fixed measures. We will often identify maps with partitions implicitly and without comment.
+
+    In particular, $Hom((X,\mu), U_r)$ is identified with partitions consisting of two elements. Of course, that is the same as if we simply chose any subset of $X$ of measure $r$. We will similarly identify $Hom((X,\mu), U_r)$ with subsets of $X$ of measure $r$.
+
 \end{remark}
 
-Before continuing, we will derive a better criterion for determining whether a presheaf on $FinProb$ is a sheaf. First, notice that we have the following universal property \footnote{In \cite{caramello_lafforgue} families of objects with these universal properties are called multilimits, see lemma 6.11.} :
+We now compute the finite limits of representables in $\mathfrak{Prob}$.
 
-% TODO: First do multiproduct and cite \cite{caramello_lafforgue}. Then multiequalizer.
-% Then introduce the P^n_{r_i} and et of atoms notation and also do lemma about set of atoms notation morphims
+\begin{proposition} \label{multiproduct}
+    Let $U_{r_1, \cdots r_n}$ and $U_{s_1, \cdots s_m}$ be finite probability spaces. For each finite probability space $U_{t_{ij}}$ ($0 < i \leq n$, $0 < j \leq m$) with
+    \[
+        \sum_j t_{ij} = r_i
+    \]
+    and
+    \[
+        \sum_i t_{ij} = s_j ,
+    \]
+    we define projections $p_1: U_{t_{ij}} \to U_{r_i}$, $(x_{ij}) \mapsto (\bigvee_j x_{ij})$ and $p_2: U_{t_{ij}} \to U_{s_i}$, $(x_{ij}) \mapsto (\bigvee_i x_{ij})$.
 
-\begin{lemma} \label{multipullback}
-For a diagram
-\[
-\begin{tikzcd}
-& U_{r_i} \arrow[d, "g"] \\
-U_{r'_i} \arrow[r, "f"'] & U_{s_i} ,
-\end{tikzcd}
-\]
-we consider the finite probability spaces $U_{t_{ij}}$ with the projections $p_1: U_{t_{ij}} \to U_{r_i}$, $(x_{ij}) \mapsto (\bigvee_j x_{ij})$ and $p_2: U_{t_{ij}} \to U_{r'_i}$, $(x_{ij}) \mapsto (\bigvee_i x_{ij})$, where the $t_{ij} \geq 0$ are indexed by pairs $(i, j)$ with $f(i) = g(j)$ such that for each $i$,
-\[
-\sum_j t_{ij} = r_i
-\]
-and for each $j$
-\[
-\sum_i t_{ij} = r'_j .
-\]
-These cones have the universal property
-\[
-y U_{r_i} \times_f y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} .
-\]
-\end{lemma}
+    These projection maps induce the isomorphism
+    \[
+    y U_{r_i} \times y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
+    \]
+    where the indexing $t_{ij}$ range over the ones with the fixed sums specified above.
+\end{proposition}
 \begin{proof}
-The $t_{ij}$ where precisely chosen such that the projections are measure preserving and such that they form the required commutative square. To show
-\[
-y U_{r_i} \times_f y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
-\]
-send a pair of partitions $((a_i),(b_j))$ to the family $(a_i \wedge b_j)_{ij}$. The inverse of this map is given by joining the family with the universal maps described above.
+    The $t_{ij}$ where precisely chosen such that the projections are measure preserving. To show
+    \[
+    y U_{r_i} \times y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
+    \]
+    send a pair of partitions $((a_i),(b_j))$ to the family $(a_i \wedge b_j)_{ij}$. The inverse of this map is given by joining the family with the projection maps described above.
+\end{proof}
+    
+Notice that the isomorphism we proved is not quite a universal property in the traditional sense. Normally, we would have required $y U_{r_i} \times y U_{s_j}$ to actually be representable in order to be able to say that we have a products in $FinProb$. But this does not work in our case, as it only is a coproduct of representables.
+
+We give a name to this weaker notion of a limit.
+
+\begin{definition}
+    Given a small category $\mathcal{C}$ and a diagram $D: J \to C$, we will call a family of cones\footnote{We think of cones over $D$ as natural transformations $c \Rightarrow D$ from a constant diagram $c$ to the diagram $D$.} $(d_i \Rightarrow D)_i$ over $D$ a \emph{multi-limit} of $D$ the cones induce an isomorphism
+    \[
+        lim_{j \in J} D(j) \cong \coprod_i d_i .
+    \]
+    Moreover, we will use the terminology \emph{multi-product}, \emph{multi-equalizer} and \emph{multi-pullback}.
+\end{definition}
+
+Alternatively, we could have presented the universal property in a more traditional style by saying that cones over our diagram factor through one of the $U_{t_{ij}}$ uniquely. In fact, this is what is done in \cite{caramello_lafforgue} (Lemma 6.11.). Caramello and Lafforgue use multi-products in order to study the atoms of an atomic topos, which also one of the things we will use them for.
+
+For completeness sake, we remark that not only binary multi-products do exist in $FinProb$, but in fact all finite multi-products do exist. Indeed, $FinProb$ has a terminal object.
+
+Finally, we also have multi-equalizers.
+
+\begin{proposition}
+    Given the diagram \begin{tikzcd}[column sep=small]
+        \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \beta
+        \end{tikzcd} in $FinProb$ we have
+    \[
+        eq(\begin{tikzcd}[column sep=small]
+        y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & y \beta
+        \end{tikzcd}) \cong y \alpha \text{ if } f = g \text{ and } \emptyset \text{ otherwise.}
+    \]
+\end{proposition}
+\begin{proof}
+    The interesting case is when $f \neq g$. In that case we compute the equalizer poinitwise on a finite probability space $\gamma$:
+    \[
+        eq(\begin{tikzcd}[column sep=small]
+        y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & y \beta
+        \end{tikzcd})(\gamma) \cong \{ h: \gamma \twoheadrightarrow \alpha | fh = gh \} \cong \emptyset .
+    \]
 \end{proof}
 
+\begin{proposition}
+    $FinProb$ has all finite multi-limits.
+\end{proposition}
+\begin{proof}
+    This involves writing a limit as an equalizer of products and then somehow reordering things?
+\end{proof}
 
-We could have presented the universal property in a more traditional style by saying that cones over our diagram factor through one of the $U_{t_{ij}}$.
+In practise we noticed that we needed to work a lot with big coproducts with complicated index sets, like one has to do with multi-products. Thus, we introduce a simplified notation for objects of this kind.
 
-\begin{remark} Given $r_i$, $r'_j$, the elements of the multiproduct $t_{ij}$ can be interpreted as a $n\times m$-matrix with coefficients in $\mathbb{R}_{\geq 0}$. Actually, non-negative real matrices satisfying
+
+\begin{definition}
+    \begin{enumerate}
+        \item $P^1_n := \{ (r_i) \in \mathbb{R}^n | \sum_{i=1}^n r_i = 1 \}$
+        \item $P^2_{r_i,s_i} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} | \sum_{i=1}^n t_{ij} = s_j, \sum_{j=1}^m t_{ij} = r_i, t_{ij} \geq 0 \}$
+        \item $P^2_{n,m} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} | \sum_{i,j = 1}^{n,m} t_{ij} = 1 , t_{ij} \geq 0 \}$
+    \end{enumerate}
+\end{definition}
+
+\begin{remark} Given $r_i$, $s_j$, the elements of the multiproduct $t_{ij}$ can be interpreted as a $n\times m$-matrix with coefficients in $\mathbb{R}_{\geq 0}$. Actually, non-negative real matrices satisfying
 \[
-\sum_j t_{ij} = r_i \quad \sum_i t_{ij} = r'_j .
+\sum_j t_{ij} = r_i \quad \sum_i t_{ij} = s_j .
 \]
 are in one-to-one correspondence with elements of the multiproduct. These matrices form a polytope inside $\mathbb{R}^{n\times m}$ called \emph{transportation polytope}. Any element of a polytope is a convex sum of its extreme points. These and much more about this polytope are explored in Chapter 8 of [Matrix book]. \newline
 \indent $yU_{r_i}\times_{yU_{s_i}}yU_{r'_i}$ corresponds to the subset of matrices in the block diagonal from with non-zero entries at $(i,j)$ only if $g(i)=f(j)$.
 \end{remark}
 
+Using this site for substantial applications will result in having to write coproducts whose index will be many lines long. This is very inconvenient to write down and moreover we don't find it very transparent when it comes to understanding what is going on. Thus, we give a more convenient notation for coproducts.
+
+\begin{definition}
+    \begin{enumerate}
+        \item Let $\mathcal{A}$ denote the set 
+        \[
+            \{(r_1, \cdots, r_n, H) | n \in \mathbb{N}, r_i \in \mathbb{R}_{\geq 0}, \sum r_i = 1, H \leq Aut(U_{r_i})\}.
+        \]
+        \item For any $x \in \mathcal{A}$ with $x = (r_i, H)$, denote by $A_x \in \mathfrak{Prob}$ the atom corresponding to the finite probability space $U_{r_i}$ divided by the group of permutations $H$.
+        \item Let $\mathcal{A}^{re}$ denote the set
+        \[
+            \{(r_1,\cdots, r_n) | n \in \mathbb{N}, r_i \in \mathbb{R}_{\geq 0}, \sum r_i = 1\}.
+        \]
+        \item Let $S$ be a subset of $\mathcal{A}$ and let for for each $x \in S$, $T(x)$ be any set. Then we can introduce the following notation:
+        \[
+            \langle T(x) | x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} A_x .
+        \]
+        We will call a sheaf written in this notation a \emph{set of atoms}.
+        \item We define an \emph{element} of a set of atoms $\langle T(x) | x \in S \rangle$ to be a tuple $(x,t) \in \coprod_{x \in S} T(x)$.
+    \end{enumerate}
+\end{definition}
+
+This notation is the payoff of the efforts that had been directed towards a combinatorial understanding of $\mathfrak{Prob}_{at}$. One should be aware that the coproduct that results in this notation will contain many atoms twice, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order. This means that we can only think of $\mathcal{A}$ and $\mathcal{A}^{re}$ as sets that we can use to index our atoms, but not as the actual objects in the category of atoms.
+
+The crucial thing about this notation, is that \ref{coprod_representation} gurantees that every sheaf can be written this way. Moreover, when the subsets of $\mathcal{A}$ are even subsets of $\mathcal{A}^{re}$, we will be able to precisely describe the sheaves that are coproducts of sheaves representable over the site $(FinProb, J_{at})$. In this case, we omit writing down trivial subgroups everywhere in our notation.
+
+We give some examples as how to it makes things easier. 
+
+\begin{example}
+    \begin{enumerate}
+        \item The binary multiproducts we have dealt with so often, can now be written as:
+        \[ y U_{r_i} \times y U_{s_j} \cong \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \] % TODO: Define the P stuff earlier.
+        where $1$ denotes the one-object set
+        \item We can also express the universal model $U$ in the following way:
+        \[ U \cong \langle 1 | (r_1,r_2) \in P^1_2 \rangle. \]
+
+        % TODO: Add n-ary multiproducts.
+    \end{enumerate}
+\end{example}
+
+The previous examples may be too easy to fully make use of the notation. In chapter \ref{simple_functions} we will see be a more interesting application when we look at simple functions.
+
+One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The convenient thing, is that when writing down sheaves in this way, one does not need to check functoriality nor sheaf conditions. Of course, this is does not mean that our topos is equivalent to $Set^{\mathcal{A}}$, because while the objects match, the morphisms are different:
+
+\begin{proposition}\label{atom_coprod_maps}
+    Let $\mathcal{F} = \langle T(x) | x \in S \rangle$ and $\mathcal{G} = \langle T'(x) | x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely maps $(g, (f_x))$, where $g$ is a map between the sets of elements
+    \[
+        \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
+    \]
+    and for each element $(x,t) \in \coprod_{x \in S} T(x)$ with $(x',t') = g(x,t)$, $f_{x,t}$ is a morphism
+    \[
+        A_x \xrightarrow{f_{x,t}} A_{x'} .
+    \]
+\end{proposition}
+\begin{proof}
+    Use the universal property of the coproduct of atoms and then use that each map needs to factor through one of the images because the image of an atom needs to be an atom again.
+\end{proof}
+
+One of the most convenient things about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphisms, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf, is by decomposing the sheaf into atoms. % Adjust this. Say that this theme will be very noticeable throughout the paper.
+
 \subsection{Sheaf Conditions}
+
+Before continuing, we will derive a better criterion for determining whether a presheaf on $FinProb$ is a sheaf.
 
 Here we give our first application of our calculus of polytopes. We use it to give a straightforward criterion for when a preasheaf over $FinProb$ is actually a sheaf. This sounds very useful, but the sheaves we use in practise, are usually coproducts of representables and are thus automatically sheaves. In fact, we only use the results of this subsection when we later compute the set of atoms of $\mathfrak{Prob}$ and we show that the new atoms we found are in fact sheaves (see \ref{atoms_are_sheaves}). This means that the uninterested reader can safely skip this subsection.
 
-% TODO: MULTIPULLBACKS
+% TODO: HEAVILY SIMPLIFY THIS
+\begin{lemma} \label{multipullback}
+    For a diagram
+    \[
+    \begin{tikzcd}
+    & U_{r_i} \arrow[d, "g"] \\
+    U_{r'_i} \arrow[r, "f"'] & U_{s_i} ,
+    \end{tikzcd}
+    \]
+    we consider the finite probability spaces $U_{t_{ij}}$ with the projections $p_1: U_{t_{ij}} \to U_{r_i}$, $(x_{ij}) \mapsto (\bigvee_j x_{ij})$ and $p_2: U_{t_{ij}} \to U_{r'_i}$, $(x_{ij}) \mapsto (\bigvee_i x_{ij})$, where the $t_{ij} \geq 0$ are indexed by pairs $(i, j)$ with $f(i) = g(j)$ such that for each $i$,
+    \[
+    \sum_j t_{ij} = r_i
+    \]
+    and for each $j$
+    \[
+    \sum_i t_{ij} = r'_j .
+    \]
+    These cones have the universal property
+    \[
+    y U_{r_i} \times_f y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} .
+    \]
+\end{lemma}
+\begin{proof}
+r
+\end{proof}
 
 We can use this lemma in order to simplify the following sheaf condition for sheaves over categories equipped with the atomic topology found in \cite{sheaves_geometry_logic}, III.4 Lemma 2:
 
@@ -690,7 +825,7 @@ Lan_F(U \times U) \arrow[d, "Lan_F(U(\wedge))"'] \arrow[r, phantom, shift right=
 Lan_F U                                          & \coprod y \{b.B_rb\} & y\{a.\top\} .
 \end{tikzcd}
 \]
-We start with the left isomorphism. We can use \ref{multipullback} to rewrite $U \times U$ as a coproduct of representables by using the isomorphism $U \times U \to \coprod y U_{r_1 \cdots r_4}$ given on components by 
+We start with the left isomorphism. We can use \ref{multiproduct} to rewrite $U \times U$ as a coproduct of representables by using the isomorphism $U \times U \to \coprod y U_{r_1 \cdots r_4}$ given on components by 
 \[
 (a,b) \mapsto (a \wedge b, a \wedge \neg b, \neg a \wedge b, \neg a \wedge \neg b) .
 \]
@@ -1009,7 +1144,7 @@ R \arrow[r, hook] & {y(X,\mu)\times y(X,\mu)} \arrow[r, "\pi_1", shift left] \ar
 \end{tikzcd}
 \end{center}
 
-To exploit this, we will utilize the combinatorial method outlined in \cite{caramello_lafforgue} Prop 6.7. For this, we will need to understand internal equivalence relations on the sheaves $yU_{r_1\cdots r_n}$. We use \ref{multipullback} to yield the following description of an equivalence relation. \newline
+To exploit this, we will utilize the combinatorial method outlined in \cite{caramello_lafforgue} Prop 6.7. For this, we will need to understand internal equivalence relations on the sheaves $yU_{r_1\cdots r_n}$. We use \ref{multiproduct} to yield the following description of an equivalence relation. \newline
 \indent A relation is a subobject 
 \[R\hookrightarrow yU_{r_1\cdots r_n}\times yU_{r_1\cdots r_n}=\bigsqcup_{\substack{\sum_i t_{ij}=r_j \\ \sum_j t_{ij}=r_i}  }yU_{t_{ij}}\]
 As these representable functors are atoms, this is equivalent to giving a subset of the set $S_{r_1\cdots r_n}:=\{(t_{ij})_{0\leq i,j \leq n} | \sum_i t_{ij}=r_j,\, \sum_j t_{ij}=r_i \}$ of matrices whose rows and columns sum to the $r_i$'s. We use Definition 6.5 (iii) \cite{caramello_lafforgue} to see that a relation is an equivalence relation iff it fulfils the following conditions:
@@ -1163,67 +1298,8 @@ We can Yoneda embed $\mathfrak{Prob}_{at}$ into $\mathfrak{Prob}$.  By the Yoned
 \end{definition}
 This yields a new site presentation, which we will see is extremely easy to work with.
 \begin{corollary} \label{coprod_representation}
-    $\mathfrak{Prob}\simeq \text{Sh}(\mathfrak{Prob}_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $\mathfrak{Prob}_{at}$. % What is this even supposed to mean???
+    $\mathfrak{Prob}\simeq \text{Sh}(\mathfrak{Prob}_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $\mathfrak{Prob}_{at}$. % TODO: What is this even supposed to mean???
 \end{corollary}
-
-Using this site for substantial applications will result in having to write coproducts whose index will be many lines long. This is very inconvenient to write down and moreover we don't find it very transparent when it comes to understanding what is going on. Thus, we give a more convenient notation for coproducts.
-
-\begin{definition}
-    \begin{enumerate}
-        \item Let $\mathcal{A}$ denote the set 
-        \[
-            \{(r_1, \cdots, r_n, H) | n \in \mathbb{N}, r_i \in \mathbb{R}_{\geq 0}, \sum r_i = 1, H \leq Aut(U_{r_i})\}.
-        \]
-        \item For any $x \in \mathcal{A}$ with $x = (r_i, H)$, denote by $A_x \in \mathfrak{Prob}$ the atom corresponding to the finite probability space $U_{r_i}$ divided by the group of permutations $H$.
-        \item Let $\mathcal{A}^{re}$ denote the set
-        \[
-            \{(r_1,\cdots, r_n) | n \in \mathbb{N}, r_i \in \mathbb{R}_{\geq 0}, \sum r_i = 1\}.
-        \]
-        \item Let $S$ be a subset of $\mathcal{A}$ and let for for each $x \in S$, $T(x)$ be any set. Then we can introduce the following notation:
-        \[
-            \langle T(x) | x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} A_x .
-        \]
-        We will call a sheaf written in this notation a \emph{set of atoms}.
-        \item We define an \emph{element} of a set of atoms $\langle T(x) | x \in S \rangle$ to be a tuple $(x,t) \in \coprod_{x \in S} T(x)$.
-    \end{enumerate}
-\end{definition}
-
-This notation is the payoff of the efforts that had been directed towards a combinatorial understanding of $\mathfrak{Prob}_{at}$. One should be aware that the coproduct that results in this notation will contain many atoms twice, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order. This means that we can only think of $\mathcal{A}$ and $\mathcal{A}^{re}$ as sets that we can use to index our atoms, but not as the actual objects in the category of atoms.
-
-The crucial thing about this notation, is that \ref{coprod_representation} gurantees that every sheaf can be written this way. Moreover, when the subsets of $\mathcal{A}$ are even subsets of $\mathcal{A}^{re}$, we will be able to precisely describe the sheaves that are coproducts of sheaves representable over the site $(FinProb, J_{at})$. In this case, we omit writing down trivial subgroups everywhere in our notation.
-
-We give some examples as how to it makes things easier. 
-
-\begin{example}
-    \begin{enumerate}
-        \item The binary multiproducts we have dealt with so often, can now be written as:
-        \[ y U_{r_i} \times y U_{s_j} \cong \langle 1 | t_{ij} \in P^2_{r_i,s_j} \rangle, \] % TODO: Define the P stuff earlier.
-        where $1$ denotes the one-object set
-        \item We can also express the universal model $U$ in the following way:
-        \[ U \cong \langle 1 | (r_1,r_2) \in P^1_2 \rangle. \]
-    \end{enumerate}
-\end{example}
-
-The previous examples may be too easy to fully make use of the notation. In chapter \ref{simple_functions} we will see be a more interesting application when we look at simple functions.
-
-One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The convenient thing, is that when writing down sheaves in this way, one does not need to check functoriality nor sheaf conditions. Of course, this is does not mean that our topos is equivalent to $Set^{\mathcal{A}}$, because while the objects match, the morphisms are different:
-
-\begin{proposition}\label{atom_coprod_maps}
-    Let $\mathcal{F} = \langle T(x) | x \in S \rangle$ and $\mathcal{G} = \langle T'(x) | x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely maps $(g, (f_x))$, where $g$ is a map between the sets of elements
-    \[
-        \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
-    \]
-    and for each element $(x,t) \in \coprod_{x \in S} T(x)$ with $(x',t') = g(x,t)$, $f_{x,t}$ is a morphism
-    \[
-        A_x \xrightarrow{f_{x,t}} A_{x'} .
-    \]
-\end{proposition}
-\begin{proof}
-    Use the universal property of the coproduct of atoms and then use that each map needs to factor through one of the images because the image of an atom needs to be an atom again.
-\end{proof}
-
-One of the most convenient things about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphisms, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf, is by decomposing the sheaf into atoms.
-
 
 We know from \cite{caramello_lafforgue} that the category of atoms also has all multilimits, which will again come handy when actually doing computations.
 \begin{lemma} Given atoms $yU_{r_1\cdots r_n}/G$ and $yU_{s_1\cdots s_m}/H$, we have:
@@ -1396,16 +1472,6 @@ This holds as for any boolean algebra homomorphism $f:X\rightarrow I$, we can in
 In this section we aim to illustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
 
 % TODO: We should throughly explain why stuff like L^0 doesn't work and the philosophical ramifications of this. Because it is very nonobvious and philosophically interpreting Prob has been and still is one of the hardest problems we have faced. It would be retarded not to write about it.
-
-% TODO: This should be moved to the appropriate section.
-\begin{definition}
-    \begin{enumerate}
-        \item $P^1_n := \{ (r_i) \in \mathbb{R}^n | \sum_{i=1}^n r_i = 1 \}$
-        \item $P^2_{r_i,s_i} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} | \sum_{i=1}^n t_{ij} = s_j, \sum_{j=1}^m t_{ij} = r_i, t_{ij} \geq 0 \}$
-        \item $P^2_{n,m} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} | \sum_{i,j = 1}^{n,m} t_{ij} = 1 , t_{ij} \geq 0 \}$
-    \end{enumerate}
-\end{definition}
-% TODO: Write out multiproduct using this, maybe write a more general definition, though not sure whether we need it.
 
 \begin{definition}
     Define the presheaf $\mathcal{S}$ of simple functions on $FinProb$ to be defined by sending $(X,\mu)$ to the set of maps of sets $\mathbb{R}^X$ and by sending maps between finite probablitiy spaces to the corresponding precomposition maps.
