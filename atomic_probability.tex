@@ -1301,15 +1301,7 @@ This yields a new site presentation, which we will see is extremely easy to work
     $\mathfrak{Prob}\simeq \text{Sh}(\mathfrak{Prob}_{at},J_{at})$. More concretely, $\mathfrak{Prob}$ is the $\infty$-positivisation of $\mathfrak{Prob}_{at}$. % TODO: What is this even supposed to mean???
 \end{corollary}
 
-We know from \cite{caramello_lafforgue} that the category of atoms also has all multilimits, which will again come handy when actually doing computations.
-\begin{lemma} Given atoms $yU_{r_1\cdots r_n}/G$ and $yU_{s_1\cdots s_m}/H$, we have:
-\[ yU_{r_1\cdots r_n}/G\times yU_{s_1\cdots s_m}/H\simeq \bigsqcup_{\substack{t_{ij}\\ K\subseteq \text{Aut}(U_{t_{ij}})\text{ maximal w.r.t. property }P}}yU_{t_{ij}}/K  \]
-The measurable functions underlying the projection maps are the same as in \ref{multipullback} (more precisely the equivalences classes thereof) also $t_{ij}$ are as in that lemma.
-Here a subgroup $K$ is said to have property P if for any $\sigma\in K$ there exists $\psi\in G$ and $\tau\in H$ such that $\pi_1\circ \sigma=\psi\circ \pi_1$ and $\pi_2\circ\sigma=\tau\circ \pi_2$.
-\end{lemma}
-\begin{proof}
-IS THIS TRUE? PROBABLY NOT
-\end{proof}
+
 
 %TODO: Insert subsection on group-action perspective on all of this here.
 
@@ -1422,13 +1414,13 @@ The fact that it is localic hints to the fact that the theory which "our topos" 
 \begin{corollary} The geometric morphism $(U^*\vdash U_*)$ corresponds to the map exhibiting the universal model of the theory of continuum boolean probability algebras as an atomic boolean algebra. The inequality predicate is $\bigvee_{r>0} B_r ( A\Delta B )$.%edited this here!
 \end{corollary}
 \begin{proof} We compute 
-\[U^*(Y(2)\sqcup y(1) \sqcup y(1))= (U^*y(2))\sqcup (U^*y(1))\sqcup (U^*y(1))=\bigsqcup_{r\in (0,1)}yU_{(2,r)}\sqcup yU_1 \sqcup yU_1, \] which is the universal model of the theory of continuum boolean probability algebras. It is easily checked that this identification induces an isomorphism of the boolean algebra structures.
+\[U^*(y(2)\sqcup y(1) \sqcup y(1))= (U^*y(2))\sqcup (U^*y(1))\sqcup (U^*y(1))=\bigsqcup_{r\in (0,1)}yU_{(2,r)}\sqcup yU_1 \sqcup yU_1, \] which is the universal model of the theory of continuum boolean probability algebras. It is easily checked that this identification induces an isomorphism of the boolean algebra structures.
 \end{proof}%Super technical detail allert!!!!!!! r=0, r=1 !!!!!!!! a single point missing !!!!!!!!!!!!!
 We can also characterise the internal complete boolean algebra, the sheaves over which are equivalent to our topos.
 \begin{lemma} Given the sheaf of boolean algebras $\mathbb{M}$ which assigns to a finite sets the power set of the set of probability measures on it and a set map $f:X\rightarrow Y$ the map given by $\{\nu \}\mapsto \{\mu| \forall y\in Y. \nu(y)=\sum_{x\in f^{-1}(y)}\mu(y)  \}$. Then we get:
 \[\text{Sh}(FinProb,J_{at})\simeq \text{Sh}_{\text{Sh}(FinSur,J_{at})}(\mathbb{M}) \]
 \end{lemma}
-\begin{proof} By [elephant], we need to compute $U_*\Omega$ for the subobject classifyer $\Omega$:
+\begin{proof} By [elephant], we need to compute $U_*\Omega$ for the subobject classifier $\Omega$:
 \[(U_*\Omega)(X)\simeq \text{Hom}(yX,U_*\Omega)\simeq \text{Hom}(U^*yX,\Omega)\simeq \text{Hom}(\bigsqcup_{\mu \text{ is a measure on }X}y(X,\mu),\Omega)\]
 \[\simeq \prod_{\mu \text{ is a measure on }X}\text{Hom}(y(X,\mu),\Omega)\simeq \prod_{\mu \text{ is a measure on }X} 2\simeq 2^{\{\mu \text{ is a measure on }X\} } 
  \]
