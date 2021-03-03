@@ -34,20 +34,25 @@
 \begin{center}
 \begin{minipage}{\textwidth}
 \begin{abstract}
-Yo guys we solved probability theory. %TODO do this but properly
+Inspired by probability, we introduce topos $\mathfrak{Prob}$. %TODO do this but properly
 \end{abstract}
 
 \maketitle
 \end{minipage}
 \end{center}
 \tableofcontents 
-\section{Motivation}
-
-Talk about the challenge of using topos theory for talking about topological phenomena involving completeness properties in a logical way(obviously one can consider sheaves on a space, but it is hard to consider classifying toposes of some kind of space). Completeness kind of provides a solution to this dilemma.
-
-Talk about 'bookkeeping' in probability theory. Nobody cares about the choice of base $\sigma$-algebra, as long as it has good properties. Yet, a $\sigma$-algebra must be chosen. One may try to exploit this by imposing restrictions(of functorial or topological nature) on how statements/sets may depend on the base $\sigma$-algebra. These techniques will lead to an approach to probability theory that works without a choice of $\sigma$-algebra.
-
-Talk about how this is a substantial application justifying the use of geometric/infinitary logic, since first order logic doesn't suffice. Talk about how one can't even define probability intervals in first order logics. Also say that usual Galois theory a la SGA1 does not suffice to capture the group action flavour. The group is simple but profinite groups are completely determined by their closed normal subgroups (or smth. similar).
+\section{Introduction}
+Talk about 'bookkeeping' in probability theory. Nobody cares about the choice of base $\sigma$-algebra, as long as it has good properties. Yet, a $\sigma$-algebra must be chosen. One may try to exploit this by imposing restrictions(of functorial or topological nature) on how statements/sets may depend on the base $\sigma$-algebra. These techniques will lead to an approach to probability theory that works without a choice of $\sigma$-algebra. Outline the standard set up.\newline
+\indent First technical improvement: Divide out null sets! (Explain this in detail) Define measure algebras and show how they interact with $\sigma$-algebras. \newline
+\indent Step 3:  Intervals model Lebesgue interval. Give the definitions.
+\newline
+%logics
+\indent Talk about how this is a substantial application justifying the use of geometric/infinitary logic, since first order logic doesn't suffice. Talk about how one can't even define probability intervals in first order logics. Completeness, Quantifier elimination.\newline
+\indent To do this we use the topos $\mathfrak{Prob}$. Shortly explain how models of the theory correspond to intervals and how other structure can be transported along that morphism. Here we give background to topos theory. Completeness comes from an 'open surjection' a map of topoi to Set that preserves and reflects this infinitary first order logics. Explain enough to justify simple functions. I.e. the universal model. The simple functions are mapped to each other.
+\begin{center}\textbf{ALWAYS EXPLAIN THE REASONING BEHIND ALL THE CONCEPTS WHICH APPEAR HERE}\end{center}
+Also say that usual Galois theory a la SGA1 does not suffice to capture the group action flavour. The group is simple but profinite groups are completely determined by their closed normal subgroups (or smth. similar). State the main result (group of automorphisms ... commonly called measure preserving dynamical systems).\newline
+\indent Combinatorial methods using 'multiproducts'. We give a nice calculus of our topos using its "atoms". This also yields a description by a model of ZFA. \newline
+\indent Hype!!! $L^p$ spaces and other outlook. 
 
 \section{Conventions} \label{conventions}
 
