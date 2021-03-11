@@ -1560,7 +1560,7 @@ The last definition is motivated by the fact that for the algebras simple functi
 \[  \lim_{n\rightarrow \infty} ||f||_n=||f||_\infty. \]
 Note that the fact that all statements of the previous definition are infinitary first order, we can transfer statements using them between algebras of simple functions. The next step will be to give a suitable notion of a statement that "spreads out" as to allow one to only check in on simple functions. Be not afraid of the complicated looking formulas that follow.
 \begin{definition} Given a quantifier free infinitary first order formula\linebreak $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras. Then we call $\Phi$ \emph{spreading} if 
-\[\forall f_1\cdots \forall f_n.( \Phi(f_1,\cdots, f_n)\implies \bigvee_{k\in \mathbb{N}}\forall g_1,\cdots, \forall g_n.(\bigwedge_{i=1}^n\bigvee_{\epsilon\leq 1/k}||f_i-g_i||_{\infty}=1/k\implies \Phi(g_1,\cdots g_n))) \]
+\[\forall f_1\cdots \forall f_n.( \Phi(f_1,\cdots, f_n)\implies \bigvee_{k\in \mathbb{N}}\forall g_1,\cdots, \forall g_n.(\bigwedge_{i=1}^n\bigvee_{\epsilon\leq 1/k}||f_i-g_i||_{\infty}=\epsilon\implies \Phi(g_1,\cdots g_n))) \]
 holds in $\mathcal{S}$.\newline
 \indent  Given an infinitary first order formula $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras, written it in prenex normal form
 \[\forall x_1\cdots \forall x_n \exists y_1\cdots \exists y_m \forall x_{n+1}\cdots \forall x_{n+l}\cdots \Psi(f_1,\cdots f_n, x_1,\cdots, x_N, y_1\cdots y_M) \]
@@ -1572,7 +1572,7 @@ Given a spreading formula $\Phi(f_1,\cdots,f_n)$, then for all probability inter
 \[(L^\infty(X,\mu)\vDash \Phi)\iff(L^\infty(Y,\nu)\vDash\Phi)  \] 
 \end{theorem}
 \begin{proof}
-$(L^\infty(X,\mu)\vDash \Phi)\iff (\mathcal{S}\vDash \Phi)$ as $\Phi$ is spreading and $S(X,\mu)$ is dense. Then apply the transfer lemma.
+$(L^\infty(X,\mu)\vDash \Phi)\iff (\mathcal{S}\vDash \Phi)$ as $\Phi$ is spreading and $S(X,\mu)$ is dense. Then apply the transfer lemma. PROVE THIS
 \end{proof}
 \section{Outlook for further research}
 Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
