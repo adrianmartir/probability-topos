@@ -1067,11 +1067,16 @@ Notice that by using 331I in \cite{fremlin} we have implicitly used the axiom of
 \end{proposition}
 
 Another feature of this description is that toposes of continuous group actions are quite well understood. The interest in researching them comes from their connection to set theory and representation theory. So called \emph{permutation models} are one of the main tools of forcing, and they will also appear later in this paper as another interpretation of $\mathfrak{Prob}$. In a totally separate field of mathematics, a representation of a topological group on a $k$-vector space (with discrete topology) is nothing but an internal $k$-vector space \cite{XYZ} i.e. a sheaf of $k$-vector spaces in the topos of continuous group actions of that group.
+
+Now that we have proved a non-trivial \emph{bridge}, we briefly discuss an application. We show that the universal model in $\mathfrak{Prob}$ has not only finite meets and joins, but all meets and joins, in a sense to be defined.
+
 \begin{definition} A sheaf $L$ of posets with finite meets and top element is called an \emph{internal locale} if the map 
 \[I: L\rightarrow \mathcal{P}(L) \]
 sending ... has a right adjoint. An \emph{internal complete boolean algebra} is accordingly a sheaf of boolean algebras that is an internal locale.
 \end{definition}
-Now we can glue some theorems from the literature to get quite the surprising result.
+
+Our surprising result now follows by glueing some theorems from the literature.
+
 \begin{theorem} The universal model of $\mathbb{T}_{int}$ is an internal complete boolean algebra.
 \end{theorem}
 \begin{proof} 
@@ -1081,7 +1086,8 @@ We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the 
  to see $(I,\lambda)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(I,\lambda))$ is $(I,\lambda)$ with the canonical continuous group action.\newline 
 \indent Thus $U_{\mathbb{T}_{int}}$ is a complete boolean algebra acting on itself via automorphisms.  By C2.5.8(e) \cite{elephant} this proves that the universal model is an internal locale. Hence it is a complete boolean algebra.
 \end{proof}
-This theorem is remarkable as we get some completeness condition from definitions, which essentially only use statements about finite sets of variables.
+
+This theorem is remarkable as we get some completeness condition from definitions, which essentially only use statements about finite sets of variables. Nevertheless, we feel like it needs to be commented that the statement of this result might be a bit misleading at first sight. The reason is, that we will see in \ref{choice_failture}, that infinite families of variables often fail to exist inside $\mathfrak{Prob}$.
 
 
 \section{The atoms of $\mathfrak{Prob}$ }
@@ -1336,7 +1342,7 @@ This means, dealing with standard sets is really cheap and easy. Quite the contr
 The natural numbers object of a Grothendieck topos is always the constant sheaf with value $\mathbb{N}$. \cite{XYZ}.
 \end{proof}
 Given a probability interval $(\mathcal{B},\mu)$, we get an interpretation (is this the right word?) of $\mathfrak{Prob}$ in $\text{Set}$. %Do this properly with proper language
-\begin{proposition} The internal language of our topos proves the negation of countable choice.
+\begin{proposition}\label{choice_failture} The internal language of our topos proves the negation of countable choice.
 \end{proposition}
 \begin{proof} We construct a countable product of non-empty objects, which is empty. Take $yU_{1/n}$ to be the representable functors of the finite probability space with two elements and measure $1/n$ on one of them. Then the multi-limit of this family is empty as there is no finite probability space with a sequence of elements $x_n$ with measures $1/n$. We conclude $\prod_n yU_{1/n}=0$.
 \end{proof}
