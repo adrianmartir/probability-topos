@@ -139,11 +139,11 @@ Much of this paper is dedicated to finding other equivalent ways of describing $
 
 \subsection{Finite Limits and a Calculus of Polytopes}
 
-Our goal in the next section will be to understand the logic of $\mathfrak{Prob}$. Successfully doing so requires a very good understanding of what the flat functors on $FinProb$ are and thus also requires a good understanding of finite limits in $\mathfrak{Prob}$. This will be our goal in this section.
+Our goal in the next section will be to understand the logic of $\mathfrak{Prob}$. Successfully doing so requires a very good understanding of what the flat functors on $FinProb$ are and thus also requires a good understanding of finite limits in $\mathfrak{Prob}$. This will be our goal in this subsection.
 
 But the situation is not as simple as one may hope: these finite limits only very rarely exist. But naturally, in the topos $\mathfrak{Prob}$, these finite limits do actually exist, and we will see that luckily these have a straightforward form. This will give rise to a weakened form of the notion of a limit which we will call multilimit. It will be essential in all our discussions about logic.
 
-The most surprising thing about multilimits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an overwhelming amount of statements in this paper(beyond statements about flat functors) are proved by computations with multilimits and polytopes. One could say that this subsection gives us a first look at the computational meat of $\mathfrak{Prob}$.
+The most surprising thing about multilimits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an overwhelming amount of statements in this paper(beyond statements about flat functors) are proved by using computations with multilimits and polytopes. One could say that this subsection gives us a first look at the computational meat of $\mathfrak{Prob}$.
 
 There is some very convenient notation for finite probability spaces emphasizing their combinatorial nature, where we see that phenomena involving polytopes are starting to arise.
 
@@ -161,9 +161,9 @@ equipped with the measure $\mu(i) = r_i$.
 This is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$.
 
 \begin{remark}
-    Notice that for a finite probability space $(X,\mu)$, $Hom((X,\mu), U_{r_i})$ precisely consists of partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. This may seems like quite a harmless observation, but being aware of this fact makes some calculations with $y U_{r_i}$ much more intuitive. Moreover, we will later see that the $U_{r_i}$ in fact precisely correspond to logical formulas specifying a partition with fixed measures. We will often identify maps with partitions implicitly and without comment.
+    Notice that for a finite probability space $(X,\mu)$, $Hom((X,\mu), U_{r_i})$ precisely consists of partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. This may seem like quite a harmless observation, but being aware of this fact makes some calculations with $y U_{r_i}$ much more intuitive. Moreover, we will later see that the $U_{r_i}$ in fact precisely correspond to logical formulas specifying a partition with fixed measures. We will often identify maps with partitions implicitly and without comment.
 
-    In particular, $Hom((X,\mu), U_r)$ is identified with partitions consisting of two elements. Of course, that is the same as if we simply chose any subset of $X$ of measure $r$. We will similarly identify $Hom((X,\mu), U_r)$ with subsets of $X$ of measure $r$.
+    In particular, $Hom((X,\mu), U_r)$ is identified with partitions consisting of two elements. Of course, we could have equivalently simply chosen any subset of $X$ of measure $r$. We will similarly identify $Hom((X,\mu), U_r)$ with subsets of $X$ of measure $r$.
 
 \end{remark}
 
@@ -206,7 +206,7 @@ We give a name to this weaker notion of a limit.
     Moreover, we will use the terminology \emph{multi-product}, \emph{multi-equalizer} and \emph{multi-pullback}.
 \end{definition}
 
-Alternatively, we could have presented the universal property in a more traditional style by saying that cones over our diagram factor through one of the $U_{t_{ij}}$ uniquely. In fact, this is what is done in \cite{caramello_lafforgue} (Lemma 6.11.). Caramello and Lafforgue use multi-products in order to study the atoms of an atomic topos, which also one of the things we will use them for.
+Alternatively, we could have presented the universal property in a more traditional style by saying that cones over our diagram factor through one of the $U_{t_{ij}}$ uniquely. In fact, this is what is done in \cite{caramello_lafforgue} (Lemma 6.11.). Caramello and Lafforgue use multi-products in order to study the atoms of an atomic topos, which is also one of the things we will use them for.
 
 For completeness sake, we remark that not only binary multi-products do exist in $FinProb$, but in fact all finite multi-products do exist. Indeed, $FinProb$ has a terminal object.
 
@@ -229,13 +229,6 @@ Finally, we also have multi-equalizers.
         y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & y \beta
         \end{tikzcd})(\gamma) \cong \{ h: \gamma \twoheadrightarrow \alpha | fh = gh \} \cong \emptyset .
     \]
-\end{proof}
-
-\begin{proposition}
-    $FinProb$ has all finite multi-limits.
-\end{proposition}
-\begin{proof}
-    This involves writing a limit as an equalizer of products and then somehow reordering things?
 \end{proof}
 
 In practise we noticed that we needed to work a lot with big coproducts with complicated index sets, like one has to do with multi-products. Thus, we introduce a simplified notation for objects of this kind.
@@ -463,33 +456,18 @@ Essentially, we have encoded a boolean probability algebra geometrically by part
 Let us get some more notation out of the way.
 
 \begin{definition}
-Denote the category models of $\mathbb{T}_{bpalg}$ in $Set$ by $BPAlg$. Denote the category of finite models by $BPAlg_f$.
+Denote the category models of $\mathbb{T}_{bpalg}$ in $Set$ by $BPAlg$.
 \end{definition}
 
-The first thing to note is that this gives us an equivalent site for topos.
+\begin{remark}
+    Note that we have an equivalence of categories 
+    \[
+        FinProb^{op} \simeq BPAlg_f
+    \]
+    between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We don't prove this in detail nor do we give the equivalence explicitly, since we won't use this fact anywhere in this paper.
 
-\begin{proposition} \label{finprob_equiv}
-We have an equivalence of categories
-\[
-FinProb^{op} \simeq BPAlg_f
-\]
-defined by sending a finite probability space $(X, \mu)$ to the finite boolean probability algebra $(\mathcal{P} X, \bar{\mu})$, where
-\[
-\bar{\mu}(S) := \sum_{x \in S} \mu(x).
-\]
-A map in $FinProb$ is sent to the preimage map on powersets.
-\end{proposition}
-\begin{proof}
-First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is sent to a measure-preserving map $f^{-1}: (\mathcal{P}X, \bar{\mu}) \to (\mathcal{P}Y, \bar{\nu})$. So let $S \in \mathcal{P} Y$.
-\begin{align*}
-\bar{\mu}(f^{-1} S) &= \sum_{x \in f^{-1} S} \mu x \\
-&= \sum_{y \in S} \sum_{x \in f^{-1} y} \mu x \\
-&= \sum_{y \in S} \nu y \\
-&= \bar{\nu} S
-\end{align*}
+\end{remark}
 
-The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
-\end{proof}
 
 We would like to show that the topos $Set^{FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. Proving this fact requires a bit of work. The difficulty is mainly the fact that  $FinProb$ does not have all finite limits, so the flat functors on $FinProb$ are not as straightforward to understand. We will prove the equivalence
 \[
@@ -991,6 +969,10 @@ and by sending a map $(X,\nu_1) \to (Y,\nu_2)$ the map
 \]
 \end{remark}
 
+
+\subsection{Completeness and quantifier elimination}
+
+TODO: THIS SECTION IS UBERSCUFFED RIGHT NOW
 \begin{corollary}
 Every infinitary first-order formula over the empty context over the theory $\mathbb{T}_{int}$ is provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{int}$.
 \end{corollary}
@@ -1012,6 +994,174 @@ Every infinitary first-order formula over the empty context over the theory $\ma
 \end{proof}
 
 This is a form of quantifier elimination, only that this is a bit different than traditional quantifier elimination in that we can't guarantee that the equivalent quantifier-free formula has only finite joins. Moreover, our formulas aren't even over the same context.
+
+
+\subsection{Simple functions} \label{simple_functions}
+
+In this section we aim to illustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
+
+% TODO: We should throughly explain why stuff like L^0 doesn't work and the philosophical ramifications of this. Because it is very nonobvious and philosophically interpreting Prob has been and still is one of the hardest problems we have faced. It would be retarded not to write about it.
+
+\begin{definition}
+    Define the presheaf $\mathcal{S}$ of simple functions on $FinProb$ to be defined by sending $(X,\mu)$ to the set of maps of sets $\mathbb{R}^X$ and by sending maps between finite probablitiy spaces to the corresponding precomposition maps.
+\end{definition}
+
+We show that $\mathcal{S}$ is a sheaf by showing that $\mathcal{S}$ is a coproduct of atoms.
+
+\begin{proposition}
+    We have that
+    \[
+        \mathcal{S} \cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
+    \]
+    and in particular, $\mathcal{S}$ is a sheaf.
+\end{proposition}
+\begin{proof}
+    The essential observation is that we can describe any $s \in \mathbb{R}^X$ by looking at the ordered set of values in $\mathbb{R}$ that the function $s$ takes.
+\end{proof}
+
+
+The point of this chapter is convincing the reader that for a model $F: \mathcal{E} \to \mathfrak{Prob}$, $F^*(\mathcal{S})$ is a suitable definition for the simple functions over $F$ in $\mathcal{E}$. We will prove that we can recover the simple functions over a $\sigma$-algebra with this construction. Of course, for proving meaningful statements, we want to equip $\mathcal{S}$ with suitable structure.
+
+\begin{definition}
+    Define the theory of expectation algebras to be the geometric theory of $\mathbb{R}$-algebras together with a unary relation symbol $E_r$ for each $r \in \mathbb{R}$, adding the following geometric sequents:
+    \begin{enumerate}
+        \item \textit{$E_r$ form a partition}. For all $r, s \in \mathbb{R}$ with $r \neq s$ we have an axiom
+        \[
+        E_r(a)  \wedge E_s(a) \vdash \bot
+        \]
+        and we also have an axiom
+        \[
+        \top \vdash \bigvee_{r \in \mathbb{R}} E_r(a).
+        \]
+        \item \textit{Linearity}. For all $r, s \in \mathbb{R}$, we require the sequents
+        \[
+        E_r(a) \wedge E_s(a) \vdash E_{r+s}(a + b)
+        \]
+        and for all $r \in \mathbb{R}$ and $\lambda \in \mathbb{R}$, we also need
+        \[
+        E_r(a) \vdash E_{\lambda r} (\lambda \cdot a) .
+        \]
+        \item \textit{Positivity}.
+        \[
+            \top \vdash \bigvee_{r \geq 0} E_r a^2
+        \]
+        \item \textit{Expectation}.
+        \[
+            \top \vdash E_1 1
+        \]
+        \item \textit{No nullsets}.
+        \[
+            E_0 (a^2) \vdash a = 0 % We need to be careful what we write here, since a priori I don't see why our algebra should be an integral domain.
+        \]
+    \end{enumerate}
+    %     \item Define expectation algebra structure on $\mathcal{S}$.
+    %     \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
+    % \end{enumerate}
+\end{definition}
+
+Here we made use of the same trick we used when defining the theory of boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra, since we can consider $\lambda \cdot 1$. This means that if $A$ is an $\mathbb{R}$-algebra in any topos, we get a canonical operator $\mathbb{E}: A \to A$, which can be thought of an expectation operator.
+
+% TODO: Is this even true?
+Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. The \emph{no nullsets} axiom corresponds to the fact that there is only one element of measure zero in a boolean probability algebra. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
+
+% TODO: ref this:https://terrytao.wordpress.com/2014/06/28/algebraic-probability-spaces/
+
+We can now define expectation algebra structure on $\mathcal{S}$. Note that we do not yet check the axioms, for now we will only think of $\mathcal{S}$ as a structure over the signature of the theory of expectation algebras.
+
+\begin{definition}
+    \begin{enumerate}
+        \item Define $+: \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ on the components of the natural transformation by pointwise addition of the $s \in \mathbb{R}^X$.
+        \item Define $\cdot: \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ on the components of the natural transformation by pointwise multiplication of the $s \in \mathbb{R}^X$.
+        \item Define $E_r \xrightarrow{} \mathcal{S}$ to be the subsheaf that on an object $(X,\mu)$ consists of the $s \in \mathbb{R}^X$ with $\sum_{i \in X} s(i) = r$.
+    \end{enumerate}
+\end{definition}
+
+Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
+
+\begin{align*}
+    S \times S &\cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle^2 \\
+    &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m | y_i, z_j \in \mathbb{R} \} | (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}^{re} \rangle
+\end{align*}
+
+Now we can use \ref{atom_coprod_maps} to specify our structure on the elements of this set of atoms:
+
+\begin{proposition}
+    \begin{enumerate}
+        \item We calculate addition on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i + z_j | i,j \}$. Then addition is given on elements by
+        \[
+            (t_{ij},y_i,z_j) \mapsto (\sum_{y_i + z_j = x_k} t_{ij}, x_k) 
+        \]
+        with the corresponding map on atoms
+        \[
+            U_{t_{ij}} \to U_{\sum_{y_i + z_j = x_k} t_{ij}}
+        \]
+        defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i + z_j = y_{i'} + z_{j'}$ holds.
+        \item We calculate multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j | i,j \}$. Then we multiplication is given on elements by
+        \[
+            (t_{ij},y_i,z_j) \mapsto (\sum_{y_i \cdot z_j = x_k} t_{ij}, x_k) 
+        \]
+        with the corresponding map on atoms
+        \[
+            U_{t_{ij}} \to U_{\sum_{y_i \cdot z_j = x_k} t_{ij}}
+        \]
+        defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i \cdot z_j = y_{i'} \cdot z_{j'}$ holds.
+        \item $E_r \to \mathcal{S}$ is the subobject
+        \[
+            \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R}, \sum r_i y_i = r \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
+        \]
+        of $\mathcal{S}$.
+    \end{enumerate}
+\end{proposition}
+
+Having defined the simple functions in $\mathfrak{Prob}$, we can define simple functions in great generality.
+
+\begin{definition}
+    Let $F: \mathcal{E} \to \mathfrak{Prob}$ be an interval in $\mathcal{E}$. Then we can define the simple functions over $F$ to be $F^*(\mathcal{S})$ equipped with the corresponding expectation algebra structure.
+\end{definition}
+
+For the sake of comparing this unusual definition of the set of simple functions to the more standard one, we recall the following:
+
+\begin{definition}
+    Define the expectation algebra of simple functions $S(X,\Sigma, \mu)$ on a probability space $(X, \Sigma, \mu)$ to be the set of measurable maps $X \to \mathbb{R}$ of finite image modulo equality almost everywhere equipped with pointwise addition, pointwise multiplication and expectation.
+\end{definition}
+
+\begin{proposition}
+    Let $(X, \Sigma, \mu)$ be a probability space such that the corresponding measure algebra is atomless. Then $S(X,\Sigma,\mu)$ is isomorphic to the expectation algebra over the corresponding interval.
+\end{proposition}
+\begin{proof}
+    The atomless measure algebra of $(X, \Sigma, \mu)$ is an inteval and thus can be viewed as a geometric morphism $F: Set \to \mathfrak{Prob}$. $F^*$ sends an atom $U_{r_i}$ to the set of partitions of the interval with measures $r_1,\cdots,r_n$. Thus, since $F^*$ is colimit preserving, $\mathcal{S}$ gets sent to
+    \[
+        \coprod_{\substack{r_1, \cdots r_n \in \mathcal{A}^{re} \\ x_1 < \cdots < x_n}} F^*(U_{r_1\cdots r_n}) .
+    \]
+    It should be clear that this corresponds to the traditional set of simple functions. It is a straightforward calculation that expectation, addition and multiplication are the correct ones. The necessary setup has already been done, since addition and multiplication have already been decomposed into their components on atoms.
+\end{proof}
+
+This proof ilustrates one of the most fascinating things about the set of atoms notation(the same goes for the $(FinProb, J_{at})$ site). Partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. The way we defined the simple functions, we never had to deal with issues about \emph{where} exactly a simple function took a specific value, but instead just specified the measure of the preimages.
+
+Applying the inverse image functors of models inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
+
+\begin{theorem}
+    \begin{enumerate}
+    \item $\mathcal{S}$ is an expectation algebra.
+    \item The simple functions over an interval are all infinitary first order equivalent as expectation algebras.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Use that the topos is two-valued.
+\end{proof}
+
+% TODO: Say that poset structure also matches, since x \leq y iff y - x is a square.
+
+This is one of those theorems that I am not sure how classical model theory would even be able to prove.
+
+We will now investigate even further what can be said in the theory of expectation algebras about simple functions on probability intervals.
+\begin{lemma} Any atomic formula in $\mathbb{T}_{exp}$ is $\mathbb{T}_{exp}$-provably equivalent to one of the form $x_1,\cdots, x_n. E_0(f(x_1,\cdots,x_n))$ where $f\in \mathbb{R}[X_1,\cdots, X_n]$ is a real polynomial. 
+\end{lemma}
+\begin{proof}
+\[ E_r(f(x_1,\cdots, x_n))\dashv \vdash E_0(f(x_1,\cdots, x_n)-r\cdot 1)    \]
+\[ f(x_1,\cdots, x_n)=g(x_1,\cdots ,x_n)\dashv\vdash E_0((f(x_1,\cdots, x_n)-g(x_1,\cdots ,x_n))^2)  \]
+\end{proof}
+
 
 \section{$\mathfrak{Prob}$ as a topos of continuous group actions}
 
@@ -1381,164 +1531,10 @@ This proof can, in fact be adapted in many situations, to suggest that most coun
 \end{remark}
 
 
+\section{Outlook for further research}
 
-\section{Simple functions} \label{simple_functions}
+Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
 
-In this section we aim to illustrate how we can use $\mathfrak{Prob}$ in order to look at problems in probability theory that have a more combinatorial and less analytic nature. 
-
-% TODO: We should throughly explain why stuff like L^0 doesn't work and the philosophical ramifications of this. Because it is very nonobvious and philosophically interpreting Prob has been and still is one of the hardest problems we have faced. It would be retarded not to write about it.
-
-\begin{definition}
-    Define the presheaf $\mathcal{S}$ of simple functions on $FinProb$ to be defined by sending $(X,\mu)$ to the set of maps of sets $\mathbb{R}^X$ and by sending maps between finite probablitiy spaces to the corresponding precomposition maps.
-\end{definition}
-
-We show that $\mathcal{S}$ is a sheaf by showing that $\mathcal{S}$ is a coproduct of atoms.
-
-\begin{proposition}
-    We have that
-    \[
-        \mathcal{S} \cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
-    \]
-    and in particular, $\mathcal{S}$ is a sheaf.
-\end{proposition}
-\begin{proof}
-    The essential observation is that we can describe any $s \in \mathbb{R}^X$ by looking at the ordered set of values in $\mathbb{R}$ that the function $s$ takes.
-\end{proof}
-
-
-The point of this chapter is convincing the reader that for a model $F: \mathcal{E} \to \mathfrak{Prob}$, $F^*(\mathcal{S})$ is a suitable definition for the simple functions over $F$ in $\mathcal{E}$. We will prove that we can recover the simple functions over a $\sigma$-algebra with this construction. Of course, for proving meaningful statements, we want to equip $\mathcal{S}$ with suitable structure.
-
-\begin{definition}
-    Define the theory of expectation algebras to be the geometric theory of $\mathbb{R}$-algebras together with a unary relation symbol $E_r$ for each $r \in \mathbb{R}$, adding the following geometric sequents:
-    \begin{enumerate}
-        \item \textit{$E_r$ form a partition}. For all $r, s \in \mathbb{R}$ with $r \neq s$ we have an axiom
-        \[
-        E_r(a)  \wedge E_s(a) \vdash \bot
-        \]
-        and we also have an axiom
-        \[
-        \top \vdash \bigvee_{r \in \mathbb{R}} E_r(a).
-        \]
-        \item \textit{Linearity}. For all $r, s \in \mathbb{R}$, we require the sequents
-        \[
-        E_r(a) \wedge E_s(a) \vdash E_{r+s}(a + b)
-        \]
-        and for all $r \in \mathbb{R}$ and $\lambda \in \mathbb{R}$, we also need
-        \[
-        E_r(a) \vdash E_{\lambda r} (\lambda \cdot a) .
-        \]
-        \item \textit{Positivity}.
-        \[
-            \top \vdash \bigvee_{r \geq 0} E_r a^2
-        \]
-        \item \textit{Expectation}.
-        \[
-            \top \vdash E_1 1
-        \]
-        \item \textit{No nullsets}.
-        \[
-            E_0 (a^2) \vdash a = 0 % We need to be careful what we write here, since a priori I don't see why our algebra should be an integral domain.
-        \]
-    \end{enumerate}
-    %     \item Define expectation algebra structure on $\mathcal{S}$.
-    %     \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \mathfrak{Prob}$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
-    % \end{enumerate}
-\end{definition}
-
-Here we made use of the same trick we used when defining the theory of boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra, since we can consider $\lambda \cdot 1$. This means that if $A$ is an $\mathbb{R}$-algebra in any topos, we get a canonical operator $\mathbb{E}: A \to A$, which can be thought of an expectation operator.
-
-% TODO: Is this even true?
-Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. The \emph{no nullsets} axiom corresponds to the fact that there is only one element of measure zero in a boolean probability algebra. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
-
-% TODO: ref this:https://terrytao.wordpress.com/2014/06/28/algebraic-probability-spaces/
-
-We can now define expectation algebra structure on $\mathcal{S}$. Note that we do not yet check the axioms, for now we will only think of $\mathcal{S}$ as a structure over the signature of the theory of expectation algebras.
-
-\begin{definition}
-    \begin{enumerate}
-        \item Define $+: \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ on the components of the natural transformation by pointwise addition of the $s \in \mathbb{R}^X$.
-        \item Define $\cdot: \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ on the components of the natural transformation by pointwise multiplication of the $s \in \mathbb{R}^X$.
-        \item Define $E_r \xrightarrow{} \mathcal{S}$ to be the subsheaf that on an object $(X,\mu)$ consists of the $s \in \mathbb{R}^X$ with $\sum_{i \in X} s(i) = r$.
-    \end{enumerate}
-\end{definition}
-
-Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
-
-\begin{align*}
-    S \times S &\cong \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R} \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle^2 \\
-    &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m | y_i, z_j \in \mathbb{R} \} | (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}^{re} \rangle
-\end{align*}
-
-Now we can use \ref{atom_coprod_maps} to specify our structure on the elements of this set of atoms:
-
-\begin{proposition}
-    \begin{enumerate}
-        \item We calculate addition on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i + z_j | i,j \}$. Then addition is given on elements by
-        \[
-            (t_{ij},y_i,z_j) \mapsto (\sum_{y_i + z_j = x_k} t_{ij}, x_k) 
-        \]
-        with the corresponding map on atoms
-        \[
-            U_{t_{ij}} \to U_{\sum_{y_i + z_j = x_k} t_{ij}}
-        \]
-        defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i + z_j = y_{i'} + z_{j'}$ holds.
-        \item We calculate multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j | i,j \}$. Then we multiplication is given on elements by
-        \[
-            (t_{ij},y_i,z_j) \mapsto (\sum_{y_i \cdot z_j = x_k} t_{ij}, x_k) 
-        \]
-        with the corresponding map on atoms
-        \[
-            U_{t_{ij}} \to U_{\sum_{y_i \cdot z_j = x_k} t_{ij}}
-        \]
-        defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i \cdot z_j = y_{i'} \cdot z_{j'}$ holds.
-        \item $E_r \to \mathcal{S}$ is the subobject
-        \[
-            \langle \{y_1 < \cdots < y_n | y_i \in \mathbb{R}, \sum r_i y_i = r \} | (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
-        \]
-        of $\mathcal{S}$.
-    \end{enumerate}
-\end{proposition}
-
-Having defined the simple functions in $\mathfrak{Prob}$, we can define simple functions in great generality.
-
-\begin{definition}
-    Let $F: \mathcal{E} \to \mathfrak{Prob}$ be an interval in $\mathcal{E}$. Then we can define the simple functions over $F$ to be $F^*(\mathcal{S})$ equipped with the corresponding expectation algebra structure.
-\end{definition}
-
-For the sake of comparing this unusual definition of the set of simple functions to the more standard one, we recall the following:
-
-\begin{definition}
-    Define the expectation algebra of simple functions $S(X,\Sigma, \mu)$ on a probability space $(X, \Sigma, \mu)$ to be the set of measurable maps $X \to \mathbb{R}$ of finite image modulo equality almost everywhere equipped with pointwise addition, pointwise multiplication and expectation.
-\end{definition}
-
-\begin{proposition}
-    Let $(X, \Sigma, \mu)$ be a probability space such that the corresponding measure algebra is atomless. Then $S(X,\Sigma,\mu)$ is isomorphic to the expectation algebra over the corresponding interval.
-\end{proposition}
-\begin{proof}
-    The atomless measure algebra of $(X, \Sigma, \mu)$ is an inteval and thus can be viewed as a geometric morphism $F: Set \to \mathfrak{Prob}$. $F^*$ sends an atom $U_{r_i}$ to the set of partitions of the interval with measures $r_1,\cdots,r_n$. Thus, since $F^*$ is colimit preserving, $\mathcal{S}$ gets sent to
-    \[
-        \coprod_{\substack{r_1, \cdots r_n \in \mathcal{A}^{re} \\ x_1 < \cdots < x_n}} F^*(U_{r_1\cdots r_n}) .
-    \]
-    It should be clear that this corresponds to the traditional set of simple functions. It is a straightforward calculation that expectation, addition and multiplication are the correct ones. The necessary setup has already been done, since addition and multiplication have already been decomposed into their components on atoms.
-\end{proof}
-
-This proof ilustrates one of the most fascinating things about the set of atoms notation(the same goes for the $(FinProb, J_{at})$ site). Partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. The way we defined the simple functions, we never had to deal with issues about \emph{where} exactly a simple function took a specific value, but instead just specified the measure of the preimages.
-
-Applying the inverse image functors of models inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
-
-\begin{theorem}
-    \begin{enumerate}
-    \item $\mathcal{S}$ is an expectation algebra.
-    \item The simple functions over an interval are all infinitary first order equivalent as expectation algebras.
-    \end{enumerate}
-\end{theorem}
-\begin{proof}
-    Use that the topos is two-valued.
-\end{proof}
-
-% TODO: Say that poset structure also matches, since x \leq y iff y - x is a square.
-
-This is one of those theorems that I am not sure how classical model theory would even be able to prove.
 
 We will now investigate even further what can be said in the theory of expectation algebras about simple functions on probability intervals.
 \begin{lemma} Any atomic formula in $\mathbb{T}_{exp}$ is $\mathbb{T}_{exp}$-provably equivalent to one of the form $x_1,\cdots, x_n. E_0(f(x_1,\cdots,x_n))$ where $f\in \mathbb{R}[X_1,\cdots, X_n]$ is a real polynomial. 
@@ -1576,7 +1572,11 @@ $(L^\infty(X,\mu)\vDash \Phi)\iff (\mathcal{S}\vDash \Phi)$ as $\Phi$ is spreadi
 \end{proof}
 \section{Outlook for further research}
 Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
+
+
 \section{Appendix: Models in Set}
+
+NOTE: THIS SECTION SHOULD PROBABLY BE KILLED
 
 In this section, we show that the $Set$-based models of $Sh(FinProb, J_{at})$ are precisely certain infinite boolean probability algebras(in the sense defined below). This will be useful for the reader that is uninterested in seeing the general result about models in an arbitrary topos proved, since the proof here is easier to understand.
 
@@ -1622,7 +1622,15 @@ defined by sending a finite probability space $(X, \mu)$ to the finite boolean p
 A map in $FinProb$ is sent to the preimage map on powersets.
 \end{proposition}
 \begin{proof}
-See \ref{finprob_equiv}.
+    First we show a measure-preserving map $f: (X,\mu) \to (Y,\nu)$ in $FinProb$ is sent to a measure-preserving map $f^{-1}: (\mathcal{P}X, \bar{\mu}) \to (\mathcal{P}Y, \bar{\nu})$. So let $S \in \mathcal{P} Y$.
+    \begin{align*}
+    \bar{\mu}(f^{-1} S) &= \sum_{x \in f^{-1} S} \mu x \\
+    &= \sum_{y \in S} \sum_{x \in f^{-1} y} \mu x \\
+    &= \sum_{y \in S} \nu y \\
+    &= \bar{\nu} S
+    \end{align*}
+
+    The facts that this functor is full, faithful and essentially surjective on objects are instantly verified.
 \end{proof}
 
 From now on we will implicitly use this equivalence and use $FinProb$ or $BPAlg_f$ depending on which variance more convenient.
