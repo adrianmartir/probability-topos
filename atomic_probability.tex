@@ -483,10 +483,16 @@ The above gives us some inspiration as to how to guess the universal model. We w
 \]
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. This means that map $f$ between probability spaces gets sent to the map that takes the preimage of a subset. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
 
+We use this universal model in order to define the functor for our equivalence of topoi.
+
 \begin{lemma} \label{universal model}
-$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$. This yields a left-exact, colimit-preserving functor $Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}_{bpalg}]$.
+$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$.
+
+This yields a left-exact, colimit-preserving functor $Lan_y(U): Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}_{bpalg}]$.
 \end{lemma}
 \begin{proof}
+The last statement follows from the first part by using the universal property of classifying topoi.
+
 We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $y U_r \to U$ are natural since morphisms in $FinProb$ preserve measure.
 
 Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $Set^{BPAlg_f}$.
@@ -495,8 +501,6 @@ Since we are looking at presheaves, all the colimit and limit conditions from th
 We diverge from the notation in D.1 of \cite{elephant} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
 
 Since the theory of flat functors we will apply this lemma to has no relation symbols, we restrict ourselves to the case where $\Sigma$ has no relation symbols
-
-We now define the inverse functor. We induce it by a geometric functor $\mathcal{C}^{\mathbb{T}^{FinProb}} \to \mathcal{C}^{\mathbb{T}}$, where $\mathbb{T}^{FinProb}$ denotes the theory of flat functors over $FinProb$. Such a geometric functor of course is given by a model of $\mathbb{T}^{FinProb}$ in $\mathcal{C}^{\mathbb{T}_{bpalg}}$. We give the functor in this way because it allows us to use internal logic to prove that the induced functor on classifying toposes is left-exact, which will be needed when showing that the functors are inverses of each other.
 
 We will identify the objects and arrows in $FinProb$ with the corresponding sorts and function symbols in $\mathbb{T}^{FinProb}$.
 
@@ -507,6 +511,8 @@ We have a $\mathbb{T}^{FinProb}$-model in $\mathcal{C}^{\mathbb{T}_{bpalg}}$ giv
 [\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{j \in Y} (b_j = \bigvee_{f i = j} a_i) \wedge \phi_{X,\mu}^{\vec{a}} \Bigg] ,
 \end{align*}
 so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$.
+
+This yields a left-exact, colimit-preserving functor $Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}_{bpalg}]$.
 \end{lemma}
 
 The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
@@ -517,22 +523,15 @@ TODO: THIS PROOF SHOULD BE DONE ENTIRELY WITHOUT INTERPRETATIONS BY INSTEAD USIN
 
 \end{proof}
 
-Finally, we show that the above functors assemble into an equivalence of categories. We abuse notation and identify the candidate universal model $U$ with the corresponding functor $\mathcal{C}^{\mathbb{T}} \to Set^{FinProb^{op}}$. $U$, of course, induces a left-exact, colimit-preserving functor
-\[
-Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}]: Lan_y(U).
-\]
-
-Similarly, we abuse notation and identify $F$, our $\mathbb{T}^{FinProb}$-model in $\mathcal{C}^{\mathbb{T}_{bpalg}}$ with a flat functor $FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$, that of course induces a left-exact, colimit-preserving functor
-\[
-Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}].
-\]
-
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
 $Lan_y(U)$ and $Lan_F$ define an equivalence of categories
 \[
 Set^{FinProb^{op}} \simeq Set[\mathbb{T}_{bpalg}].
 \]
 \end{theorem}
+
+We warn the reader that the necessary ideas defining the equivalence have already been introduced, and that this proof consists of highly technical and uninsightful property-checking.
+
 \begin{proof}
 For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
 
@@ -1351,6 +1350,14 @@ This proof can, in fact be adapted in many situations, to suggest that most coun
 
 Sheaves and shit maybe? The Grothendieck construction and shit. I don't know how much of it we should mention. We could give the explicit site description and say we think it has all the nice properties. But the technical difficulties are too big and would take up too much time to give them in this paper etc.
 
+Thinks that should go in here:
+\begin{enumerate}
+    \item $\mathfrak{Rand}$ and the Grothendieck construction. 'Random vectors spaces', 'random groups', etc. as vectors spaces, groups, etc. internal to $\mathfrak{Rand}$.
+    \item Difficulties in looking at $L^0$, despite internal completeness. Discussion of the failture of the axiom of choice. Non-open stabilizers.
+    \item Philosophically, argue for a solution using internal sheaves over the simple functions, cite Vickers(and maybe someone else) and his ideas in formal topology(this must be explained very well). He does geometric mathematics in 'A monad of valuation locales' and also uses simple functions as a proxy for $L^0$.
+    \item Far future: One might expect our 'canonical' framework for probability theory to have much better formal properties than models by intervals in $Set$. Thus, geometry might be better behaved when using the universal $L^0$ as a base for 'random field stuff'(cite the random fields book!)
+    \item A sure bet: Repeat the logical analysis in this paper for many other atomic topoi. More conceptual proofs for algebraically closed fields and real closed fields? Quantifier elimination in infinitary logic as a weaker version of usual q-elim.
+\end{enumerate}
 
 We will now investigate even further what can be said in the theory of expectation algebras about simple functions on probability intervals.
 \begin{lemma} Any atomic formula in $\mathbb{T}_{exp}$ is $\mathbb{T}_{exp}$-provably equivalent to one of the form $x_1,\cdots, x_n. E_0(f(x_1,\cdots,x_n))$ where $f\in \mathbb{R}[X_1,\cdots, X_n]$ is a real polynomial. 
