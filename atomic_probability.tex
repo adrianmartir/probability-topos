@@ -25,6 +25,10 @@
  
 \newcommand{\ldoub}{[\![ }
 \newcommand{\rdoub}{]\!]}
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
 
 \author{Adam Dauser, Adrian Marti}
 
@@ -534,10 +538,33 @@ where we again identify models with functors whose domain is a syntactic categor
 The model $F$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
 
 Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
+
 \begin{proof}
-aa
+    We need to show functoriality and then verify that $Lan_F$ is left-exact. The latter property is checked by the usual identification of functors whose left Kan extension is left-exact with functors that are flat. Concretely, we use theorem \Rmnum{7}.9.1 in \cite{sheaves_geometry_logic}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
 
+    The reader who actually reads the definition of a filtering functor will quickly notice that that definition can be checked in our case by showing that $F$ preserves the terminal object, binary multiproducts and multiequalizers in the sense described below.
 
+    \begin{enumerate}
+        \item We show that $F$ preserves identities. We compute that
+            \begin{align*}
+                F(id) &= [\theta^{\vec{a},\vec{b}}_{id}] \\
+                &= [\vec{a}=\vec{b}] \\
+                &= id,
+            \end{align*}
+            which shows our claim.
+        \item We show that $F$ preserves composition. Given morphisms $f: \alpha \to \beta$, $g: \beta \to \gamma$ in $FinProb$,
+            \begin{align*}
+                F(g)F(f) &= [\exists c . \theta^{\vec{a},\vec{c}} \wedge \theta^{\vec{c},\vec{b}}_g] \\
+                &= [\theta^{\vec{a},\vec{b}}_{gf}] ,
+            \end{align*}
+            where the last equality follows from associativity and commutativity of the $\wedge$ operation and by additivity of the measure.
+        \item We show that $F$ preserves the terminal object. We simply compute this:
+            \begin{align*}
+                F(*) =& \{a. B_1(a)\} \\
+                \cong& \{[].\top \} ,
+            \end{align*}
+            where the last isomorphism follows from the fact we can geometrically prove that there is a unique element of measure $1$.
+    \end{enumerate}
 \end{proof}
 
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
