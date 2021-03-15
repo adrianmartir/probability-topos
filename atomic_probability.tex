@@ -164,7 +164,7 @@ equipped with the measure $\mu(i) = r_i$.
 
 This is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $FinProb$.
 
-\begin{remark}
+\begin{remark}\label{classifying_partitions}
     Notice that for a finite probability space $(X,\mu)$, $Hom((X,\mu), U_{r_i})$ precisely consists of partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. This may seem like quite a harmless observation, but being aware of this fact makes some calculations with $y U_{r_i}$ much more intuitive. Moreover, we will later see that the $U_{r_i}$ in fact precisely correspond to logical formulas specifying a partition with fixed measures. We will often identify maps with partitions implicitly and without comment.
 
     In particular, $Hom((X,\mu), U_r)$ is identified with partitions consisting of two elements. Of course, we could have equivalently simply chosen any subset of $X$ of measure $r$. We will similarly identify $Hom((X,\mu), U_r)$ with subsets of $X$ of measure $r$.
@@ -299,7 +299,7 @@ The previous examples may be too easy to fully make use of the notation. In chap
 One of the most intriguing things about this notation, is that it almost feels like it gives semantics to an abstract notion of \emph{sets parameterized by a partition of unity}, defined in the formal sense above. The convenient thing, is that when writing down sheaves in this way, one does not need to check functoriality nor sheaf conditions. Of course, this is does not mean that our topos is equivalent to $Set^{\mathcal{A}}$, because while the objects match, the morphisms are different:
 
 \begin{proposition}\label{atom_coprod_maps}
-    Let $\mathcal{F} = \langle T(x) | x \in S \rangle$ and $\mathcal{G} = \langle T'(x) | x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely maps $(g, (f_x))$, where $g$ is a map between the sets of elements
+    Let $\mathcal{F} = \langle T(x) | x \in S \rangle$ and $\mathcal{G} = \langle T'(x) | x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
     \[
         \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
     \]
@@ -470,9 +470,12 @@ Denote the category models of $\mathbb{T}_{bpalg}$ in $Set$ by $BPAlg$.
     \]
     between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We don't prove this in detail nor do we give the equivalence explicitly, since we won't use this fact anywhere in this paper.
 
+    TODO: INSERT THE REMARKS ABOUT THE EASIER IND COMPLETION PROOF HERE
 \end{remark}
 
 \subsection{The classifying topos proof}
+
+TODO: THE TEXT BELOW SHOULD BE REWRITTEN, AS MY PERSPECTIVE ON the motivations of why the proof works have changed(the 'partitions as formulas' idea should be central). moreover the proof itself has been heavily modified.
 
 We would like to show that the topos $Set^{FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. Proving this fact requires a bit of work. The difficulty is mainly the fact that  $FinProb$ does not have all finite limits, so the flat functors on $FinProb$ are not as straightforward to understand. We will prove the equivalence
 \[
@@ -493,7 +496,11 @@ We use this universal model in order to define the functor for our equivalence o
 \begin{lemma} \label{universal model}
 $U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in FinProb$, $U(X, \mu)$ is the powerset of $X$.
 
-This yields a left-exact, colimit-preserving functor $Lan_y(U): Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}_{bpalg}]$.
+This yields a left-exact, colimit-preserving functor 
+\[
+    Lan_y(U): Set^{FinProb^{op}} \leftarrow Set[\mathbb{T}_{bpalg}],
+\]
+where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ with functors whose domain is the syntactic category of $\mathbb{T}_{bpalg}$.
 \end{lemma}
 \begin{proof}
 The last statement follows from the first part by using the universal property of classifying topoi.
@@ -517,14 +524,19 @@ We have a $\mathbb{T}^{FinProb}$-model in $\mathcal{C}^{\mathbb{T}_{bpalg}}$ giv
 \end{align*}
 so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$.
 
-This yields a left-exact, colimit-preserving functor $Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}_{bpalg}]$.
+This yields a left-exact, colimit-preserving functor 
+\[
+    Lan_F: Set^{FinProb^{op}} \to Set[\mathbb{T}_{bpalg}],
+\]
+where we again identify models with functors whose domain is a syntactic category.
 \end{lemma}
 
-The model $M$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
+The model $F$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
 
+Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
 \begin{proof}
-TODO: THIS PROOF SHOULD BE DONE ENTIRELY WITHOUT INTERPRETATIONS BY INSTEAD USING MULTIPRODUCTS
-% Concretly, I want to use that by Makkai's 'Accessible categories', 1.2.2 v) iff iv), it suffices to check that F preserves finite limits of representables. Thus we only need to check lim F x_i can be computed as the coproduct of the multiproduct.
+aa
+
 
 \end{proof}
 
@@ -565,11 +577,11 @@ Now we can use this together with the Yoneda lemma in order to give the required
 \[
 \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
 \]
-sends $\{x\}_{x \in X}$ to $\{f^{-1} x\}_{x \in X}$. This means that the morphism
+induced by $f$, sends $\{x\}_{x \in X}$ to $\{f^{-1} x\}_{x \in X}$. This means that the morphism
 \[
 y (X,\mu) (Y,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
 \]
-sends an $f$ to the family $\{f^{-1} x\}$. This clearly is an isomorphism, so $y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ is an isomorphism.
+sends an $f$ to the family $\{f^{-1} x\}$. We should recognize this mapping from our discussions on the relationship between partitions and the presheaf $y (X,\mu)$ in \ref{classifying_partitions}. We already discussed that this is a bijection and thus we get an isomorphism $y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$.
 
 We still need to show this isomorphism is natural in $(X,\mu)$. We prove naturality on each $(Y,\nu) \in FinProb$. So let $(X,\mu), (X',\mu') \in FinProb$. The diagram
 \[
@@ -580,7 +592,7 @@ We still need to show this isomorphism is natural in $(X,\mu)$. We prove natural
 \]
 commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $Set$-model. This concludes our proof of $Lan_y(U) \circ Lan_F \cong Id$.
 
-We now prove that $Lan_F \circ Lan_y(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $Set[\mathbb{T}]$. This means we have to compute $Lan_F \circ Lan_y(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $Set[\mathbb{T}]$.
+We now prove that $Lan_F \circ Lan_y(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $Set[\mathbb{T}]$. This means we have to compute $Lan_F \circ Lan_y(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
 
 We first check this for the sort $B$. This means that we have to show that $Lan_F(U) \cong y \{b . \top\}$. This reduces to showing
 \[
