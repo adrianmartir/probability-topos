@@ -978,6 +978,37 @@ say the following
     \item Extremely interesting: This technique is not at all specific to $\mathfrak{Prob}$. One can imagine proving similar results in a wide variety of other contexts. Classical Model theory could not prove this kind of stuff?
 \end{enumerate}
 
+\subsection{Transfer results for $L^p$-spaces}
+TODO: PROVE THAT ANY function $f:\mathbb{R} \to \mathbb{R}$ we get a map $f: \mathcal{S} \to \mathcal{S}$(defined pointwise) that gets sent to the expected map on atomless $\sigma$-algebras.
+
+We will now try to transfer statements between $L^p(X,\mu)$ for probability intervals $(X,\mu)$. The key insight is that we know how to transfer statements about simple functions and simple functions are dense in the metric spaces $L^p$. Another insight is, that every bounded, measurable function on a probability space is integrable. So $L^\infty(X,\mu)$ is an expectation algebra, in particular, for any probability interval $(X,\mu)$ in Set.
+\begin{definition} For a expectation algebra $S$ we define:
+\begin{enumerate}
+\item $f\geq g$ if $\exists h. h^2=f-g$
+\item For $p$ an even integer, $||f||_p=r$ if $E_{r^p}(f^p)$
+\item $||f||_\infty=r$ if $\bigwedge_{k\in\mathbb{N}}\bigvee_{N\in\mathbb{N}}\bigwedge_{n\geq N}\bigvee_{-1/k\leq s\leq 1/k}||f||_{2n}=r+s$
+\end{enumerate}
+\end{definition}
+The last definition is motivated by the fact that for the algebras simple functions and bounded functions, we have
+\[  \lim_{n\rightarrow \infty} ||f||_n=||f||_\infty. \]
+Note that the fact that all statements of the previous definition are infinitary first order, we can transfer statements using them between algebras of simple functions. The next step will be to give a suitable notion of a statement that "spreads out" as to allow one to only check in on simple functions. Be not afraid of the complicated looking formulas that follow.
+\begin{definition} Given a quantifier free infinitary first order formula\linebreak $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras. Then we call $\Phi$ \emph{spreading} if 
+\[\forall f_1\cdots \forall f_n.( \Phi(f_1,\cdots, f_n)\implies \bigvee_{k\in \mathbb{N}}\forall g_1,\cdots, \forall g_n.(\bigwedge_{i=1}^n\bigvee_{\epsilon\leq 1/k}||f_i-g_i||_{\infty}=\epsilon\implies \Phi(g_1,\cdots g_n))) \]
+holds in $\mathcal{S}$.\newline
+\indent  Given an infinitary first order formula $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras, written it in prenex normal form
+\[\forall x_1\cdots \forall x_n \exists y_1\cdots \exists y_m \forall x_{n+1}\cdots \forall x_{n+l}\cdots \Psi(f_1,\cdots f_n, x_1,\cdots, x_N, y_1\cdots y_M) \]
+for $\Psi$ quantifier free. Then we call $\Phi$ \emph{spreading} if $\Psi$ is spreading.
+\end{definition}
+This should be interpreted as stating that, given $\Phi$ holds for some simple functions, it holds for all simple function in a small $L^\infty$-neighbourhood around them. Note also that the statement that a formula spreads is stated in infinitary first order language, so it can be transferred. In particular, it suffices to check it for some algebra of simple functions in Set. In that case, we see that it reduces to check the aforementioned statement without having to think about the complicated formulation we state above.
+\begin{theorem}
+Given a spreading formula $\Phi(f_1,\cdots,f_n)$, then for all probability intervals $(X,\mu)$ and $(Y,\nu)$ in Set, we have:
+\[(L^\infty(X,\mu)\vDash \Phi)\iff(L^\infty(Y,\nu)\vDash\Phi)  \] 
+\end{theorem}
+\begin{proof}
+$(L^\infty(X,\mu)\vDash \Phi)\iff (\mathcal{S}\vDash \Phi)$ as $\Phi$ is spreading and $S(X,\mu)$ is dense. Then apply the transfer lemma. PROVE THIS
+\end{proof}
+
+
 \section{$\mathfrak{Prob}$ as a topos of continuous group actions}
 
 We seek to apply the following result due to O.Caramello:
@@ -1365,35 +1396,6 @@ Thinks that should go in here:
     \item A sure bet: Repeat the logical analysis in this paper for many other atomic topoi. More conceptual proofs for algebraically closed fields and real closed fields? Quantifier elimination in infinitary logic as a weaker version of usual q-elim.
     \item The technique that we use for proving that the simple functions are all geometrically equivalent looks extremely easy to reproduce in other contexts. E.g. free modules over algebraically closed fields?
 \end{enumerate}
-
-
-\subsection{Transfer results for $L^p$-spaces}
-We will now try to transfer statements between $L^p(X,\mu)$ for probability intervals $(X,\mu)$. The key insight is that we know how to transfer statements about simple functions and simple functions are dense in the metric spaces $L^p$. Another insight is, that every bounded, measurable function on a probability space is integrable. So $L^\infty(X,\mu)$ is an expectation algebra, in particular, for any probability interval $(X,\mu)$ in Set.
-\begin{definition} For a expectation algebra $S$ we define:
-\begin{enumerate}
-\item $f\geq g$ if $\exists h. h^2=f-g$
-\item For $p$ an even integer, $||f||_p=r$ if $E_{r^p}(f^p)$
-\item $||f||_\infty=r$ if $\bigwedge_{k\in\mathbb{N}}\bigvee_{N\in\mathbb{N}}\bigwedge_{n\geq N}\bigvee_{-1/k\leq s\leq 1/k}||f||_{2n}=r+s$
-\end{enumerate}
-\end{definition}
-The last definition is motivated by the fact that for the algebras simple functions and bounded functions, we have
-\[  \lim_{n\rightarrow \infty} ||f||_n=||f||_\infty. \]
-Note that the fact that all statements of the previous definition are infinitary first order, we can transfer statements using them between algebras of simple functions. The next step will be to give a suitable notion of a statement that "spreads out" as to allow one to only check in on simple functions. Be not afraid of the complicated looking formulas that follow.
-\begin{definition} Given a quantifier free infinitary first order formula\linebreak $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras. Then we call $\Phi$ \emph{spreading} if 
-\[\forall f_1\cdots \forall f_n.( \Phi(f_1,\cdots, f_n)\implies \bigvee_{k\in \mathbb{N}}\forall g_1,\cdots, \forall g_n.(\bigwedge_{i=1}^n\bigvee_{\epsilon\leq 1/k}||f_i-g_i||_{\infty}=\epsilon\implies \Phi(g_1,\cdots g_n))) \]
-holds in $\mathcal{S}$.\newline
-\indent  Given an infinitary first order formula $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras, written it in prenex normal form
-\[\forall x_1\cdots \forall x_n \exists y_1\cdots \exists y_m \forall x_{n+1}\cdots \forall x_{n+l}\cdots \Psi(f_1,\cdots f_n, x_1,\cdots, x_N, y_1\cdots y_M) \]
-for $\Psi$ quantifier free. Then we call $\Phi$ \emph{spreading} if $\Psi$ is spreading.
-\end{definition}
-This should be interpreted as stating that, given $\Phi$ holds for some simple functions, it holds for all simple function in a small $L^\infty$-neighbourhood around them. Note also that the statement that a formula spreads is stated in infinitary first order language, so it can be transferred. In particular, it suffices to check it for some algebra of simple functions in Set. In that case, we see that it reduces to check the aforementioned statement without having to think about the complicated formulation we state above.
-\begin{theorem}
-Given a spreading formula $\Phi(f_1,\cdots,f_n)$, then for all probability intervals $(X,\mu)$ and $(Y,\nu)$ in Set, we have:
-\[(L^\infty(X,\mu)\vDash \Phi)\iff(L^\infty(Y,\nu)\vDash\Phi)  \] 
-\end{theorem}
-\begin{proof}
-$(L^\infty(X,\mu)\vDash \Phi)\iff (\mathcal{S}\vDash \Phi)$ as $\Phi$ is spreading and $S(X,\mu)$ is dense. Then apply the transfer lemma. PROVE THIS
-\end{proof}
 
 
 \begin{thebibliography}{9}
