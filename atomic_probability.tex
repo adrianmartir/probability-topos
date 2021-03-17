@@ -1017,37 +1017,95 @@ say the following
     \item Extremely interesting: This technique is not at all specific to $\mathfrak{Prob}$. One can imagine proving similar results in a wide variety of other contexts. Classical Model theory could not prove this kind of stuff?
 \end{enumerate}
 
-\subsection{Transfer results for $L^p$-spaces}
-TODO: PROVE THAT ANY function $f:\mathbb{R} \to \mathbb{R}$ we get a map $f: \mathcal{S} \to \mathcal{S}$(defined pointwise) that gets sent to the expected map on atomless $\sigma$-algebras.
+\subsection{Transfer results for $L^\infty$-spaces}
+%TODO: PROVE THAT ANY function $f:\mathbb{R} \to \mathbb{R}$ we get a map $f: \mathcal{S} \to \mathcal{S}$(defined pointwise) that gets sent to the expected map on atomless $\sigma$-algebras.
 
-We will now try to transfer statements between $L^p(X,\mu)$ for probability intervals $(X,\mu)$. The key insight is that we know how to transfer statements about simple functions and simple functions are dense in the metric spaces $L^p$. Another insight is, that every bounded, measurable function on a probability space is integrable. So $L^\infty(X,\mu)$ is an expectation algebra, in particular, for any probability interval $(X,\mu)$ in Set.
+We will now try to transfer statements between $L^\infty(X,\mu)$ for atomless probability algebras $(X,\mu)$. The key insight is that we know how to transfer statements about simple functions and bounded measurable functions can be approximated by them. Another insight is, that every bounded, measurable function on a probability space is integrable. So $L^\infty(X,\mu)$ is an expectation algebra, in particular, for any probability interval $(X,\mu)$ in Set.
 \begin{definition} For a expectation algebra $S$ we define:
 \begin{enumerate}
 \item $f\geq g$ if $\exists h. h^2=f-g$
-\item For $p$ an even integer, $||f||_p=r$ if $E_{r^p}(f^p)$
-\item $||f||_\infty=r$ if $\bigwedge_{k\in\mathbb{N}}\bigvee_{N\in\mathbb{N}}\bigwedge_{n\geq N}\bigvee_{-1/k\leq s\leq 1/k}||f||_{2n}=r+s$
+\item $|f|$ is the function uniquely determined by $f^2=|f|^2\wedge |f|\geq 0$
+\item $f^+=\frac{1}{2}(f+|f|)$ and $f^-=\frac{1}{2}(f-|-f|)$ 
+\item For $p$ an integer, $||f||_p=r$ if $E_{r^p}(|f|^p)$
+\item $||f||_\infty=r$ if $\bigwedge_{k\in\mathbb{N}}\bigvee_{N\in\mathbb{N}}\bigwedge_{n\geq N}\bigvee_{-1/k\leq s\leq 1/k}||f||_{n}=r+s$
+
 \end{enumerate}
 \end{definition}
 The last definition is motivated by the fact that for the algebras simple functions and bounded functions, we have
 \[  \lim_{n\rightarrow \infty} ||f||_n=||f||_\infty. \]
-Note that the fact that all statements of the previous definition are infinitary first order, we can transfer statements using them between algebras of simple functions. The next step will be to give a suitable notion of a statement that "spreads out" as to allow one to only check in on simple functions. Be not afraid of the complicated looking formulas that follow.
-\begin{definition} Given a quantifier free infinitary first order formula\linebreak $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras. Then we call $\Phi$ \emph{spreading} if 
-\[\forall f_1\cdots \forall f_n.( \Phi(f_1,\cdots, f_n)\implies \bigvee_{k\in \mathbb{N}}\forall g_1,\cdots, \forall g_n.(\bigwedge_{i=1}^n\bigvee_{\epsilon\leq 1/k}||f_i-g_i||_{\infty}=\epsilon\implies \Phi(g_1,\cdots g_n))) \]
-holds in $\mathcal{S}$.\newline
-\indent  Given an infinitary first order formula $\Phi(f_1,\cdots, f_n)$ in the theory of expectation algebras, written it in prenex normal form
-\[\forall x_1\cdots \forall x_n \exists y_1\cdots \exists y_m \forall x_{n+1}\cdots \forall x_{n+l}\cdots \Psi(f_1,\cdots f_n, x_1,\cdots, x_N, y_1\cdots y_M) \]
-for $\Psi$ quantifier free. Then we call $\Phi$ \emph{spreading} if $\Psi$ is spreading.
+Note that the fact that all statements of the previous definition are infinitary first order, we can transfer statements using them between algebras of simple functions. The next insight will be that we can actually define given simple functions uniquely using only infinitary first order language in the theory of expectation algebras.\newline
+\indent The next step is to characterise simple functions among bounded measurable functions. This will also allow us to classify the definable subsets of algebras of simple functions.
+\begin{definition} For an expectation algebra $S$, $f$ is called a
+\begin{enumerate}\item \emph{characteristic function} if $(f-1)^+-f^- -(f-1)^-f^+=0$. Write this relation $\chi$.
+\item \emph{simple function} if $\bigvee_{n\in \mathbb{N}}\exists f_1 \cdots \exists f_n. \bigwedge_{i=1}^n \chi(f_n)\wedge \bigvee_{r_1,\cdots,r_n\in\mathbb{R}} f=\sum_{i=1}^n r_if_i$. Call this relation $s$.
+\end{enumerate}
 \end{definition}
-This should be interpreted as stating that, given $\Phi$ holds for some simple functions, it holds for all simple function in a small $L^\infty$-neighbourhood around them. Note also that the statement that a formula spreads is stated in infinitary first order language, so it can be transferred. In particular, it suffices to check it for some algebra of simple functions in Set. In that case, we see that it reduces to check the aforementioned statement without having to think about the complicated formulation we state above.
+In the case of $L^\infty(X,\mu)$ or $S(X,\mu)$, these definitions can easily be seen to be equivalent to the ordinary ones. Note also that these are geometric statements. 
 \begin{theorem}
-Given a spreading formula $\Phi(f_1,\cdots,f_n)$, then for all probability intervals $(X,\mu)$ and $(Y,\nu)$ in Set, we have:
-\[(L^\infty(X,\mu)\vDash \Phi)\iff(L^\infty(Y,\nu)\vDash\Phi)  \] 
+The complete boolean algebra of subsets of $S(X,\mu)^n$ for an interval $(X,\mu)$ in Set, definable by infinitary first order (equivalently geometric) statements in the theory of expectation algebras, with $n$ free variables, is generated by subsets of the form:
+\[\{(f_1,\cdots, f_n)| f_1,\cdots, f_n\text{have cumulative distribtion function g}\} \]
+for $g:\mathbb{R}^n\rightarrow\mathbb{R}$ cumulative distribution functions of $n$-tuples of simple functions.
 \end{theorem}
 \begin{proof}
-$(L^\infty(X,\mu)\vDash \Phi)\iff (\mathcal{S}\vDash \Phi)$ as $\Phi$ is spreading and $S(X,\mu)$ is dense. Then apply the transfer lemma. PROVE THIS
+These subsets correspond precisely to the images under $f^*$, the inverse image functor classifying $(X,\mu)$, of the atoms of $\mathcal{S}^n$. This shows, that the lattice of definable sets is certainly contained in the lattice given in the statement.\newline
+\indent For the converse, we have to construct for any cumulative distribution function of an $n$-tuple of simple functions, a infinitary first order statement satisfied by precisely all the $n$-tuples of simple functions with the same cumulative distribution function. Given simple functions some interval $(X,\mu)$ in Set $f_i=\sum_{j=1}^{m} r_{j}\chi_{a_j}$ for $1\leq i\leq n$ with and $a_j\neq 0$ disjoint from $a_{j'}$ for  $j\neq j'$ on. Say $\mu(a_{j})=\mu_{j}$.  We claim that the following geometric statement with free variables $h_i$ characterises all the simple functions with the same distribution function as $f_i$:
+\[\exists g_1\cdots \exists g_m. \bigwedge_{j=1}^m(\chi (g_j)\wedge E_{\mu_{j}}(g_j))\wedge \bigwedge_{i=1}^n\sum_{j=1}^m r_jg_j=h_i   \]  %make this prettier and internal to $\mathcal{S}$!
 \end{proof}
-
-
+We will now see that we can generalise this theorem to all measurable functions and, with that, get a transfer result. First some lemmas.
+\begin{lemma} The one for atomic statements
+\end{lemma}
+\begin{lemma}\label{atomic_L_infty} Given an atomic statement in the theory of expectation algebras $\Phi(f_1,\cdots,f_n)$ with free variables $f_1,\cdots, f_n$. If it holds for functions $f_1,\cdots ,f_n\in L^\infty(X,\mu)$ for an atomless probability algebra $(X,\mu)$ in Set, then it holds for all $n$-tuple $f_1',\cdots, f_n'\in L^\infty(X,\mu)$ with the same distribution function $g:\mathbb{R}^n\rightarrow \mathbb{R}$.
+\end{lemma}
+\begin{proof}
+For any $n$-tuple of bounded measurable functions $f_1,\cdots, f_n$ and polynomial $f\in \mathbb{R}[X_1,\cdots, X_n]$, we have:
+\[\int_X f(f_1,\cdots,f_n)d\mu=\lim_{\substack{g_1\rightarrow f_1,\cdots, g_n\rightarrow f_n \text{ in }L^\infty\\ g_1\cdots g_n \text{ simple}}}  \int_Xf(g_1,\cdots,g_n)d\mu \]%formulate this properly
+This is true as simple functions are dense in $L^\infty(X,\mu)^n$. Thus we have:
+\[E_0(f_1,\cdots,f_n)\iff \forall g_1\cdots \forall g_n.(\bigwedge_{i=1}^n s(g_i))\wedge\bigwedge_{\epsilon>0}\bigvee_{\delta>0}(\bigvee_{0\leq r\leq \delta}||f_i-g_i||_\infty=r \]
+\[\implies\bigvee_{|s|\leq\epsilon} E_s(g_1,\cdots,g_n) )\]%bad and ugly
+$E_s(g_1,\cdots,g_n)$ only depends on the cumulative distribution function of $g_1,\cdots,g_n$. So it will already hold if not $||f_i-g_i||_\infty=r$ but merely $g_i$ have the same  cumulative distribution function as some $n$-tuple of simple functions for which this holds. The existence of such a tuple can be read off the cumulative distribution function of $f_1,\cdots,f_n$.%Finish the argument
+\end{proof}
+\begin{lemma}\label{distribution_L_infty} The joint cumulative distribution functions of $n$-tuple of bounded measurable functions on an atomic probability algebra $(X,\mu)$ in Set are precisely the functions $g:\mathbb{R}^n\rightarrow \mathbb{R}$ which are:
+\begin{enumerate}
+\item Right-continuous in all variables
+\item Non-decreasing in all variables
+\item There exist real numbers $r_1,\cdots,r_n,s_1,\cdots, s_n$, such that we have $f(x_1,\cdots,x_n)=0$ for all $x_i\leq r_i$ and $f(x_1,\cdots,x_n)=1$ for all $x_i\geq s_i$  and for each $i$ and numbers $x_j$ for $i\neq j$, $f(x_1,\cdots,x_n)$ is constant in $x_i$ outside $[s_i,r_i]$.%Check this is the right condition
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+We adopt a proof of a similar statement from [Probability: Theory and Examples by Rick Durrett, Thm 1.2.1 and 1.2.2]. 
+\begin{enumerate}
+\item It is right continuous as $\lim_{y\rightarrow x^+}f^{-1}(-\infty,y)=f^{-1}(-\infty, x)$
+\item The function is non-decreasing in all variables by the monotonicity of the measure
+\item As the functions are bounded in both directions, we have $\mathbb{E}((f-c)^+)=1$ for some $c$ small enough and $\mathbb{E}((f-c)^+)=0$ for some $c$ large enough. 
+\end{enumerate}
+Conversely, given such a joint cumulative distribution function, we seek to construct an $n$-tuple of functions with these properties. The reference describes how this can be done for the Lebesque interval. So it suffices to construct a measure preserving measurable function $f:(X,\mu)\rightarrow (I,\lambda)$. We repeatedly use the interval property to define elements $x_{\frac{1}{2}}$ of $X$ of measure $\frac{1}{2}$, then bisecting it and its complement to get elements $x_{\frac{k}{2^n}}$ of measure $\frac{1}{2^n}$. We now define the map by $f^{-1}(0,r)=\bigvee_{\frac{k}{2^n}\leq r} x_{\frac{k}{2^n}} $. %make this precise
+\end{proof}
+Combining this statement with the previous lemma, we get that the validity of atomic statement does not depend on the atomless probability algebra we choose. Simply because they only depend on the joint cumulative distribution function and the set of these functions coincides for all choices. Let's extend this result! Before that we need one more technical result to deal with quantifiers.
+\begin{lemma} Given a function $g:\mathbb{R}^n\rightarrow \mathbb{R}$ with the conditions of lemma \ref{distribution_L_infty} and bounded measurable functions $f_1,\cdots, f_{n-1}\in L^\infty(X,\mu)$ for some atomless probability algebra, such that their joint cumulative distribution function $\tilde{g}:\mathbb{R}^{n-1}\rightarrow \mathbb{R}$ has
+\[g(x_1,\cdots, x_n)=\tilde{g}(x_1,\cdots, x_{n-1}) \text{ for }x_n\text{ large enough} \]
+Then there exists a bounded measurable function $f_n\in L^\infty(X,\mu)$ such that the joint cumulative distribution function of $f_1,\cdots,f_n $ is $g$.
+\end{lemma}
+\begin{proof}
+We will simply construct such a function. 
+\end{proof}
+\begin{theorem}
+For any infinitary first order statement in the theory of expectation algebras $\Phi$ and all atomless probability algebras $(X,\mu)$, $(Y,\nu)$, we have:
+\[L^\infty(X,\mu)\vDash\Phi \iff L^\infty(Y,\nu)\vDash\Phi \]
+Moreover, the subsets of $L^\infty(X,\mu)^n$ definable by infinitary first order statements are precisely unions of sets of the form
+\[\{(f_1,\cdots,f_n)|f_1,\cdots,f_n \text{ have cumulative distribution function }g \} \]
+where $g:\mathbb{R}^n\rightarrow\mathbb{R}$ is right-continuous and non-decreasing, zero for all values small enough and one for all values large enough in all variables.
+\end{theorem}
+\begin{proof}
+Note that we can uniquely define the set of $n$-tuple of measurable functions with a given cumulative distribution function of some $n$-tuple $f_1,\cdots,f_n$ by $ $
+First, we treat the case of quantifier free formulas. Via a simple symbolic recursion, the previous lemma \ref{atomic_L_infty} implies that the validity also only depends on the joint cumulative distribution function. It remains to check what happens for quantification. We proceed by symbolic recursion:\newline
+\indent Assume one has a statement $\Phi(f_1,\cdots f_n)$ with free variables $f_1,\cdots, f_n$ which only depends on the joint cumulative distribution of $f_1,\cdots, f_n$. We seek to show that then, so does $\exists f_1.\Phi(f_1,\cdots f_n)$. LAST PUZZLE PIECE\newline
+\indent We have shown that the validity of all statements only depends on the joint cumulative distribution function of the free variables. This concludes the first part of the lemma in conjunction with lemma \ref{distribution_L_infty} as the joint cumulative distribution functions are exactly the same.\newline
+\indent So it remains to show that we can define the set 
+\[\{(f_1,\cdots,f_n)|f_1,\cdots,f_n \text{ have cumulative distribution function }g \} \]
+ with $g$ as in the statement. This is possible with the following statement:
+ \[\bigwedge_{n\in \mathbb{N}}\text{There exist a lot of simple functions below it...} \]
+This concludes the second part of the lemma.
+\end{proof}
 \section{$\mathfrak{Prob}$ as a topos of continuous group actions}
 
 We seek to apply the following result due to O.Caramello:
