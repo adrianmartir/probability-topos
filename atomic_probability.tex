@@ -1080,25 +1080,36 @@ We adopt a proof of a similar statement from [Probability: Theory and Examples b
 \end{enumerate}
 Conversely, given such a joint cumulative distribution function, we seek to construct an $n$-tuple of functions with these properties. The reference describes how this can be done for the Lebesque interval. So it suffices to construct a measure preserving measurable function $f:(X,\mu)\rightarrow (I,\lambda)$. We repeatedly use the interval property to define elements $x_{\frac{1}{2}}$ of $X$ of measure $\frac{1}{2}$, then bisecting it and its complement to get elements $x_{\frac{k}{2^n}}$ of measure $\frac{1}{2^n}$. We now define the map by $f^{-1}(0,r)=\bigvee_{\frac{k}{2^n}\leq r} x_{\frac{k}{2^n}} $. %make this precise
 \end{proof}
-Combining this statement with the previous lemma, we get that the validity of atomic statement does not depend on the atomless probability algebra we choose. Simply because they only depend on the joint cumulative distribution function and the set of these functions coincides for all choices. Let's extend this result! Before that we need one more technical result to deal with quantifiers.
-\begin{lemma} Given a function $g:\mathbb{R}^n\rightarrow \mathbb{R}$ with the conditions of lemma \ref{distribution_L_infty} and bounded measurable functions $f_1,\cdots, f_{n-1}\in L^\infty(X,\mu)$ for some atomless probability algebra, such that their joint cumulative distribution function $\tilde{g}:\mathbb{R}^{n-1}\rightarrow \mathbb{R}$ has
+\begin{corollary}\label{quantifierfreeLinfty}
+Given a \emph{quantifier-free} infinitary first-order statement $\Phi$ in the theory of expectation algebras and any atomless probability algebras $(X,\mu)$ and $(Y,\nu)$ then we have:
+\[L^\infty(X,\mu)\vDash\Phi \iff L^\infty(Y,\nu)\vDash \Phi \]
+\end{corollary}
+\begin{proof}
+This is true for atomic statements simply because they only depend on the joint cumulative distribution function of the free variables and the set of these functions coincides for all choices. A simple symbolic recursion yields the quantifier-free case. 
+\end{proof}  
+Interestingly, we \emph{cannot} extend this result to statements containing quantifiers in general! Almost magically, statements in the theory of expectation algebras for $L^\infty(X,\mu)$ can detect whether elements in the underlying probability algebra $(X,\mu)$ are countably generated. This was the case neither for the theory of intervals nor for simple function algebras. 
+\begin{definition} A probability algebra $(X,\mu)$ is said to be $\aleph_1$\emph{-atomless} if there exists no element $x\in X$ such that the boolean algebra $\downarrow x$ is countably generated.
+\end{definition}
+These probability algebras have the following saturation property, which is necessary for dealing with quantifiers:
+\begin{lemma} Given a function $g:\mathbb{R}^n\rightarrow \mathbb{R}$ with the conditions of lemma \ref{distribution_L_infty} and bounded measurable functions $f_1,\cdots, f_{n-1}\in L^\infty(X,\mu)$ for some $\aleph_1$-atomless probability algebra $(X,\mu)$, such that their joint cumulative distribution function $\tilde{g}:\mathbb{R}^{n-1}\rightarrow \mathbb{R}$ has
 \[g(x_1,\cdots, x_n)=\tilde{g}(x_1,\cdots, x_{n-1}) \text{ for }x_n\text{ large enough} \]
 Then there exists a bounded measurable function $f_n\in L^\infty(X,\mu)$ such that the joint cumulative distribution function of $f_1,\cdots,f_n $ is $g$.
 \end{lemma}
 \begin{proof}
-We will simply construct such a function. 
+This is essentially 4.5 [Keisler paper].
 \end{proof}
+\begin{remark} It is shown in [Keisler paper] that this lemma fails for the Lebesgue interval. Also note that such probability algebras actually exist, see ibid.
+\end{remark}
 \begin{theorem}
-For any infinitary first order statement in the theory of expectation algebras $\Phi$ and all atomless probability algebras $(X,\mu)$, $(Y,\nu)$, we have:
+For any infinitary first order statement in the theory of expectation algebras $\Phi$ and all $\aleph_1$-atomless probability algebras $(X,\mu)$, $(Y,\nu)$, we have:
 \[L^\infty(X,\mu)\vDash\Phi \iff L^\infty(Y,\nu)\vDash\Phi \]
 Moreover, the subsets of $L^\infty(X,\mu)^n$ definable by infinitary first order statements are precisely unions of sets of the form
 \[\{(f_1,\cdots,f_n)|f_1,\cdots,f_n \text{ have cumulative distribution function }g \} \]
 where $g:\mathbb{R}^n\rightarrow\mathbb{R}$ is right-continuous and non-decreasing, zero for all values small enough and one for all values large enough in all variables.
 \end{theorem}
 \begin{proof}
-Note that we can uniquely define the set of $n$-tuple of measurable functions with a given cumulative distribution function of some $n$-tuple $f_1,\cdots,f_n$ by $ $
-First, we treat the case of quantifier free formulas. Via a simple symbolic recursion, the previous lemma \ref{atomic_L_infty} implies that the validity also only depends on the joint cumulative distribution function. It remains to check what happens for quantification. We proceed by symbolic recursion:\newline
-\indent Assume one has a statement $\Phi(f_1,\cdots f_n)$ with free variables $f_1,\cdots, f_n$ which only depends on the joint cumulative distribution of $f_1,\cdots, f_n$. We seek to show that then, so does $\exists f_1.\Phi(f_1,\cdots f_n)$. LAST PUZZLE PIECE\newline
+We seek to extend the result of \ref{quantifierfreeLinfty} to statements containing quantifiers. To do this we use symbolic recursion:\newline
+\indent Assume one has a statement $\Phi(f_1,\cdots f_n)$ with free variables $f_1,\cdots, f_n$ which only depends on the joint cumulative distribution of $f_1,\cdots, f_n$. We seek to show that then, so does $\exists f_1.\Phi(f_1,\cdots f_n)$. \newline
 \indent We have shown that the validity of all statements only depends on the joint cumulative distribution function of the free variables. This concludes the first part of the lemma in conjunction with lemma \ref{distribution_L_infty} as the joint cumulative distribution functions are exactly the same.\newline
 \indent So it remains to show that we can define the set 
 \[\{(f_1,\cdots,f_n)|f_1,\cdots,f_n \text{ have cumulative distribution function }g \} \]
@@ -1106,6 +1117,8 @@ First, we treat the case of quantifier free formulas. Via a simple symbolic recu
  \[\bigwedge_{n\in \mathbb{N}}\text{There exist a lot of simple functions below it...} \]
 This concludes the second part of the lemma.
 \end{proof}
+\begin{remark} This gives definitive evidence, that there cannot a "universal" $L^\infty$ algebra in $\mathfrak{Prob}$, whose images under the inverse image functors given by models $(X,\mu)$ are precisely the expectation algebras $L^\infty(X,\mu)$. For this, we would need a topos that somehow axiomatises the property of being $\aleph_1$-atomless, which is, as we stated it, formulated in second order logic.
+\end{remark}
 \section{$\mathfrak{Prob}$ as a topos of continuous group actions}
 
 We seek to apply the following result due to O.Caramello:
