@@ -597,7 +597,11 @@ Readers paying close attention to the proof strategy may wonder why we even both
 
         Thus we have shown that the required map is an isomorphism.
 
-        \item We show that $F$ preserves multiequalizers. More specifically, if we have a family of forks
+        \item  Let
+        \begin{tikzcd}
+        \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
+        \end{tikzcd}
+        be a diagram in $FinProb$. We show that $F$ preserves multiequalizers. More specifically, if we have a family of forks
         \[
             \begin{tikzcd}
             \gamma_i \arrow[r, "h_i"] & \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
@@ -605,8 +609,34 @@ Readers paying close attention to the proof strategy may wonder why we even both
         \]
         forming a multiequalizer, then we need to show that
         \[
-            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to eq(F(\alpha))
+            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to eq(\begin{tikzcd}
+                F(\alpha) \arrow[r, "Ff", shift left] \arrow[r, "Fg"', shift right] & F(\beta)
+                \end{tikzcd})
         \]
+        is an isomorphism.
+        
+        We already know that multiequalizers in $FinProb$ are particularly simple. If $f = g$, then the family of forks consists of only the identity map $id: \alpha \to \alpha$. In this case our claim becomes trivial.
+
+        Now assume that $f \neq g$. Then the multiequalizer is the empty family. Thus our claim becomes that
+        \[
+            eq(\begin{tikzcd}
+                \{ \vec{a}.\phi^{\vec{a}}_{\alpha} \} \arrow[r, "{[\theta^{\vec{a},\vec{b}}_f]}", shift left] \arrow[r, "{[\theta^{\vec{a},\vec{b}}_g]}"', shift right] & \{ \vec{b}.\phi^{\vec{b}}_{\beta} \}
+                \end{tikzcd})
+        \]
+        is the initial object $\{\vec{a}.\bot\}$. In fact, using D.1.4.2 in \cite{elephant}, we can compute this equalizer to be $\{ \vec{a} . (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}} \}$. This means that our objective is to show the sequent
+        \[
+            (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}} \vdash_{\vec{a}} \bot .
+        \]
+        Since that $f \neq g$, we have a $k$ be such that $f(k) \neq g(k)$. Now we can simply show that this sequent holds.
+        \begin{align*}
+            (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}}
+            &\vdash_{\vec{a}} (\exists \vec{b}) \bigwedge_{j \in \beta} (b_j = \bigvee_{f i = j} a_i) \wedge \bigwedge_{j \in \beta} (b_j = \bigvee_{g i = j} a_i) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \bigwedge_{j \in \beta} \big ( \bigvee_{f i = j} a_i = \bigvee_{g i = j} a_i \big ) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \big ( \bigvee_{f i = f k} a_i = \bigvee_{g i = f k} a_i \big ) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \big ( \bigvee_{f i = f k} a_i \wedge a_k = \bigvee_{g i = f k} a_i \wedge a_k \big ) \wedge \phi_{\alpha}^{\vec{a}}\\
+            &\vdash_{\vec{a}} (a_k = 0) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \bot
+        \end{align*}
     \end{enumerate}
 \end{proof}
 
