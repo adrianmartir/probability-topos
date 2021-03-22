@@ -540,9 +540,9 @@ The model $F$ has a straightforward intuitive meaning: The sorts can be interpre
 Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
 
 \begin{proof}
-    We need to show functoriality and then verify that $Lan_F$ is left-exact. The latter property is checked by the usual identification of functors whose left Kan extension is left-exact with functors that are flat. Concretely, we use theorem \Rmnum{7}.9.1 in \cite{sheaves_geometry_logic}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
+    We need to show functoriality and then verify that $Lan_F$ is left-exact. In order to check this left-exactness, we use theorem \Rmnum{7}.9.1 in \cite{sheaves_geometry_logic}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
 
-    The reader who actually reads the definition of a filtering functor will quickly notice that that definition can be checked in our case by showing that $F$ preserves the terminal object, binary multiproducts and multiequalizers in the sense described below.
+    The reader who actually reads the definition of a filtering functor will quickly notice that that definition can be checked in our case by showing that $F$ preserves the terminal object, binary multiproducts and multiequalizers in the sense checked below.
 
     \begin{enumerate}
         \item We show that $F$ preserves identities. We compute that
@@ -554,7 +554,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
             which shows our claim.
         \item We show that $F$ preserves composition. Given morphisms $f: \alpha \to \beta$, $g: \beta \to \gamma$ in $FinProb$,
             \begin{align*}
-                F(g)F(f) &= [\exists c . \theta^{\vec{a},\vec{c}} \wedge \theta^{\vec{c},\vec{b}}_g] \\
+                F(g)F(f) &= [\exists c . \theta^{\vec{a},\vec{c}}_f \wedge \theta^{\vec{c},\vec{b}}_g] \\
                 &= [\theta^{\vec{a},\vec{b}}_{gf}] ,
             \end{align*}
             where the last equality follows from associativity and commutativity of the $\wedge$ operation and by additivity of the measure.
@@ -564,8 +564,53 @@ Readers paying close attention to the proof strategy may wonder why we even both
                 \cong& \{[].\top \} ,
             \end{align*}
             where the last isomorphism follows from the fact we can geometrically prove that there is a unique element of measure $1$.
+        \item We show that $F$ preserves multiproducts. Concretely, let $\alpha$, $\beta$ be finite probability spaces. Then we have a polytope $P^2_{r_i,s_j}$ and for each of its elements $t_{ij}$ we have a cone
+        \[\begin{tikzcd}
+            & U_{t_{ij}} \arrow[ld, "p_{t_{ij}}"'] \arrow[rd, "q_{t_{ij}}"] &       \\
+        \alpha &                                                               & \beta
+        \end{tikzcd} .\]
+
+        In order to show that this multiproduct gets preserved, we need to show that the map
+        \[
+            \coprod_{t_{ij} \in P^2_{r_i,s_j}} \langle \theta^{\vec{a},\vec{b}}_{p_{t_{ij}}}, \theta^{\vec{a},\vec{b}}_{q_{t_{ij}}} \rangle : \coprod_{t_{ij} \in P^2_{r_i,s_j}} F U_{t_{ij}} \to F(\alpha) \times F(\beta)
+        \]
+        is an isomorphism. It is crucial that there does not only exist an isomorphism, but that it is this concrete isomorphism constructed by universal property. Indeed, for showing corresponding condition \Rmnum{7}.8.1 in \cite{sheaves_geometry_logic} we need to show that a specific family of morphisms is jointly epimorphic. And our claim here certainly implies that.
+
+        We will show that this map is an isomorphism by computing this map as a formula. First, note that the inclusions
+        \[
+            FU_{t_{ij}} \to F(\alpha) \times F(\beta)
+        \]
+        can be computed (using D.1.4.2 in \cite{elephant}) to be
+        \[
+            [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ] :\{ \vec{a}. \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{ \vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta} \} .
+        \]
+        By using the partition axiom multiple times, we notice that the formulas $\{ \vec{a} . \phi^{\vec{a}}_{U_{t_{ij}}}\}$ are disjoint (in the subobject lattice of $\{ \vec{a} . \top \}$). Thus the coproduct corresponds to union in that subobject lattice. Therefore by D.1.4.10 in \cite{elephant} we can compute the required coproduct to be
+        \[
+            [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ]: \{ \vec{a}.\bigvee_{t_{ij} \in P^2_{r_i,s_j} } \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{\vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta}\},
+        \]
+        where the map is forced to be this map by universal property, since it commutes with the inclusions.
+
+        Intriguingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the boolean probability algebra axioms:
+        \[
+            [a_{ij} = b_i \wedge c_j]
+        \]
+
+        Thus we have shown that the required map is an isomorphism.
+
+        \item We show that $F$ preserves multiequalizers. More specifically, if we have a family of forks
+        \[
+            \begin{tikzcd}
+            \gamma_i \arrow[r, "h_i"] & \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
+            \end{tikzcd}
+        \]
+        forming a multiequalizer, then we need to show that
+        \[
+            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to eq(F(\alpha))
+        \]
     \end{enumerate}
 \end{proof}
+
+TODO: Mention that we see a restricted form of a normal form here!
 
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
 $Lan_y(U)$ and $Lan_F$ define an equivalence of categories
