@@ -450,7 +450,7 @@ and we also have an axiom
 \]
 \item \textit{Probability measure}. For all $r, s \in [0,1]$, we further require
 \[
-(a \wedge b = 0) \wedge B_r(a) \wedge B_s(a) \vdash B_{r+s}(a \vee b)
+(a \wedge b = 0) \wedge B_r(a) \wedge B_s(b) \vdash B_{r+s}(a \vee b)
 \]
 and finally we need
 \begin{align*}
@@ -970,7 +970,7 @@ The point of this chapter is convincing the reader that for a model $F: \mathcal
         \]
         \item \textit{Linearity}. For all $r, s \in \mathbb{R}$, we require the sequents
         \[
-        E_r(a) \wedge E_s(a) \vdash E_{r+s}(a + b)
+        E_r(a) \wedge E_s(b) \vdash E_{r+s}(a + b)
         \]
         and for all $r \in \mathbb{R}$ and $\lambda \in \mathbb{R}$, we also need
         \[
