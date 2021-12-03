@@ -36,6 +36,8 @@
 
 \newcommand{\Set}{\textsf{Set}}
 \newcommand{\FinProb}{\textsf{FinProb}}
+\newcommand{\BPAlg}{\textsf{BPAlg}}
+\newcommand{\Ind}{\textsf{Ind}}
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\Prob}{\mathfrak{Prob}}
 
@@ -201,7 +203,7 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 
 Note that the second and third part are merely formal consequences of the first one. Any category (satisfying the right Ore condition) such that the first part holds, also satisfies the second and the third part.
 
-The representable functors are atoms in $\Prob$, i.e. objects whose only subobjects are the initial object and the object itself. A crucial property of an atomic topos (a topos of sheaves over a category equipped with the atomic topology) is that every object is a coproduct of atoms. So the natural question arises: Are the representables all atoms already? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
+The representable functors are atoms in $\Prob$, i.e. objects whose only subobjects are the initial object and the object itself. A crucial property of an atomic topos (a topos of sheaves over a category equipped with the atomic topology) is that every object is a coproduct of atoms. So the natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
 
 
 \subsection{Finite Limits}
@@ -210,9 +212,9 @@ Our goal in the next section will be to understand the logic of $\Prob$. Success
 
 But the situation is not as simple as one may hope: these finite limits only very rarely exist. Naturally, the presheaves $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
 
-The most surprising part about multi-limits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an overwhelming amount of statements in this paper (beyond statements about flat functors) are proved by using computations with multi-limits and polytopes.
+The most surprising part about multi-limits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an many statements in this paper are proved by using computations with multi-limits and polytopes.
 
-There is some very convenient notation for finite probability spaces emphasizing their combinatorial nature, where we see that phenomena involving polytopes are starting to arise.
+We introduce convenient notation to emphazise the combinatorial nature of finite probability spaces.
 
 \begin{definition}[U-notation] \label{U-notation}
 \begin{enumerate}
@@ -377,9 +379,11 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{remark} We have seen that the elements $t_{ij}$ of a binary multi-product are the $t_{ij} \in P^2_{r_i,s_i}$. This set can be seen a subset of the set of $n\times m$-matrices, which is, in fact, a polytope in $\mathbb{R}^{n\times m}$. The combinatorics literature has called these polytopes \emph{transportation polytopes}. Chapter 8 of [Matrix book] is dedicated to their study.
 \end{remark}
 
-One should note that when specifying a sheaf $\mathcal{F}$ by using this set of atoms notation, the elements of $\mathcal{F}$ (as defined above) are precisely the monomorphisms $y U_{r_i} \hookrightarrow \mathcal{F}$. So one can think of this notation as providing us with a way of directly specifying sheaves through their generalized elements, without needing to worry about functoriality and sheaf conditions. Unfortunately one can't specify all the sheaves in this way. Nevertheless this notation can be easily adapted to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
+One should note that when specifying a sheaf $\mathcal{F}$ by using this set of atoms notation, the elements of $\mathcal{F}$ (as defined above) are precisely the monomorphisms $y U_{r_i} \hookrightarrow \mathcal{F}$.
 
-The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphisms, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf, is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
+Unfortunately, one can't specify all the sheaves in this way. Nevertheless, this notation can be easily adapted to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
+
+The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphism, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf, is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
 
 \begin{proposition}\label{atom_coprod_maps}
     Let $\mathcal{F} = \langle T(x) \mid x \in S \rangle$ and $\mathcal{G} = \langle T'(x) \mid x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
@@ -407,7 +411,7 @@ A presheaf $\mathcal{F}$ on $\FinProb$ is a sheaf over the atomic topology if an
 \mathcal{F} U_{r_i} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \prod_{t_{ij}} \mathcal{F} U_{t_{ij}}
 \end{tikzcd}
 \]
-is an equalizer diagram, where the $t_{ij}$ range over the elements of the multi-pullback $U_{r_i} \times_{U_{s_i}} U_{r_i}$ (the morphisms of the diagram are both $f$) and the projection $\pi_1$ and $\pi_2$ are induced by the universal 'projection maps' of multi-pullbacks.
+is an equalizer diagram, where the $t_{ij}$ range over the elements of the multi-pullback $U_{r_i} \times_{U_{s_i}} U_{r_i}$ (we are pulling $f$ back along itself) and the projection $\pi_1$ and $\pi_2$ are induced by the universal 'projection maps' of multi-pullbacks.
 \end{proposition}
 \begin{proof}
 Since for each $U_{t_{ij}}$ we have the commuting square
@@ -435,9 +439,9 @@ with $fg = fh$. But this certainly holds, since we can factor $g$ and $h$ throug
 
 Note that this proposition actually had little to do with finite probability spaces and is really about a sheaf condition for atomic topologies where the base category has multi-pullbacks.
 
-\section{$\Prob$ as a classifying topos}
+\section{$\Prob$ as the classifying topos of a theory of intervals}
 
-In this section we will determine what $\Sh(\FinProb, J_{at})$ classifies. By default, we will use the notations and definitions as in part D.1 of \cite{elephant}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}. If the reader still wants an intuition about why \ref{classifying} should be true, we have provided an independent proof of a weaker theorem in the appendix. There prove our result only for the models of $\Sh(\FinProb, J_{at})$ in $\Set$ in a way that should be accessible to a reader only familiar with $Ind$-completions and flat functors into $\Set$. There we do not use any formal logic.
+In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part we will use the notations and definitions as in part D.1 of \cite{elephant}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}.
 
 \begin{definition}
 Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
@@ -497,36 +501,43 @@ Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $BPAlg$.
         \FinProb^{op} \simeq BPAlg_f
     \]
     between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We don't prove this in detail nor do we give the equivalence explicitly, since we won't use this fact anywhere in this paper.
-
-    TODO: INSERT THE REMARKS ABOUT THE EASIER IND COMPLETION PROOF HERE
 \end{remark}
 
 \subsection{The classifying topos proof}
 
-TODO: THE TEXT BELOW SHOULD BE REWRITTEN, AS MY PERSPECTIVE ON the motivations of why the proof works have changed(the 'partitions as formulas' idea should be central). moreover the proof itself has been heavily modified.
+We would like to show that the topos $\Set^{\FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
+\[
+\Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}} .
+\]
 
-We would like to show that the topos $\Set^{\FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. Proving this fact requires a bit of work. The difficulty is mainly the fact that  $\FinProb$ does not have all finite limits, so the flat functors on $\FinProb$ are not as straightforward to understand. We will prove the equivalence
+The main difficulty is that we have we have found no way of knowing whether the topos on the left-hand-side has enough points. For example, Deligne's theorem is inapplicable, since the theory is not coherent.
+
+Nevertheless, as a consistency check, one can verify that the models in $Set$ are equivalent by checking that
+\[
+    \BPAlg \simeq \Ind(\BPAlg_f) \simeq \Ind(\FinProb^{op}),
+\]
+but the proof of this fact is not short enough for us to provide it here.
+
+We will prove the equivalence
 \[
 \Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}}
 \]
-by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The challenge lies in proving that this gives an equivalence. We will show this by interpreting the topos on the left hand side as the classifying topos of the theory of flat functors on $\FinProb$ and using this fact we will give an inverse functor. Working purely syntactically is essential to being able to comfortably write down a formal argument. That means that we will need to extensively work with geometric logic.
+by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
-To get an idea of what the universal model might be, one can for example look at the universal models in classifying toposes of cartesian theories $\mathbb{T}$. In those cases the universal model in $[\mathbb{T} \text{-} Mod(\Set)_{f.p.}, \Set]$ just corresponds to the forgetful functor sending a (finitely presented) $\mathbb{T}$-model to its underlying set. Of course, the forgetful functor comes equipped with the required $\mathbb{T}$-model structure. For more details, see D3.1.2 of \cite{elephant}.
+Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $y U_{s_i} \to y U_{r_i}$ are supposed to represent unions of the partition into a coarser one.
 
-The above gives us some inspiration as to how to guess the universal model. We want it to be the functor in $\Set^{BPAlg_f}$ that gives us the underlying set of the boolean algebra in question. On the equivalent topos $\Set^{\FinProb^{op}}$, this happens to be the powerset functor on the underlying set of the finite probability space in question. We can give an alternative description. First, we introduce the shorthand $U_r := U_{r,r-1}$ for $r \in (0,1)$. We will think of the functor $y U_r$ as the functor sending a finite probability space to the set of subsets of measure $r$. Similarly, we will think of the functor $y U_{r_i}$ as the functor sending a finite probability space $(X,\mu)$ to the set its partitions $(a_i)$ with $\mu(a_i) = r_i$. Then we can define $U$ to be
+With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct a object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
 \coprod_{r \in [0,1]} y U_r \in \Set^{\FinProb^{op}} .
 \]
-One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space. This means that map $f$ between probability spaces gets sent to the map that takes the preimage of a subset. We will see that the $U_r$ can be interpreted as the unary relations of the theory $\mathbb{T}_{bpalg}$.
-
-We use this universal model in order to define the functor for our equivalence of topoi.
+One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space (a map $f$ between probability spaces gets sent to the map that takes the preimage of each subset).
 
 \begin{lemma} \label{universal model}
 $U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in \FinProb$, $U(X, \mu)$ is the powerset of $X$.
 
 This yields a left-exact, colimit-preserving functor
 \[
-    Lan_y(U): \Set^{\FinProb^{op}} \leftarrow \Set[\mathbb{T}_{bpalg}],
+    \Set^{\FinProb^{op}} \xleftarrow{Lan_y(U)} \Set[\mathbb{T}_{bpalg}],
 \]
 where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ with functors whose domain is the syntactic category of $\mathbb{T}_{bpalg}$.
 \end{lemma}
@@ -535,31 +546,26 @@ The last statement follows from the first part by using the universal property o
 
 We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $y U_r \to U$ are natural since morphisms in $\FinProb$ preserve measure.
 
-Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{BPAlg_f}$.
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
 \end{proof}
+
+We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor.
 
 We diverge from the notation in D.1 of \cite{elephant} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
 
-Since the theory of flat functors we will apply this lemma to has no relation symbols, we restrict ourselves to the case where $\Sigma$ has no relation symbols
-
-We will identify the objects and arrows in $\FinProb$ with the corresponding sorts and function symbols in $\mathbb{T}^{\FinProb}$.
-
 \begin{lemma} \label{inverse}
-We have a $\mathbb{T}^{\FinProb}$-model in $\C^{\mathbb{T}_{bpalg}}$ given as follows. Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We specify a model $F$ on the sort given by $(X,\mu)$ and on the function symbol given by $f$ by:
+Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $F: \FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$ on the object $(X,\mu)$ and on the function $f$ as follows: Let
 \begin{align*}
 \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{i \in X} B_{\mu(i)} a_i \wedge \bigwedge_{\substack{i,j \in X \\ i \neq j}} (a_i \wedge a_j = 0) \Bigg \} \\
 [\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{j \in Y} (b_j = \bigvee_{f i = j} a_i) \wedge \phi_{X,\mu}^{\vec{a}} \Bigg] ,
 \end{align*}
-so now we can give $F((X,\mu))$ by $\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f)$ by $[\theta_f^{\vec{a}, \vec{b}}]$.
+and now define $F(X,\mu) := \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f) := \theta_f^{\vec{a}, \vec{b}}]$.
 
 This yields a left-exact, colimit-preserving functor
 \[
-    Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}],
+    Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}] .
 \]
-where we again identify models with functors whose domain is a syntactic category.
 \end{lemma}
-
-The model $F$ has a straightforward intuitive meaning: The sorts can be interpreted as partitions of a boolean algebra into elements of prescribed measure. The function symbols compute unions of the partitions in prescribed ways.
 
 Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
 
@@ -614,7 +620,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
         \]
         where the map is forced to be this map by universal property, since it commutes with the inclusions.
 
-        Intriguingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the boolean probability algebra axioms:
+        Interestingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the boolean probability algebra axioms:
         \[
             [a_{ij} = b_i \wedge c_j]
         \]
@@ -663,8 +669,6 @@ Readers paying close attention to the proof strategy may wonder why we even both
         \end{align*}
     \end{enumerate}
 \end{proof}
-
-TODO: Mention that we see a restricted form of a normal form here!
 
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
 $Lan_y(U)$ and $Lan_F$ define an equivalence of categories
@@ -953,6 +957,7 @@ Every infinitary first-order formula over the empty context over the theory $\ma
 
 This is a form of quantifier elimination, only that this is a bit different than traditional quantifier elimination in that we can't guarantee that the equivalent quantifier-free formula has only finite joins. Moreover, our formulas aren't even over the same context.
 
+\section{$\Prob$ as the classifying topos of a theory of simple functions}
 
 \subsection{Simple functions} \label{simple_functions}
 
