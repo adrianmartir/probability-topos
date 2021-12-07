@@ -208,7 +208,7 @@ The representable functors are atoms in $\Prob$, i.e. objects whose only subobje
 
 \subsection{Finite Limits}
 
-Our goal in the next section will be to understand the logic of $\Prob$. Successfully doing so requires a very good understanding of what the flat functors on $\FinProb$ are and thus also requires a good understanding of finite limits in $\Prob$. This will be our goal in this subsection.
+Our goal in the next section will be to understand the logic of $\Prob$. Successfully doing so requires a very good understanding of what the flat functors on $\FinProb$ are and thus also requires a good understanding of finite limits in this category. This will be our goal in this subsection.
 
 But the situation is not as simple as one may hope: these finite limits only very rarely exist. Naturally, the presheaves $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
 
@@ -524,7 +524,7 @@ We will prove the equivalence
 \]
 by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
-Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $y U_{s_i} \to y U_{r_i}$ are supposed to represent unions of the partition into a coarser one.
+Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $y U_{s_i} \to y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
 With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct a object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
@@ -849,11 +849,12 @@ The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a pro
 
 Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
 
-Measure algebras are the correct setting for doing measure theory while ignoring the effects of nullsets. They connect to the more standard setting for measure theory as follows: Given a $\sigma$-algebra $(X,\Sigma)$ and a measure on $(X,\Sigma)$, dividing out the nullsets out of $\Sigma$ is guaranteed to yield a measure algebra. This is a surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. One can also conversely construct a measure space on a $\sigma$-algebra out of a measure algebra by using the Stone space of the measure algebra. For many more details on measure algebras, see chapter 32 of \cite{fremlin}, a notably long reference on measure theory.
+Measure algebras are the correct setting for doing measure theory while ignoring the effects of nullsets. They connect to the more standard setting for measure theory as follows: Given a $\sigma$-algebra $(X,\Sigma)$ and a measure on $(X,\Sigma)$, dividing out the nullsets out of $\Sigma$ is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. One can also conversely construct a measure space on a $\sigma$-algebra out of a measure algebra by using the Stone space of the measure algebra. For many more details on measure algebras, see chapter 32 of \cite{fremlin}, a notably long reference on measure theory.
 
 \begin{example} \label{interval_examples}
 \begin{itemize}
-\item Let $(A,\mu)$ be an atomless probability algebra. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element of measure $s$. Consider the set
+\item Let $(A,\mu)$ be an atomless probability algebra. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element $b
+leq a$ of measure $s$. Consider the set
 \[
 S := \{ b \leq a \mid \mu(b) \leq s \}.
 \]
@@ -861,6 +862,7 @@ Since every chain has a supremum, we can use Zorn's lemma to get a maximal eleme
 \[
 T := \{ b' \leq a \mid b' \geq b\} .
 \]
+What? This seems wrong... though the idea seems correct
 This has a minimal element $b'$ given by the meet of all elements of $T$. Note that $\mu(b') \geq s$ since $b' \geq b$. Thus, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
 \item Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure, and call $(I, \lambda)$ the Lebesgue interval. This is an atomless measure algebra, so the Lebesgue interval $(I, \lambda)$ is actually an interval.
 \item More generally, any radon measure gives rise to an atomless measure algebra and thus also gives rise to an interval.
@@ -974,7 +976,7 @@ We show that $\mathcal{S}$ is a sheaf by showing that $\mathcal{S}$ is a coprodu
 \begin{proposition}
     We have that
     \[
-        \mathcal{S} \cong \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
+        \mathcal{S} \cong \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \rangle
     \]
     and in particular, $\mathcal{S}$ is a sheaf.
 \end{proposition}
@@ -1042,8 +1044,8 @@ We can now define expectation algebra structure on $\mathcal{S}$. Note that we d
 Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
 
 \begin{align*}
-    S \times S &\cong \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle^2 \\
-    &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m \mid y_i, z_j \in \mathbb{R} \} \mid (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}^{re} \rangle
+    S \times S &\cong \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \rangle^2 \\
+    &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m \mid y_i, z_j \in \mathbb{R} \} \mid (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}\rangle
 \end{align*}
 
 Now we can use \ref{atom_coprod_maps} to specify our structure on the elements of this set of atoms:
@@ -1070,7 +1072,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
         defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i \cdot z_j = y_{i'} \cdot z_{j'}$ holds.
         \item $E_r \to \mathcal{S}$ is the subobject
         \[
-            \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R}, \sum r_i y_i = r \} \mid (r_1, \cdots, r_n) \in \mathcal{A}^{re} \rangle
+            \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R}, \sum r_i y_i = r \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \rangle
         \]
         of $\mathcal{S}$.
     \end{enumerate}
@@ -1092,9 +1094,9 @@ For the sake of comparing this unusual definition of the set of simple functions
     Let $(X, \Sigma, \mu)$ be a probability space such that the corresponding measure algebra is atomless. Then $S(X,\Sigma,\mu)$ is isomorphic to the expectation algebra over the corresponding interval.
 \end{proposition}
 \begin{proof}
-    The atomless measure algebra of $(X, \Sigma, \mu)$ is an inteval and thus can be viewed as a geometric morphism $F: \Set \to \Prob$. $F^*$ sends an atom $U_{r_i}$ to the set of partitions of the interval with measures $r_1,\cdots,r_n$. Thus, since $F^*$ is colimit preserving, $\mathcal{S}$ gets sent to
+    The atomless measure algebra of $(X, \Sigma, \mu)$ is an interval and thus can be viewed as a geometric morphism $F: \Set \to \Prob$. $F^*$ sends an atom $U_{r_i}$ to the set of partitions of the interval with measures $r_1,\cdots,r_n$. Thus, since $F^*$ is colimit preserving, $\mathcal{S}$ gets sent to
     \[
-        \coprod_{\substack{r_1, \cdots r_n \in \mathcal{A}^{re} \\ x_1 < \cdots < x_n}} F^*(U_{r_1\cdots r_n}) .
+        \coprod_{\substack{r_1, \cdots r_n \in \mathcal{A} \\ x_1 < \cdots < x_n}} F^*(U_{r_1\cdots r_n}) .
     \]
     It should be clear that this corresponds to the traditional set of simple functions. It is a straightforward calculation that expectation, addition and multiplication are the correct ones. The necessary setup has already been done, since addition and multiplication have already been decomposed into their components on atoms.
 \end{proof}
@@ -1106,7 +1108,7 @@ Applying the inverse image functors of models inserts that missing location info
 \begin{theorem}
     \begin{enumerate}
     \item $\mathcal{S}$ is an expectation algebra.
-    \item The simple functions over an interval are all infinitary first order equivalent as expectation algebras.
+    \item The simple functions over an interval(one should explicitly give this theory, by stating the interval property for characteristic functions and state the Morita equivalence explicitly, maybe?) are all infinitary first order equivalent as expectation algebras.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -1613,6 +1615,7 @@ Thinks that should go in here:
     \item Far future: One might expect our 'canonical' framework for probability theory to have much better formal properties than models by intervals in $\Set$. Thus, geometry might be better behaved when using the universal $L^0$ as a base for 'random field stuff'(cite the random fields book!)
     \item A sure bet: Repeat the logical analysis in this paper for many other atomic topoi. More conceptual proofs for algebraically closed fields and real closed fields? Quantifier elimination in infinitary logic as a weaker version of usual q-elim.
     \item The technique that we use for proving that the simple functions are all geometrically equivalent looks extremely easy to reproduce in other contexts. E.g. free modules over algebraically closed fields?
+    \item Emulate ideas in this paper by considering $L^2$ equipped with the action of $Aut(I,\lambda)$ (Koopmann operator). "Can only ask questions about distributions", as one should.
 \end{enumerate}
 
 
