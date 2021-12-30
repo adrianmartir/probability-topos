@@ -1,16 +1,22 @@
 \documentclass[a4paper]{amsproc}
 \renewcommand\labelenumi{(\roman{enumi})}
 \renewcommand\theenumi\labelenumi
-\title{\textbf{An Atomic Topos for Probability Theory}}
+\title{An Atomic Topos for Probability Theory}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fontspec}
+\usepackage[hcentering,bindingoffset=0mm]{geometry}
 %\usepackage[hyphens]{url} \urlstyle{same}
 \usepackage{tikz}
 \usepackage{lscape}
 \usepackage{mathtools}
 \usetikzlibrary{cd}
 %\usepackage[dvips]{graphicx} %% Package for inserting illustrations/figures
+
+% I like how the sans serif doesn't stand out as much in this font.
+\setmainfont{FreeSerif}
 
 \theoremstyle{plain}
  \newtheorem{theorem}{Theorem}[section]
@@ -25,13 +31,16 @@
  \numberwithin{equation}{section}
 
 % Some shortcuts
-\newcommand{\ob}[1]{\textsf{ob}(#1)}
+\newcommand{\ob}[1]{ob(#1)}
 \newcommand{\id}[1]{id_{#1}}
 
-\newcommand{\Hom}{\textsf{Hom}}
-\newcommand{\Sh}{\textsf{Sh}}
-\newcommand{\limit}{\textsf{lim}}
-\newcommand{\eq}{\textsf{eq}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\Sh}{\text{Sh}}
+\newcommand{\y}{\emph{y}}
+\newcommand{\limit}{\text{lim}}
+\newcommand{\colim}{\text{colim}}
+\newcommand{\Lan}{\text{Lan}}
+\newcommand{\eq}{\text{eq}}
 \newcommand{\s}{\textsf{ }}
 
 \newcommand{\Set}{\textsf{Set}}
@@ -53,23 +62,23 @@
 \date{}
 \begin{document}
 
-\begin{center}
-\begin{minipage}{\textwidth}
+\maketitle
+
 \begin{abstract}
 Inspired by probability, we introduce topos $\Prob$. %TODO do this but properly
 \end{abstract}
 
-\maketitle
-\end{minipage}
-\end{center}
 \tableofcontents
+
+
 \section{Introduction}
 
 Talk about 'bookkeeping' in probability theory. Nobody cares about the choice of base $\sigma$-algebra, as long as it has good properties. Yet, a $\sigma$-algebra must be chosen. Probability theorists always quantify over a good class of $\sigma$-algebras. The domain of a random variable never gets fixed on a particular $\sigma$-algebra. One may try to exploit this by imposing restrictions(of functorial or topological nature) on how statements/sets may depend on the base $\sigma$-algebra. These techniques will lead to an approach to probability theory that works without a choice of $\sigma$-algebra. Outline the standard set up.
 
-\indent First technical improvement: Divide out null sets! (Explain this in detail) Define measure algebras and show how they interact with $\sigma$-algebras. \newline
-\indent Step 3:  Intervals model Lebesgue interval. Give the definitions.
-\newline
+First technical improvement: Divide out null sets! (Explain this in detail) Define measure algebras and show how they interact with $\sigma$-algebras.
+
+Step 3:  Intervals model Lebesgue interval. Give the definitions.
+
 %logics
 \indent Talk about how this is a substantial application justifying the use of geometric/infinitary logic, since first order logic doesn't suffice. Talk about how one can't even define probability intervals in first order logics. Completeness, Quantifier elimination.\newline
 \indent To do this we use the topos $\Prob$. Shortly explain how models of the theory correspond to intervals and how other structure can be transported along that morphism. Here we give background to topos theory. Completeness comes from an 'open surjection' a map of topoi to $\Set$ that preserves and reflects this infinitary first order logics. Completeness legitimizes the belief that the underlying $\sigma$-algebra does not matter, to a certain extend(in the geometric logic sense). Explain enough to justify simple functions. I.e. the universal model. The simple functions are mapped to each other.
@@ -83,11 +92,11 @@ Somewhere in here we should definitely mention Olivia's bridges philosophy and h
 
 \section{Conventions} \label{conventions}
 
-When there is need to be completely formal, the lim and colim operators in our sheaf toposes will not be defined only 'up to isomorphism', but rather taken the to be canonical constructions in sheaf toposes given by sheafifying the (co-)limit taken pointwise is $\Set$. In case the sheaf topos is a presheaf topos, we will omit the sheafification step. The same will hold for Kan extensions, as in our examples these are always computed as (co-)limits. When considering what is traditionally thought of different 'representatives' of an isomorphism class given by a limit or colimit, we will formalize this as simply claiming that an object (together with a corresponding universal (co-)cone) \emph{has} a universal property.
+When there is need to be completely formal, the $\limit$ and $\colim$ operators in our sheaf toposes will not be defined only 'up to isomorphism', but rather taken the to be canonical constructions in sheaf toposes given by sheafifying the (co-)limit taken pointwise is $\Set$. In case the sheaf topos is a presheaf topos, we will omit the sheafification step. The same will hold for Kan extensions, as in our examples these are always computed as (co-)limits. When considering what is traditionally thought of different 'representatives' of an isomorphism class given by a limit or colimit, we will formalize this as simply claiming that an object (together with a corresponding universal (co-)cone) \emph{has} a universal property.
 
 This explicit approach clears up some of the confusion that arises when one thinks of e.g. a limit $\limit c_i$ simply as some sort of object defined only up to isomorphism that takes the form of the correct representative of the isomorphism class when convenient. Admittedly, this explicit viewpoint will only be taken in the rare occasion where one needs to prove that certain diagrams involving isomorphisms given by universal properties commute.
 
-For a small category $\C$, we will denote the Yoneda embedding by $y: \C \to \Set^{\C^{op}}$. For a morphism $f$ in $\C$, we will denote $y(f)$ (also known as postcomposition) by $f_*$.
+For a small category $\C$, we will denote the Yoneda embedding by $\y: \C \to \Set^{\C^{op}}$. For a morphism $f$ in $\C$, we will denote $\y(f)$ (also known as postcomposition) by $f_*$.
 
 We will call a diagram
 \[
@@ -230,7 +239,7 @@ equipped with the measure $\mu(i) = r_i$.
 This is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $\FinProb$.
 
 \begin{remark}\label{classifying_partitions}
-    Notice that for a finite probability space $(X,\mu)$, $\Hom((X,\mu), U_{r_i})$ precisely consists of partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. This may seem like quite a harmless observation, but being aware of this fact makes some calculations with $y U_{r_i}$ much more intuitive. Moreover, we will later see that the $U_{r_i}$ in fact precisely correspond to logical formulas specifying a partition with fixed measures. We will often identify maps with partitions implicitly and without comment.
+    Notice that for a finite probability space $(X,\mu)$, $\Hom((X,\mu), U_{r_i})$ precisely consists of partitions $(a_i)$ of the set $X$ with $\mu(a_i) = r_i$. This may seem like quite a harmless observation, but being aware of this fact makes some calculations with $\y U_{r_i}$ much more intuitive. Moreover, we will later see that the $U_{r_i}$ in fact precisely correspond to logical formulas specifying a partition with fixed measures. We will often identify maps with partitions implicitly and without comment.
 
     In particular, $\Hom((X,\mu), U_r)$ is identified with partitions consisting of two elements. Of course, we could have equivalently simply chosen any subset of $X$ of measure $r$. We will similarly identify $\Hom((X,\mu), U_r)$ with subsets of $X$ of measure $r$.
 
@@ -251,26 +260,26 @@ We now compute the finite limits of representables in $\Set^{\FinProb^{op}}$ (or
 
     These projection maps induce the isomorphism
     \[
-    y U_{r_i} \times y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
+    \y U_{r_i} \times \y U_{s_j} \cong \coprod_{t_{ij}} \y U_{t_{ij}} ,
     \]
     where the indexing $t_{ij}$ range over the ones with the fixed sums specified above.
 \end{proposition}
 \begin{proof}
     The $t_{ij}$ where precisely chosen such that the projections are measure preserving. To show
     \[
-    y U_{r_i} \times y U_{s_j} \cong \coprod_{t_{ij}} y U_{t_{ij}} ,
+    \y U_{r_i} \times \y U_{s_j} \cong \coprod_{t_{ij}} \y U_{t_{ij}} ,
     \]
     send a pair of partitions $((a_i),(b_j))$ to the family $(a_i \wedge b_j)_{ij}$. The inverse of this map is given by joining the family with the projection maps described above.
 \end{proof}
 
-Notice that the isomorphism we proved is not quite a universal property in the traditional sense. Normally, we would have required $y U_{r_i} \times y U_{s_j}$ to actually be representable in order to be able to say that we have a products in $\FinProb$. But this does not work in our case, as it only is a coproduct of representables.
+Notice that the isomorphism we proved is not quite a universal property in the traditional sense. Normally, we would have required $\y U_{r_i} \times \y U_{s_j}$ to actually be representable in order to be able to say that we have a products in $\FinProb$. But this does not work in our case, as it only is a coproduct of representables.
 
 We give a name to this weaker notion of a limit.
 
 \begin{definition}
     Given a small category $\C$ and a diagram $D: J \to C$, we will call a family of cones\footnote{We think of cones over $D$ as natural transformations $c \Rightarrow D$ from a constant diagram $c$ to the diagram $D$.} $(d_i \Rightarrow D)_i$ over $D$ a \emph{multi-limit} of $D$ the cones induce an isomorphism
     \[
-        \lim_{j \in J} D(j) \cong \coprod_i d_i .
+        \limit_{j \in J} D(j) \cong \coprod_i d_i .
     \]
     Moreover, we will use the terminology \emph{multi-product}, \emph{multi-equalizer} and \emph{multi-pullback} to refer to multi-limits of particular shapes.
 \end{definition}
@@ -284,16 +293,16 @@ Finally, we also have multi-equalizers.
         \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \beta
         \end{tikzcd} in $\FinProb$ we have
     \[
-        \eq(\begin{tikzcd}[column sep=small]
-        y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & y \beta
-        \end{tikzcd}) \cong y \alpha \text{ if } f = g \text{ and } \emptyset \text{ otherwise.}
+        eq(\begin{tikzcd}[column sep=small]
+        \y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \y \beta
+        \end{tikzcd}) \cong \y \alpha \text{ if } f = g \text{ and } \emptyset \text{ otherwise.}
     \]
 \end{proposition}
 \begin{proof}
     The interesting case is when $f \neq g$. In that case we compute the equalizer poinitwise on a finite probability space $\gamma$:
     \[
-        \eq(\begin{tikzcd}[column sep=small]
-        y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & y \beta
+        eq(\begin{tikzcd}[column sep=small]
+        \y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \y \beta
         \end{tikzcd})(\gamma) \cong \{ h: \gamma \twoheadrightarrow \alpha \mid fh = gh \} \cong \emptyset .
     \]
 \end{proof}
@@ -350,11 +359,11 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{example} \label{notation_example}
     \begin{itemize}
         \item Binary multi-products can now be written as:
-        \[ y U_{r_i} \times y U_{s_j} \cong \langle 1 \mid t_{ij} \in P^2_{r_i,s_j} \rangle, \]
+        \[ \y U_{r_i} \times \y U_{s_j} \cong \langle 1 \mid t_{ij} \in P^2_{r_i,s_j} \rangle, \]
         where $1$ denotes the one-object set.
         \item Since $\FinProb$ has a terminal object, we can use our binary multi-product formula in order to compute arbitrary finite multi-products:
         \[
-            \prod_{j=1}^n y U_{r_i^j} \cong \langle 1 \mid t_{i^1 \cdots i^n} \in P^n_{r_i^1 \cdots r_i^n} \rangle
+            \prod_{j=1}^n \y U_{r_i^j} \cong \langle 1 \mid t_{i^1 \cdots i^n} \in P^n_{r_i^1 \cdots r_i^n} \rangle
         \]
         \item Computing the multi-pullback of a diagram
         \[
@@ -366,7 +375,7 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
         (by noting that equalizers of coproducts are coproducts of equalizers in presheaf topoi, which can be checked pointwise) yields the formula
         \begin{equation*}
             \begin{split}
-            y U_{r_i} &\times_{y U_{s_i}} y U_{r_i'} \cong \\
+            \y U_{r_i} &\times_{\y U_{s_i}} \y U_{r_i'} \cong \\
             &\langle 1 \mid t_{ij} \in P^2_{r_i, r_i'}, t_{ij} = 0 \text{ for all } i,j \text{ with } f(i) \neq g(j) \rangle
             \end{split}
         \end{equation*}
@@ -379,7 +388,7 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{remark} We have seen that the elements $t_{ij}$ of a binary multi-product are the $t_{ij} \in P^2_{r_i,s_i}$. This set can be seen a subset of the set of $n\times m$-matrices, which is, in fact, a polytope in $\mathbb{R}^{n\times m}$. The combinatorics literature has called these polytopes \emph{transportation polytopes}. Chapter 8 of [Matrix book] is dedicated to their study.
 \end{remark}
 
-One should note that when specifying a sheaf $\mathcal{F}$ by using this set of atoms notation, the elements of $\mathcal{F}$ (as defined above) are precisely the monomorphisms $y U_{r_i} \hookrightarrow \mathcal{F}$.
+One should note that when specifying a sheaf $\mathcal{F}$ by using this set of atoms notation, the elements of $\mathcal{F}$ (as defined above) are precisely the monomorphisms $\y U_{r_i} \hookrightarrow \mathcal{F}$.
 
 Unfortunately, one can't specify all the sheaves in this way. Nevertheless, this notation can be easily adapted to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
 
@@ -492,13 +501,13 @@ Essentially, we have encoded a boolean probability algebra geometrically by part
 Let us get some more notation out of the way.
 
 \begin{definition}
-Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $BPAlg$.
+Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $\BPAlg$.
 \end{definition}
 
 \begin{remark}
     Note that we have an equivalence of categories
     \[
-        \FinProb^{op} \simeq BPAlg_f
+        \FinProb^{op} \simeq \BPAlg_f
     \]
     between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We don't prove this in detail nor do we give the equivalence explicitly, since we won't use this fact anywhere in this paper.
 \end{remark}
@@ -524,27 +533,27 @@ We will prove the equivalence
 \]
 by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
-Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $y U_{s_i} \to y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
+Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
 With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct a object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
-\coprod_{r \in [0,1]} y U_r \in \Set^{\FinProb^{op}} .
+\coprod_{r \in [0,1]} \y U_r \in \Set^{\FinProb^{op}} .
 \]
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space (a map $f$ between probability spaces gets sent to the map that takes the preimage of each subset).
 
 \begin{lemma} \label{universal model}
-$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in \FinProb$, $U(X, \mu)$ is the powerset of $X$.
+$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $\y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in \FinProb$, $U(X, \mu)$ is the powerset of $X$.
 
 This yields a left-exact, colimit-preserving functor
 \[
-    \Set^{\FinProb^{op}} \xleftarrow{Lan_y(U)} \Set[\mathbb{T}_{bpalg}],
+    \Set^{\FinProb^{op}} \xleftarrow{\Lan_{\y}(U)} \Set[\mathbb{T}_{bpalg}],
 \]
 where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ with functors whose domain is the syntactic category of $\mathbb{T}_{bpalg}$.
 \end{lemma}
 \begin{proof}
 The last statement follows from the first part by using the universal property of classifying topoi.
 
-We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $y U_r \to U$ are natural since morphisms in $\FinProb$ preserve measure.
+We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $\y U_r \to U$ are natural since morphisms in $\FinProb$ preserve measure.
 
 Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{elephant}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
 \end{proof}
@@ -563,14 +572,14 @@ and now define $F(X,\mu) := \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f) := \
 
 This yields a left-exact, colimit-preserving functor
 \[
-    Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}] .
+    \Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}] .
 \]
 \end{lemma}
 
-Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
+Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $\Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
 
 \begin{proof}
-    We need to show functoriality and then verify that $Lan_F$ is left-exact. In order to check this left-exactness, we use theorem \Rmnum{7}.9.1 in \cite{sheaves_geometry_logic}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
+    We need to show functoriality and then verify that $\Lan_F$ is left-exact. In order to check this left-exactness, we use theorem \Rmnum{7}.9.1 in \cite{sheaves_geometry_logic}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
 
     The reader who actually reads the definition of a filtering functor will quickly notice that that definition can be checked in our case by showing that $F$ preserves the terminal object, binary multi-products and multi-equalizers in the sense checked below.
 
@@ -639,7 +648,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
         \]
         forming a multi-equalizer, then we need to show that
         \[
-            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to \eq(\begin{tikzcd}
+            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to eq(\begin{tikzcd}
                 F(\alpha) \arrow[r, "Ff", shift left] \arrow[r, "Fg"', shift right] & F(\beta)
                 \end{tikzcd})
         \]
@@ -649,7 +658,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
 
         Now assume that $f \neq g$. Then the multi-equalizer is the empty family. Thus our claim becomes that
         \[
-            \eq(\begin{tikzcd}
+            eq(\begin{tikzcd}
                 \{ \vec{a}.\phi^{\vec{a}}_{\alpha} \} \arrow[r, "{[\theta^{\vec{a},\vec{b}}_f]}", shift left] \arrow[r, "{[\theta^{\vec{a},\vec{b}}_g]}"', shift right] & \{ \vec{b}.\phi^{\vec{b}}_{\beta} \}
                 \end{tikzcd})
         \]
@@ -671,7 +680,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
 \end{proof}
 
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
-$Lan_y(U)$ and $Lan_F$ define an equivalence of categories
+$\Lan_{\y}(U)$ and $\Lan_F$ define an equivalence of categories
 \[
 \Set^{\FinProb^{op}} \simeq \Set[\mathbb{T}_{bpalg}].
 \]
@@ -684,16 +693,16 @@ For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
 
 We check that the functors we defined are inverses to each other.
 
-We first check that $Lan_y(U) \circ Lan_F \cong Id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in \FinProb$. Then we get natural isomorphisms
+We first check that $\Lan_{\y}(U) \circ \Lan_F \cong Id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in \FinProb$. Then we get natural isomorphisms
 
 \begin{align*}
-Lan_y(U)(Lan_F(y(X,\mu))) &\cong Lan_y(U)(yF(X,\mu)) \\
+\Lan_{\y}(U)(\Lan_F(\y(X,\mu))) &\cong \Lan_{\y}(U)(yF(X,\mu)) \\
 &\cong UF(X,\mu) \\
 &\cong U \{\vec{a} . \phi^{\vec{a}}_{X,\mu}\} \\
 &\cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U .
 \end{align*}
 
-It remains to show that we have a natural isomorphim $y (X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$. First, we compute this functor on objects. Since the corresponding limits are computed pointwise, we first get a natural (in $(X,\mu)$) isomorphism
+It remains to show that we have a natural isomorphim $\y (X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$. First, we compute this functor on objects. Since the corresponding limits are computed pointwise, we first get a natural (in $(X,\mu)$) isomorphism
 \[
 \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U (Y,\nu) \cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)} .
 \]
@@ -703,15 +712,15 @@ But computing these pullbacks and equalizers in $\Set$ yields
 \{\{V_x\} \subset Y \mid (\nu(V_x) = \mu(x)) \wedge (V_x \cap V_y = \emptyset) \text{ for } x,y \in X, x \neq y\} .
 \end{align*}
 
-Now we can use this together with the Yoneda lemma in order to give the required isomorphism $y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ by the element $\{x\}_{x \in X} \in \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(X,\mu)}$. In order to show this actually is an isomorphism, we explicitly compute this isomorphism on an $f \in y (X,\mu) (Y,\nu)$. In order to do that, we note that the functor $\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ is a subfunctor of $\prod_{x \in X} U$, so that lets us see that the map
+Now we can use this together with the Yoneda lemma in order to give the required isomorphism $\y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ by the element $\{x\}_{x \in X} \in \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(X,\mu)}$. In order to show this actually is an isomorphism, we explicitly compute this isomorphism on an $f \in \y (X,\mu) (Y,\nu)$. In order to do that, we note that the functor $\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ is a subfunctor of $\prod_{x \in X} U$, so that lets us see that the map
 \[
 \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
 \]
 induced by $f$, sends $\{x\}_{x \in X}$ to $\{f^{-1} x\}_{x \in X}$. This means that the morphism
 \[
-y (X,\mu) (Y,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
+\y (X,\mu) (Y,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
 \]
-sends an $f$ to the family $\{f^{-1} x\}$. We should recognize this mapping from our discussions on the relationship between partitions and the presheaf $y (X,\mu)$ in \ref{classifying_partitions}. We already discussed that this is a bijection and thus we get an isomorphism $y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$.
+sends an $f$ to the family $\{f^{-1} x\}$. We should recognize this mapping from our discussions on the relationship between partitions and the presheaf $\y (X,\mu)$ in \ref{classifying_partitions}. We already discussed that this is a bijection and thus we get an isomorphism $\y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$.
 
 We still need to show this isomorphism is natural in $(X,\mu)$. We prove naturality on each $(Y,\nu) \in \FinProb$. So let $(X,\mu), (X',\mu') \in \FinProb$. The diagram
 \[
@@ -720,17 +729,17 @@ We still need to show this isomorphism is natural in $(X,\mu)$. We prove natural
     {\Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_{U(Y,\nu)}}
 \end{tikzcd}
 \]
-commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $Lan_y(U) \circ Lan_F \cong Id$.
+commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $\Lan_{\y}(U) \circ \Lan_F \cong Id$.
 
-We now prove that $Lan_F \circ Lan_y(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $Lan_F \circ Lan_y(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
+We now prove that $\Lan_F \circ \Lan_{\y}(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
 
-We first check this for the sort $B$. This means that we have to show that $Lan_F(U) \cong y \{b . \top\}$. This reduces to showing
+We first check this for the sort $B$. This means that we have to show that $\Lan_F(U) \cong \y \{b . \top\}$. This reduces to showing
 \[
-\coprod_{r \in [0,1]} y \{b . B_r b\} \cong y \{b . \top\} .
+\coprod_{r \in [0,1]} \y \{b . B_r b\} \cong \y \{b . \top\} .
 \]
 We can prove this by showing that for every sheaf $\mathcal{F} \in \Set[\mathbb{T}]$, we have a natural bijection
 \[
-\Hom(y \{b . \top\}, \mathcal{F}) \cong \prod_{r \in [0,1]} \Hom(y \{b . B_r b\}, \mathcal{F})
+\Hom(\y \{b . \top\}, \mathcal{F}) \cong \prod_{r \in [0,1]} \Hom(\y \{b . B_r b\}, \mathcal{F})
 \]
 given by the inclusions $\iota_r : \{b . B_r b\} \to \{b . \top\}$. Applying the yoneda lemma on both sides, this is equivalent to showing that the inclusions induce an isomorphism
 \[
@@ -742,8 +751,8 @@ Next, we need to show that the above isomorphism actually is an isomorphism of $
 % TODO: This should be improved on.
 \[
 \begin{tikzcd}[column sep=tiny]
-    {y \{a_1,\cdots,a_n . \top \}} \arrow[d, "{[f(a_1,\cdots,a_n) = a]}"'] \arrow[r, "\cong"',phantom, shift right=7] & Lan_F U^n \arrow[d, "Lan_F U(f)"] \\
-    y \{a . \top \}                                                                                           & Lan_F U
+    {\y \{a_1,\cdots,a_n . \top \}} \arrow[d, "{[f(a_1,\cdots,a_n) = a]}"'] \arrow[r, "\cong"',phantom, shift right=7] & \Lan_F U^n \arrow[d, "\Lan_F U(f)"] \\
+    \y \{a . \top \}                                                                                           & \Lan_F U
 \end{tikzcd}
 \]
 in the category of arrows in $\Set[\mathbb{T}]$. The upper isomorphim is induced by the data of the respective universal cones exhibiting the upper objects as cartesian products. We also need the analogous statement for relation symbols. In particular this apply this remark to Kan-extensions. Notice that here and also in what follows, we are taken the viewpoint on objects defined by universal property described in section \ref{conventions}.
@@ -752,8 +761,8 @@ We first consider the 0-ary function $U(0): * \to U$. We get the chain of isomor
 
 \[
 \begin{tikzcd}
-Lan_F * \arrow[d, "Lan_F U(0)"'] \arrow[r, "\cong"',phantom, shift right=7] & Lan_F y U_0 \arrow[d] \arrow[r, "\cong"',phantom, shift right=7] & y \{b . B_0 b \} \arrow[d] \arrow[r, "\cong"',phantom, shift right=7] & {y \{[].\top\}} \arrow[d, "{[a=0]_*}"] \\
-Lan_F U                                                             & Lan_F \coprod y U_r                                      & \coprod y \{ b . B_r b\}                                      & y\{a.\top\}
+\Lan_F * \arrow[d, "\Lan_F U(0)"'] \arrow[r, "\cong"',phantom, shift right=7] & \Lan_F \y U_0 \arrow[d] \arrow[r, "\cong"',phantom, shift right=7] & \y \{b . B_0 b \} \arrow[d] \arrow[r, "\cong"',phantom, shift right=7] & {\y \{[].\top\}} \arrow[d, "{[a=0]_*}"] \\
+\Lan_F U                                                             & \Lan_F \coprod \y U_r                                      & \coprod \y \{ b . B_r b\}                                      & \y\{a.\top\}
 \end{tikzcd}
 \]
 
@@ -766,48 +775,48 @@ where the left hand side is the upper right composition and the right hand side 
 We proceed with the binary function $U(\wedge): U \times U \to U$. We will prove the required isomorphism in the following two steps:
 \[
 \begin{tikzcd}
-Lan_F(U \times U) \arrow[d, "Lan_F(U(\wedge))"'] \arrow[r, phantom, shift right=7, "\cong"] & {\coprod y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d] \arrow[r, phantom, shift right=7, "\cong"] & {y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1 \wedge a_2]_*}"] \\
-Lan_F U                                          & \coprod y \{b.B_rb\} & y\{a.\top\} .
+\Lan_F(U \times U) \arrow[d, "\Lan_F(U(\wedge))"'] \arrow[r, phantom, shift right=7, "\cong"] & {\coprod \y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d] \arrow[r, phantom, shift right=7, "\cong"] & {\y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1 \wedge a_2]_*}"] \\
+\Lan_F U                                          & \coprod \y \{b.B_rb\} & \y\{a.\top\} .
 \end{tikzcd}
 \]
-We start with the left isomorphism. We can use \ref{multi-product} to rewrite $U \times U$ as a coproduct of representables by using the isomorphism $U \times U \to \coprod y U_{r_1 \cdots r_4}$ given on components by
+We start with the left isomorphism. We can use \ref{multi-product} to rewrite $U \times U$ as a coproduct of representables by using the isomorphism $U \times U \to \coprod \y U_{r_1 \cdots r_4}$ given on components by
 \[
 (a,b) \mapsto (a \wedge b, a \wedge \neg b, \neg a \wedge b, \neg a \wedge \neg b) .
 \]
-Using the inverse of this isomorphism $(b_1,b_2,b_3,b_4) \mapsto (b_1 \vee b_2, b_1 \vee b_3)$, we get the commutative square which after applying $Lan_F$ yields the required commutative square above on the left
+Using the inverse of this isomorphism $(b_1,b_2,b_3,b_4) \mapsto (b_1 \vee b_2, b_1 \vee b_3)$, we get the commutative square which after applying $\Lan_F$ yields the required commutative square above on the left
 \[
 \begin{tikzcd}
-U \times U \arrow[d, "U(\wedge)"'] & \coprod y U_{r_1 \cdots r_4} \arrow[d, "\coprod f"] \arrow[l, "\cong"'] \\
-U                                  & \coprod y U_r \arrow[l, "\cong"]                          ,
+U \times U \arrow[d, "U(\wedge)"'] & \coprod \y U_{r_1 \cdots r_4} \arrow[d, "\coprod f"] \arrow[l, "\cong"'] \\
+U                                  & \coprod \y U_r \arrow[l, "\cong"]                          ,
 \end{tikzcd}
 \]
 
-where $f$ sends a partition into four subsets onto the first subset. Since we do not only need any isomorphism $Lan_F (U \times U) \cong \coprod y F (U_{r_1 \cdots r_4})$, but a specific one induced on the components on the cartesian product, we check that the upper isomorphism in our diagram is in fact induced by the required isomorphism. We do this by noting that the map $U \times U \xleftarrow{\cong} \coprod y U_{r_1 \cdots r_4}$ commutes with the required map on the first projection of the cartesian products:
+where $f$ sends a partition into four subsets onto the first subset. Since we do not only need any isomorphism $\Lan_F (U \times U) \cong \coprod \y F (U_{r_1 \cdots r_4})$, but a specific one induced on the components on the cartesian product, we check that the upper isomorphism in our diagram is in fact induced by the required isomorphism. We do this by noting that the map $U \times U \xleftarrow{\cong} \coprod \y U_{r_1 \cdots r_4}$ commutes with the required map on the first projection of the cartesian products:
 
 \[
 \begin{tikzcd}
-U \times U \arrow[d, "p_1"'] & \coprod y U_{r_1 \cdots r_4} \arrow[d, "\alpha_1"] \arrow[l, "\cong"'] \\
-U                            & \coprod y U_r \arrow[l, "\cong"]                                    ,
+U \times U \arrow[d, "p_1"'] & \coprod \y U_{r_1 \cdots r_4} \arrow[d, "\alpha_1"] \arrow[l, "\cong"'] \\
+U                            & \coprod \y U_r \arrow[l, "\cong"]                                    ,
 \end{tikzcd}
 \]
-where $\alpha_1$ is the map induced by the maps $y U_{r_1 \cdots r_4} \to y U_r$ given by $(b_1,\cdots,b_4) \mapsto b_1 \vee b_2$, where the $b_i$ are seen as partitions. There is an analogous map $\alpha_2$ that has a similar relation to the second projection $p_2$. Now the two isomorphims on the the diagram above imply that $\alpha_1$ and $\alpha_2$ form a universal cone for a cartesian product. This immediately implies that the isomorphism $U \times U \cong \coprod y U_{r_1 \cdots r_4}$ is the one induced by the universal properties of the product and moreover, by flatness of $F$, this fact gets preserved when applying $Lan_F$. Now that we have shown the first part of the isomorphism, we wish to show that we have an isomorphism
+where $\alpha_1$ is the map induced by the maps $\y U_{r_1 \cdots r_4} \to \y U_r$ given by $(b_1,\cdots,b_4) \mapsto b_1 \vee b_2$, where the $b_i$ are seen as partitions. There is an analogous map $\alpha_2$ that has a similar relation to the second projection $p_2$. Now the two isomorphims on the the diagram above imply that $\alpha_1$ and $\alpha_2$ form a universal cone for a cartesian product. This immediately implies that the isomorphism $U \times U \cong \coprod \y U_{r_1 \cdots r_4}$ is the one induced by the universal properties of the product and moreover, by flatness of $F$, this fact gets preserved when applying $\Lan_F$. Now that we have shown the first part of the isomorphism, we wish to show that we have an isomorphism
 \[
 \begin{tikzcd}
-{\coprod y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d, "{\coprod [b = b_1]_*}"'] \arrow[r, "\phi"] & {y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1 \wedge a_2]_*}"] \\
-\coprod y \{b.B_rb\} \arrow[r, "\cong"']                                                & y\{a.\top\}                                               ,
+{\coprod \y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d, "{\coprod [b = b_1]_*}"'] \arrow[r, "\phi"] & {\y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1 \wedge a_2]_*}"] \\
+\coprod \y \{b.B_rb\} \arrow[r, "\cong"']                                                & \y\{a.\top\}                                               ,
 \end{tikzcd}
 \]
 where $\phi$ is given by $[(a_1 = b_1 \vee b_2) \wedge (a_2 = b_1 \vee b_3)]_*$. It is easy to see that the diagram commutes. The fact that $\phi$ is an isomorphism will follow by the fact that $\phi$ is induced by the required isomorphisms. Like earlier, this is shown by remarking that
 
 \[
 \begin{tikzcd}
-{\coprod y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d, "\alpha_1"'] \arrow[r, "\phi"] & {y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1]_*}"] \\
-\coprod y \{b.B_rb\} \arrow[r, "\cong"']                                                            & y\{a.\top\}
+{\coprod \y \{\vec{b}.\bigwedge_{i=1,\cdots 4} B_{r_i} b_i\}} \arrow[d, "\alpha_1"'] \arrow[r, "\phi"] & {\y \{a_1,a_2.\top\}} \arrow[d, "{[a = a_1]_*}"] \\
+\coprod \y \{b.B_rb\} \arrow[r, "\cong"']                                                            & y\{a.\top\}
 \end{tikzcd}
 \]
-commutes. But this time, we already know that $\alpha_1$ and $\alpha_2$ are a universal cone of a product and similarly, $[a=a_1]_*$ and $[a=a_2]_*$ are the projections of a product. This already implies that $\phi$ is induced by the correct isomorphisms and moreover that $\phi$ itself is an isomorphism. This concludes the proof that $Lan_F U(\wedge)$ matches the corresponding operation on the universal model in $\Set[\mathbb{T}]$. The argument for $\vee$ should be very similar.
+commutes. But this time, we already know that $\alpha_1$ and $\alpha_2$ are a universal cone of a product and similarly, $[a=a_1]_*$ and $[a=a_2]_*$ are the projections of a product. This already implies that $\phi$ is induced by the correct isomorphisms and moreover that $\phi$ itself is an isomorphism. This concludes the proof that $\Lan_F U(\wedge)$ matches the corresponding operation on the universal model in $\Set[\mathbb{T}]$. The argument for $\vee$ should be very similar.
 
-We show that $Lan_F U(\neg)$ matches the corresponding operation on the universal model, by showing that we don't need to show it. Let $\mathbb{T}_{BAlg}$ denote the theory of boolean algebras and $\mathbb{T}_{DLat'}$ be the theory of distributive lattices together with the axiom
+We show that $\Lan_F U(\neg)$ matches the corresponding operation on the universal model, by showing that we don't need to show it. Let $\mathbb{T}_{BAlg}$ denote the theory of boolean algebras and $\mathbb{T}_{DLat'}$ be the theory of distributive lattices together with the axiom
 \[
 \top \vdash_{x} (\exists y) ((x \wedge y=0)\wedge (x\vee y=1)) .
 \]
@@ -824,7 +833,7 @@ One can verify that this actually is an equivalence by using \ref{interpretation
 \]
 in $\C^{\mathbb{T}_{BAlg}}$. This now proves that we don't need to check that negation gets preserved, by identifying models of $\mathbb{T}_{BAlg}$ with models of $\mathbb{T}_{DLat'}$.
 
-Luckily, sending $U_r \to \coprod U_r$ through $Lan_F$ is easily seen to give the expected subobject, concluding the proof.
+Luckily, sending $U_r \to \coprod U_r$ through $\Lan_F$ is easily seen to give the expected subobject, concluding the proof.
 \end{proof}
 
 We proceed by investigating what $\Sh(\FinProb, J_{at})$ classifies.
@@ -854,7 +863,7 @@ Measure algebras are the correct setting for doing measure theory while ignoring
 \begin{example} \label{interval_examples}
 \begin{itemize}
 \item Let $(A,\mu)$ be an atomless probability algebra. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element $b
-leq a$ of measure $s$. Consider the set
+\leq a$ of measure $s$. Consider the set
 \[
 S := \{ b \leq a \mid \mu(b) \leq s \}.
 \]
@@ -1138,7 +1147,7 @@ We will now try to transfer statements between $L^\infty(X,\mu)$ for atomless pr
 \end{enumerate}
 \end{definition}
 The last definition is motivated by the fact that for the algebras simple functions and bounded functions, we have
-\[  \\lim_{n\rightarrow \infty} ||f||_n=||f||_\infty. \]
+\[  \\limit_{n\rightarrow \infty} ||f||_n=||f||_\infty. \]
 Note that the fact that all statements of the previous definition are infinitary first order, we can transfer statements using them between algebras of simple functions. The next insight will be that we can actually define given simple functions uniquely using only infinitary first order language in the theory of expectation algebras.\newline
 \indent The next step is to characterise simple functions among bounded measurable functions. This will also allow us to classify the definable subsets of algebras of simple functions.
 \begin{definition} For an expectation algebra $S$, $f$ is called a
@@ -1164,7 +1173,7 @@ We will now see that we can generalise this theorem to all measurable functions 
 \end{lemma}
 \begin{proof}
 For any $n$-tuple of bounded measurable functions $f_1,\cdots, f_n$ and polynomial $f\in \mathbb{R}[X_1,\cdots, X_n]$, we have:
-\[\int_X f(f_1,\cdots,f_n)d\mu=\\lim_{\substack{g_1\rightarrow f_1,\cdots, g_n\rightarrow f_n \text{ in }L^\infty\\ g_1\cdots g_n \text{ simple}}}  \int_Xf(g_1,\cdots,g_n)d\mu \]%formulate this properly
+\[\int_X f(f_1,\cdots,f_n)d\mu=\\limit_{\substack{g_1\rightarrow f_1,\cdots, g_n\rightarrow f_n \text{ in }L^\infty\\ g_1\cdots g_n \text{ simple}}}  \int_Xf(g_1,\cdots,g_n)d\mu \]%formulate this properly
 This is true as simple functions are dense in $L^\infty(X,\mu)^n$. Thus we have:
 \[E_0(f_1,\cdots,f_n)\iff \forall g_1\cdots \forall g_n.(\bigwedge_{i=1}^n s(g_i))\wedge\bigwedge_{\epsilon>0}\bigvee_{\delta>0}(\bigvee_{0\leq r\leq \delta}||f_i-g_i||_\infty=r \]
 \[\implies\bigvee_{|s|\leq\epsilon} E_s(g_1,\cdots,g_n) )\]%bad and ugly
@@ -1180,7 +1189,7 @@ $E_s(g_1,\cdots,g_n)$ only depends on the cumulative distribution function of $g
 \begin{proof}
 We adopt a proof of a similar statement from [Probability: Theory and Examples by Rick Durrett, Thm 1.2.1 and 1.2.2].
 \begin{enumerate}
-\item It is right continuous as $\\lim_{y\rightarrow x^+}f^{-1}(-\infty,y)=f^{-1}(-\infty, x)$
+\item It is right continuous as $\\limit_{y\rightarrow x^+}f^{-1}(-\infty,y)=f^{-1}(-\infty, x)$
 \item The function is non-decreasing in all variables by the monotonicity of the measure
 \item As the functions are bounded in both directions, we have $\mathbb{E}((f-c)^+)=1$ for some $c$ small enough and $\mathbb{E}((f-c)^+)=0$ for some $c$ large enough.
 \end{enumerate}
@@ -1242,7 +1251,7 @@ For an element $a \in B$ of a boolean algebra, we will denote the ideal of eleme
 \begin{enumerate}
 \item In the category of boolean algebras, if one has a \\ boolean algebra $A$, we get the following correspondence between decompositions $A \cong B \times C$ and partitions $a,b$ (i.e. pairs of elements $a,b$ with $a \vee b = 1$ and $a \wedge b = 0$). A decomposition $B \times C$ induces the partition $(1,0), (0,1)$ on $A$ and conversely the partition $a,b$ induces the decomposition \\ $A \cong I(a) \times I(b)$. This lets us interpret the product of boolean algebras as some sort of disjoint union.
 \item The interesting thing about this description of products, is that it shows that if we have a map $A \to B$ of boolean algebras and we have a decomposition $A \cong A_1 \times A_2$, then this induces a decomposition of $B$.
-\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $BPAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
+\item Given two boolean probability algebras $(A, \mu)$ and $(B, \nu)$, there is a measure $(\mu + \nu)(x,y) := \mu(x) + \nu(y)$ on $A \times B$. Unfortunately, this can't be the product in $\BPAlg$, because $\mu + \nu$ is not a probability measure nor are the projections measure-preserving.
 \end{enumerate}
 \end{remark}
 
@@ -1266,14 +1275,14 @@ Now we actually show that homogeneous-Maharam-type probability algebras are $BPA
 \item $\FinProb$ has a terminal object, proving the joint embedding property.
 \item $\FinProb$ fulfills the right Ore condition.
 \item For any $(A,\mu),(B,\nu)$ in $BPAlg_f$ , an arrow $f:(A,\mu)\rightarrow (B,\nu)$ in \\
- $BPAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (M, \alpha)$ as well as $\chi_2:(B,\nu)\rightarrow (M, \alpha)$ in $BPAlg$ there exists an isomorphism $j':(M, \alpha) \rightarrow (M, \alpha)$ such that $j'\circ \chi_1=\chi_2\circ j$:
+ $BPAlg_f$, and arrows $\chi_1:(A,\mu)\rightarrow (M, \alpha)$ as well as $\chi_2:(B,\nu)\rightarrow (M, \alpha)$ in $\BPAlg$ there exists an isomorphism $j':(M, \alpha) \rightarrow (M, \alpha)$ such that $j'\circ \chi_1=\chi_2\circ j$:
  \begin{center}
  \begin{tikzcd}
 {(A,\mu)} \arrow[r, "\chi_1"] \arrow[d, "j"'] & {(M, \alpha)} \arrow[d, "j'", dotted] \\
 {(B,\nu)} \arrow[r, "\chi_2"']                & {(M, \alpha)}
 \end{tikzcd}
  \end{center}
-\item For any object $(A,\mu)$ of $BPAlg_f$ there exists an arrow $\chi:(A,\mu)\rightarrow (M, \alpha)$ in $BPAlg$.
+\item For any object $(A,\mu)$ of $BPAlg_f$ there exists an arrow $\chi:(A,\mu)\rightarrow (M, \alpha)$ in $\BPAlg$.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -1328,7 +1337,7 @@ Our surprising result now follows by glueing some theorems from the literature.
 \end{theorem}
 \begin{proof}
 We use the following equivalence of categories:
-\[ \text{Cont}_\tau(\text{Aut}_{BPAlg}(I,\lambda))\simeq \text{\Set}[\mathbb{T}_{int}]  \]
+\[ \text{Cont}_\tau(\text{Aut}_{\BPAlg}(I,\lambda))\simeq \text{\Set}[\mathbb{T}_{int}]  \]
 We can use Theorem 7.3 (and remark 7.2) \cite{caramello_lafforgue} %is this the correct ref?
  to see $(I,\lambda)$ is a special model of $\mathbb{T}_{int}$ and thus the universal model in $\text{Cont}_\tau(\text{Aut}(I,\lambda))$ is $(I,\lambda)$ with the canonical continuous group action.\newline
 \indent Thus $U_{\mathbb{T}_{int}}$ is a complete boolean algebra acting on itself via automorphisms.  By C2.5.8(e) \cite{elephant} this proves that the universal model is an internal locale. Hence it is a complete boolean algebra.
@@ -1359,14 +1368,14 @@ The statement is Proposition 4.21 of \cite{caramello}. % TODO: Why is this the s
 We can quickly give a first description of the category of atoms in our case. But this will be not very workable.
 \begin{proposition} Given a topological group $(G,\tau)$, the category of atoms of the topos $\text{Cont}_\tau (G)$ is equivalent to its subcategory of transitive, continuous actions. \cite{XYZ}
 \end{proposition}
-As our topos is equivalent to $\text{Cont}_\tau(\text{Aut}_{BPAlg}(I,\lambda))$, this immediately gives a description of its atoms.
+As our topos is equivalent to $\text{Cont}_\tau(\text{Aut}_{\BPAlg}(I,\lambda))$, this immediately gives a description of its atoms.
 But again, it would be nice to have a more combinatorial, workable interpretation of these objects. First we need to classify the atoms (as sheaves on the atomic site on $\FinProb$) and thereby inadvertently the open subgroups of our topological groups.
 \newline
-\indent We have already seen some of the atoms: $y(X,\mu)$ for any finite probability space $(X,\mu)$. Any morphism $y(X,\mu)\rightarrow A$ for an atom $A$ is necessarily surjective, else its image would be a third subobject. As $A$ is not constantly $\emptyset$ and by the Yoneda lemma, such a map exists. Toposes are effective categories by IV.7.8 \cite{sheaves_geometry_logic}, so there exists an equivalence relation $R$ such that the following fork is a coequalizer diagram:
+\indent We have already seen some of the atoms: $y (X,\mu)$ for any finite probability space $(X,\mu)$. Any morphism $y (X,\mu)\rightarrow A$ for an atom $A$ is necessarily surjective, else its image would be a third subobject. As $A$ is not constantly $\emptyset$ and by the Yoneda lemma, such a map exists. Toposes are effective categories by IV.7.8 \cite{sheaves_geometry_logic}, so there exists an equivalence relation $R$ such that the following fork is a coequalizer diagram:
 \begin{center}
 
 \begin{tikzcd}
-R \arrow[r, hook] & {y(X,\mu)\times y(X,\mu)} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & {y(X,\mu)}\arrow[r]&A
+R \arrow[r, hook] & {y (X,\mu)\times y (X,\mu)} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & {y (X,\mu)}\arrow[r]&A
 \end{tikzcd}
 \end{center}
 
@@ -1482,7 +1491,7 @@ One calculates coequalizers in sheaf topoi by calculating the section-wise coequ
 \begin{center}
 
 \begin{tikzcd}
-\bigsqcup_{\sigma \in H}y(X,\mu) \arrow[r, hook] & {y(X,\mu)\times y(X,\mu)} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & {y(X,\mu)}
+\bigsqcup_{\sigma \in H}\y(X,\mu) \arrow[r, hook] & {\y (X,\mu)\times \y (X,\mu)} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & {\y (X,\mu)}
 \end{tikzcd}
 \end{center}
 Here the components on the left are included as permutation matrices. These compositions are coproducts of the Yoneda embeddings of $id: (X,\mu)\rightarrow (X,\mu)$ resp. $\sigma: (X,\mu)\rightarrow (X,\mu)$. Thus the quotient presheaf is the sheaf described in the statement.
@@ -1515,10 +1524,10 @@ Now we are able to describe the category of atoms of $\Prob$ in a very combinato
 \end{theorem}
 \begin{proof}
 %We use Theorem 6.7 of \cite{caramello_lafforgue}.
-We can Yoneda embed $\Prob_{at}$ into $\Prob$.  By the Yoneda lemma, a morphism $y(M,\mu)\rightarrow y(N,\nu)/U$ corresponds to an element of $(y(N,\nu)/U)(M,\mu)$. This has been computed to be maps $(M,\mu)\rightarrow (N,\nu)$ up to permutation by $\sigma\in U$. A morphism $y(M,\mu)/V \rightarrow y(N,\nu)/U$ is simply a morphism such that $y(M,\mu)\rightarrow y(N,\nu)/U$ factors over the quotient map $y(M,\mu)\rightarrow y(M,\mu)/V$. This means it is a morphism $f:(X,\mu)\rightarrow (Y,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $. Hence the statement follows.
+We can Yoneda embed $\Prob_{at}$ into $\Prob$.  By the Yoneda lemma, a morphism $\y (M,\mu)\rightarrow \y (N,\nu)/U$ corresponds to an element of $(\y (N,\nu)/U)(M,\mu)$. This has been computed to be maps $(M,\mu)\rightarrow (N,\nu)$ up to permutation by $\sigma\in U$. A morphism $\y (M,\mu)/V \rightarrow \y (N,\nu)/U$ is simply a morphism such that $\y (M,\mu)\rightarrow \y (N,\nu)/U$ factors over the quotient map $\y (M,\mu)\rightarrow \y (M,\mu)/V$. This means it is a morphism $f:(X,\mu)\rightarrow (Y,\nu)$ such that for any $\sigma\in V$ there exists a $\psi\in U$ such that $f\circ \sigma =\psi\circ f $. Hence the statement follows.
 \end{proof}
 
-\begin{remark} This shows, in particular that the atoms $y(X,\mu)/U$, $y(X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
+\begin{remark} This shows, in particular that the atoms $\y (X,\mu)/U$, $\y (X,\mu)/V$ for different subgroups $U$ and $V$, which are not conjugated to each other, are non-isomorphic. % is this true?
 \end{remark}
 
 \begin{definition} Denote the category given above by $\Prob_{at}$ and call it the atomic completion of $\FinProb$ in accordance with notation in \cite{caramello_lafforgue}.
