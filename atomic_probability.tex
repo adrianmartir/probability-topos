@@ -31,24 +31,29 @@
  \numberwithin{equation}{section}
 
 % Some shortcuts
-\newcommand{\ob}[1]{ob(#1)}
-\newcommand{\id}[1]{id_{#1}}
+% \newcommand{\ob}[1]{ob(#1)}
+\newcommand{\id}{\textup{id}}
 
-\newcommand{\Hom}{\text{Hom}}
-\newcommand{\Sh}{\text{Sh}}
-\newcommand{\y}{\emph{y}}
-\newcommand{\limit}{\text{lim}}
-\newcommand{\colim}{\text{colim}}
-\newcommand{\Lan}{\text{Lan}}
-\newcommand{\eq}{\text{eq}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Sh}{Sh}
+\newcommand{\y}{\textit{y}}
+% The star indicates that subscripts are to be typeset below the operator
+% instead of to the right
+\DeclareMathOperator*{\limit}{lim}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator{\Lan}{Lan}
+\DeclareMathOperator{\eq}{eq}
 \newcommand{\s}{\textsf{ }}
 
-\newcommand{\Set}{\textsf{Set}}
-\newcommand{\FinProb}{\textsf{FinProb}}
-\newcommand{\BPAlg}{\textsf{BPAlg}}
+\newcommand{\Set}{\textup{\textsf{Set}}}
+\newcommand{\FinProb}{\textup{\textsf{FinProb}}}
+\newcommand{\BPAlg}{\textup{\textsf{BPAlg}}}
 \newcommand{\Ind}{\textsf{Ind}}
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\Prob}{\mathfrak{Prob}}
+
+\newcommand{\la}{\langle\,}
+\newcommand{\ra}{\,\rangle}
 
 \newcommand{\ldoub}{[\![}
 \newcommand{\rdoub}{]\!]}
@@ -327,10 +332,10 @@ We have seen that treating multi-limits requires us to talk about coproducts ove
         \]
         \item Let $S$ be a subset of $\mathcal{A}$ and let for for each $x \in S$, $T(x)$ be any set. Then we can introduce the following notation:
         \[
-            \langle T(x) \mid x \in S \rangle := \coprod_{\substack{x \in S \\ y \in T(x)}} U_x .
+            \la T(x) \mid x \in S \ra := \coprod_{\substack{x \in S \\ y \in T(x)}} U_x .
         \]
         We will call an a object written in this notation a \emph{set of atoms}.
-        \item We define an \emph{element} of a set of atoms $\langle T(x) \mid x \in S \rangle$ to be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always the one-element set, we will abbreviate and say that $x$ is an \emph{element} of the set of atoms $\langle T(x) \mid x \in S \rangle$.
+        \item We define an \emph{element} of a set of atoms $\la T(x) \mid x \in S \ra$ to be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always the one-element set, we will abbreviate and say that $x$ is an \emph{element} of the set of atoms $\la T(x) \mid x \in S \ra$.
     \end{enumerate}
 \end{definition}
 
@@ -359,11 +364,11 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{example} \label{notation_example}
     \begin{itemize}
         \item Binary multi-products can now be written as:
-        \[ \y U_{r_i} \times \y U_{s_j} \cong \langle 1 \mid t_{ij} \in P^2_{r_i,s_j} \rangle, \]
+        \[ \y U_{r_i} \times \y U_{s_j} \cong \la 1 \mid t_{ij} \in P^2_{r_i,s_j} \ra, \]
         where $1$ denotes the one-object set.
         \item Since $\FinProb$ has a terminal object, we can use our binary multi-product formula in order to compute arbitrary finite multi-products:
         \[
-            \prod_{j=1}^n \y U_{r_i^j} \cong \langle 1 \mid t_{i^1 \cdots i^n} \in P^n_{r_i^1 \cdots r_i^n} \rangle
+            \prod_{j=1}^n \y U_{r_i^j} \cong \la 1 \mid t_{i^1 \cdots i^n} \in P^n_{r_i^1 \cdots r_i^n} \ra
         \]
         \item Computing the multi-pullback of a diagram
         \[
@@ -376,11 +381,11 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
         \begin{equation*}
             \begin{split}
             \y U_{r_i} &\times_{\y U_{s_i}} \y U_{r_i'} \cong \\
-            &\langle 1 \mid t_{ij} \in P^2_{r_i, r_i'}, t_{ij} = 0 \text{ for all } i,j \text{ with } f(i) \neq g(j) \rangle
+            &\la 1 \mid t_{ij} \in P^2_{r_i, r_i'}, t_{ij} = 0 \text{ for all } i,j \text{ with } f(i) \neq g(j) \ra
             \end{split}
         \end{equation*}
         \item Define the presheaf $U$ in the following way:
-        \[ U \cong \langle 1 \mid (r_1,r_2) \in P^1_2 \rangle. \]
+        \[ U \cong \la 1 \mid (r_1,r_2) \in P^1_2 \ra. \]
         We will later see that this presheaf is in fact the underlying sheaf of a universal model in $\Prob$ for a suitable theory of boolean algebras with measures.
     \end{itemize}
 \end{example}
@@ -395,7 +400,7 @@ Unfortunately, one can't specify all the sheaves in this way. Nevertheless, this
 The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphism, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf, is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
 
 \begin{proposition}\label{atom_coprod_maps}
-    Let $\mathcal{F} = \langle T(x) \mid x \in S \rangle$ and $\mathcal{G} = \langle T'(x) \mid x \in S' \rangle $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
+    Let $\mathcal{F} = \la T(x) \mid x \in S \ra$ and $\mathcal{G} = \la T'(x) \mid x \in S' \ra $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
     \[
         \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
     \]
@@ -535,7 +540,7 @@ by purely syntactical means. The functor in one direction will be given by an ap
 
 Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
-With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct a object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
+With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
 \coprod_{r \in [0,1]} \y U_r \in \Set^{\FinProb^{op}} .
 \]
@@ -568,7 +573,7 @@ Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $
 \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{i \in X} B_{\mu(i)} a_i \wedge \bigwedge_{\substack{i,j \in X \\ i \neq j}} (a_i \wedge a_j = 0) \Bigg \} \\
 [\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{j \in Y} (b_j = \bigvee_{f i = j} a_i) \wedge \phi_{X,\mu}^{\vec{a}} \Bigg] ,
 \end{align*}
-and now define $F(X,\mu) := \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f) := \theta_f^{\vec{a}, \vec{b}}]$.
+and now define $F(X,\mu) := \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f) := [\theta_f^{\vec{a}, \vec{b}}]$.
 
 This yields a left-exact, colimit-preserving functor
 \[
@@ -586,9 +591,9 @@ Readers paying close attention to the proof strategy may wonder why we even both
     \begin{enumerate}
         \item We show that $F$ preserves identities. We compute that
             \begin{align*}
-                F(id) &= [\theta^{\vec{a},\vec{b}}_{id}] \\
+                F(\id) &= [\theta^{\vec{a},\vec{b}}_{\id}] \\
                 &= [\vec{a}=\vec{b}] \\
-                &= id,
+                &= \id,
             \end{align*}
             which shows our claim.
         \item We show that $F$ preserves composition. Given morphisms $f: \alpha \to \beta$, $g: \beta \to \gamma$ in $\FinProb$,
@@ -599,8 +604,8 @@ Readers paying close attention to the proof strategy may wonder why we even both
             where the last equality follows from associativity and commutativity of the $\wedge$ operation and by additivity of the measure.
         \item We show that $F$ preserves the terminal object. We simply compute this:
             \begin{align*}
-                F(*) =& \{a. B_1(a)\} \\
-                \cong& \{[].\top \} ,
+                F(*) &= \{a. B_1(a)\} \\
+                &\cong \{[].\top \} ,
             \end{align*}
             where the last isomorphism follows from the fact we can geometrically prove that there is a unique element of measure $1$.
         \item We show that $F$ preserves multi-products. Concretely, let $\alpha$, $\beta$ be finite probability spaces. Then we have a polytope $P^2_{r_i,s_j}$ and for each of its elements $t_{ij}$ we have a cone
@@ -611,7 +616,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
 
         In order to show that this multi-product gets preserved, we need to show that the map
         \[
-            \coprod_{t_{ij} \in P^2_{r_i,s_j}} \langle \theta^{\vec{a},\vec{b}}_{p_{t_{ij}}}, \theta^{\vec{a},\vec{b}}_{q_{t_{ij}}} \rangle : \coprod_{t_{ij} \in P^2_{r_i,s_j}} F U_{t_{ij}} \to F(\alpha) \times F(\beta)
+            \coprod_{t_{ij} \in P^2_{r_i,s_j}} \la \theta^{\vec{a},\vec{b}}_{p_{t_{ij}}}, \theta^{\vec{a},\vec{b}}_{q_{t_{ij}}} \ra : \coprod_{t_{ij} \in P^2_{r_i,s_j}} F U_{t_{ij}} \to F(\alpha) \times F(\beta)
         \]
         is an isomorphism. It is crucial that there does not only exist an isomorphism, but that it is this concrete isomorphism constructed by universal property. Indeed, for showing corresponding condition \Rmnum{7}.8.1 in \cite{sheaves_geometry_logic} we need to show that a specific family of morphisms is jointly epimorphic. And our claim here certainly implies that.
 
@@ -654,7 +659,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
         \]
         is an isomorphism.
 
-        We already know that multi-equalizers in $\FinProb$ are particularly simple. If $f = g$, then the family of forks consists of only the identity map $id: \alpha \to \alpha$. In this case our claim becomes trivial.
+        We already know that multi-equalizers in $\FinProb$ are particularly simple. If $f = g$, then the family of forks consists of only the identity map $\id: \alpha \to \alpha$. In this case our claim becomes trivial.
 
         Now assume that $f \neq g$. Then the multi-equalizer is the empty family. Thus our claim becomes that
         \[
@@ -693,7 +698,7 @@ For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
 
 We check that the functors we defined are inverses to each other.
 
-We first check that $\Lan_{\y}(U) \circ \Lan_F \cong Id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in \FinProb$. Then we get natural isomorphisms
+We first check that $\Lan_{\y}(U) \circ \Lan_F \cong \id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in \FinProb$. Then we get natural isomorphisms
 
 \begin{align*}
 \Lan_{\y}(U)(\Lan_F(\y(X,\mu))) &\cong \Lan_{\y}(U)(yF(X,\mu)) \\
@@ -729,9 +734,9 @@ We still need to show this isomorphism is natural in $(X,\mu)$. We prove natural
     {\Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_{U(Y,\nu)}}
 \end{tikzcd}
 \]
-commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $\Lan_{\y}(U) \circ \Lan_F \cong Id$.
+commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $\Lan_{\y}(U) \circ \Lan_F \cong \id$.
 
-We now prove that $\Lan_F \circ \Lan_{\y}(U) = Id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
+We now prove that $\Lan_F \circ \Lan_{\y}(U) = \id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
 
 We first check this for the sort $B$. This means that we have to show that $\Lan_F(U) \cong \y \{b . \top\}$. This reduces to showing
 \[
@@ -961,7 +966,7 @@ Every infinitary first-order formula over the empty context over the theory $\ma
     Let $\{ \vec{x} . \psi\}$ be a formula in context over the theory $\mathbb{T}_{int}$, where $\vec{x} = x_1, \cdots x_n$. Then it is provably equivalent to a a formula of the form $\{\vec{y} . \bigvee_j \phi_{U_{r_i^j}} \}$, where each of the $r_i^j$ in the family is in $P^1_{2^n}$ and $\vec{y} = y_1,\cdots,y_{2^n}$.
 \end{corollary}
 \begin{proof}
-    Let $\{ \vec{x} . \psi\}$ such a formula in context, where $\vec{x} = x_1, \cdots x_n$. Then it internalizes to a subobject of the iterated cartesian product $U^n$, where $n$ is the length of the context. Since we can compute $U^n$ using multi-products to be $\langle * \mid t_{i_1,\cdots i_n} \in P^n_{2,\cdots 2} \rangle$, we know that $\{ \vec{x} . \psi\}$ is a join of the subobjects given by atoms. But the subobjects given by the atoms are precisely the $\phi_{X,\mu}$, so the claim follows.
+    Let $\{ \vec{x} . \psi\}$ such a formula in context, where $\vec{x} = x_1, \cdots x_n$. Then it internalizes to a subobject of the iterated cartesian product $U^n$, where $n$ is the length of the context. Since we can compute $U^n$ using multi-products to be $\la * \mid t_{i_1,\cdots i_n} \in P^n_{2,\cdots 2} \ra$, we know that $\{ \vec{x} . \psi\}$ is a join of the subobjects given by atoms. But the subobjects given by the atoms are precisely the $\phi_{X,\mu}$, so the claim follows.
 
     Here in reality we also need some results about infinitary first order logic sites, if we want to be precise.
 \end{proof}
@@ -985,7 +990,7 @@ We show that $\mathcal{S}$ is a sheaf by showing that $\mathcal{S}$ is a coprodu
 \begin{proposition}
     We have that
     \[
-        \mathcal{S} \cong \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \rangle
+        \mathcal{S} \cong \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra
     \]
     and in particular, $\mathcal{S}$ is a sheaf.
 \end{proposition}
@@ -1053,8 +1058,8 @@ We can now define expectation algebra structure on $\mathcal{S}$. Note that we d
 Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
 
 \begin{align*}
-    S \times S &\cong \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \rangle^2 \\
-    &\cong \langle \{y_1 < \cdots < y_n, z_1 < \cdots < z_m \mid y_i, z_j \in \mathbb{R} \} \mid (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}\rangle
+    S \times S &\cong \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra^2 \\
+    &\cong \la \{y_1 < \cdots < y_n, z_1 < \cdots < z_m \mid y_i, z_j \in \mathbb{R} \} \mid (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}\ra
 \end{align*}
 
 Now we can use \ref{atom_coprod_maps} to specify our structure on the elements of this set of atoms:
@@ -1081,7 +1086,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
         defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i \cdot z_j = y_{i'} \cdot z_{j'}$ holds.
         \item $E_r \to \mathcal{S}$ is the subobject
         \[
-            \langle \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R}, \sum r_i y_i = r \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \rangle
+            \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R}, \sum r_i y_i = r \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra
         \]
         of $\mathcal{S}$.
     \end{enumerate}
@@ -1305,7 +1310,7 @@ for each $i$. Now both of these measure algebras are Maharam-type-homogeneous an
 
 \item A measure-preserving map $\chi:(\mathcal{P} X,\mu)\rightarrow (A,\mu)$ consists of precisely a partition of $(A,\mu)$ into finitely many elements of predetermined measure. But this is precisely the interval property for atomless measure algebras, see \ref{interval_examples}.
 
-% \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\langle f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \rangle $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
+% \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\la f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \ra $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
 \end{enumerate}
 \end{proof}
 
@@ -1478,7 +1483,7 @@ $L$ is then defined to be the sum of these matrices.
 \emph{Step 4.} The $(0,1)$-matrices of all matrices in $R$ are permutation matrices. The conditions on matrices in $S$ impose that these matrices are automorphisms of $U_{r_1\cdots r_n}$. It remains to prove that they form a subgroup of $S_n$. One can check that $\sigma^\top=\sigma^{-1}$ and the only matrix that can appear as $t^{(3)}_{ik}$ if we set $t^{(1)}_{ij}=\sigma$ and $t^{(2)}_{jk}=\tau$, is $\sigma \tau^{-1}$. It also contains the unit of $S_n$ by reflexivity. Hence it is a subgroup.
 \newline
 \newline
-This concludes the proof as all atoms are quotients of equivalence relations and the relations. The representable functors appear as $(X,\mu, \{id\})$.
+This concludes the proof as all atoms are quotients of equivalence relations and the relations. The representable functors appear as $(X,\mu, \{\id\})$.
 \end{proof}
 
 \begin{lemma} \label{atoms_are_sheaves} Given a finite probability space $(X,\mu)$ and a subgroup $H$ of its automorphism group, we compute the sheaf-theoretic quotient of the corresponding equivalence relation in $\Sh(\FinProb,J_{at})$ to be:
@@ -1494,7 +1499,7 @@ One calculates coequalizers in sheaf topoi by calculating the section-wise coequ
 \bigsqcup_{\sigma \in H}\y(X,\mu) \arrow[r, hook] & {\y (X,\mu)\times \y (X,\mu)} \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & {\y (X,\mu)}
 \end{tikzcd}
 \end{center}
-Here the components on the left are included as permutation matrices. These compositions are coproducts of the Yoneda embeddings of $id: (X,\mu)\rightarrow (X,\mu)$ resp. $\sigma: (X,\mu)\rightarrow (X,\mu)$. Thus the quotient presheaf is the sheaf described in the statement.
+Here the components on the left are included as permutation matrices. These compositions are coproducts of the Yoneda embeddings of $\id: (X,\mu)\rightarrow (X,\mu)$ resp. $\sigma: (X,\mu)\rightarrow (X,\mu)$. Thus the quotient presheaf is the sheaf described in the statement.
 
 Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
 \[
