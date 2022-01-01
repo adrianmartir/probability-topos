@@ -207,7 +207,9 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 
 Note that the second and third part are merely formal consequences of the first one. Any category (satisfying the \emph{right Ore condition}) such that the first part holds, also satisfies the second and the third part.
 
-The representable functors are atoms in $\Prob$, i.e. objects with precisely two subobjects: the initial object and the object itself. A crucial property of an atomic topos (a topos of sheaves over a category equipped with the atomic topology) is that every object is a coproduct of atoms. So the natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
+Recall that a site $(\C, J)$, is called \emph{atomic} if every nonempty sieve over an object $c$ is covering. Furthermore, a Grothendieck topos is called \emph{atomic} if it is equivalent to a topos of sheaves over an atomic site. Tautologically, $\Prob$ can be seen to be an atomic topos. An object in an atomic topos is called an \emph{atom} if it has precisely two subobjects (the initial object and the object itself).
+
+Due to $\Prob$ being an atomic topos, the representables $\y U_{r_i}$ (which we now know to be sheaves) are atoms in $\Prob$. Moreover, for atomic topoi, every object can be uniquely written as a coproduct of atoms. So in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
 
 
 \subsection{Finite Limits}
@@ -323,31 +325,50 @@ We have seen that treating multi-limits requires us to talk about coproducts ove
             \la T(x) \mid x \in S \ra := \coprod_{\substack{x \in S \\ y \in T(x)}} U_x ,
         \]
         using U-notation.
-        \item An \emph{element} of a set of atoms $(S,T)$ will be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always either empty or the one-element set, we will abbreviate and say that $x$ is an \emph{element} of $(S,T)$.
+        \item An \emph{element} of a set of atoms $(S,T)$ will be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always either empty or the one-element set, we will abbreviate writing $(x,t)$ for an element of $(S,T)$ by merely stating that $x$ is an element of $(S,T)$.
     \end{enumerate}
 \end{definition}
 
 One subtlety about our definitions is that the set $\mathcal{A}$ will contain multiple distinct elements corresponding to the same atom, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order.
 
+Notice that the elements of a set of atoms $(S,T)$ index the coproduct in the defintion of $\la T(x) \mid x \in S \ra$. Moreover they can also be seen as the monomorphisms
+\[
+    \y U_{r_i} \hookrightarrow \la T(x) \mid x \in S \ra
+\]
+into the sheaf associated to $(S,T)$.
+
+Occasionally, we may add an additional properties $\phi_1, \phi_2, \cdots, \phi_n$ to the notation, as follows:
+\[
+    \la T(x) \mid x \in S, \phi_1(x), \cdots, \phi_n(x) \ra := \la T(x) \mid x \in \{x' \in S \mid \phi_1(x'), \cdots, \phi_n(x')\} \ra
+\]
+While this is somewhat informal(\emph{What is a property?}), the reader most likely knows what is meant.
+
 We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ of $\mathcal{A}$ with fixed sums of rows and columns are essential. Since multi-products will be invaluable in our study of $\Prob$, we introduce some notation for these index sets.
 
 \begin{definition}
-    Let $n_1, \cdots, n_k$ be positive integers and for each $j = 1, \cdots k$, let $r^j_1, \cdots r^j_{n_j}$ be nonnegative real numbers summing up to $1$. Now define:
-    \begin{equation*}
-        \begin{split}
-            P^k_{r_i^1,\cdots r_i^k} := \{ (t_{i_1 \cdots i_k}) &\in \mathbb{R}^{n_1 \times \cdots \times n_k} \mid t_{i_1 \cdots i_k} \geq 0, \\
-            & \sum_{j=1}^{n_1} t_{j i_2 \cdots i_k} = r_1, \\
-            & \cdots \\
-            & \sum_{j=1}^{n_k} t_{i_1 i_2 \cdots j} = r_k \\
-            & \text{ for all indices } i_1, \cdots i_k \}
-        \end{split}
-    \end{equation*}
+    Let $n_1, \cdots, n_k$ be positive integers.
+    \begin{enumerate}
+        \item Define:
+        \begin{equation*}
+            P^k_{n_1,\cdots,n_k} := \{ (t_{i_1 \cdots i_k}) \in \mathbb{R}^{n_1 \times \cdots \times n_k} \mid t_{i_1 \cdots i_k} \geq 0, \sum_{i_1,\cdots,i_k} t_{i_1 \cdots i_k} = 1 \}
+        \end{equation*}
+        \item For each $j = 1, \cdots k$, let $r^j_1, \cdots r^j_{n_j}$ be nonnegative real numbers summing up to $1$. Now let
+        \begin{equation*}
+            \begin{split}
+                P^k_{r_i^1,\cdots r_i^k} := \{ (t_{i_1 \cdots i_k}) &\in \mathbb{R}^{n_1 \times \cdots \times n_k} \mid t_{i_1 \cdots i_k} \geq 0, \\
+                & \sum_{j=1}^{n_1} t_{j i_2 \cdots i_k} = r_1, \\
+                & \cdots \\
+                & \sum_{j=1}^{n_k} t_{i_1 i_2 \cdots j} = r_k \\
+                & \text{ for all indices } i_1, \cdots i_k \} .
+            \end{split}
+        \end{equation*}
+    \end{enumerate}
 \end{definition}
 
 \begin{example} \label{notation_example}
     \mbox{}
     \begin{itemize}
-        \item Binary multi-products can now be written as:
+        \item Binary multi-products can now be written as
         \[ \y U_{r_i} \times \y U_{s_j} \cong \la 1 \mid t_{ij} \in P^2_{r_i,s_j} \ra, \]
         where $1$ denotes the one-object set.
         \item Since $\FinProb$ has a terminal object, we can use our binary multi-product formula in order to compute arbitrary finite multi-products:
@@ -361,30 +382,28 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
             U_{r_i} \arrow[r, "f"'] & U_{s_i} ,
             \end{tikzcd}
         \]
-        (by noting that equalizers of coproducts are coproducts of equalizers in presheaf topoi, which can be checked pointwise) yields the formula
+        (by noting that equalizers of coproducts are coproducts of equalizers in presheaf topoi, which can be checked pointwise), yields the formula
         \begin{equation*}
             \begin{split}
             \y U_{r_i} &\times_{\y U_{s_i}} \y U_{r_i'} \cong \\
-            &\la 1 \mid t_{ij} \in P^2_{r_i, r_i'}, t_{ij} = 0 \text{ for all } i,j \text{ with } f(i) \neq g(j) \ra
+            &\la 1 \mid t_{ij} \in P^2_{r_i, r_i'}, t_{ij} = 0 \text{ for all } i,j \text{ with } f(i) \neq g(j) \ra .
             \end{split}
         \end{equation*}
         \item Define the presheaf $U$ in the following way:
-        \[ U \cong \la 1 \mid (r_1,r_2) \in P^1_2 \ra. \]
+        \[ U \cong \la 1 \mid (r_1,r_2) \in P^1_2 \ra \]
         We will later see that this presheaf is in fact the underlying sheaf of a universal model in $\Prob$ for a suitable theory of boolean algebras with measures.
     \end{itemize}
 \end{example}
 
-\begin{remark} We have seen that the elements $t_{ij}$ of a binary multi-product are the $t_{ij} \in P^2_{r_i,s_i}$. This set can be seen a subset of the set of $n\times m$-matrices, which is, in fact, a polytope in $\mathbb{R}^{n\times m}$. The combinatorics literature has called these polytopes \emph{transportation polytopes}. Chapter 8 of [Matrix book] is dedicated to their study.
+\begin{remark} We have seen that the elements $t_{ij}$ of a binary multi-product\footnote{We have not specified what exactly the data $(S,T)$ is, for which we want to consider elements. In this case, and in the future, we trust that the reader is able to infer this data on his own.} are the $t_{ij} \in P^2_{r_i,s_i}$. This set can be seen a subset of the set of $n\times m$-matrices, which is, in fact, a polytope in $\mathbb{R}^{n\times m}$. The combinatorics literature has called these polytopes \emph{transportation polytopes}. Chapter 8 of \cite{brualdi2006combinatorial} is dedicated to their study.
 \end{remark}
 
-One should note that when specifying a sheaf $\mathcal{F}$ by using this set of atoms notation, the elements of $\mathcal{F}$ (as defined above) are precisely the monomorphisms $\y U_{r_i} \hookrightarrow \mathcal{F}$.
+Notice that all the sheaves we have worked with until now can be written as sheaves associated to sets of atoms. One might hope that every sheaf can be written in this form, but as remarked earlier, this is not possible, since there are non-representable atoms. Nevertheless, our definitions can be easily extended to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
 
-Unfortunately, one can't specify all the sheaves in this way. Nevertheless, this notation can be easily adapted to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
-
-The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphism, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf, is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
+The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphism, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
 
 \begin{proposition}\label{atom_coprod_maps}
-    Let $\mathcal{F} = \la T(x) \mid x \in S \ra$ and $\mathcal{G} = \la T'(x) \mid x \in S' \ra $. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
+    Let $(S,T)$ and $(S',T')$ be sets of atoms and let $\mathcal{F}$ and $\mathcal{G}$ be their associated sheaves, respectively. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
     \[
         \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
     \]

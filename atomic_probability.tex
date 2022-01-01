@@ -959,9 +959,7 @@ and by sending a map $(X,\nu_1) \to (Y,\nu_2)$ the map
 \begin{proof}
     First, notice that we can reduce to geometric formulas, because by Remark 4.2.19 (a) in \cite{caramello_book} every infinitary first-order formula is equivalent to a geometric one. This follows from the fact that our topos is atomic and thus boolean.
 
-    Let $\{ \vec{x} . \psi\}$ such a geometric formula in context, where $\vec{x} = x_1, \cdots x_n$. Then it internalizes to a subobject of the iterated cartesian product $U^n$, where $n$ is the length of the context. Since we can compute $U^n$ using multi-products to be $\la * \mid t_{i_1,\cdots i_n} \in P^n_{2,\cdots 2} \ra$, we know that $\{ \vec{x} . \psi\}$ is a join of the subobjects given by atoms. But the subobjects given by the atoms are precisely the $\phi_{X,\mu}$, so the claim follows.
-
-    Here in reality we also need some results about infinitary first order logic sites, if we want to be precise.
+    Let $\{ \vec{x} . \psi\}$ such a geometric formula in context, where $\vec{x} = x_1, \cdots x_n$. Then it can be viewed as a subobject of the iterated cartesian product $U^n$, where $n$ is the length of the context. Since we can compute $U^n$ using multi-products to be $\la * \mid t_{i_1,\cdots i_n} \in P^n_{2,\cdots 2} \ra$, we know that $\{ \vec{x} . \psi\}$ is a join of the subobjects given by atoms. But the subobjects given by the atoms are precisely the $\phi_{X,\mu}$, so the claim follows.
 \end{proof}
 
 This is a form of quantifier elimination, only that this is a bit different than traditional quantifier elimination in that we can't guarantee that the equivalent quantifier-free formula has only finite joins. Moreover, our formulas aren't even over the same context.
@@ -1293,7 +1291,7 @@ Now we actually show that homogeneous-Maharam-type probability algebras are $BPA
 \end{lemma}
 \begin{proof}
 \begin{enumerate}
-\item The one-element set $\{*\}$ with with measure $\mu(\star)=1$ is the terminal object. Its underlying set the terminal object in $\Set$ and the universal map is tautologically measure preserving.
+\item The one-element set $1$ with with measure $\mu(\star)=1$ is the terminal object. Its underlying set the terminal object in $\Set$ and the universal map is tautologically measure preserving.
 \item We have already shown this in \ref{pullbackMeasure}.
 \item
 Now, given boolean probability algebras as in the claim above, we see that $(A, \mu)$ has a partition into atoms $x_i$. Crucially, if we apply a map of boolean algebras to this partition, we get a partition again. This means we can decompose our problem(by \ref{partitions}) into finding a measure-preserving map $j'$ as below:
