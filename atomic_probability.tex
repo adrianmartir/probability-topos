@@ -99,6 +99,7 @@ Somewhere in here we should definitely mention Olivia's bridges philosophy and h
 
 When there is need to be completely formal, the $\limit$ and $\colim$ operators in our sheaf toposes will not be defined only 'up to isomorphism', but rather taken the to be canonical constructions in sheaf toposes given by sheafifying the (co-)limit taken pointwise is $\Set$. In case the sheaf topos is a presheaf topos, we will omit the sheafification step. The same will hold for Kan extensions, as in our examples these are always computed as (co-)limits. When considering what is traditionally thought of different 'representatives' of an isomorphism class given by a limit or colimit, we will formalize this as simply claiming that an object (together with a corresponding universal (co-)cone) \emph{has} a universal property.
 
+% The remark above is a bit imprecise. How do we compute sheafification? We don't even need to, since we do it for presheaf topoi. Instead of writing this in the beginning (the reader will have forgotten this, or never have read this section), this should be written where it arises.
 This explicit approach clears up some of the confusion that arises when one thinks of e.g. a limit $\limit c_i$ simply as some sort of object defined only up to isomorphism that takes the form of the correct representative of the isomorphism class when convenient. Admittedly, this explicit viewpoint will only be taken in the rare occasion where one needs to prove that certain diagrams involving isomorphisms given by universal properties commute.
 
 For a small category $\C$, we will denote the Yoneda embedding by $\y: \C \to \Set^{\C^{op}}$. For a morphism $f$ in $\C$, we will denote $\y(f)$ (also known as postcomposition) by $f_*$.
@@ -117,6 +118,7 @@ in a category $\C$ a fork if $fg = hg$.
 In this section we will introduce the topos $\Prob$, by exhibiting a site based on the following category of finite probability spaces.
 
 \begin{definition}
+\mbox{}
 \begin{enumerate}
 \item A finite probability space is a finite set $X$ equipped with a map (called probability measure) $\mu: X \to \mathbb{R}_{>0}$ such that \\ $\sum_{x \in X} \mu(x) = 1$.
 \item For a finite probability space $(X,\mu)$ and a subset $a \subset X$, we define $\mu(a) := \sum_{x \in a} \mu(x)$.
@@ -616,7 +618,7 @@ Readers paying close attention to the proof strategy may wonder why we even both
 
         In order to show that this multi-product gets preserved, we need to show that the map
         \[
-            \coprod_{t_{ij} \in P^2_{r_i,s_j}} \la \theta^{\vec{a},\vec{b}}_{p_{t_{ij}}}, \theta^{\vec{a},\vec{b}}_{q_{t_{ij}}} \ra : \coprod_{t_{ij} \in P^2_{r_i,s_j}} F U_{t_{ij}} \to F(\alpha) \times F(\beta)
+            \coprod_{t_{ij} \in P^2_{r_i,s_j}} \langle \theta^{\vec{a},\vec{b}}_{p_{t_{ij}}}, \theta^{\vec{a},\vec{b}}_{q_{t_{ij}}} \rangle : \coprod_{t_{ij} \in P^2_{r_i,s_j}} F U_{t_{ij}} \to F(\alpha) \times F(\beta)
         \]
         is an isomorphism. It is crucial that there does not only exist an isomorphism, but that it is this concrete isomorphism constructed by universal property. Indeed, for showing corresponding condition \Rmnum{7}.8.1 in \cite{sheaves_geometry_logic} we need to show that a specific family of morphisms is jointly epimorphic. And our claim here certainly implies that.
 
@@ -950,28 +952,26 @@ and by sending a map $(X,\nu_1) \to (Y,\nu_2)$ the map
 
 \subsection{Completeness and quantifier elimination}
 
-TODO: THIS SECTION IS UBERSCUFFED RIGHT NOW
 \begin{corollary}
-Every infinitary first-order formula over the empty context over the theory $\mathbb{T}_{int}$ is provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{int}$.
+    Let $\{ \vec{x} . \psi\}$ be an infinitary first-order formula in context over the theory $\mathbb{T}_{int}$, where $\vec{x} = x_1, \cdots x_n$. Then it is provably equivalent to a a formula of the form $\{\vec{y} . \bigvee_j \phi_{U_{r_i^j}} \}$, where each of the $r_i^j$ in the family is in $P^1_{2^n}$ and $\vec{y} = y_1,\cdots,y_{2^n}$.
 \end{corollary}
 \begin{proof}
-    Since we know that infinitary first-order formulas can be internalized in $\Prob$ [cite sth], we only need to remark that a formula over the empty context invernalizes to a subobject of the subobject classifier. Because the subobject classifier only has two subobjects, the claim follows.
+    First, notice that we can reduce to geometric formulas, because by Remark 4.2.19 (a) in \cite{caramello_book} every infinitary first-order formula is equivalent to a geometric one. This follows from the fact that our topos is atomic and thus boolean.
 
-    We need to talk about infinitary first-order logic sites(or use claims about those in the literature) in order to be more precise.
-\end{proof}
-% This result is particularly remarkable. The study of the geometric logic of $\Sh(Fin\Set, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{int}$ can be thought as a synthetic context for studying geometric properties of the measure-theoretic interval.
-
-% All this should be defined much more carefully
-\begin{corollary}
-    Let $\{ \vec{x} . \psi\}$ be a formula in context over the theory $\mathbb{T}_{int}$, where $\vec{x} = x_1, \cdots x_n$. Then it is provably equivalent to a a formula of the form $\{\vec{y} . \bigvee_j \phi_{U_{r_i^j}} \}$, where each of the $r_i^j$ in the family is in $P^1_{2^n}$ and $\vec{y} = y_1,\cdots,y_{2^n}$.
-\end{corollary}
-\begin{proof}
-    Let $\{ \vec{x} . \psi\}$ such a formula in context, where $\vec{x} = x_1, \cdots x_n$. Then it internalizes to a subobject of the iterated cartesian product $U^n$, where $n$ is the length of the context. Since we can compute $U^n$ using multi-products to be $\la * \mid t_{i_1,\cdots i_n} \in P^n_{2,\cdots 2} \ra$, we know that $\{ \vec{x} . \psi\}$ is a join of the subobjects given by atoms. But the subobjects given by the atoms are precisely the $\phi_{X,\mu}$, so the claim follows.
+    Let $\{ \vec{x} . \psi\}$ such a geometric formula in context, where $\vec{x} = x_1, \cdots x_n$. Then it internalizes to a subobject of the iterated cartesian product $U^n$, where $n$ is the length of the context. Since we can compute $U^n$ using multi-products to be $\la * \mid t_{i_1,\cdots i_n} \in P^n_{2,\cdots 2} \ra$, we know that $\{ \vec{x} . \psi\}$ is a join of the subobjects given by atoms. But the subobjects given by the atoms are precisely the $\phi_{X,\mu}$, so the claim follows.
 
     Here in reality we also need some results about infinitary first order logic sites, if we want to be precise.
 \end{proof}
 
 This is a form of quantifier elimination, only that this is a bit different than traditional quantifier elimination in that we can't guarantee that the equivalent quantifier-free formula has only finite joins. Moreover, our formulas aren't even over the same context.
+
+\begin{corollary}
+    Every infinitary first-order formula over the empty context over the theory $\mathbb{T}_{int}$ is provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{int}$.
+\end{corollary}
+\begin{proof}
+    Follows from the previous result, taking $n=0$.
+\end{proof}
+% This result is particularly remarkable. The study of the geometric logic of $\Sh(Fin\Set, J_{at})$ corresponds to the study of geometric statements over the boolean probability algebra signature on $(I, \lambda)$. Thus $\mathbb{T}_{int}$ can be thought as a synthetic context for studying geometric properties of the measure-theoretic interval.
 
 \section{$\Prob$ as the classifying topos of a theory of simple functions}
 
@@ -1310,7 +1310,7 @@ for each $i$. Now both of these measure algebras are Maharam-type-homogeneous an
 
 \item A measure-preserving map $\chi:(\mathcal{P} X,\mu)\rightarrow (A,\mu)$ consists of precisely a partition of $(A,\mu)$ into finitely many elements of predetermined measure. But this is precisely the interval property for atomless measure algebras, see \ref{interval_examples}.
 
-% \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\la f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \ra $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
+% \item $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are subalgebras of $I$, so we may generate the smallest subalgebra of them, containing both. Define $\mathcal{B}_3=\langle f_1(\mathcal{B}_1),f_2(\mathcal{B}_2) \rangle $ with the measure induced by the Lebesgue measure. As $f_1(\mathcal{B}_1)$ and $f_2(\mathcal{B}_2)$ are isomorphism to $\mathcal{B}_1$ resp. $\mathcal{B}_2$, the diagram commutes. It remains to show that $\mathcal{B}_3$ is finite (resp. at most countable). This is obvious, however any element of it may be represented as the unions of intersections of atoms $b_1\wedge b_2$ of $b_1\in \mathcal{B}_1$, $b_2\in\mathcal{B}_2$.
 \end{enumerate}
 \end{proof}
 
@@ -1639,7 +1639,7 @@ Saunders Mac Lane, Ieke Moerdijk. \textit{Sheaves in Geometry and Logic} A First
 \bibitem{elephant}
 ELEPHANT
 \bibitem{caramello_book}
-
+CARAMELLO
 \bibitem{fremlin}
 FREMLIN
 \bibitem{riehl}
