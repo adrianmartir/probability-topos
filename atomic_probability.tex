@@ -128,9 +128,9 @@ In this section we will introduce the topos $\Prob$, by exhibiting a site based 
 
 Notice that all maps of finite probability spaces are surjective. Also notice that we do not allow elements of measure zero.
 
-We want to consider the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ denotes the atomic topology. The atomic topology is defined by saying that every nonempty sieve is a cover. Checking that this actually yields a Grothendieck topology requires the base category to satisfy the right Ore condition.
+We want to consider the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ denotes the atomic topology. Recall that the atomic topology is defined by letting every nonempty sieve be a covering sieve. Checking that this actually yields a Grothendieck topology requires the base category to satisfy the right Ore condition.
 
-\begin{theorem} \label{pullback_measure}
+\begin{theorem} \label{pullbackMeasure}
 Given a diagram of finite probability spaces
 \[
 \begin{tikzcd}
@@ -138,10 +138,10 @@ Given a diagram of finite probability spaces
 {(X_1, \mu_1)} \arrow[r, "f"'] & {(Y,\mu)}
 \end{tikzcd},
 \]
-the pullback of the finite sets carries a probability measure $\nu(x,y) := \frac{\mu_1(x) \mu_2(y)}{\mu(f x)}$ such that the diagram
+the pullback of the finite sets carries a probability measure $\bar{\mu}(x,y) := \frac{\mu_1(x) \mu_2(y)}{\mu(f x)}$ such that the diagram
 \[
 \begin{tikzcd}
-{(X_1 \times_Y X_2, \nu)} \arrow[d, "p_1"'] \arrow[r, "p_2"] & {(X_2,\mu_2)} \arrow[d, "g"] \\
+{(X_1 \times_Y X_2, \bar{\mu})} \arrow[d, "p_1"'] \arrow[r, "p_2"] & {(X_2,\mu_2)} \arrow[d, "g"] \\
 {(X_1, \mu_1)} \arrow[r, "f"']                               & {(Y,\mu)}
 \end{tikzcd}
 \]
@@ -150,26 +150,26 @@ commutes.
 In particular, $\FinProb$ satisfies the right Ore condition.
 \end{theorem}
 \begin{proof}
-The only thing to show is that the projections are measure-preserving, since that also implies that $\nu$ is actually a measure. So let $x \in X_1$ and $u := f(x)$.
+The only thing to show is that the projections are measure-preserving, since that also implies that $\bar{\mu}$ is actually a measure. So let $x \in X_1$ and $u := f(x)$.
 \begin{align*}
-\sum_{(x,y) \in p_1^{-1} x} \nu(x,y) &= \sum_{y \in g^{-1} u} \frac{\mu_1(x)\mu_2(y)}{\mu u} \\
+\sum_{(x,y) \in p_1^{-1} x} \bar{\mu}(x,y) &= \sum_{y \in g^{-1} u} \frac{\mu_1(x)\mu_2(y)}{\mu u} \\
 &= \frac{\mu_1 x}{\mu u} \sum_{y \in g^{-1} u} \mu_2 y \\
 &= \frac{\mu_2 x}{\mu u} \mu u \\
 &= \mu_2 x
 \end{align*}
 \end{proof}
 
-Now we can introduce the topos that we wish to study in this paper.
+We now introduce the protagonist this paper.
 
 \begin{definition}
 Define the topos $\Prob$ to be $\Sh(\FinProb, J_{at})$.
 \end{definition}
 
-Much of this paper is dedicated to finding other equivalent ways of describing $\Prob$. When we wish to leave the particular description of $\Prob$ vague, we will use the notation $\Prob$.
+Much of this article is dedicated to finding other equivalent ways of describing $\Prob$. When we wish to leave the particular description of $\Prob$ vague, we will use the notation $\Prob$.
 
 III.4, Lemma 2 in \cite{sheaves_geometry_logic} gives us a convenient condition for checking whether a presheaf is actually a sheaf over the atomic topology:
 
-A presheaf $\mathcal{F}$ on a $\FinProb$ is a sheaf over the atomic topology if and only if one can check that for any morphism $f: \alpha \to \beta$ and any $a \in \mathcal{F}(\alpha)$: If for all diagrams
+A presheaf $\mathcal{F}$ on $\FinProb$ is a sheaf over the atomic topology if and only if one can check that for any morphism $f: \alpha \to \beta$ and any $a \in \mathcal{F}(\alpha)$: If for all diagrams
 
 \[
 \begin{tikzcd}
@@ -180,13 +180,13 @@ with $f g = f h$ we have that $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$, then ther
 
 In some cases, one can prove the following condition that is much stronger than being a sheaf. It is especially useful when the sheaf doesn't really use the measure in its definition.
 
-\begin{proposition} \label{sheaf_condition_weak}
+\begin{proposition} \label{sheafConditionWeak}
 Let $\mathcal{F}$ be a presheaf on $\FinProb$. If for all morphisms $f: (X,\mu) \to (Y,\nu)$ the fork
 \[
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (X,\mu) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (X \times_f X,\bar{\mu})
 \end{tikzcd}
 \]
-is an equalizer, where $\bar{\mu}$ is as in \ref{pullback_measure}, then $\mathcal{F}$ is a sheaf.
+is an equalizer, where $\bar{\mu}$ is as in \ref{pullbackMeasure}, then $\mathcal{F}$ is a sheaf.
 \end{proposition}
 \begin{proof}
 This is the condition from \cite{sheaves_geometry_logic} described above, but weakened by choosing $\gamma = (X \times_f X,\bar{\mu})$.
@@ -203,7 +203,7 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 \end{proposition}
 \begin{proof}
     \begin{enumerate}
-        \item We need to show that every morphism $f:(X,\mu)\rightarrow (Y, \nu)$ comes from a coequalizer. Our construction of the measure on the pullback in \ref{pullback_measure} gives us the following fork:
+        \item We need to show that every morphism $f:(X,\mu)\rightarrow (Y, \nu)$ comes from a coequalizer. Our construction of the measure on the pullback in \ref{pullbackMeasure} gives us the following fork:
         \[
         \begin{tikzcd}[column sep=large]
         (X \times_Y X, \bar{\mu}) \arrow[r, shift left=2] \arrow[r, shift right] & (X,\mu) \arrow[r, "f", two heads] & (Y,\nu)
@@ -211,9 +211,9 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
         \]
         Since this is clearly a coequalizer on the underlying sets, the only thing to check is that the uniquely induced maps are measure-preserving. This is straightforward to verify.
 
-        \item Checking that the representable functors are sheaves by using \ref{sheaf_condition_weak} reduces to the fact that the fork above is a coequalizer diagram.
+        \item Checking that the representable functors are sheaves by using \ref{sheafConditionWeak} reduces to the fact that the fork above is a coequalizer diagram.
 
-        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf topoi (since this fact can be checked pointwise in set).
+        \item We check the sheaf condition \ref{sheafConditionWeak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf topoi (since this fact can be checked pointwise in set).
     \end{enumerate}
 \end{proof}
 
@@ -224,23 +224,24 @@ The representable functors are atoms in $\Prob$, i.e. objects whose only subobje
 
 \subsection{Finite Limits}
 
-Our goal in the next section will be to understand the logic of $\Prob$. Successfully doing so requires a very good understanding of what the flat functors on $\FinProb$ are and thus also requires a good understanding of finite limits in this category. This will be our goal in this subsection.
+Our goal in the next two sections will be gaining an understanding of $\Prob$ from a more logical perspective. An absolute prerequisite for these discussions is a good understanding of finite limits in our topos. We will need products for controlling the number of free variables in our formulas and equalizers for expressing that two terms are equal.
 
-But the situation is not as simple as one may hope: these finite limits only very rarely exist. Naturally, the presheaves $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
+The idea is to first understand finite limits in $\FinProb$, since the sheaves we are interested in are coproducts of representables. But the situation is not as simple as one may hope: finite limits in $\FinProb$ only very rarely exist. Naturally, the presheaves $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
 
 The most surprising part about multi-limits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an many statements in this paper are proved by using computations with multi-limits and polytopes.
 
 We introduce convenient notation to emphazise the combinatorial nature of finite probability spaces.
 
 \begin{definition}[U-notation] \label{U-notation}
-\begin{enumerate}
-\item For $r_1, \cdots r_n \in [0,1]$ such that $r_1 + \cdots + r_n = 1$, denote by $U_{r_1 \cdots r_n}$ or simply by $U_{r_i}$ the finite probability space on the set
-\[
-\{i \mid r_i \neq 0 \}
-\]
-equipped with the measure $\mu(i) = r_i$.
-\item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$.
-\end{enumerate}
+    \mbox{}
+    \begin{enumerate}
+        \item For $r_1, \cdots r_n \in [0,1]$ such that $r_1 + \cdots + r_n = 1$, denote by $U_{r_1 \cdots r_n}$ or simply by $U_{r_i}$ the finite probability space on the set
+        \[
+        \{i \mid r_i \neq 0 \}
+        \]
+        equipped with the measure $\mu(i) = r_i$.
+        \item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$.
+    \end{enumerate}
 \end{definition}
 
 This is notation for finite probability spaces in the sense that the $U_{r_i}$ form a skeleton of $\FinProb$.
@@ -909,7 +910,7 @@ for each morphism $f: \alpha \to \beta$ in $\FinProb$. One can easily see that t
 \]
 suffice, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. Now, the axioms above are precisely reformulations of the interval axioms.
 
-Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed \footnote{One can use the commutative square in theorem 8.1.3 to see this, with a similar argument as in the remark below.}, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf by using \ref{sheaf_condition_weak}. This tells us that $p_1^{-1}(a) = p_2^{-1}(a)$, which means that
+Now we compute the universal model. By the way that the equivalence in \cite{caramello_book}, corollary 8.1.14 is constructed \footnote{One can use the commutative square in theorem 8.1.3 to see this, with a similar argument as in the remark below.}, the universal model is the sheafification on $U$. But we can show that $U$ is already a sheaf by using \ref{sheafConditionWeak}. This tells us that $p_1^{-1}(a) = p_2^{-1}(a)$, which means that
 IT IS A SHEAF BY ATOM NOTATION! % Explain why we don't need to sheafify coproducts!!!
 \[
 \forall x,y \text{ such that } f(x) = f(y): x \in a \Leftrightarrow y \in a .
@@ -1293,7 +1294,7 @@ Now we actually show that homogeneous-Maharam-type probability algebras are $BPA
 \begin{proof}
 \begin{enumerate}
 \item The one-element set $\{*\}$ with with measure $\mu(\star)=1$ is the terminal object. Its underlying set the terminal object in $\Set$ and the universal map is tautologically measure preserving.
-\item We have already shown this in \ref{pullback_measure}.
+\item We have already shown this in \ref{pullbackMeasure}.
 \item
 Now, given boolean probability algebras as in the claim above, we see that $(A, \mu)$ has a partition into atoms $x_i$. Crucially, if we apply a map of boolean algebras to this partition, we get a partition again. This means we can decompose our problem(by \ref{partitions}) into finding a measure-preserving map $j'$ as below:
 \[
@@ -1501,7 +1502,7 @@ One calculates coequalizers in sheaf topoi by calculating the section-wise coequ
 \end{center}
 Here the components on the left are included as permutation matrices. These compositions are coproducts of the Yoneda embeddings of $\id: (X,\mu)\rightarrow (X,\mu)$ resp. $\sigma: (X,\mu)\rightarrow (X,\mu)$. Thus the quotient presheaf is the sheaf described in the statement.
 
-Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheaf_condition_weak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
+Sheafification is not needed in our case however as the presheaf given in the statement is a sheaf:  We seek to apply the criterion \ref{sheafConditionWeak}. We need to check that the following is an equalizer diagram for any $f:(Z,\lambda)\rightarrow (Y,\nu)$:
 \[
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (Z,\lambda) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (Z \times_f Z,\bar{\lambda})
 \end{tikzcd} ,
