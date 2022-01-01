@@ -27,6 +27,7 @@
 \theoremstyle{definition}
  \newtheorem{example}[theorem]{Example}
  \newtheorem{definition}[theorem]{Definition}
+ \newtheorem{notation}[theorem]{Notation}
 \theoremstyle{remark}
  \newtheorem{remark}[theorem]{Remark}
  \numberwithin{equation}{section}
@@ -111,7 +112,7 @@ Notice that all maps of finite probability spaces are surjective. Also notice th
 
 We want to consider the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ denotes the atomic topology. Recall that the atomic topology is defined by letting every nonempty sieve be a covering sieve. We need to check that this yields a Grothendieck topology.
 
-\begin{proposition} \label{pullbackMeasure}
+\begin{proposition} \label{pullback_measure}
     Given a diagram of finite probability spaces
     \[
     \begin{tikzcd}
@@ -164,13 +165,13 @@ with $f g = f h$, we have that $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$, then the
 
 In some cases, one can prove the following condition that is much stronger than being a sheaf. It is especially useful when the sheaf doesn't really use the measure in its definition.
 
-\begin{proposition} \label{sheafConditionWeak}
+\begin{proposition} \label{sheaf_condition_weak}
 Let $\mathcal{F}$ be a presheaf on $\FinProb$. If for all morphisms $f: (X,\mu) \to (Y,\nu)$ the fork
 \[
 \begin{tikzcd} \mathcal{F} (Y,\nu) \arrow[r, "\mathcal{F}f"] & \mathcal{F} (X,\mu) \arrow[r, "\pi_1", shift left] \arrow[r, "\pi_2"', shift right] & \mathcal{F} (X \times_f X,\bar{\mu})
 \end{tikzcd}
 \]
-is an equalizer, where $\bar{\mu}$ is as in \ref{pullbackMeasure}, then $\mathcal{F}$ is a sheaf.
+is an equalizer, where $\bar{\mu}$ is as in \ref{pullback_measure}, then $\mathcal{F}$ is a sheaf.
 \end{proposition}
 \begin{proof}
 This is the condition from \cite{maclane2012sheaves} described above, but weakened by choosing $\gamma = (X \times_f X,\bar{\mu})$.
@@ -190,7 +191,7 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 \begin{proof}
     \mbox{}
     \begin{enumerate}
-        \item We need to show that every morphism $f:(X,\mu)\rightarrow (Y, \nu)$ comes from a coequalizer. Our construction of the measure on the pullback in \ref{pullbackMeasure} gives us the following fork:
+        \item We need to show that every morphism $f:(X,\mu)\rightarrow (Y, \nu)$ comes from a coequalizer. Our construction of the measure on the pullback in \ref{pullback_measure} gives us the following fork:
         \[
         \begin{tikzcd}[column sep=large]
         (X \times_Y X, \bar{\mu}) \arrow[r, shift left=2] \arrow[r, shift right] & (X,\mu) \arrow[r, "f", two heads] & (Y,\nu)
@@ -198,9 +199,9 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
         \]
         Since this is clearly a coequalizer on the underlying sets, the only thing to check is that the uniquely induced maps are measure-preserving. This is straightforward to verify.
 
-        \item Checking that the representable functors are sheaves by using \ref{sheafConditionWeak} reduces to the fact that the fork above is a coequalizer diagram.
+        \item Checking that the representable functors are sheaves by using \ref{sheaf_condition_weak} reduces to the fact that the fork above is a coequalizer diagram.
 
-        \item We check the sheaf condition \ref{sheafConditionWeak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf topoi (since this fact can be checked pointwise in set).
+        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf topoi (since this fact can be checked pointwise in set).
     \end{enumerate}
 \end{proof}
 
@@ -309,19 +310,20 @@ Finally, we also have multi-equalizers.
 
 We have seen that treating multi-limits requires us to talk about coproducts over certain index sets. As we progress further into the paper, we will encounter many more of these constructions. In order to describe these coproducts in a concise manner, we introduce simplified notation for them.
 
-
 \begin{definition}
+    \mbox{}
     \begin{enumerate}
         \item Let $\mathcal{A}$ denote the set
         \[
             \{(r_1,\cdots, r_n) \mid n \in \mathbb{N}, r_i \in \mathbb{R}_{\geq 0}, \sum r_i = 1\}.
         \]
-        \item Let $S$ be a subset of $\mathcal{A}$ and let for for each $x \in S$, $T(x)$ be any set. Then we can introduce the following notation:
+        \item Define a \emph{set of atoms} to be a pair $(S, T)$, where $S$ is a subset of $\mathcal{A}$ and $T(x)$ is a set for all $x \in S$.
+        \item The sheaf associated to a set of atoms $(S,T)$ will be defined by
         \[
-            \la T(x) \mid x \in S \ra := \coprod_{\substack{x \in S \\ y \in T(x)}} U_x .
+            \la T(x) \mid x \in S \ra := \coprod_{\substack{x \in S \\ y \in T(x)}} U_x ,
         \]
-        We will call an a object written in this notation a \emph{set of atoms}.
-        \item We define an \emph{element} of a set of atoms $\la T(x) \mid x \in S \ra$ to be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always the one-element set, we will abbreviate and say that $x$ is an \emph{element} of the set of atoms $\la T(x) \mid x \in S \ra$.
+        using U-notation.
+        \item An \emph{element} of a set of atoms $(S,T)$ will be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always either empty or the one-element set, we will abbreviate and say that $x$ is an \emph{element} of $(S,T)$.
     \end{enumerate}
 \end{definition}
 
@@ -340,14 +342,10 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
             & \text{ for all indices } i_1, \cdots i_k \}
         \end{split}
     \end{equation*}
-    % \begin{enumerate}
-        % \item We can index all \[P^1_n := \{ (r_i) \in \mathbb{R}^n \mid \sum_{i=1}^n r_i = 1 \}\]
-        % \item \[P^2_{r_i,s_i} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} \mid \sum_{i=1}^n t_{ij} = s_j, \sum_{j=1}^m t_{ij} = r_i, t_{ij} \geq 0 \}\]
-        % \item \[P^2_{n,m} := \{ (t_{ij}) \in \mathbb{R}^{n \times m} \mid \sum_{i,j = 1}^{n,m} t_{ij} = 1 , t_{ij} \geq 0 \}\]
-    % \end{enumerate}
 \end{definition}
 
 \begin{example} \label{notation_example}
+    \mbox{}
     \begin{itemize}
         \item Binary multi-products can now be written as:
         \[ \y U_{r_i} \times \y U_{s_j} \cong \la 1 \mid t_{ij} \in P^2_{r_i,s_j} \ra, \]
