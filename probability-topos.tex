@@ -17,6 +17,7 @@
 \usetikzlibrary{cd}
 
 % I like how the sans serif doesn't stand out as much in this font.
+% You need to have the `gnu-free-fonts` package installed (on arch)
 \setmainfont{FreeSerif}
 
 \theoremstyle{plain}
@@ -81,18 +82,6 @@ WIP
 \section{Introduction}
 
 WIP
-
-\section{Conventions} \label{conventions}
-
-For a small category $\C$, we will denote the Yoneda embedding by $\y: \C \to \Set^{\C^{op}}$. For a morphism $f$ in $\C$, we will denote $\y(f)$ by $f_*$.
-
-We will call a diagram
-\[
-\begin{tikzcd}
-\alpha \arrow[r, "f"] & \beta \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \gamma
-\end{tikzcd}
-\]
-in a category $\C$ a fork if $fg = hg$.
 
 \section{A combinatorial construction of $\Prob$}
 
@@ -209,7 +198,7 @@ Note that the second and third part are merely formal consequences of the first 
 
 Recall that a site $(\C, J)$, is called \emph{atomic} if every nonempty sieve over an object $c$ is covering. Furthermore, a Grothendieck topos is called \emph{atomic} if it is equivalent to a topos of sheaves over an atomic site. Tautologically, $\Prob$ can be seen to be an atomic topos. An object in an atomic topos is called an \emph{atom} if it has precisely two subobjects (the initial object and the object itself).
 
-Due to $\Prob$ being an atomic topos, the representables $\y U_{r_i}$ (which we now know to be sheaves) are atoms in $\Prob$. Moreover, for atomic topoi, every object can be uniquely written as a coproduct of atoms. So in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
+We just saw that the representables $\y U_{r_i}$ are actually sheaves($\y$ denotes the Yoneda embedding). In fact, since $\Prob$ is an atomic topos, these representables are atoms. Moreover, for atomic topoi, every object can be uniquely written as a coproduct of atoms. So in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
 
 
 \subsection{Finite Limits}
@@ -455,6 +444,263 @@ with $fg = fh$. But this certainly holds, since we can factor $g$ and $h$ throug
 \end{proof}
 
 Note that this proposition actually had little to do with finite probability spaces and is really about a sheaf condition for atomic topologies where the base category has multi-pullbacks.
+
+
+\section{$\Prob$ as the classifying topos of a theory of intervals}
+
+In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part, we will use the notations and definitions as in part D.1 of \cite{johnstone2002sketches2}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}.
+
+\begin{definition}
+    Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
+    \begin{center}
+        $1: B$ \\
+        $0: B$ \\
+        $\wedge: B \times B \to B$ \\
+        $\vee: B \times B \to B$ \\
+        $\neg: B \to B$
+    \end{center}
+    and a unary relation symbol $B_r$ on $B$ for each $r \in [0,1]$. We impose the following axioms($a$, $b$ and $c$ denote free variables in $B$):
+    \begin{itemize}
+        \item \textit{Boolean algebra}.
+        \begin{equation*}
+            \begin{split}
+                \top &\vdash a \wedge (b \wedge c) = (a \wedge b) \wedge c \\
+                \top &\vdash a \wedge 1 = a \\
+                \top &\vdash a \wedge \neg{a} = 0 \\
+                \top &\vdash a \wedge (a \vee b) = a \\
+                \top &\vdash a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge c) \\
+            \end{split}
+            \quad
+            \begin{split}
+                \top &\vdash a \vee (b \vee c) = (a \vee b) \vee c \\
+                \top &\vdash a \vee 0 = a \\
+                \top &\vdash a \vee \neg{a} = 1 \\
+                \top &\vdash a \vee (a \wedge b) = a \\
+                \top &\vdash a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c) \\
+            \end{split}
+            \quad
+            \begin{split}
+                &\textit{associativity} \\
+                &\textit{identity} \\
+                &\textit{inverse} \\
+                &\textit{absorbtion} \\
+                &\textit{distributivity} \\
+            \end{split}
+        \end{equation*}
+        \item \textit{The $B_r$ form a partition}. For all $r, s \in [0,1]$ with $r \neq s$ we have an axiom
+        \[
+        B_r(a)  \wedge B_s(a) \vdash \bot
+        \]
+        and we also have an axiom
+        \[
+        \top \vdash \bigvee_{r \in [0,1]} B_r(a).
+        \]
+        \item \textit{Probability measure}. For all $r, s \in [0,1]$, we further require
+        \[
+        (a \wedge b = 0) \wedge B_r(a) \wedge B_s(b) \vdash B_{r+s}(a \vee b)
+        \]
+        and finally we need
+        \begin{align*}
+            \top & \vdash B_1(1) \\
+            B_0(a) & \vdash a = 0.
+        \end{align*}
+    \end{itemize}
+\end{definition}
+
+Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. Notice that we require there to only be one element of measure zero. This requirement may be somewhat surprising, since the boolean algebra of measurable sets of a $\sigma$-algebra certainly can have sets of measure zero, or \emph{nullsets}. Instead, the reader should have the boolean algebra of measurable sets \emph{modulo nullsets} in mind, as the intended model.
+
+\begin{example}\label{mod_nullset}
+\end{example}
+
+Let us get some more notation out of the way.
+
+\begin{definition}
+Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $\BPAlg$.
+\end{definition}
+
+\begin{remark}
+    Note that we have an equivalence of categories
+    \[
+        \FinProb^{op} \simeq \BPAlg_f
+    \]
+    between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We don't prove this in detail nor do we give the equivalence explicitly, since we won't use this fact anywhere in this paper.
+\end{remark}
+
+\subsection{The classifying topos proof}
+
+We would like to show that the topos $\Set^{\FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
+\[
+\Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}} .
+\]
+
+The main difficulty is that we have we have found no way of knowing whether the topos on the left-hand-side has enough points. For example, Deligne's theorem is inapplicable, since the theory is not coherent.
+
+Nevertheless, as a consistency check, one can verify that the models in $Set$ are equivalent by checking that
+\[
+    \BPAlg \simeq \Ind(\BPAlg_f) \simeq \Ind(\FinProb^{op}),
+\]
+but the proof of this fact is not short enough for us to provide it here.
+
+We will prove the equivalence
+\[
+\Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}}
+\]
+by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
+
+Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
+
+With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
+\[
+\coprod_{r \in [0,1]} \y U_r \in \Set^{\FinProb^{op}} .
+\]
+One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space (a map $f$ between probability spaces gets sent to the map that takes the preimage of each subset).
+
+\begin{lemma} \label{universal model}
+$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $\y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in \FinProb$, $U(X, \mu)$ is the powerset of $X$.
+
+This yields a left-exact, colimit-preserving functor
+\[
+    \Set^{\FinProb^{op}} \xleftarrow{\Lan_{\y}(U)} \Set[\mathbb{T}_{bpalg}],
+\]
+where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ with functors whose domain is the syntactic category of $\mathbb{T}_{bpalg}$.
+\end{lemma}
+\begin{proof}
+The last statement follows from the first part by using the universal property of classifying topoi.
+
+We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $\y U_r \to U$ are natural since morphisms in $\FinProb$ preserve measure.
+
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
+\end{proof}
+
+We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor.
+
+We diverge from the notation in D.1 of \cite{johnstone2002sketches2} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
+
+\begin{lemma} \label{inverse}
+Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $F: \FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$ on the object $(X,\mu)$ and on the function $f$ as follows: Let
+\begin{align*}
+\{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{i \in X} B_{\mu(i)} a_i \wedge \bigwedge_{\substack{i,j \in X \\ i \neq j}} (a_i \wedge a_j = 0) \Bigg \} \\
+[\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{j \in Y} (b_j = \bigvee_{f i = j} a_i) \wedge \phi_{X,\mu}^{\vec{a}} \Bigg] ,
+\end{align*}
+and now define $F(X,\mu) := \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f) := [\theta_f^{\vec{a}, \vec{b}}]$.
+
+This yields a left-exact, colimit-preserving functor
+\[
+    \Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}] .
+\]
+\end{lemma}
+
+Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $\Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
+
+\begin{proof}
+    We need to show functoriality and then verify that $\Lan_F$ is left-exact. In order to check this left-exactness, we use theorem \Rmnum{7}.9.1 in \cite{maclane2012sheaves}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
+
+    The reader who actually reads the definition of a filtering functor will quickly notice that that definition can be checked in our case by showing that $F$ preserves the terminal object, binary multi-products and multi-equalizers in the sense checked below.
+
+    \begin{enumerate}
+        \item We show that $F$ preserves identities. We compute that
+            \begin{align*}
+                F(\id) &= [\theta^{\vec{a},\vec{b}}_{\id}] \\
+                &= [\vec{a}=\vec{b}] \\
+                &= \id,
+            \end{align*}
+            which shows our claim.
+        \item We show that $F$ preserves composition. Given morphisms $f: \alpha \to \beta$, $g: \beta \to \gamma$ in $\FinProb$,
+            \begin{align*}
+                F(g)F(f) &= [\exists c . \theta^{\vec{a},\vec{c}}_f \wedge \theta^{\vec{c},\vec{b}}_g] \\
+                &= [\theta^{\vec{a},\vec{b}}_{gf}] ,
+            \end{align*}
+            where the last equality follows from associativity and commutativity of the $\wedge$ operation and by additivity of the measure.
+        \item We show that $F$ preserves the terminal object. We simply compute this:
+            \begin{align*}
+                F(*) &= \{a. B_1(a)\} \\
+                &\cong \{[].\top \} ,
+            \end{align*}
+            where the last isomorphism follows from the fact we can geometrically prove that there is a unique element of measure $1$.
+        \item We show that $F$ preserves multi-products. Concretely, let $\alpha$, $\beta$ be finite probability spaces. Then we have a polytope $P^2_{r_i,s_j}$ and for each of its elements $t_{ij}$ we have a cone
+        \[\begin{tikzcd}
+            & U_{t_{ij}} \arrow[ld, "p_{t_{ij}}"'] \arrow[rd, "q_{t_{ij}}"] &       \\
+        \alpha &                                                               & \beta
+        \end{tikzcd} .\]
+
+        In order to show that this multi-product gets preserved, we need to show that the map
+        \[
+            \coprod_{t_{ij} \in P^2_{r_i,s_j}} \langle \theta^{\vec{a},\vec{b}}_{p_{t_{ij}}}, \theta^{\vec{a},\vec{b}}_{q_{t_{ij}}} \rangle : \coprod_{t_{ij} \in P^2_{r_i,s_j}} F U_{t_{ij}} \to F(\alpha) \times F(\beta)
+        \]
+        is an isomorphism. It is crucial that there does not only exist an isomorphism, but that it is this concrete isomorphism constructed by universal property. Indeed, for showing corresponding condition \Rmnum{7}.8.1 in \cite{maclane2012sheaves} we need to show that a specific family of morphisms is jointly epimorphic. And our claim here certainly implies that.
+
+        We will show that this map is an isomorphism by computing this map as a formula. First, note that the inclusions
+        \[
+            FU_{t_{ij}} \to F(\alpha) \times F(\beta)
+        \]
+        can be computed (using D.1.4.2 in \cite{johnstone2002sketches2}) to be
+        \[
+            [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ] :\{ \vec{a}. \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{ \vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta} \} .
+        \]
+        By using the partition axiom multiple times, we notice that the formulas $\{ \vec{a} . \phi^{\vec{a}}_{U_{t_{ij}}}\}$ are disjoint (in the subobject lattice of $\{ \vec{a} . \top \}$). Thus the coproduct corresponds to union in that subobject lattice. Therefore by D.1.4.10 in \cite{johnstone2002sketches2} we can compute the required coproduct to be
+        \[
+            [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ]: \{ \vec{a}.\bigvee_{t_{ij} \in P^2_{r_i,s_j} } \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{\vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta}\},
+        \]
+        where the map is forced to be this map by universal property, since it commutes with the inclusions.
+
+        Interestingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the boolean probability algebra axioms:
+        \[
+            [a_{ij} = b_i \wedge c_j]
+        \]
+
+        Thus we have shown that the required map is an isomorphism.
+
+        \item  Let
+        \begin{tikzcd}
+        \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
+        \end{tikzcd}
+        be a diagram in $\FinProb$. We show that $F$ preserves multi-equalizers. More specifically, if we have a family of forks
+        \[
+            \begin{tikzcd}
+            \gamma_i \arrow[r, "h_i"] & \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
+            \end{tikzcd}
+        \]
+        forming a multi-equalizer, then we need to show that
+        \[
+            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to eq(\begin{tikzcd}
+                F(\alpha) \arrow[r, "Ff", shift left] \arrow[r, "Fg"', shift right] & F(\beta)
+                \end{tikzcd})
+        \]
+        is an isomorphism.
+
+        We already know that multi-equalizers in $\FinProb$ are particularly simple. If $f = g$, then the family of forks consists of only the identity map $\id: \alpha \to \alpha$. In this case our claim becomes trivial.
+
+        Now assume that $f \neq g$. Then the multi-equalizer is the empty family. Thus our claim becomes that
+        \[
+            eq(\begin{tikzcd}
+                \{ \vec{a}.\phi^{\vec{a}}_{\alpha} \} \arrow[r, "{[\theta^{\vec{a},\vec{b}}_f]}", shift left] \arrow[r, "{[\theta^{\vec{a},\vec{b}}_g]}"', shift right] & \{ \vec{b}.\phi^{\vec{b}}_{\beta} \}
+                \end{tikzcd})
+        \]
+        is the initial object $\{\vec{a}.\bot\}$. In fact, using D.1.4.2 in \cite{johnstone2002sketches2}, we can compute this equalizer to be $\{ \vec{a} . (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}} \}$. This means that our objective is to show the sequent
+        \[
+            (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}} \vdash_{\vec{a}} \bot .
+        \]
+        Since that $f \neq g$, we have a $k$ be such that $f(k) \neq g(k)$. Now we can simply show that this sequent holds.
+        \begin{align*}
+            (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}}
+            &\vdash_{\vec{a}} (\exists \vec{b}) \bigwedge_{j \in \beta} (b_j = \bigvee_{f i = j} a_i) \wedge \bigwedge_{j \in \beta} (b_j = \bigvee_{g i = j} a_i) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \bigwedge_{j \in \beta} \big ( \bigvee_{f i = j} a_i = \bigvee_{g i = j} a_i \big ) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \big ( \bigvee_{f i = f k} a_i = \bigvee_{g i = f k} a_i \big ) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \big ( \bigvee_{f i = f k} a_i \wedge a_k = \bigvee_{g i = f k} a_i \wedge a_k \big ) \wedge \phi_{\alpha}^{\vec{a}}\\
+            &\vdash_{\vec{a}} (a_k = 0) \wedge \phi_{\alpha}^{\vec{a}} \\
+            &\vdash_{\vec{a}} \bot
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
+$\Lan_{\y}(U)$ and $\Lan_F$ define an equivalence of categories
+\[
+\Set^{\FinProb^{op}} \simeq \Set[\mathbb{T}_{bpalg}].
+\]
+\end{theorem}
+
+We warn the reader that the necessary ideas defining the equivalence have already been introduced, and that this proof consists of highly technical and uninsightful property-checking.
 
 
 \bibliographystyle{unsrt}

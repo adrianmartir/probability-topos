@@ -97,6 +97,7 @@ Somewhere in here we should definitely mention Olivia's bridges philosophy and h
 
 \section{Conventions} \label{conventions}
 
+% We don't want a conventions section. It doesn't seem to be often used in shorter papers. Moreover, one can simply introduce notation/conventions when it is needed and recalled if one thinks that the reader is in danger of forgetting it. Putting it all in the beginning just is the perfect way of making the reader forget it later.
 When there is need to be completely formal, the $\limit$ and $\colim$ operators in our sheaf toposes will not be defined only 'up to isomorphism', but rather taken the to be canonical constructions in sheaf toposes given by sheafifying the (co-)limit taken pointwise is $\Set$. In case the sheaf topos is a presheaf topos, we will omit the sheafification step. The same will hold for Kan extensions, as in our examples these are always computed as (co-)limits. When considering what is traditionally thought of different 'representatives' of an isomorphism class given by a limit or colimit, we will formalize this as simply claiming that an object (together with a corresponding universal (co-)cone) \emph{has} a universal property.
 
 % The remark above is a bit imprecise. How do we compute sheafification? We don't even need to, since we do it for presheaf topoi. Instead of writing this in the beginning (the reader will have forgotten this, or never have read this section), this should be written where it arises.
@@ -857,7 +858,7 @@ for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability alg
 Note that the models of $\mathbb{T}_{int}$ in $\Set$ must all be uncountable. We now look at some examples of intervals in $\Set$.
 
 \begin{definition}
-Call a boolean probability algebra $(A,\mu)$ simply a probability algebra, if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
+Call a boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
 \[
 \mu(\bigvee a_i) = \text{sup } \mu(a_i) .
 \]
@@ -1508,7 +1509,7 @@ Sheafification is not needed in our case however as the presheaf given in the st
 
 First notice that $\mathcal{F} f$ is injective and its image consists of precisely the $[s] \in \mathcal{F}(Z,\lambda)$ such that $s$ is constant on each fiber of $f$. We want to prove that these elements are precisely the ones with $\pi_1([s]) = \pi_2([s])$.
 
-Since the diagram above is always a fork, we just need to to prove that the elements $[s] \in \mathcal{F}(Z,\lambda)$ such that for some $\sigma \in H$, $s \circ \pi_1 = \sigma \circ s \circ \pi_2$, are already constant on the fibers of $f$. Elementwise, our assumption on $s$ is that for all $x,y$ with $f(x) = f(y)$ we have that
+Since the diagram above always commutes, we just need to to prove that the elements $[s] \in \mathcal{F}(Z,\lambda)$ such that for some $\sigma \in H$, $s \circ \pi_1 = \sigma \circ s \circ \pi_2$, are already constant on the fibers of $f$. Elementwise, our assumption on $s$ is that for all $x,y$ with $f(x) = f(y)$ we have that
 \[
     s (x) = \sigma (s y) .
 \]
