@@ -857,31 +857,43 @@ for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability alg
 
 Note that the models of $\mathbb{T}_{int}$ in $\Set$ must all be uncountable. We now look at some examples of intervals in $\Set$.
 
-\begin{definition}
-Call a boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
-\[
-\mu(\bigvee a_i) = \text{sup } \mu(a_i) .
-\]
-The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a probability algebra will simply be called measure algebras. A morphism of measure algebras is a morphism of boolean algebras that is measure-preserving.
-\end{definition}
+% \begin{definition}\label{probability_alg}
+% Call a boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
+% \[
+% \mu(\bigvee a_i) = \text{sup } \mu(a_i) .
+% \]
+% The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a probability algebra will simply be called measure algebras. A morphism of measure algebras is a morphism of boolean algebras that is measure-preserving.
+% \end{definition}
 
-Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
+% Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
 
-Measure algebras are the correct setting for doing measure theory while ignoring the effects of nullsets. They connect to the more standard setting for measure theory as follows: Given a $\sigma$-algebra $(X,\Sigma)$ and a measure on $(X,\Sigma)$, dividing out the nullsets out of $\Sigma$ is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. One can also conversely construct a measure space on a $\sigma$-algebra out of a measure algebra by using the Stone space of the measure algebra. For many more details on measure algebras, see chapter 32 of \cite{fremlin}, a notably long reference on measure theory.
+% Measure algebras are the correct setting for doing measure theory while ignoring the effects of nullsets. They connect to the more standard setting for measure theory as follows: Given a measure space $(X,\Sigma,\mu)$, dividing out the nullsets out of $\Sigma$ is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. One can also conversely construct a measure space on a $\sigma$-algebra out of a measure algebra by using the Stone space of the measure algebra. For many more details on measure algebras, see chapter 32 of \cite{fremlin}, a notably long reference on measure theory.
 
 \begin{example} \label{interval_examples}
+\mbox{}
 \begin{itemize}
 \item Let $(A,\mu)$ be an atomless probability algebra. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element $b
 \leq a$ of measure $s$. Consider the set
 \[
 S := \{ b \leq a \mid \mu(b) \leq s \}.
 \]
-Since every chain has a supremum, we can use Zorn's lemma to get a maximal element $b \in S$. Now consider the set
+Since every chain in $S$ has a supremum in $S$, we can use Zorn's lemma to get a maximal element $b \leq a$ with
+
 \[
-T := \{ b' \leq a \mid b' \geq b\} .
+    \mu(b) \leq s .
 \]
-What? This seems wrong... though the idea seems correct
-This has a minimal element $b'$ given by the meet of all elements of $T$. Note that $\mu(b') \geq s$ since $b' \geq b$. Thus, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
+
+Now consider the set
+\[
+T := \{ b' \leq a \mid b' \geq b, \mu(b') \geq s\} .
+\]
+Using Zorn's lemma again, we get a minimal element $b' \leq a$, $b' \geq b$ such that
+
+\[
+    \mu(b') \geq s
+\]
+
+By construction, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
 \item Let $I$ denote the boolean probability algebra defined by the boolean algebra of Borel-subsets of the interval modulo the ideal of null-sets. Note that we can equivalently divide out the null-sets out of the boolean algebra of Lebesgue-subsets of the interval. Let $(I, \lambda)$ denote this boolean algebra equipped with the Lebesgue measure, and call $(I, \lambda)$ the Lebesgue interval. This is an atomless measure algebra, so the Lebesgue interval $(I, \lambda)$ is actually an interval.
 \item More generally, any radon measure gives rise to an atomless measure algebra and thus also gives rise to an interval.
 \item Note that not all intervals are atomless probability algebras. Consider the subalgebra

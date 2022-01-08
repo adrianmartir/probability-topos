@@ -46,12 +46,14 @@
 \DeclareMathOperator*{\colim}{colim}
 \DeclareMathOperator{\Lan}{Lan}
 \DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\Geom}{Geom}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Flat}{Flat}
 \newcommand{\s}{\textsf{ }}
 
 \newcommand{\Set}{\textup{\textsf{Set}}}
 \newcommand{\FinProb}{\textup{\textsf{FinProb}}}
 \newcommand{\BPAlg}{\textup{\textsf{BPAlg}}}
-\newcommand{\Ind}{\textsf{Ind}}
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\Prob}{\mathfrak{Prob}}
 
@@ -190,7 +192,7 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 
         \item Checking that the representable functors are sheaves by using \ref{sheaf_condition_weak} reduces to the fact that the fork above is a coequalizer diagram.
 
-        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf topoi (since this fact can be checked pointwise in set).
+        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf toposes (since this fact can be checked pointwise in set).
     \end{enumerate}
 \end{proof}
 
@@ -198,7 +200,7 @@ Note that the second and third part are merely formal consequences of the first 
 
 Recall that a site $(\C, J)$, is called \emph{atomic} if every nonempty sieve over an object $c$ is covering. Furthermore, a Grothendieck topos is called \emph{atomic} if it is equivalent to a topos of sheaves over an atomic site. Tautologically, $\Prob$ can be seen to be an atomic topos. An object in an atomic topos is called an \emph{atom} if it has precisely two subobjects (the initial object and the object itself).
 
-We just saw that the representables $\y U_{r_i}$ are actually sheaves($\y$ denotes the Yoneda embedding). In fact, since $\Prob$ is an atomic topos, these representables are atoms. Moreover, for atomic topoi, every object can be uniquely written as a coproduct of atoms. So in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
+We just saw that the representables $\y U_{r_i}$ are actually sheaves($\y$ denotes the Yoneda embedding). In fact, since $\Prob$ is an atomic topos, these representables are atoms. Moreover, for atomic toposes, every object can be uniquely written as a coproduct of atoms. So in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
 
 
 \subsection{Finite Limits}
@@ -371,7 +373,7 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
             U_{r_i} \arrow[r, "f"'] & U_{s_i} ,
             \end{tikzcd}
         \]
-        (by noting that equalizers of coproducts are coproducts of equalizers in presheaf topoi, which can be checked pointwise), yields the formula
+        (by noting that equalizers of coproducts are coproducts of equalizers in presheaf toposes, which can be checked pointwise), yields the formula
         \begin{equation*}
             \begin{split}
             \y U_{r_i} &\times_{\y U_{s_i}} \y U_{r_i'} \cong \\
@@ -448,7 +450,7 @@ Note that this proposition actually had little to do with finite probability spa
 
 \section{$\Prob$ as the classifying topos of a theory of intervals}
 
-In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part, we will use the notations and definitions as in part D.1 of \cite{johnstone2002sketches2}. We warn the reader that this section contains big amounts of technical property-checking, so the uninterested reader can read the next definition and then skip to \ref{theory_of_intevals}.
+In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part, we will use the notations and definitions as in part D.1 of \cite{johnstone2002sketches2}.
 
 \begin{definition}
     Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
@@ -505,47 +507,72 @@ In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain t
             B_0(a) & \vdash a = 0.
         \end{align*}
     \end{itemize}
+    Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $\BPAlg$.
 \end{definition}
 
-Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. Notice that we require there to only be one element of measure zero. This requirement may be somewhat surprising, since the boolean algebra of measurable sets of a $\sigma$-algebra certainly can have sets of measure zero, or \emph{nullsets}. Instead, the reader should have the boolean algebra of measurable sets \emph{modulo nullsets} in mind, as the intended model.
+Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. Notice that we require that there is only one element of measure zero. This requirement may seem somewhat surprising, since the boolean algebra of measurable sets of a $\sigma$-algebra certainly can have sets of measure zero, or \emph{nullsets}. Instead, we have a different kind of model in mind.
 
 \begin{example}\label{mod_nullset}
+    Let $(X, \Sigma, \mu)$ be a probability space. Consider the equivalence relation $\sim$ on $\Sigma$ with
+    \begin{equation*}
+        A \sim B \text{ iff } \mu (A \setminus B \cup B \setminus A) = 0 .
+    \end{equation*}
+
+    We now consider the boolean algebra $B := \Sigma \, / \sim$\s (\emph{'measurable sets up to nullset'}) together with the unary relations $B_r \subset B$ given by the equivalence classes in $B$ that have measure $r$. This forms a boolean probability algebra.
+
+    Notice that the boolean probability algebras associated to the Borel and the Lebesgue intervals equipped with the Lebesgue measure are the same.
 \end{example}
 
-Let us get some more notation out of the way.
+This is a well-established construction and it yields what is known as a \emph{measure algebra}. In this case we even get a \emph{probability algebra}.
 
-\begin{definition}
-Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $\BPAlg$.
+\begin{definition}\label{probability_alg}
+    Call a boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
+    \[
+    \mu(\bigvee a_i) = \text{sup } \mu(a_i) .
+    \]
+    The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a probability algebra will simply be called measure algebras. A morphism of measure algebras is a morphism of boolean algebras that is measure-preserving.
 \end{definition}
 
-\begin{remark}
-    Note that we have an equivalence of categories
-    \[
-        \FinProb^{op} \simeq \BPAlg_f
-    \]
-    between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We don't prove this in detail nor do we give the equivalence explicitly, since we won't use this fact anywhere in this paper.
-\end{remark}
+Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
+
+Given a measure space $(X,\Sigma,\mu)$, dividing out the nullsets out of $\Sigma$ (as above) is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. Conversely, every measure algebra $(A,\mu)$ arises this way, which is proved using the Stone space associated to $A$. For more details, see \S 321 of \cite{fremlin2012measure}. For a more category-theoretic treatment of this \emph{'point-free'} approach to measure spaces and it's relationship to other approaches, see \cite{pavlov2022gelfand} or \cite{jamneshan2020foundational}.
+
+The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of boolean probability algebras is that we do not have actual measure algebras and thus we cannot make statements about infinite unions and infinite sums of measures. We believe such a thing would be impossible to do in geometric logic (or in first-order logic) in a manner that is fully satisfactory.
 
 \subsection{The classifying topos proof}
 
-We would like to show that the topos $\Set^{\FinProb^{op}}$ classifies $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
-\[
-\Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}} .
-\]
+We would like to show that the presheaf topos $\Set^{\FinProb^{op}}$ classifies the theory $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
 
-The main difficulty is that we have we have found no way of knowing whether the topos on the left-hand-side has enough points. For example, Deligne's theorem is inapplicable, since the theory is not coherent.
+\begin{equation}\label{equiv}
+    \Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}} ,
+\end{equation}
 
-Nevertheless, as a consistency check, one can verify that the models in $Set$ are equivalent by checking that
-\[
-    \BPAlg \simeq \Ind(\BPAlg_f) \simeq \Ind(\FinProb^{op}),
-\]
-but the proof of this fact is not short enough for us to provide it here.
+where $\Set[\mathbb{T}_{bpalg}]$ denotes the construction of the classifying topos of $\mathbb{T}_{bpalg}$ as the sheaves on a certain geometric category of formulas in context.
 
-We will prove the equivalence
-\[
-\Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}}
-\]
-by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
+The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
+
+\begin{remark}
+    We have an equivalence of categories
+    \[
+        \FinProb^{op} \simeq \BPAlg_f
+    \]
+    between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We omit the proof and the data of the equivalence, since we won't use this fact outside this remark.
+
+    If \ref{equiv} were to be true, we would have that the points (or models) of both toposes are equivalent. This fact can be directly verified, as a consisitency check, using \emph{Diaconescu's theorem}, the fact that flat functors to $\Set$ can be given as $\Ind$-completions and a substantial amount of property-checking for seeing that $\BPAlg$ is the $\Ind$-completion of $\BPAlg_f$:
+    \begin{align*}
+        \Geom(\Set,\Set[\mathbb{T}_{bpalg}]) &\simeq \mathbb{T}_{bpalg}\textup{-mod}(\Set) \\
+        &\simeq \BPAlg \\
+        &\simeq \Ind(\BPAlg_f) \\
+        &\simeq \Ind(\FinProb^{op}) \\
+        &\simeq \Flat(\FinProb, \Set) \\
+        &\simeq \Geom(\Set, \Set^{\FinProb^{op}}) ,
+    \end{align*}
+    where we use $\Geom$ to denote the category of geometric morphisms between two toposes, $\mathbb{T}_{bpalg}\textup{-mod}$ denotes the models of the theory in a topos, $\Flat$ denotes the flat functors from a small category into a left-exact category and $\Ind$ denotes the $\Ind$-completion of a small category.
+
+    While it is useful to know this, we want to prove the stronger statement \ref{equiv}.
+\end{remark}
+
+We will prove the equivalence \ref{equiv} by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
 Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
@@ -565,7 +592,7 @@ This yields a left-exact, colimit-preserving functor
 where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ with functors whose domain is the syntactic category of $\mathbb{T}_{bpalg}$.
 \end{lemma}
 \begin{proof}
-The last statement follows from the first part by using the universal property of classifying topoi.
+The last statement follows from the first part by using the universal property of classifying toposes.
 
 We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $\y U_r \to U$ are natural since morphisms in $\FinProb$ preserve measure.
 
