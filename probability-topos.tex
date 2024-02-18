@@ -192,7 +192,7 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 
         \item Checking that the representable functors are sheaves by using \ref{sheaf_condition_weak} reduces to the fact that the fork above is a coequalizer diagram.
 
-        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in presheaf toposes (since this fact can be checked pointwise in set).
+        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in $\Set$.
     \end{enumerate}
 \end{proof}
 
@@ -200,14 +200,14 @@ Note that the second and third part are merely formal consequences of the first 
 
 Recall that a site $(\C, J)$, is called \emph{atomic} if every nonempty sieve over an object $c$ is covering. Furthermore, a Grothendieck topos is called \emph{atomic} if it is equivalent to a topos of sheaves over an atomic site. Tautologically, $\Prob$ can be seen to be an atomic topos. An object in an atomic topos is called an \emph{atom} if it has precisely two subobjects (the initial object and the object itself).
 
-We just saw that the representables $\y U_{r_i}$ are actually sheaves($\y$ denotes the Yoneda embedding). In fact, since $\Prob$ is an atomic topos, these representables are atoms. Moreover, for atomic toposes, every object can be uniquely written as a coproduct of atoms. So in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
+We just saw that the representables are actually sheaves. In fact, since our site is atomic, these representables are atoms. Moreover, for atomic toposes, every object can be uniquely written as a coproduct of atoms. So, in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
 
 
 \subsection{Finite Limits}
 
 Our goal in the next two sections will be gaining an understanding of $\Prob$ from a more logical perspective. An absolute prerequisite for these discussions is a good understanding of finite limits in our topos. We will need products for controlling the number of free variables in our formulas and equalizers for expressing that two terms are equal.
 
-The idea is to first understand finite limits in $\FinProb$, since the sheaves we are interested in are coproducts of representables. But the situation is not as simple as one may hope: finite limits in $\FinProb$ only very rarely exist. Naturally, the presheaves $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
+The idea is to first understand finite limits in $\FinProb$, since the sheaves we are interested in are coproducts of representables. But the situation is not as simple as one may hope: finite limits in $\FinProb$ only very rarely exist. Naturally, the correspoinding representable presheaves in $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
 
 The most surprising part about multi-limits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an many statements in this paper are proved by using computations with multi-limits and polytopes.
 
@@ -313,7 +313,7 @@ We have seen that treating multi-limits requires us to talk about coproducts ove
         \item Define a \emph{set of atoms} to be a pair $(S, T)$, where $S$ is a subset of $\mathcal{A}$ and $T(x)$ is a set for all $x \in S$.
         \item The sheaf associated to a set of atoms $(S,T)$ will be defined by
         \[
-            \la T(x) \mid x \in S \ra := \coprod_{\substack{x \in S \\ y \in T(x)}} U_x ,
+            \la T(x) \mid x \in S \ra := \coprod_{\substack{x \in S \\ y \in T(x)}} \y U_x ,
         \]
         using U-notation.
         \item An \emph{element} of a set of atoms $(S,T)$ will be a tuple $(x,t) \in \coprod_{x \in S} T(x)$. If $T(x)$ is always either empty or the one-element set, we will abbreviate writing $(x,t)$ for an element of $(S,T)$ by merely stating that $x$ is an element of $(S,T)$.
@@ -322,7 +322,7 @@ We have seen that treating multi-limits requires us to talk about coproducts ove
 
 One subtlety about our definitions is that the set $\mathcal{A}$ will contain multiple distinct elements corresponding to the same atom, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order.
 
-Notice that the elements of a set of atoms $(S,T)$ index the coproduct in the defintion of $\la T(x) \mid x \in S \ra$. Moreover they can also be seen as the monomorphisms
+Notice that the elements of a set of atoms $(S,T)$ index the coproduct in the defintion of $\la T(x) \mid x \in S \ra$. Moreover, they can also be seen as the monomorphisms
 \[
     \y U_{r_i} \hookrightarrow \la T(x) \mid x \in S \ra
 \]
@@ -389,12 +389,12 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{remark} We have seen that the elements $t_{ij}$ of a binary multi-product\footnote{We have not specified what exactly the data $(S,T)$ is, for which we want to consider elements. In this case, and in the future, we trust that the reader is able to infer this data on his own.} are the $t_{ij} \in P^2_{r_i,s_i}$. This set can be seen a subset of the set of $n\times m$-matrices, which is, in fact, a polytope in $\mathbb{R}^{n\times m}$. The combinatorics literature has called these polytopes \emph{transportation polytopes}. Chapter 8 of \cite{brualdi2006combinatorial} is dedicated to their study.
 \end{remark}
 
-Notice that all the sheaves we have worked with until now can be written as sheaves associated to sets of atoms. One might hope that every sheaf can be written in this form, but as remarked earlier, this is not possible, since there are non-representable atoms. Nevertheless, our definitions can be easily extended to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
+Notice that all the sheaves we have worked with until now can be written as sheaves associated to sets of atoms. One might hope that every sheaf can be written in this form, but as remarked earlier, this is not possible, since there are non-representable atoms. Nevertheless, our notation can be easily extended to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
 
 The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphism, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
 
 \begin{proposition}\label{atom_coprod_maps}
-    Let $(S,T)$ and $(S',T')$ be sets of atoms and let $\mathcal{F}$ and $\mathcal{G}$ be their associated sheaves, respectively. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_x))$, where $g$ is a map between the sets of elements
+    Let $(S,T)$ and $(S',T')$ be sets of atoms and let $\mathcal{F}$ and $\mathcal{G}$ be their associated sheaves, respectively. Then the maps $\mathcal{F} \to \mathcal{G}$ are precisely pairs $(g, (f_{x,t}))$, where $g$ is a map between the sets of elements
     \[
         \coprod_{x \in S} T(x) \to \coprod_{x \in S'} T'(x)
     \]
@@ -404,7 +404,7 @@ The most convenient thing about sets of atoms, is that it is easy to send them t
     \]
 \end{proposition}
 \begin{proof}
-    Use the universal property of the coproduct of atoms and then use that each map needs to factor through one of the images because the image of an atom needs to be an atom again.
+    Using the universal property of the coproduct, we first see that a map $f: \mathcal{F} \to \mathcal{G}$ is determined by maps $\tilde{f}_{x,t}: \y U_x \to \mathcal{G}$ for each element $(x,t)$ of $(S,T)$. By the Yoneda lemma, there exists an element $g(x,t) := (x',t')$ of $(S',T')$ such that $\tilde{f}_{x,t}$ is determined by a $f_{x,t} \in \Hom(U_x, U_x')$. Now the $g$ and the family $(f_{x,t})$ give us the required decomposition of $f$.
 \end{proof}
 
 \subsection{A better sheaf condition}
@@ -537,7 +537,7 @@ Note that we have chosen a slightly more restrictive definition of measure algeb
 
 Given a measure space $(X,\Sigma,\mu)$, dividing out the nullsets out of $\Sigma$ (as above) is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. Conversely, every measure algebra $(A,\mu)$ arises this way, which is proved using the Stone space associated to $A$. For more details, see \S 321 of \cite{fremlin2012measure}. For a more category-theoretic treatment of this \emph{'point-free'} approach to measure spaces and it's relationship to other approaches, see \cite{pavlov2022gelfand} or \cite{jamneshan2020foundational}.
 
-The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of boolean probability algebras is that we do not have actual measure algebras and thus we cannot make statements about infinite unions and infinite sums of measures. We believe such a thing would be impossible to do in geometric logic (or in first-order logic) in a manner that is fully satisfactory.
+The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of boolean probability algebras is that we do not have actual measure algebras and thus we cannot make statements about infinite unions and infinite sums of measures. This gives us a first glimpse how naively working with the topos $\Prob$ limits us to the study of \emph{finitary phenomena}.
 
 \subsection{The classifying topos proof}
 
@@ -583,7 +583,7 @@ With this intuition in mind, how should we go about defining the universal model
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space (a map $f$ between probability spaces gets sent to the map that takes the preimage of each subset).
 
 \begin{lemma} \label{universal model}
-$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by $\y U_r$ and the boolean algebra operations given by the fact that at every $(X,\mu) \in \FinProb$, $U(X, \mu)$ is the powerset of $X$.
+$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by the inclusions of the $\y U_r$ and the boolean algebra operations are inherited from the boolean algebra structure of $U(X, \mu)$, the powerset of $X$.
 
 This yields a left-exact, colimit-preserving functor
 \[
@@ -594,9 +594,7 @@ where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ wi
 \begin{proof}
 The last statement follows from the first part by using the universal property of classifying toposes.
 
-We begin with some well-definedness remarks. The operations $\wedge, \vee$ and $\neg$ on $U$ can be defined pointwise by using the boolean algebra structure of powersets. Since the maps of finite probability spaces induce boolean algebra homomorphisms between the powersets, and these automatically preserve $\wedge, \vee \text{ and } \neg$, we get naturality of the operations. Similarly, the inclusions $\y U_r \to U$ are natural since morphisms in $\FinProb$ preserve measure.
-
-Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are trivial. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are immediate. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
 \end{proof}
 
 We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor.
