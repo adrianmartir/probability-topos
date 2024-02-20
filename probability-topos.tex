@@ -597,9 +597,7 @@ The last statement follows from the first part by using the universal property o
 Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are immediate. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
 \end{proof}
 
-We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor.
-
-We diverge from the notation in D.1 of \cite{johnstone2002sketches2} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
+We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor. We diverge from the notation in D.1 of \cite{johnstone2002sketches2} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
 
 \begin{lemma} \label{inverse}
 Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $F: \FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$ on the object $(X,\mu)$ and on the function $f$ as follows: Let
@@ -614,8 +612,6 @@ This yields a left-exact, colimit-preserving functor
     \Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}] .
 \]
 \end{lemma}
-
-Readers paying close attention to the proof strategy may wonder why we even bother showing left-exactness of $\Lan_F$. After all, if at the end we show that we have an equivalence of categories, we would get left-exactness for free. But it turns out, that proving that our functors are inverses to one another(see \ref{classifying_presheaf}) essentially requires this left-exactness property. We have marked the place in the proof where we use it by a footnote.
 
 \begin{proof}
     We need to show functoriality and then verify that $\Lan_F$ is left-exact. In order to check this left-exactness, we use theorem \Rmnum{7}.9.1 in \cite{maclane2012sheaves}(page 399). The cited theorem says that flat functors(defined as functors whose left Kan extension is left-exact) precisely correspond to the functors satisfying the straightforward list of properties listed in the definition of a filtering functor, which is defined in \Rmnum{7}.8.1 (page 394).
@@ -718,6 +714,8 @@ Readers paying close attention to the proof strategy may wonder why we even both
     \end{enumerate}
 \end{proof}
 
+We now prove that our constructions are mutual inverses.
+
 \begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
 $\Lan_{\y}(U)$ and $\Lan_F$ define an equivalence of categories
 \[
@@ -725,6 +723,57 @@ $\Lan_{\y}(U)$ and $\Lan_F$ define an equivalence of categories
 \]
 \end{theorem}
 
+
+\begin{proof}
+For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
+
+We first check that $\Lan_{\y}(U) \circ \Lan_F \cong \id$. Since these functors preserve colimits, we check only need to check this on representables. For a $U_{r_i}$, we get natural isomorphisms 
+\begin{equation*}
+\Lan_{\y}(U)(\Lan_F(\y U_{r_i}))
+\cong \Lan_{\y}(U)(\y \{\vec{a} . \phi^{\vec{a}}_{U_{r_i}} \})
+\cong \ldoub \vec{a} . \phi^{\vec{a}}_{U_{r_i}} \rdoub_U .
+\end{equation*}
+
+On an object $(X,\mu)$ this evaluates to the partitions $(a_i)$ of $(X,\mu)$ with measures $\mu(a_i) = r_i$, because the pullbacks and equalizers in the formula are computed on objects. On a morphism $f: (X,\mu) \to (Y,\nu)$, the presheaf evaluates to the map sending the partition $(a_i)$ of $(Y,\nu)$ to the partition $(f^{-1}a_i)$ of $(X,\mu)$. Thus this presheaf can be seen to be isomorphic to $\y U_{r_i}$.
+
+For proving naturality, let $(Y,\nu), (X,\mu), (X',\mu') \in \FinProb$. The diagram
+\[
+\begin{tikzcd}
+    {\Hom((Y,\nu),(X,\mu))} \arrow[r, "\cong"] \arrow[d, "f_*"'] & {\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U (Y,\nu)} \arrow[d, "{\ldoub \vec{a},\vec{b} . \theta_f \rdoub}"] \\
+    {\Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_U (Y,\nu)}
+\end{tikzcd}
+\]
+commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $\Lan_{\y}(U) \circ \Lan_F \cong \id$.
+
+We now prove that $\Lan_F \circ \Lan_{\y}(U) \cong \id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the signature of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
+
+We first check this for the sort $B$:
+\begin{equation}\label{lan_on_sort}
+\Lan_F(U) \cong \coprod_{r \in [0,1]} \y \{b . B_r b\} \cong \y \{b . \top\}, \tag{*}
+\end{equation}
+
+where the last isomorphism holds since the $\{b.B_r b\}$ cover $\{b.\top\}$ and are disjoint\footnote{This can be explicitly proven by using the Yoneda lemma and the sheaf condition.}.
+
+Next, we need to show that the above isomorphism actually is an isomorphism of $\mathbb{T}$-models. Explicitly, we have to show that for each function symbol $f$ our isomorphism \ref{lan_on_sort} induces an iso
+\[
+\begin{tikzcd}[column sep=tiny]
+    \Lan_F U^n \arrow[d, "\Lan_F U(f)"'] \arrow[r, "\cong"',phantom, shift right=7] & {\y \{a_1,\cdots,a_n . \top \}} \arrow[d, "{[f(a_1,\cdots,a_n) = a]}"] \\
+    \Lan_F U & \y \{a . \top \}
+\end{tikzcd}
+\]
+in the category of arrows in $\Set[\mathbb{T}]$, where the upper isomorphism is constructed by using \ref{inverse}.
+
+The 0-ary operation $U(0): * \to U$ comes from the inclusion into the component $U_0$ of $\coprod_{r\in [0,1]} U_r$. Applying $\Lan_F$ and suitably composing isomorphisms \ref{lan_on_sort} and $\{b.B_0 b\} \cong \{[].\top\}$ from \ref{inverse} yields the morphism $$[a=0]_*: \y \{[].\top\} \to \y\{a.\top\},$$ as desired.
+
+The binary operation $U(\wedge): U \times U \to U$ can be described as a map $\coprod_{t_{ij} \in P^2} U_{t_{ij}} \to \coprod_{r \in [0,1]} U_r$ by the components (see \ref{atom_coprod_maps}) $U_{t_{ij}} \to U_{t_{11}}$ sending the only the element of measure $t_{11}$ to the element of measure $t_{11}$. Sending this through $\Lan_F$ and again suitably composing \ref{lan_on_sort} and the \emph{inverse substution} $[a_{ij} = b_i \wedge c_j]$ described in (iv) of \ref{inverse} yields the map $$[a=a_1 \wedge a_2]_* : \y \{a_1,a_2.\top\} \to \y \{a.\top\},$$
+which happens to be just as desired.
+
+The unary operation $U(\neg): U \to U$ is given on components $U_r \to U_{1-r}$ by the map sending $0$ to $1$ and $1$ to $0$. Applying $\Lan_F$ and our isomorphisms yields the negation $$[a=\neg b]_*: \{b.\top\} \to \{a.\top\},$$
+
+as we wanted to prove.
+
+The symbols $1$ and $\vee$ now automatically get preserved, since they are both easily expressible in terms of $0$,$\vee$ and $\neg$. Sending $U_r \to \coprod U_r$ through $\Lan_F$ gives the expected subobject $\{a.B_r a\} \to \{a.\top\}$, concluding the proof.
+\end{proof}
 
 \bibliographystyle{unsrt}
 \bibliography{probability-topos}

@@ -103,66 +103,35 @@ $\Lan_{\y}(U)$ and $\Lan_F$ define an equivalence of categories
 \]
 \end{theorem}
 
-We warn the reader that the necessary ideas defining the equivalence have already been introduced, and that this proof consists of highly technical and uninsightful property-checking.
-
 \begin{proof}
 For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
 
-We check that the functors we defined are inverses to each other.
+We first check that $\Lan_{\y}(U) \circ \Lan_F \cong \id$. Since these functors preserve colimits, we check only need to check this on representables. For a $U_{r_i}$, we get natural isomorphisms 
+\begin{equation*}
+\Lan_{\y}(U)(\Lan_F(\y U_{r_i}))
+\cong \Lan_{\y}(U)(\y \{\vec{a} . \phi^{\vec{a}}_{U_{r_i}} \})
+\cong \ldoub \vec{a} . \phi^{\vec{a}}_{U_{r_i}} \rdoub_U .
+\end{equation*}
 
-We first check that $\Lan_{\y}(U) \circ \Lan_F \cong \id$. Since these functors preserve colimits, we check only need to check this on representables. So let $(X,\mu) \in \FinProb$. Then we get natural isomorphisms
+On an object $(X,\mu)$ this evaluates to the partitions $(a_i)$ of $(X,\mu)$ with measures $\mu(a_i) = r_i$, because the pullbacks and equalizers in the formula are computed on objects. On a morphism $f: (X,\mu) \to (Y,\nu)$, the presheaf evaluates to the map sending the partition $(a_i)$ of $(Y,\nu)$ to the partition $(f^{-1}a_i)$ of $(X,\mu)$. Thus this presheaf can be seen to be isomorphic to $\y U_{r_i}$.
 
-\begin{align*}
-\Lan_{\y}(U)(\Lan_F(\y(X,\mu))) &\cong \Lan_{\y}(U)(yF(X,\mu)) \\
-&\cong UF(X,\mu) \\
-&\cong U \{\vec{a} . \phi^{\vec{a}}_{X,\mu}\} \\
-&\cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U .
-\end{align*}
-
-It remains to show that we have a natural isomorphim $\y (X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$. First, we compute this functor on objects. Since the corresponding limits are computed pointwise, we first get a natural (in $(X,\mu)$) isomorphism
-\[
-\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U (Y,\nu) \cong \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)} .
-\]
-But computing these pullbacks and equalizers in $\Set$ yields
-\begin{align*}
-\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)} \cong
-\{\{V_x\} \subset Y \mid (\nu(V_x) = \mu(x)) \wedge (V_x \cap V_y = \emptyset) \text{ for } x,y \in X, x \neq y\} .
-\end{align*}
-
-Now we can use this together with the Yoneda lemma in order to give the required isomorphism $\y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ by the element $\{x\}_{x \in X} \in \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(X,\mu)}$. In order to show this actually is an isomorphism, we explicitly compute this isomorphism on an $f \in \y (X,\mu) (Y,\nu)$. In order to do that, we note that the functor $\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$ is a subfunctor of $\prod_{x \in X} U$, so that lets us see that the map
-\[
-\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(X,\mu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
-\]
-induced by $f$, sends $\{x\}_{x \in X}$ to $\{f^{-1} x\}_{x \in X}$. This means that the morphism
-\[
-\y (X,\mu) (Y,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U(Y,\nu)
-\]
-sends an $f$ to the family $\{f^{-1} x\}$. We should recognize this mapping from our discussions on the relationship between partitions and the presheaf $\y (X,\mu)$ in \ref{classifying_partitions}. We already discussed that this is a bijection and thus we get an isomorphism $\y (X,\nu) \to \ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U$.
-
-We still need to show this isomorphism is natural in $(X,\mu)$. We prove naturality on each $(Y,\nu) \in \FinProb$. So let $(X,\mu), (X',\mu') \in \FinProb$. The diagram
+For proving naturality, let $(Y,\nu), (X,\mu), (X',\mu') \in \FinProb$. The diagram
 \[
 \begin{tikzcd}
-    {\Hom((Y,\nu),(X,\mu))} \arrow[r, "\cong"] \arrow[d, "f_*"'] & {\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_{U(Y,\nu)}} \arrow[d, "{\ldoub \vec{a},\vec{b} . \theta_f \rdoub}"] \\
-    {\Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_{U(Y,\nu)}}
+    {\Hom((Y,\nu),(X,\mu))} \arrow[r, "\cong"] \arrow[d, "f_*"'] & {\ldoub \vec{a} . \phi^{\vec{a}}_{X,\mu} \rdoub_U (Y,\nu)} \arrow[d, "{\ldoub \vec{a},\vec{b} . \theta_f \rdoub}"] \\
+    {\Hom((Y,\nu),(X',\mu'))} \arrow[r, "\cong"]                 & {\ldoub \vec{a} . \phi^{\vec{a}}_{X',\mu'} \rdoub_U (Y,\nu)}
 \end{tikzcd}
 \]
 commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $\Lan_{\y}(U) \circ \Lan_F \cong \id$.
 
-We now prove that $\Lan_F \circ \Lan_{\y}(U) = \id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the 'signature' of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
+We now prove that $\Lan_F \circ \Lan_{\y}(U) \cong \id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the signature of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
 
-We first check this for the sort $B$. This means that we have to show that $\Lan_F(U) \cong \y \{b . \top\}$. This reduces to showing
-\[
-\coprod_{r \in [0,1]} \y \{b . B_r b\} \cong \y \{b . \top\} .
-\]
-We can prove this by showing that for every sheaf $\mathcal{F} \in \Set[\mathbb{T}]$, we have a natural bijection
-\[
-\Hom(\y \{b . \top\}, \mathcal{F}) \cong \prod_{r \in [0,1]} \Hom(\y \{b . B_r b\}, \mathcal{F})
-\]
-given by the inclusions $\iota_r : \{b . B_r b\} \to \{b . \top\}$. Applying the yoneda lemma on both sides, this is equivalent to showing that the inclusions induce an isomorphism
-\[
-\mathcal{F} \{b . \top\} \cong \prod_{r \in [0,1]} \mathcal{F} \{b . B_r b\} .
-\]
-But this can be checked by applying the sheaf condition to the cover of $\{b . \top\}$ given by the $\{b . B_r b\}$. Notice that here we are using the two partition axioms.
+We first check this for the sort $B$:
+\begin{equation}\label{lan_on_sort}
+\Lan_F(U) \cong \coprod_{r \in [0,1]} \y \{b . B_r b\} \cong \y \{b . \top\}, \tag{*}
+\end{equation}
+
+where the last isomorphism holds since the $\{b.B_r b\}$ cover $\{b.\top\}$ and are disjoint\footnote{This can be explicitly proven by using the Yoneda lemma and the sheaf condition.}.
 
 Next, we need to show that the above isomorphism actually is an isomorphism of $\mathbb{T}$-models. Explicitly, we have to show that for each function symbol $f$ our isomorphism induces an iso
 % TODO: This should be improved on.
@@ -172,7 +141,7 @@ Next, we need to show that the above isomorphism actually is an isomorphism of $
     \y \{a . \top \}                                                                                           & \Lan_F U
 \end{tikzcd}
 \]
-in the category of arrows in $\Set[\mathbb{T}]$. The upper isomorphim is induced by the data of the respective universal cones exhibiting the upper objects as cartesian products. We also need the analogous statement for relation symbols. In particular this apply this remark to Kan-extensions. Notice that here and also in what follows, we are taken the viewpoint on objects defined by universal property described in section \ref{conventions}.
+in the category of arrows in $\Set[\mathbb{T}]$, where the upper isomorphism is constructed by using \ref{inverses} and by using \ref{lan_on_sort}.
 
 We first consider the 0-ary function $U(0): * \to U$. We get the chain of isomorphisms
 
