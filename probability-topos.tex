@@ -99,7 +99,7 @@ In this section, we define the topos $\Prob$ as a category of sheaves on the cat
     \end{enumerate}
 \end{definition}
 
-Notice that all maps of finite probability spaces are surjective. Also notice that we do not allow elements of measure zero.
+Note that all maps of finite probability spaces are surjective, and we do not allow elements of measure zero.
 
 We want to consider the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ denotes the atomic topology. Recall that the atomic topology is defined by letting every nonempty sieve be a covering sieve. We need to check that this yields a Grothendieck topology.
 
@@ -207,11 +207,11 @@ We just saw that the representables are actually sheaves. In fact, since our sit
 
 Our goal in the next two sections will be gaining an understanding of $\Prob$ from a more logical perspective. An absolute prerequisite for these discussions is a good understanding of finite limits in our topos. We will need products for controlling the number of free variables in our formulas and equalizers for expressing that two terms are equal.
 
-The idea is to first understand finite limits in $\FinProb$, since the sheaves we are interested in are coproducts of representables. But the situation is not as simple as one may hope: finite limits in $\FinProb$ only very rarely exist. Naturally, the correspoinding representable presheaves in $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
+The idea is to first understand finite limits in $\FinProb$, since the sheaves we are interested in are coproducts of representables. But the situation is not as simple as one may hope: finite limits in $\FinProb$ only very rarely exist. Naturally, the corresponding representable presheaves in $\Set^{\FinProb^{op}}$ actually do have these finite limits, and we will see that they have a straightforward form. This will give rise to a weakened form of the notion of a limit, which we will call multi-limit. It will be essential in all our discussions about logic.
 
-The most surprising part about multi-limits will be their nontrivial combinatorial content and their connection to polytopes. We will see that an many statements in this paper are proved by using computations with multi-limits and polytopes.
+The most surprising part about multi-limits will be their nontrivial combinatorial content and their connection to polytopes. We will see that many statements in this paper are proven by using computations with multi-limits and polytopes.
 
-We introduce convenient notation to emphazise the combinatorial nature of finite probability spaces.
+We introduce convenient notation to emphasize the combinatorial nature of finite probability spaces.
 
 \begin{definition}[U-notation] \label{U-notation}
     \mbox{}
@@ -261,7 +261,7 @@ We now compute the finite limits of representables in $\Set^{\FinProb^{op}}$ (or
     send a pair of partitions $((a_i),(b_j))$ to the family $(a_i \wedge b_j)_{ij}$. The inverse of this map is given by joining the family with the projection maps described above.
 \end{proof}
 
-Notice that the isomorphism we proved is not quite a universal property in the traditional sense. Normally, we would have required $\y U_{r_i} \times \y U_{s_j}$ to actually be representable in order to be able to say that we have a products in $\FinProb$. But this does not work in our case, as it only is a coproduct of representables.
+Notice that the isomorphism we proved is not quite a universal property in the traditional sense. Normally, we would have required $\y U_{r_i} \times \y U_{s_j}$ to actually be representable in order to be able to say that we have binary products in $\FinProb$. But this does not work in our case, as it only is a coproduct of representables.
 
 We give a name to this weaker notion of a limit.
 
@@ -284,7 +284,7 @@ Finally, we also have multi-equalizers.
         \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \beta
         \end{tikzcd} in $\FinProb$ we have
     \[
-        eq(\begin{tikzcd}[column sep=small]
+        \eq(\begin{tikzcd}[column sep=small]
         \y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \y \beta
         \end{tikzcd}) \cong \y \alpha \text{ if } f = g \text{ and } \emptyset \text{ otherwise.}
     \]
@@ -292,7 +292,7 @@ Finally, we also have multi-equalizers.
 \begin{proof}
     The interesting case is when $f \neq g$. In that case we compute the equalizer pointwise on a finite probability space $\gamma$:
     \[
-        eq(\begin{tikzcd}[column sep=small]
+        \eq(\begin{tikzcd}[column sep=small]
         \y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \y \beta
         \end{tikzcd})(\gamma) \cong \{ h: \gamma \twoheadrightarrow \alpha \mid fh = gh \} \cong \emptyset .
     \]
@@ -301,7 +301,7 @@ Finally, we also have multi-equalizers.
 
 \subsection{A calculus of polytopes}
 
-We have seen that treating multi-limits requires us to talk about coproducts over certain index sets. As we progress further into the paper, we will encounter many more of these constructions. In order to describe these coproducts in a concise manner, we introduce simplified notation for them.
+We have seen that treating multi-limits requires us to talk about coproducts over certain index sets. As we progress further into the paper, we will encounter many more of these constructions. In order to describe these concisely, we introduce simplified notation for them.
 
 \begin{definition}
     \mbox{}
@@ -322,13 +322,13 @@ We have seen that treating multi-limits requires us to talk about coproducts ove
 
 One subtlety about our definitions is that the set $\mathcal{A}$ will contain multiple distinct elements corresponding to the same atom, simply because we are considering \emph{ordered} families $r_i$ and the space $U_{r_i}$ does not depend on the order.
 
-Notice that the elements of a set of atoms $(S,T)$ index the coproduct in the defintion of $\la T(x) \mid x \in S \ra$. Moreover, they can also be seen as the monomorphisms
+Notice that the elements of a set of atoms $(S,T)$ index the coproduct in the definition of $\la T(x) \mid x \in S \ra$. Moreover, they can also be seen as the monomorphisms
 \[
     \y U_{r_i} \hookrightarrow \la T(x) \mid x \in S \ra
 \]
 into the sheaf associated to $(S,T)$.
 
-Occasionally, we may add an additional properties $\phi_1, \phi_2, \cdots, \phi_n$ to the notation, as follows:
+Occasionally, we may add additional properties $\phi_1, \phi_2, \cdots, \phi_n$ to the notation, as follows:
 \[
     \la T(x) \mid x \in S, \phi_1(x), \cdots, \phi_n(x) \ra := \la T(x) \mid x \in \{x' \in S \mid \phi_1(x'), \cdots, \phi_n(x')\} \ra
 \]
@@ -347,10 +347,10 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
         \begin{equation*}
             \begin{split}
                 P^k_{r_i^1,\cdots r_i^k} := \{ (t_{i_1 \cdots i_k}) &\in \mathbb{R}^{n_1 \times \cdots \times n_k} \mid t_{i_1 \cdots i_k} \geq 0, \\
-                & \sum_{j=1}^{n_1} t_{j i_2 \cdots i_k} = r_1, \\
+                & \sum_{i_2,\cdots i_k} t_{j i_2 \cdots i_k} = r^1_j, \\
                 & \cdots \\
-                & \sum_{j=1}^{n_k} t_{i_1 i_2 \cdots j} = r_k \\
-                & \text{ for all indices } i_1, \cdots i_k \} .
+                & \sum_{i_1,\cdots i_{k-1}} t_{i_1 i_2 \cdots j} = r^k_j \\
+                & \text{ for any index } j \} .
             \end{split}
         \end{equation*}
     \end{enumerate}
@@ -404,7 +404,7 @@ The most convenient thing about sets of atoms, is that it is easy to send them t
     \]
 \end{proposition}
 \begin{proof}
-    Using the universal property of the coproduct, we first see that a map $f: \mathcal{F} \to \mathcal{G}$ is determined by maps $\tilde{f}_{x,t}: \y U_x \to \mathcal{G}$ for each element $(x,t)$ of $(S,T)$. By the Yoneda lemma, there exists an element $g(x,t) := (x',t')$ of $(S',T')$ such that $\tilde{f}_{x,t}$ is determined by a $f_{x,t} \in \Hom(U_x, U_x')$. Now the $g$ and the family $(f_{x,t})$ give us the required decomposition of $f$.
+    Using the universal property of the coproduct, we first see that a map $f: \mathcal{F} \to \mathcal{G}$ is determined by maps $\tilde{f}_{x,t}: \y U_x \to \mathcal{G}$ for each element $(x,t)$ of $(S,T)$. By the Yoneda lemma, there exists an element $g(x,t) := (x',t')$ of $(S',T')$ such that $\tilde{f}_{x,t}$ is determined by an $f_{x,t} \in \Hom(U_x, U_{x'})$. Now the $g$ and the family $(f_{x,t})$ give us the required decomposition of $f$.
 \end{proof}
 
 \subsection{A better sheaf condition}
@@ -437,7 +437,7 @@ $f$ certainly gives us a diagram
 \]
 with $\pi_1 \mathcal{F}(f) = \pi_2 \mathcal{F}(f)$. Claiming that this is an equalizer means saying that for every $a \in \mathcal{F}U_{r_i}$ with the property that for all the projections $p_1: U_{t_{ij}} \to U_{r_i}$, $p_2: U_{t_{ij}} \to U_{r'_i}$ the equation $\mathcal{F}(p_1)(a) = \mathcal{F}(p_2)(a)$ is satisfied, implies that there is a unique lift $b \in \mathcal{F}U_{s_i}$ of $a$.
 
-So our claim is that the criterion described above needs only be checked on the $U_{t_{ij}}$. Thus we assume that the equation above holds for the $U_{t_{ij}}$ with their projection maps. We need to show that the equation $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$ already holds for all the \[
+So our claim is that the criterion described above needs only be checked on the $U_{t_{ij}}$. Thus, we assume that the equation above holds for the $U_{t_{ij}}$ with their projection maps. We need to show that the equation $\mathcal{F}(g)(a) = \mathcal{F}(h)(a)$ already holds for all the \[
 \begin{tikzcd}
 \gamma \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & U_{r_i}
 \end{tikzcd}
@@ -485,7 +485,7 @@ In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain t
                 &\textit{associativity} \\
                 &\textit{identity} \\
                 &\textit{inverse} \\
-                &\textit{absorbtion} \\
+                &\textit{absorption} \\
                 &\textit{distributivity} \\
             \end{split}
         \end{equation*}
@@ -523,7 +523,7 @@ Essentially, we have encoded a boolean probability algebra geometrically by part
     Notice that the boolean probability algebras associated to the Borel and the Lebesgue intervals equipped with the Lebesgue measure are the same.
 \end{example}
 
-This is a well-established construction and it yields what is known as a \emph{measure algebra}. In this case we even get a \emph{probability algebra}.
+This is a well-established construction, and it yields what is known as a \emph{measure algebra}. In this case we even get a \emph{probability algebra}.
 
 \begin{definition}\label{probability_alg}
     Call a boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
@@ -535,13 +535,13 @@ This is a well-established construction and it yields what is known as a \emph{m
 
 Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
 
-Given a measure space $(X,\Sigma,\mu)$, dividing out the nullsets out of $\Sigma$ (as above) is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. Conversely, every measure algebra $(A,\mu)$ arises this way, which is proved using the Stone space associated to $A$. For more details, see \S 321 of \cite{fremlin2012measure}. For a more category-theoretic treatment of this \emph{'point-free'} approach to measure spaces and it's relationship to other approaches, see \cite{pavlov2022gelfand} or \cite{jamneshan2020foundational}.
+Given a measure space $(X,\Sigma,\mu)$, dividing out the nullsets out of $\Sigma$ (as above) is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. Conversely, every measure algebra $(A,\mu)$ arises this way, which is proved using the Stone space associated to $A$. For more details, see \S 321 of \cite{fremlin2012measure}. For a more category-theoretic treatment of this \emph{'point-free'} approach to measure spaces, and it's relationship to other approaches, see \cite{pavlov2022gelfand} or \cite{jamneshan2020foundational}.
 
-The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of boolean probability algebras is that we do not have actual measure algebras and thus we cannot make statements about infinite unions and infinite sums of measures. This gives us a first glimpse how naively working with the topos $\Prob$ limits us to the study of \emph{finitary phenomena}.
+The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of boolean probability algebras is that we do not have actual measure algebras, and thus we cannot make statements about infinite unions and infinite sums of measures. This gives us a first glimpse how naively working with the topos $\Prob$ limits us to the study of \emph{finitary phenomena}.
 
-\subsection{The classifying topos proof}
+\subsection{Classifying the theory of boolean probability algebras}
 
-We would like to show that the presheaf topos $\Set^{\FinProb^{op}}$ classifies the theory $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
+We would like to show that the presheaf topos \newline $\Set^{\FinProb^{op}}$ classifies the theory $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
 
 \begin{equation}\label{equiv}
     \Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}} ,
@@ -558,7 +558,7 @@ The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
     \]
     between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We omit the proof and the data of the equivalence, since we won't use this fact outside this remark.
 
-    If \ref{equiv} were to be true, we would have that the points (or models) of both toposes are equivalent. This fact can be directly verified, as a consisitency check, using \emph{Diaconescu's theorem}, the fact that flat functors to $\Set$ can be given as $\Ind$-completions and a substantial amount of property-checking for seeing that $\BPAlg$ is the $\Ind$-completion of $\BPAlg_f$:
+    If \ref{equiv} were to be true, we would have that the points (or models) of both toposes are equivalent. This fact can be directly verified, as a consistency check, using \emph{Diaconescu's theorem}, the fact that flat functors to $\Set$ can be given as $\Ind$-completions and a substantial amount of property-checking for seeing that $\BPAlg$ is the $\Ind$-completion of $\BPAlg_f$:
     \begin{align*}
         \Geom(\Set,\Set[\mathbb{T}_{bpalg}]) &\simeq \mathbb{T}_{bpalg}\textup{-mod}(\Set) \\
         &\simeq \BPAlg \\
@@ -574,9 +574,9 @@ The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
 
 We will prove the equivalence \ref{equiv} by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
-Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
+Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent disjoint elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
-With this intuition in mind, how should we go about defining the universal model defining the functor $\Set[\mathbb{T}_{bpalg}] \to \Set^{\FinProb^{op}}$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
+With this intuition in mind, how should we go about defining the universal model defining the geometric morphism $\Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}]$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
 \coprod_{r \in [0,1]} \y U_r \in \Set^{\FinProb^{op}} .
 \]
@@ -597,7 +597,7 @@ The last statement follows from the first part by using the universal property o
 Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are immediate. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
 \end{proof}
 
-We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor. We diverge from the notation in D.1 of \cite{johnstone2002sketches2} in that we will sometimes annotate a formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
+We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor. We diverge from the notation in D.1 of \cite{johnstone2002sketches2} in that we will sometimes annotate formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
 
 \begin{lemma} \label{inverse}
 Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $F: \FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$ on the object $(X,\mu)$ and on the function $f$ as follows: Let
@@ -658,18 +658,17 @@ This yields a left-exact, colimit-preserving functor
         \[
             [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ] :\{ \vec{a}. \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{ \vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta} \} .
         \]
-        By using the partition axiom multiple times, we notice that the formulas $\{ \vec{a} . \phi^{\vec{a}}_{U_{t_{ij}}}\}$ are disjoint (in the subobject lattice of $\{ \vec{a} . \top \}$). Thus the coproduct corresponds to union in that subobject lattice. Therefore by D.1.4.10 in \cite{johnstone2002sketches2} we can compute the required coproduct to be
+        By using the partition axiom multiple times, we notice that the formulas $\{ \vec{a} . \phi^{\vec{a}}_{U_{t_{ij}}}\}$ are disjoint (in the subobject lattice of $\{ \vec{a} . \top \}$). Thus, the coproduct corresponds to union in that subobject lattice. Therefore, by D.1.4.10 in \cite{johnstone2002sketches2} we can compute the required coproduct to be
         \[
-            [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ]: \{ \vec{a}.\bigvee_{t_{ij} \in P^2_{r_i,s_j} } \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{\vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta}\},
+            [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ]: \{ \vec{a}.\bigvee_{t_{ij} \in P^2_{r_i,s_j} } \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{\vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta}\}.
         \]
-        where the map is forced to be this map by universal property, since it commutes with the inclusions.
 
         Interestingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the boolean probability algebra axioms:
         \[
             [a_{ij} = b_i \wedge c_j]
         \]
 
-        Thus we have shown that the required map is an isomorphism.
+        Thus, we have shown that the required map is an isomorphism.
 
         \item  Let
         \begin{tikzcd}
@@ -683,7 +682,7 @@ This yields a left-exact, colimit-preserving functor
         \]
         forming a multi-equalizer, then we need to show that
         \[
-            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to eq(\begin{tikzcd}
+            \coprod_i F(h_i) : \coprod_i F(\gamma_i) \to \eq(\begin{tikzcd}
                 F(\alpha) \arrow[r, "Ff", shift left] \arrow[r, "Fg"', shift right] & F(\beta)
                 \end{tikzcd})
         \]
@@ -691,9 +690,9 @@ This yields a left-exact, colimit-preserving functor
 
         We already know that multi-equalizers in $\FinProb$ are particularly simple. If $f = g$, then the family of forks consists of only the identity map $\id: \alpha \to \alpha$. In this case our claim becomes trivial.
 
-        Now assume that $f \neq g$. Then the multi-equalizer is the empty family. Thus our claim becomes that
+        Now assume that $f \neq g$. Then the multi-equalizer is the empty family. Thus, our claim becomes that
         \[
-            eq(\begin{tikzcd}
+            \eq(\begin{tikzcd}
                 \{ \vec{a}.\phi^{\vec{a}}_{\alpha} \} \arrow[r, "{[\theta^{\vec{a},\vec{b}}_f]}", shift left] \arrow[r, "{[\theta^{\vec{a},\vec{b}}_g]}"', shift right] & \{ \vec{b}.\phi^{\vec{b}}_{\beta} \}
                 \end{tikzcd})
         \]
@@ -734,7 +733,7 @@ We first check that $\Lan_{\y}(U) \circ \Lan_F \cong \id$. Since these functors 
 \cong \ldoub \vec{a} . \phi^{\vec{a}}_{U_{r_i}} \rdoub_U .
 \end{equation*}
 
-On an object $(X,\mu)$ this evaluates to the partitions $(a_i)$ of $(X,\mu)$ with measures $\mu(a_i) = r_i$, because the pullbacks and equalizers in the formula are computed on objects. On a morphism $f: (X,\mu) \to (Y,\nu)$, the presheaf evaluates to the map sending the partition $(a_i)$ of $(Y,\nu)$ to the partition $(f^{-1}a_i)$ of $(X,\mu)$. Thus this presheaf can be seen to be isomorphic to $\y U_{r_i}$.
+On an object $(X,\mu)$ this evaluates to the partitions $(a_i)$ of $(X,\mu)$ with measures $\mu(a_i) = r_i$, because the pullbacks and equalizers in the formula are computed on objects. On a morphism $f: (X,\mu) \to (Y,\nu)$, the presheaf evaluates to the map sending the partition $(a_i)$ of $(Y,\nu)$ to the partition $(f^{-1}a_i)$ of $(X,\mu)$. Thus, this presheaf can be seen to be isomorphic to $\y U_{r_i}$.
 
 For proving naturality, let $(Y,\nu), (X,\mu), (X',\mu') \in \FinProb$. The diagram
 \[
@@ -745,7 +744,7 @@ For proving naturality, let $(Y,\nu), (X,\mu), (X',\mu') \in \FinProb$. The diag
 \]
 commutes because this is the way $\{\vec{a},\vec{b} . \theta_f \}$ internalizes in a $\Set$-model. This concludes our proof of $\Lan_{\y}(U) \circ \Lan_F \cong \id$.
 
-We now prove that $\Lan_F \circ \Lan_{\y}(U) \cong \id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the signature of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphazise that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
+We now prove that $\Lan_F \circ \Lan_{\y}(U) \cong \id$. Since all the functors involved are left-exact and colimit-preserving, it suffices to show that the isomorphism holds on the corresponding models of $\mathbb{T}$ inside $\Set[\mathbb{T}]$. This means we have to compute $\Lan_F \circ \Lan_{\y}(U)$ on the signature of $\mathbb{T}$ and show that the yielded structure is isomorphic as a $\mathbb{T}$-model to the universal model of $\Set[\mathbb{T}]$. \footnote{One should emphasize that this reduction step is the only reason that we laboriously showed that $F$ is left-exact.}
 
 We first check this for the sort $B$:
 \begin{equation}\label{lan_on_sort}
@@ -775,6 +774,111 @@ as we wanted to prove.
 The symbols $1$ and $\vee$ now automatically get preserved, since they are both easily expressible in terms of $0$,$\vee$ and $\neg$. Sending $U_r \to \coprod U_r$ through $\Lan_F$ gives the expected subobject $\{a.B_r a\} \to \{a.\top\}$, concluding the proof.
 \end{proof}
 
+\begin{remark}
+    There is a way to embed $\Set[\mathbb{T}_{bpalg}]$ into a coherent topos. We simply expand our theory to include boolean algebras $B$ together with a map $B \to A$ into an arbitrary abelian group $A$ with a fixed element $1$, satisfying conditions analogous to the ones for the measure of a boolean probability algebra. The classifying topos of this theory is coherent, and thus it has enough points. Since it contains $\Set[\mathbb{T}_{bpalg}]$ as a subtopos, this might yield a strategy for proving \ref{classifying_presheaf} without the lengthy syntactical detour.
+\end{remark}
+
+\subsection{Classifying the theory of intervals} \label{theory_of_intervals}
+
+We will show that the topos $\Sh(\FinProb, J_{at})$ classifies the following theory of intervals.
+
+
+\begin{definition}
+    Define the \textit{theory of intervals} $\mathbb{T}_{int}$ by adding the axioms
+    \[
+    B_s a \vdash_a (\exists b) \big ( (b = a \wedge b) \wedge B_r b \big )
+    \]
+    for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability algebras.
+\end{definition}
+
+The models of $\mathbb{T}_{int}$ in $\Set$ must all be uncountable.
+
+\begin{example} \label{interval_examples} We consider some examples of intervals.
+\begin{enumerate}
+\item Let $(A,\mu)$ be an atomless probability algebra. Let $a \in A$ with $\mu(a) = r$ and let $s \in [0,r]$. We use the axiom of choice to construct an element $b
+\leq a$ of measure $s$. Consider the set
+\[
+S := \{ b \leq a \mid \mu(b) \leq s \}.
+\]
+Since every chain in $S$ has a supremum in $S$, we can use Zorn's lemma to get a maximal element $b \leq a$ with
+
+\[
+    \mu(b) \leq s .
+\]
+
+Now consider the set
+\[
+T := \{ b' \leq a \mid b' \geq b, \mu(b') \geq s\} .
+\]
+Using Zorn's lemma again, we get a minimal element $b' \leq a$, $b' \geq b$ such that
+
+\[
+    \mu(b') \geq s
+\]
+
+By construction, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus, we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
+\item Let $(I,\lambda)$ denote the boolean probability algebra associated to the $\sigma$-algebra of Lebesgue-subsets of $I := [0,1]$ equipped with the Lebesgue measure (use the construction from example \ref{mod_nullset}). This is an atomless measure algebra and thus an interval. We will refer to $(I, \lambda)$ as the \emph{Lebesgue interval}.
+\item Note that not all intervals are atomless probability algebras. Consider the subalgebra
+\[
+A = \{(x_i) \in \prod_{i=1}^{\infty} I \mid \text{ finitely many } x_i \neq 0 \text{ or finitely many } x_i \neq 1 \}
+\]
+of the product of boolean algebras $\prod_{i \in \mathbb{N}} I$, where $(I, \lambda)$ is the Lebesgue interval. $A$ is the boolean algebra generated by elements that are everywhere zero except at one index. Note that $A$ is not complete, and we have a measure on this boolean algebra defined by
+\[
+\mu((x_i)) := \sum_{i=1}^{\infty} 2^{-i} \lambda(x_i) ,
+\]
+where $\lambda$ denotes the Lebesgue measure on the $i$th Lebesgue interval. It can be easily seen that the defined boolean probability algebra is actually an interval.
+\end{enumerate}
+\end{example}
+
+We state the main result of this section.
+
+\begin{theorem} \label{classifying}
+    The topos $\Sh(\FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$. The desired equivalence is given by the universal model $U$.
+\end{theorem}
+
+\begin{proof}
+    We extend our result about presheaves in Theorem \ref{classifying_presheaf} to the sheaf case. By Theorem 8.1.12 in \cite{caramello2018theories}, there exists a unique quotient theory (up to syntactic equivalence) of $\mathbb{T}_{bpalg}$, such that its models (in a topos $\mathcal{E}$) are precisely the $J_{at}$-homogeneous models (in $\mathcal{E}$).
+    This theory is given by adding an axiom
+    \[
+    \phi_{\alpha}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
+    \]
+    for each morphism $f: \alpha \to \beta$ in $\FinProb$ to the theory $\mathbb{T}_{bpalg}$. One can easily see that the axioms
+    \[
+    \phi_{U_{r+s,t}}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
+    \]
+    are sufficient, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. These are precisely reformulations of the interval axioms.
+
+    We have shown that theory $\mathbb{T}_{int}$ classifies the topos $j: \Sh(\FinProb, J_{at}) \to \Set^{\FinProb^{op}}$. In this setting, for any Grothendieck topos $\mathcal{E}$, we get a square
+    \begin{equation}\label{geometric_com}
+        \begin{tikzcd}
+            \Geom(\mathcal{E},\Sh(\FinProb,J_{at})) \arrow[d, "j \circ -"] \arrow[r, "\simeq"] & {\mathbb{T}_{int}\textup{-mod}(\mathcal{E})} \arrow[d] \\
+            \Geom(\mathcal{E},\Set^{\FinProb^{op}}) \arrow[r, "\simeq"]         & {\mathbb{T}_{bpalg}\textup{-mod}(\mathcal{E})}, \tag{*}
+        \end{tikzcd}
+    \end{equation}
+    of geometric morphisms that commutes up to isomorphism (as in Theorem 8.1.3 in \cite{caramello2018theories}). 
+    
+    To compute the universal model, insert the identity $\textup{Id}_{\Sh(\FinProb,J_{at})}$ into the top-left corner. Applying the left and bottom morphisms, yields the sheafification $j^*(U)$ (as a boolean probability algebra). Since the underlying presheaf $U$ is already a sheaf by Proposition \ref{subcanonical} (iii), this must be $U$. Thus, the result on the top-right must be the boolean probability algebra $U$, as required.
+\end{proof}
+
+We can describe more explicitly how this result lets us view \emph{intervals} as geometric morphisms $\Set \to \Sh(\FinProb,J_{at})$.
+
+\begin{remark} \label{classifying_equiv_data}
+    The diagram \ref{geometric_com} in the proof above has fully faithful functors on the left and on the right. This means that we describe the functor
+    \[
+        \mathbb{T}_{int}\textup{-mod}(\mathcal{E}) \xrightarrow{\simeq} \Geom(\mathcal{E},\Sh(\FinProb,J_{at}))
+    \]
+    yielding the equivalence as a restriction of the functor in \ref{inverse}.
+    
+    In particular, if we have a model $(A,\mu)$ of $\mathbb{T}_{int}$ in $\Set$, we can view it as a geometric morphism $\Set \to \Sh(\FinProb, J_{at})$ by specifying it as the $J_{at}$-flat functor $\FinProb \to \Set$ given by sending a finite probability space $(X,\nu)$ to the set
+    \[
+    \{(a_i)_{i \in X} \mid a_i \in A \text{ are pairwise disjoint, } \mu(a_i) = \nu(i) \}
+    \]
+    and by sending a map $(X,\nu_1) \to (Y,\nu_2)$ to the map
+    \[
+    (a_j)_{j \in X} \mapsto \big (\bigvee_{f(j) = i} a_j \big )_{i \in Y} .
+    \]
+\end{remark}
+    
 \bibliographystyle{unsrt}
 \bibliography{probability-topos}
 
