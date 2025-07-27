@@ -364,8 +364,13 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
         where $1$ denotes the one-object set.
         \item Since $\FinProb$ has a terminal object, we can use our binary multi-product formula in order to compute arbitrary finite multi-products:
         \[
-            \prod_{j=1}^n \y U_{r_i^j} \cong \la 1 \mid t_{i^1 \cdots i^n} \in P^n_{r_i^1 \cdots r_i^n} \ra
+            \prod_{j=1}^n \y U_{r_i^j} \cong \la 1 \mid t_{i_1 \cdots i_n} \in P^n_{r_i^1 \cdots r_i^n} \ra
         \]
+        In more detail, given a family $t_{i_1\cdots i_n} \in P^n_{r_i^1,\cdots r_i^n}$, the projections
+        \[
+            \iota^k: U_{t_{i_1,\cdots i_n}} \to U_{r_k}
+        \]
+        given by $a_{i_1,\cdots i_n} \mapsto \bigvee_{i_1,\cdots i_{j-1}, i_{j+1},\cdots i_n} a_{i_1,\cdots,i_{j-1},j,i_{j+1},\cdots i_n}$ assemble into an $n$-ary multi-product.
         \item Computing the multi-pullback of a diagram
         \[
             \begin{tikzcd}
@@ -878,7 +883,59 @@ We can describe more explicitly how this result lets us view \emph{intervals} as
     (a_j)_{j \in X} \mapsto \big (\bigvee_{f(j) = i} a_j \big )_{i \in Y} .
     \]
 \end{remark}
-    
+
+\subsection{Completeness and quantifier elimination}
+
+The abstract categorical statement of Theorem \ref{classifying} has some very concrete consequences for the structure of formulas-in-context up to $\mathbb{T}_{int}$-provable equivalence, since those bijectively correspond to isomorphism classes of subobjects of a power of the universal model $U$.
+
+While we typically the fragment of logic preserved by (inverse images of) geometric morphisms is geometric logic, if a topos (such as $\Prob$) is boolean, then every geometric morphism into it will also preserve negation. This is the case since the complement $b$ of a subobject $a$ can be uniquely determined by saying that $a \wedge b = 0$ and $a \vee b = 1$, which is a property that gets preserved. In other words, every geometric morphism into a boolean topos is open.
+
+This has the pleasant consequence that every model of $\mathbb{T}_{int}$ in \emph{any} Grothendieck topos will satisfy all $\mathbb{T}_{int}$-provable sequent possibly containing \emph{infinitary} first-order-formulas. In this way, the fact that the classifying topos of $\mathbb{T}_{int}$ is atomic does not only have consequences for geometric sequents, but also for infinitary first-order sequents.
+
+In the following statement, let the term $x^{\epsilon}$ denote $x$ if $\epsilon = 1$ and $\neg x$ if $\epsilon = 2$.
+
+\begin{corollary}
+    For every infinitary first-order formula $\{\vec{x}. \psi\}$ in context over the variables $x_1,\cdots, x_n$, there is a subset $S \subset P^n_{2,\cdots,2}$ such that we have the $\mathbb{T}_{int}$-provable equivalence
+    \[
+        \psi \dashv \vdash_{\vec{x}} \bigvee_{t_{i_1,\cdots,i_n} \in S} \phi^{\vec{y}}_{U_{t_{i_1,\cdots,i_n}}} [ x_1^{i_1} \wedge \cdots \wedge x_n^{i_n} / y_{i_1,\cdots, i_n}] ,
+    \]
+    where the context $\vec{y}$ used for substitution contains $2^n$ variables $y_{i_1,\cdots,i_n}$ indexed by $n$-tuples $i_1,\cdots,i_n$ of elements $i_j \in \{1,2\}$. 
+\end{corollary}
+
+\begin{proof}
+    We start with an analysis of the subobjects of $U^n$. Recall (from Example \ref{notation_example}) that $U_{r_1} \times \cdots U_{r_n} \cong \langle * \mid t_{i_1,\cdots, i_n} \in P^n_{r_1,\cdots r_n} \rangle$ and that the maps $U_{t_{i_1,\cdots i_n}} \to U_{r_1} \times \cdots U_{r_n}$ are given by
+    \[
+        a_{i_1,\cdots i_n} \mapsto (\bigvee_{i_2,\cdots i_n} a_{1,i_2,\cdots i_n},\cdots, \bigvee_{i_1,\cdots i_{n - 1}} a_{i_1,\cdots i_{n - 1}, 1}) .
+    \]
+    Composing these maps with the inclusions $\y U_{r_1} \times \cdots \y U_{r_n} \to U^n$ yields the subobject of $U^n$ given by the formula-in-context
+    \[
+        \{ \vec{x} . \phi^{\vec{y}}_{U_{t_{i_1,\cdots i_n}}} [ x_1^{i_1} \wedge \cdots \wedge x_n^{i_n} / y_{i_1,\cdots, i_n}] \} .
+    \]
+    Moreover, these are precisely the atoms of the subobject lattice of $U^n$ and thus there is a subset $S \subset P^n_{2,\cdots,2}$ such that we have an isomorphism
+    \[
+        \{ \vec{x} . \psi \} \cong \{ \vec{x} . \bigvee_{t_{i_1,\cdots,i_n} \in S} \phi^{\vec{y}}_{U_{t_{i_1,\cdots,i_n}}} [ x_1^{i_1} \wedge \cdots \wedge x_n^{i_n} / y_{i_1,\cdots, i_n}] \} .
+    \]
+    By the discussion above about infinitary first-order logic, this does translate to the corresponding isomorphism in any (possibly categorical) model of $\mathbb{T}_{int}$. Completeness of the deduction system for infinitary first-order logic now implies the claim.
+\end{proof}
+
+This is a form of quantifier elimination. Every infinitary first-order formula is $\mathbb{T}_{int}$-provably equivalent to a quantifier-free geometric formula. The quantifier-free geometric formula may very well contain proper infinitary disjunctions, so this cannot be compared to a quantifier-elimination type statement for classical, finitary, first-order logic.
+
+The case $n = 0$ of the previous result deserves some additional attention:
+
+\begin{corollary}
+    Every infinitary first-order formula over the empty context is $\mathbb{T}_{int}$-provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{int}$.
+\end{corollary}
+
+\begin{proof}
+    $P^0 = 1$, which has precisely two subsets that yield the formulas $\bot$ and $\top$.
+\end{proof}
+
+This result is particularly remarkable, since it tells us that for the purposes of studying infinitary first-order sentences for the theory $\mathbb{T}_{int}$, \emph{the choice of the interval does not matter}. This supports the widespread practice in probability theory of working with \emph{some} $\sigma$-algebra, but never putting any special attention on its specific features. In fact, it tells us that, without losing generality, we might as well work with the Lebesgue interval $(I,\lambda)$.
+
+On the flip side, this also gives a theoretical guarantee that $\Prob$ is a suitable \emph{synthetic} context for probability theory: Any infinitary sentence that you are able to prove for \emph{some} interval, will also hold for the model $U$ in $\Prob$.
+
+The question remains whether the theory $\mathbb{T}_{int}$ (and also the topos $\Prob$) are suitable settings for \emph{stating} the types of theorems one would be interested in probability theory. We shall see that this logic does only capture a \emph{fragment} of those theorems, due to (infinitary) first-order languages limiting discussions about sequences.
+
 \bibliographystyle{unsrt}
 \bibliography{probability-topos}
 
