@@ -951,7 +951,7 @@ Still, it is important to remark that while this might seem like a deficiency of
 
 So, while we could easily fix the problem above by enlarging $\FinProb$ to contain more objects (such as countable finite probability spaces, or even general polish spaces), statements involving countable products will not have the usual semantic counterparts for intervals (there is no clear soundness theorem).
 
-It remains a \emph{key open question} whether semantics for extensions of infinitary first-order logic that allow modelling of sequences can be defined in a manner that includes the usual examples of intervals.
+Fixing this does require \emph{rethinking what the category of Grothendieck toposes and geometric morphisms is}, by modifying it so that the inverse image functors further preserve certain infinitary limits.
 
 \section{Simple functions in $\Prob$}\label{simple_functions}
 
@@ -1093,9 +1093,9 @@ For the sake of comparing this unusual definition of the set of simple functions
     It should be clear that this corresponds to the traditional set of simple functions. It is a straightforward calculation that expectation, addition and multiplication are the correct ones. The necessary setup has already been done, since addition and multiplication have already been decomposed into their components on atoms.
 \end{proof}
 
-This proof ilustrates one of the most fascinating things about the set of atoms notation(the same goes for the $(\FinProb, J_{at})$ site). Partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. The way we defined the simple functions, we never had to deal with issues about \emph{where} exactly a simple function took a specific value, but instead just specified the measure of the preimages.
+This proof illustrates one of the most fascinating things about the set of atoms notation(the same goes for the $(\FinProb, J_{at})$ site). Partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. The way we defined the simple functions, we never had to deal with issues about \emph{where} exactly a simple function took a specific value, but instead just specified the measure of the preimages.
 
-Applying the inverse image functors of models inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddently much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
+Applying the inverse image functors of models inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddenly much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
 
 \begin{theorem}
     \begin{enumerate}
