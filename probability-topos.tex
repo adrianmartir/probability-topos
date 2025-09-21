@@ -458,7 +458,7 @@ Note that this proposition actually had little to do with finite probability spa
 In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part, we will use the notations and definitions as in part D.1 of \cite{johnstone2002sketches2}.
 
 \begin{definition}
-    Define the geometric theory $\mathbb{T}_{bpalg}$ of boolean probability algebras to have one sort $B$, constants and function symbols
+    Define the geometric theory $\mathbb{T}_{\textup{bpalg}}$ of boolean probability algebras to have one sort $B$, constants and function symbols
     \begin{center}
         $1: B$ \\
         $0: B$ \\
@@ -512,7 +512,7 @@ In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain t
             B_0(a) & \vdash a = 0.
         \end{align*}
     \end{itemize}
-    Denote the category models of $\mathbb{T}_{bpalg}$ in $\Set$ by $\BPAlg$.
+    Denote the category models of $\mathbb{T}_{\textup{bpalg}}$ in $\Set$ by $\BPAlg$.
 \end{definition}
 
 Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. Notice that we require that there is only one element of measure zero. This requirement may seem somewhat surprising, since the boolean algebra of measurable sets of a $\sigma$-algebra certainly can have sets of measure zero, or \emph{nullsets}. Instead, we have a different kind of model in mind.
@@ -546,13 +546,13 @@ The bottom line is that it is a harmless and well-established idea to replace pr
 
 \subsection{Classifying the theory of boolean probability algebras}
 
-We would like to show that the presheaf topos \newline $\Set^{\FinProb^{op}}$ classifies the theory $\mathbb{T}_{bpalg}$. More specifically, we will prove the equivalence
+We would like to show that the presheaf topos \newline $\Set^{\FinProb^{op}}$ classifies the theory $\mathbb{T}_{\textup{bpalg}}$. More specifically, we will prove the equivalence
 
 \begin{equation}\label{equiv}
-    \Set[\mathbb{T}_{bpalg}] \simeq \Set^{\FinProb^{op}} ,
+    \Set[\mathbb{T}_{\textup{bpalg}}] \simeq \Set^{\FinProb^{op}} ,
 \end{equation}
 
-where $\Set[\mathbb{T}_{bpalg}]$ denotes the construction of the classifying topos of $\mathbb{T}_{bpalg}$ as the sheaves on a certain geometric category of formulas in context.
+where $\Set[\mathbb{T}_{\textup{bpalg}}]$ denotes the construction of the classifying topos of $\mathbb{T}_{\textup{bpalg}}$ as the sheaves on a certain geometric category of formulas in context.
 
 The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
 
@@ -565,47 +565,47 @@ The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
 
     If \ref{equiv} were to be true, we would have that the points (or models) of both toposes are equivalent. This fact can be directly verified, as a consistency check, using \emph{Diaconescu's theorem}, the fact that flat functors to $\Set$ can be given as $\Ind$-completions and a substantial amount of property-checking for seeing that $\BPAlg$ is the $\Ind$-completion of $\BPAlg_f$:
     \begin{align*}
-        \Geom(\Set,\Set[\mathbb{T}_{bpalg}]) &\simeq \mathbb{T}_{bpalg}\textup{-mod}(\Set) \\
+        \Geom(\Set,\Set[\mathbb{T}_{\textup{bpalg}}]) &\simeq \mathbb{T}_{\textup{bpalg}}\textup{-mod}(\Set) \\
         &\simeq \BPAlg \\
         &\simeq \Ind(\BPAlg_f) \\
         &\simeq \Ind(\FinProb^{op}) \\
         &\simeq \Flat(\FinProb, \Set) \\
         &\simeq \Geom(\Set, \Set^{\FinProb^{op}}) ,
     \end{align*}
-    where we use $\Geom$ to denote the category of geometric morphisms between two toposes, $\mathbb{T}_{bpalg}\textup{-mod}$ denotes the models of the theory in a topos, $\Flat$ denotes the flat functors from a small category into a left-exact category and $\Ind$ denotes the $\Ind$-completion of a small category.
+    where we use $\Geom$ to denote the category of geometric morphisms between two toposes, $\mathbb{T}_{\textup{bpalg}}\textup{-mod}$ denotes the models of the theory in a topos, $\Flat$ denotes the flat functors from a small category into a left-exact category and $\Ind$ denotes the $\Ind$-completion of a small category.
 
     While it is useful to know this, we want to prove the stronger statement \ref{equiv}.
 \end{remark}
 
-We will prove the equivalence \ref{equiv} by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{bpalg}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{bpalg}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
+We will prove the equivalence \ref{equiv} by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{\textup{bpalg}}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{\textup{bpalg}}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
 Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent disjoint elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
-With this intuition in mind, how should we go about defining the universal model defining the geometric morphism $\Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}]$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
+With this intuition in mind, how should we go about defining the universal model defining the geometric morphism $\Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{\textup{bpalg}}]$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
 \coprod_{r \in [0,1]} \y U_r \in \Set^{\FinProb^{op}} .
 \]
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space (a map $f$ between probability spaces gets sent to the map that takes the preimage of each subset).
 
 \begin{lemma} \label{universal model}
-$U$ is a model of the $\mathbb{T}_{bpalg}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by the inclusions of the $\y U_r$ and the boolean algebra operations are inherited from the boolean algebra structure of $U(X, \mu)$, the powerset of $X$.
+$U$ is a model of the $\mathbb{T}_{\textup{bpalg}}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by the inclusions of the $\y U_r$ and the boolean algebra operations are inherited from the boolean algebra structure of $U(X, \mu)$, the powerset of $X$.
 
 This yields a left-exact, colimit-preserving functor
 \[
-    \Set^{\FinProb^{op}} \xleftarrow{\Lan_{\y}(U)} \Set[\mathbb{T}_{bpalg}],
+    \Set^{\FinProb^{op}} \xleftarrow{\Lan_{\y}(U)} \Set[\mathbb{T}_{\textup{bpalg}}],
 \]
-where $U$ is the functor we get by identifying models of $\mathbb{T}_{bpalg}$ with functors whose domain is the syntactic category of $\mathbb{T}_{bpalg}$.
+where $U$ is the functor we get by identifying models of $\mathbb{T}_{\textup{bpalg}}$ with functors whose domain is the syntactic category of $\mathbb{T}_{\textup{bpalg}}$.
 \end{lemma}
 \begin{proof}
 The last statement follows from the first part by using the universal property of classifying toposes.
 
-Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are immediate. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{bpalg}$-model in $\Set^{\FinProb^{op}}$.
+Since we are looking at presheaves, all the colimit and limit conditions from the axioms can be checked pointwise, where they are immediate. More formally, we can use \cite{johnstone2002sketches2}, Corollary D.1.2.14, to get the fact that $U$ is a $\mathbb{T}_{\textup{bpalg}}$-model in $\Set^{\FinProb^{op}}$.
 \end{proof}
 
 We proceed by formalizing our intuition about the representables in $\Set^{\FinProb^{op}}$ being partitions by constructing our candidate inverse functor. We diverge from the notation in D.1 of \cite{johnstone2002sketches2} in that we will sometimes annotate formulas with a set of variables containing all the variables used in the formula, as seen below. This is done so that when these formulas get combined with logical connectives, the big formula remains easy to read.
 
 \begin{lemma} \label{inverse}
-Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $F: \FinProb \to \mathcal{C}^{\mathbb{T}_{bpalg}}$ on the object $(X,\mu)$ and on the function $f$ as follows: Let
+Let $f: (X,\mu) \to (Y, \nu)$ be an arrow in $\FinProb$. We define the functor $F: \FinProb \to \mathcal{C}^{\mathbb{T}_{\textup{bpalg}}}$ on the object $(X,\mu)$ and on the function $f$ as follows: Let
 \begin{align*}
 \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\} &:= \Bigg \{ \vec{a} . \bigwedge_{i \in X} B_{\mu(i)} a_i \wedge \bigwedge_{\substack{i,j \in X \\ i \neq j}} (a_i \wedge a_j = 0) \Bigg \} \\
 [\theta_f^{\vec{a}, \vec{b}}] &:= \Bigg [ \bigwedge_{j \in Y} (b_j = \bigvee_{f i = j} a_i) \wedge \phi_{X,\mu}^{\vec{a}} \Bigg] ,
@@ -614,7 +614,7 @@ and now define $F(X,\mu) := \{\vec{a} . \phi_{X,\mu}^{\vec{a}}\}$ and $F(f) := [
 
 This yields a left-exact, colimit-preserving functor
 \[
-    \Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{bpalg}] .
+    \Lan_F: \Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{\textup{bpalg}}] .
 \]
 \end{lemma}
 
@@ -720,16 +720,16 @@ This yields a left-exact, colimit-preserving functor
 
 We now prove that our constructions are mutual inverses.
 
-\begin{theorem}[Classifying topos of $\mathbb{T}_{bpalg}$] \label{classifying_presheaf}
+\begin{theorem}[Classifying topos of $\mathbb{T}_{\textup{bpalg}}$] \label{classifying_presheaf}
 $\Lan_{\y}(U)$ and $\Lan_F$ define an equivalence of categories
 \[
-\Set^{\FinProb^{op}} \simeq \Set[\mathbb{T}_{bpalg}].
+\Set^{\FinProb^{op}} \simeq \Set[\mathbb{T}_{\textup{bpalg}}].
 \]
 \end{theorem}
 
 
 \begin{proof}
-For this proof, let $\mathbb{T} := \mathbb{T}_{bpalg}$.
+For this proof, let $\mathbb{T} := \mathbb{T}_{\textup{bpalg}}$.
 
 We first check that $\Lan_{\y}(U) \circ \Lan_F \cong \id$. Since these functors preserve colimits, we check only need to check this on representables. For a $U_{r_i}$, we get natural isomorphisms 
 \begin{equation*}
@@ -780,7 +780,7 @@ The symbols $1$ and $\vee$ now automatically get preserved, since they are both 
 \end{proof}
 
 \begin{remark}
-    There is a way to embed $\Set[\mathbb{T}_{bpalg}]$ into a coherent topos. We simply expand our theory to include boolean algebras $B$ together with a map $B \to A$ into an arbitrary abelian group $A$ with a fixed element $1$, satisfying conditions analogous to the ones for the measure of a boolean probability algebra. The classifying topos of this theory is coherent, and thus it has enough points. Since it contains $\Set[\mathbb{T}_{bpalg}]$ as a subtopos, this might yield a strategy for proving \ref{classifying_presheaf} without the lengthy syntactical detour.
+    There is a way to embed $\Set[\mathbb{T}_{\textup{bpalg}}]$ into a coherent topos. We simply expand our theory to include boolean algebras $B$ together with a map $B \to A$ into an arbitrary abelian group $A$ with a fixed element $1$, satisfying conditions analogous to the ones for the measure of a boolean probability algebra. The classifying topos of this theory is coherent, and thus it has enough points. Since it contains $\Set[\mathbb{T}_{\textup{bpalg}}]$ as a subtopos, this might yield a strategy for proving \ref{classifying_presheaf} without the lengthy syntactical detour.
 \end{remark}
 
 \subsection{Classifying the theory of intervals} \label{theory_of_intervals}
@@ -789,14 +789,14 @@ We will show that the topos $\Sh(\FinProb, J_{at})$ classifies the following the
 
 
 \begin{definition}
-    Define the \textit{theory of intervals} $\mathbb{T}_{int}$ by adding the axioms
+    Define the \textit{theory of intervals} $\mathbb{T}_{\textup{int}}$ by adding the axioms
     \[
     B_s a \vdash_a (\exists b) \big ( (b = a \wedge b) \wedge B_r b \big )
     \]
     for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability algebras.
 \end{definition}
 
-The models of $\mathbb{T}_{int}$ in $\Set$ must all be uncountable.
+The models of $\mathbb{T}_{\textup{int}}$ in $\Set$ must all be uncountable.
 
 \begin{example} \label{interval_examples} We consider some examples of intervals.
 \begin{enumerate}
@@ -838,26 +838,26 @@ where $\lambda$ denotes the Lebesgue measure on the $i$th Lebesgue interval. It 
 We state the main result of this section.
 
 \begin{theorem} \label{classifying}
-    The topos $\Sh(\FinProb,J_{at})$ classifies the theory $\mathbb{T}_{int}$. The desired equivalence is given by the universal model $U$.
+    The topos $\Sh(\FinProb,J_{at})$ classifies the theory $\mathbb{T}_{\textup{int}}$. The desired equivalence is given by the universal model $U$.
 \end{theorem}
 
 \begin{proof}
-    We extend our result about presheaves in Theorem \ref{classifying_presheaf} to the sheaf case. By Theorem 8.1.12 in \cite{caramello2018theories}, there exists a unique quotient theory (up to syntactic equivalence) of $\mathbb{T}_{bpalg}$, such that its models (in a topos $\mathcal{E}$) are precisely the $J_{at}$-homogeneous models (in $\mathcal{E}$).
+    We extend our result about presheaves in Theorem \ref{classifying_presheaf} to the sheaf case. By Theorem 8.1.12 in \cite{caramello2018theories}, there exists a unique quotient theory (up to syntactic equivalence) of $\mathbb{T}_{\textup{bpalg}}$, such that its models (in a topos $\mathcal{E}$) are precisely the $J_{at}$-homogeneous models (in $\mathcal{E}$).
     This theory is given by adding an axiom
     \[
     \phi_{\alpha}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
     \]
-    for each morphism $f: \alpha \to \beta$ in $\FinProb$ to the theory $\mathbb{T}_{bpalg}$. One can easily see that the axioms
+    for each morphism $f: \alpha \to \beta$ in $\FinProb$ to the theory $\mathbb{T}_{\textup{bpalg}}$. One can easily see that the axioms
     \[
     \phi_{U_{r+s,t}}^{\vec{b}} \vdash_{\vec{b}} (\exists \vec{a}) \theta_f^{\vec{a},\vec{b}}
     \]
     are sufficient, where $f: U_{r,s,t} \to U_{r+s,t}$ joins the first two elements. Note that $r,s$ and $t$ denote any elements in $[0,1]$. These are precisely reformulations of the interval axioms.
 
-    We have shown that theory $\mathbb{T}_{int}$ classifies the topos $j: \Sh(\FinProb, J_{at}) \to \Set^{\FinProb^{op}}$. In this setting, for any Grothendieck topos $\mathcal{E}$, we get a square
+    We have shown that theory $\mathbb{T}_{\textup{int}}$ classifies the topos $j: \Sh(\FinProb, J_{at}) \to \Set^{\FinProb^{op}}$. In this setting, for any Grothendieck topos $\mathcal{E}$, we get a square
     \begin{equation}\label{geometric_com}
         \begin{tikzcd}
-            \Geom(\mathcal{E},\Sh(\FinProb,J_{at})) \arrow[d, "j \circ -"] \arrow[r, "\simeq"] & {\mathbb{T}_{int}\textup{-mod}(\mathcal{E})} \arrow[d] \\
-            \Geom(\mathcal{E},\Set^{\FinProb^{op}}) \arrow[r, "\simeq"]         & {\mathbb{T}_{bpalg}\textup{-mod}(\mathcal{E})}, \tag{*}
+            \Geom(\mathcal{E},\Sh(\FinProb,J_{at})) \arrow[d, "j \circ -"] \arrow[r, "\simeq"] & {\mathbb{T}_{\textup{int}}\textup{-mod}(\mathcal{E})} \arrow[d] \\
+            \Geom(\mathcal{E},\Set^{\FinProb^{op}}) \arrow[r, "\simeq"]         & {\mathbb{T}_{\textup{bpalg}}\textup{-mod}(\mathcal{E})}, \tag{*}
         \end{tikzcd}
     \end{equation}
     of geometric morphisms that commutes up to isomorphism (as in Theorem 8.1.3 in \cite{caramello2018theories}). 
@@ -870,11 +870,11 @@ We can describe more explicitly how this result lets us view \emph{intervals} as
 \begin{remark} \label{classifying_equiv_data}
     The diagram \ref{geometric_com} in the proof above has fully faithful functors on the left and on the right. This means that we describe the functor
     \[
-        \mathbb{T}_{int}\textup{-mod}(\mathcal{E}) \xrightarrow{\simeq} \Geom(\mathcal{E},\Sh(\FinProb,J_{at}))
+        \mathbb{T}_{\textup{int}}\textup{-mod}(\mathcal{E}) \xrightarrow{\simeq} \Geom(\mathcal{E},\Sh(\FinProb,J_{at}))
     \]
     yielding the equivalence as a restriction of the functor in \ref{inverse}.
     
-    In particular, if we have a model $(A,\mu)$ of $\mathbb{T}_{int}$ in $\Set$, we can view it as a geometric morphism $\Set \to \Sh(\FinProb, J_{at})$ by specifying it as the $J_{at}$-flat functor $\FinProb \to \Set$ given by sending a finite probability space $(X,\nu)$ to the set
+    In particular, if we have a model $(A,\mu)$ of $\mathbb{T}_{\textup{int}}$ in $\Set$, we can view it as a geometric morphism $\Set \to \Sh(\FinProb, J_{at})$ by specifying it as the $J_{at}$-flat functor $\FinProb \to \Set$ given by sending a finite probability space $(X,\nu)$ to the set
     \[
     \{(a_i)_{i \in X} \mid a_i \in A \text{ are pairwise disjoint, } \mu(a_i) = \nu(i) \}
     \]
@@ -886,16 +886,16 @@ We can describe more explicitly how this result lets us view \emph{intervals} as
 
 \subsection{Completeness and quantifier elimination}
 
-The abstract categorical statement of Theorem \ref{classifying} has some very concrete consequences for the structure of formulas-in-context up to $\mathbb{T}_{int}$-provable equivalence, since those bijectively correspond to isomorphism classes of subobjects of a power of the universal model $U$.
+The abstract categorical statement of Theorem \ref{classifying} has some very concrete consequences for the structure of formulas-in-context up to $\mathbb{T}_{\textup{int}}$-provable equivalence, since those bijectively correspond to isomorphism classes of subobjects of a power of the universal model $U$.
 
 While we typically the fragment of logic preserved by (inverse images of) geometric morphisms is geometric logic, if a topos (such as $\Prob$) is boolean, then every geometric morphism into it will also preserve negation. This is the case since the complement $b$ of a subobject $a$ can be uniquely determined by saying that $a \wedge b = 0$ and $a \vee b = 1$, which is a property that gets preserved. In other words, every geometric morphism into a boolean topos is open.
 
-This has the pleasant consequence that every model of $\mathbb{T}_{int}$ in \emph{any} Grothendieck topos will satisfy all $\mathbb{T}_{int}$-provable sequent possibly containing \emph{infinitary} first-order-formulas. In this way, the fact that the classifying topos of $\mathbb{T}_{int}$ is atomic does not only have consequences for geometric sequents, but also for infinitary first-order sequents.
+This has the pleasant consequence that every model of $\mathbb{T}_{\textup{int}}$ in \emph{any} Grothendieck topos will satisfy all $\mathbb{T}_{\textup{int}}$-provable sequent possibly containing \emph{infinitary} first-order-formulas. In this way, the fact that the classifying topos of $\mathbb{T}_{\textup{int}}$ is atomic does not only have consequences for geometric sequents, but also for infinitary first-order sequents.
 
 In the following statement, let the term $x^{\epsilon}$ denote $x$ if $\epsilon = 1$ and $\neg x$ if $\epsilon = 2$.
 
 \begin{corollary}
-    For every infinitary first-order formula $\{\vec{x}. \psi\}$ in context over the variables $x_1,\cdots, x_n$, there is a subset $S \subset P^n_{2,\cdots,2}$ such that we have the $\mathbb{T}_{int}$-provable equivalence
+    For every infinitary first-order formula $\{\vec{x}. \psi\}$ in context over the variables $x_1,\cdots, x_n$, there is a subset $S \subset P^n_{2,\cdots,2}$ such that we have the $\mathbb{T}_{\textup{int}}$-provable equivalence
     \[
         \psi \dashv \vdash_{\vec{x}} \bigvee_{t_{i_1,\cdots,i_n} \in S} \phi^{\vec{y}}_{U_{t_{i_1,\cdots,i_n}}} [ x_1^{i_1} \wedge \cdots \wedge x_n^{i_n} / y_{i_1,\cdots, i_n}] ,
     \]
@@ -915,26 +915,26 @@ In the following statement, let the term $x^{\epsilon}$ denote $x$ if $\epsilon 
     \[
         \{ \vec{x} . \psi \} \cong \{ \vec{x} . \bigvee_{t_{i_1,\cdots,i_n} \in S} \phi^{\vec{y}}_{U_{t_{i_1,\cdots,i_n}}} [ x_1^{i_1} \wedge \cdots \wedge x_n^{i_n} / y_{i_1,\cdots, i_n}] \} .
     \]
-    By the discussion above about infinitary first-order logic, this does translate to the corresponding isomorphism in any (possibly categorical) model of $\mathbb{T}_{int}$. Completeness of the deduction system for infinitary first-order logic now implies the claim.
+    By the discussion above about infinitary first-order logic, this does translate to the corresponding isomorphism in any (possibly categorical) model of $\mathbb{T}_{\textup{int}}$. Completeness of the deduction system for infinitary first-order logic now implies the claim.
 \end{proof}
 
-This is a form of quantifier elimination. Every infinitary first-order formula is $\mathbb{T}_{int}$-provably equivalent to a quantifier-free geometric formula. The quantifier-free geometric formula may very well contain proper infinitary disjunctions, so this cannot be compared to a quantifier-elimination type statement for classical, finitary, first-order logic.
+This is a form of quantifier elimination. Every infinitary first-order formula is $\mathbb{T}_{\textup{int}}$-provably equivalent to a quantifier-free geometric formula. The quantifier-free geometric formula may very well contain proper infinitary disjunctions, so this cannot be compared to a quantifier-elimination type statement for classical, finitary, first-order logic.
 
 The case $n = 0$ of the previous result deserves some additional attention:
 
 \begin{corollary}
-    Every infinitary first-order formula over the empty context is $\mathbb{T}_{int}$-provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{int}$.
+    Every infinitary first-order formula over the empty context is $\mathbb{T}_{\textup{int}}$-provably equivalent to $\top$ or $\bot$ in $\mathbb{T}_{\textup{int}}$.
 \end{corollary}
 
 \begin{proof}
     $P^0 = 1$, which has precisely two subsets that yield the formulas $\bot$ and $\top$.
 \end{proof}
 
-This result is particularly remarkable, since it tells us that for the purposes of studying infinitary first-order sentences for the theory $\mathbb{T}_{int}$, \emph{the choice of the interval does not matter}. This supports the widespread practice in probability theory of working with \emph{some} $\sigma$-algebra, but never putting any special attention on its specific features. In fact, it tells us that, without losing generality, we might as well work with the Lebesgue interval $(I,\lambda)$.
+This result is particularly remarkable, since it tells us that for the purposes of studying infinitary first-order sentences for the theory $\mathbb{T}_{\textup{int}}$, \emph{the choice of the interval does not matter}. This supports the widespread practice in probability theory of working with \emph{some} $\sigma$-algebra, but never putting any special attention on its specific features. In fact, it tells us that, without losing generality, we might as well work with the Lebesgue interval $(I,\lambda)$.
 
 On the flip side, this also gives a theoretical guarantee that $\Prob$ is a suitable \emph{synthetic} context for probability theory: Any infinitary sentence that you are able to prove for \emph{some} interval, will also hold for the model $U$ in $\Prob$.
 
-The question remains whether the theory $\mathbb{T}_{int}$ (and also the topos $\Prob$) are suitable settings for \emph{stating} the types of theorems one would be interested in probability theory.
+The question remains whether the theory $\mathbb{T}_{\textup{int}}$ (and also the topos $\Prob$) are suitable settings for \emph{stating} the types of theorems one would be interested in probability theory.
 
 While infinitary first-order logic does give us a reasonably expressive language for formulating statements about intervals, there is one key class of phenomena that does not get modelled well by $\Prob$. Concretely, sequences or \emph{countable sets of free variables} do not get modelled well by $\Prob$, as is showcased by the following proposition.
 
@@ -955,7 +955,7 @@ Fixing this does require \emph{rethinking what the category of Grothendieck topo
 
 \section{Simple functions in $\Prob$}\label{simple_functions}
 
-While our logical results about $\mathbb{T}_{int}$ are certainly interesting, there is no doubt that probability theory is really about spaces of functions on $\sigma$-algebras. While formulas over $\mathbb{T}_{int}$ might not be sufficient for expressing statements about functions, the classifying topos $\mathbb{T}_{int}$ contains additional objects that cannot be defined by formulas in $\mathbb{T}_{int}$. Among those objects is the algebra of simple functions over the interval $U$.
+While our logical results about $\mathbb{T}_{\textup{int}}$ are certainly interesting, there is no doubt that probability theory is really about spaces of functions on $\sigma$-algebras. Formulas over $\mathbb{T}_{\textup{int}}$ might not be sufficient for expressing statements about functions, however, the classifying topos $\mathbb{T}_{\textup{int}}$ contains additional objects that cannot be defined by formulas in $\mathbb{T}_{\textup{int}}$. Among those objects is the algebra of simple functions over the interval $U$.
 
 We shall note here again, that we limit ourselves to studying combinatorial aspects of functions by studying the simple ones. The reason for this is that the study of analytic phenomena (such as integrable functions) would require an enlargement of our original site $\FinProb$\footnote{The authors arrived at this conclusion after extensive trial and error.}. Nevertheless, the benefit of working out the theory for the less complex topos $\Prob$ is, that it gives us a relatively simple and well fleshed-out theory.
 
@@ -972,12 +972,25 @@ We show that $\mathcal{S}$ is a sheaf by showing that $\mathcal{S}$ is a coprodu
     \]
     and in particular, $\mathcal{S}$ is a sheaf.
 \end{proposition}
+
+This is actually a way to describe the simple functions $\mathcal{S}$ through their distributions. In fact, interpreting subobjects as formulas, \emph{the most we can say about a single simple function is stating its distribution}.
+
 \begin{proof}
-    The essential observation is that we can describe any $s \in \mathbb{R}^X$ by looking at the ordered set of values in $\mathbb{R}$ that the function $s$ takes.
+    Each pair $(r_i), (y_i)$ induces an element $(y_i) \in \mathcal{S}(U_{r_i})$ and thus induces a map
+    \[
+        f_{r_i,y_i}: \y U_{r_i} \to \mathcal{S} .
+    \]
+    This map can be checked to be sectionwise injective and thus a monomorphism. Now assume that there is another pair $r'_i,y'_i$ such that the subobjects $f_{r_i,y_i}$ and $f_{r'_i,y'_i}$ are the same. Since the domains must match, $r_i = r'_{\sigma(i)}$ for a permutation $\sigma$ and thus by Yoneda, $y_i = y'_{\sigma(i)}$. However, since there is an order on $y_i$ and $y'_i$, this implies that $\sigma = \id$. It follows that the induced map
+
+    \[
+        \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra \to \mathcal{S}
+    \]
+    is injective. One can show that this map is sectionwise surjective by describing any $s \in \mathbb{R}^X$ by looking at the ordered set of values in $\mathbb{R}$ that the function $s$ takes.
 \end{proof}
 
+The aim of this chapter is convincing the reader that for a model $F: \mathcal{E} \to \Prob$, $F^*(\mathcal{S})$ is a suitable definition for the simple functions over $F$ in $\mathcal{E}$. We will prove that we can recover the simple functions over a $\sigma$-algebra with this construction. Of course, for proving meaningful statements, we want to equip $\mathcal{S}$ with suitable structure.
 
-The point of this chapter is convincing the reader that for a model $F: \mathcal{E} \to \Prob$, $F^*(\mathcal{S})$ is a suitable definition for the simple functions over $F$ in $\mathcal{E}$. We will prove that we can recover the simple functions over a $\sigma$-algebra with this construction. Of course, for proving meaningful statements, we want to equip $\mathcal{S}$ with suitable structure.
+We take Terrance Tao's blog post \cite{tao2014algebraic} as a rough model for the following definition.
 
 \begin{definition}
     Define the theory of expectation algebras to be the geometric theory of $\mathbb{R}$-algebras together with a unary relation symbol $E_r$ for each $r \in \mathbb{R}$, adding the following geometric sequents:
@@ -990,7 +1003,7 @@ The point of this chapter is convincing the reader that for a model $F: \mathcal
         \[
         \top \vdash \bigvee_{r \in \mathbb{R}} E_r(a).
         \]
-        \item \textit{Linearity}. For all $r, s \in \mathbb{R}$, we require the sequents
+        \item $\mathbb{R}$-\textit{linearity}. For all $r, s \in \mathbb{R}$, we require the sequents
         \[
         E_r(a) \wedge E_s(b) \vdash E_{r+s}(a + b)
         \]
@@ -1011,29 +1024,25 @@ The point of this chapter is convincing the reader that for a model $F: \mathcal
             E_0 (a^2) \vdash a = 0 % We need to be careful what we write here, since a priori I don't see why our algebra should be an integral domain.
         \]
     \end{enumerate}
-    %     \item Define expectation algebra structure on $\mathcal{S}$.
-    %     \item Let $\alpha$ be a model of the theory of intervals in a topos $\mathcal{E}$, i.e. a geometric morphism $\mathcal{E} \to \Prob$. Then we define the simple functions over $\alpha$ to be the expectation algebra that the inverse image functor sends $\mathcal{S}$ to.
-    % \end{enumerate}
 \end{definition}
 
-Here we made use of the same trick we used when defining the theory of boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra, since we can consider $\lambda \cdot 1$. This means that if $A$ is an $\mathbb{R}$-algebra in any topos, we get a canonical operator $\mathbb{E}: A \to A$, which can be thought of an expectation operator.
+Here we made use of the same trick we used when defining the theory of boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra $A$, since we can consider $\lambda \cdot 1$. In this way, we have a \emph{subalgebra of real numbers} $R \subset A$ and an $\mathbb{R}$-linear map $A \to R$, which can be thought of \emph{the expectation operator.}
 
-% TODO: Is this even true?
-Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. The \emph{no nullsets} axiom corresponds to the fact that there is only one element of measure zero in a boolean probability algebra. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
+Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. One can see this by noticing that the indicator functions $a$ in our expectation algebra are characterized by the equation $a^2 = a$ (at least for boolean probability algebras in $\Set$). The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. The \emph{no nullsets} axiom corresponds to the fact that there is only one element of measure zero in a boolean probability algebra. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
 
-% TODO: ref this:https://terrytao.wordpress.com/2014/06/28/algebraic-probability-spaces/
+\begin{remark}
+    This theory of expectation-algebras is perfectly suitable for expressing questions about order: the predicate $\exists z, y - x = z^2$ can be viewed as an abbreviation of $x \le y$. This yields the intended semantics for models in $\Set$.
+\end{remark}
 
-We can now define expectation algebra structure on $\mathcal{S}$. Note that we do not yet check the axioms, for now we will only think of $\mathcal{S}$ as a structure over the signature of the theory of expectation algebras.
+We now define expectation algebra structure on $\mathcal{S}$.
 
 \begin{definition}
-    \begin{enumerate}
-        \item Define $+: \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ on the components of the natural transformation by pointwise addition of the $s \in \mathbb{R}^X$.
-        \item Define $\cdot: \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ on the components of the natural transformation by pointwise multiplication of the $s \in \mathbb{R}^X$.
-        \item Define $E_r \xrightarrow{} \mathcal{S}$ to be the subsheaf that on an object $(X,\mu)$ consists of the $s \in \mathbb{R}^X$ with $\sum_{i \in X} s(i) = r$.
-    \end{enumerate}
+    Equip $\mathcal{S}$ with the componentwise $\mathbb{R}$-algebra structure induced from the $\mathbb{R}$-algebras $\mathbb{R}^X$. Define $E_r \xrightarrow{} \mathcal{S}$ to be the subsheaf that on an object $(X,\mu)$ consists of the $s \in \mathbb{R}^X$ with $\sum_{i \in X} s(i) = r$.
 \end{definition}
 
-Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
+Using this structure, we can sectionwise verify that $\mathcal{S}$ does indeed satisfy the expectation algebra axioms, when viewed as a presheaf. It follows that it also satisfies those axioms when viewed as a sheaf. Moreover, as a sheaf there will be additional axiom analogous to the \emph{interval axiom}, which we did not state.
+
+Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus, it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
 
 \begin{align*}
     S \times S &\cong \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra^2 \\
@@ -1042,7 +1051,7 @@ Our aim is to send $\mathcal{S}$ and its structure through inverse image functor
 
 Now we can use \ref{atom_coprod_maps} to specify our structure on the elements of this set of atoms:
 
-\begin{proposition}
+\begin{proposition} \label{operations}
     \begin{enumerate}
         \item We calculate addition on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i + z_j \mid i,j \}$. Then addition is given on elements by
         \[
@@ -1053,7 +1062,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
             U_{t_{ij}} \to U_{\sum_{y_i + z_j = x_k} t_{ij}}
         \]
         defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i + z_j = y_{i'} + z_{j'}$ holds.
-        \item We calculate multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j \mid i,j \}$. Then we multiplication is given on elements by
+        \item We calculate multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j \mid i,j \}$. Then, the multiplication is given on elements by
         \[
             (t_{ij},y_i,z_j) \mapsto (\sum_{y_i \cdot z_j = x_k} t_{ij}, x_k)
         \]
@@ -1062,6 +1071,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
             U_{t_{ij}} \to U_{\sum_{y_i \cdot z_j = x_k} t_{ij}}
         \]
         defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i \cdot z_j = y_{i'} \cdot z_{j'}$ holds.
+        \item Scalar multiplication by $\lambda \in \mathbb{R}$ applied to an element $(t_i,y_i)$ is $(t_i,\lambda \cdot y_i)$.
         \item $E_r \to \mathcal{S}$ is the subobject
         \[
             \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R}, \sum r_i y_i = r \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra
@@ -1070,7 +1080,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
     \end{enumerate}
 \end{proposition}
 
-Having defined the simple functions in $\Prob$, we can define simple functions in great generality.
+Having defined the simple functions in $\Prob$, we can now transport this object to any setting whether there is an interval (a boolean probability algebra would suffice).
 
 \begin{definition}
     Let $F: \mathcal{E} \to \Prob$ be an interval in $\mathcal{E}$. Then we can define the simple functions over $F$ to be $F^*(\mathcal{S})$ equipped with the corresponding expectation algebra structure.
@@ -1079,7 +1089,7 @@ Having defined the simple functions in $\Prob$, we can define simple functions i
 For the sake of comparing this unusual definition of the set of simple functions to the more standard one, we recall the following:
 
 \begin{definition}
-    Define the expectation algebra of simple functions $S(X,\Sigma, \mu)$ on a probability space $(X, \Sigma, \mu)$ to be the set of measurable maps $X \to \mathbb{R}$ of finite image modulo equality almost everywhere equipped with pointwise addition, pointwise multiplication and expectation.
+    Define the expectation algebra of simple functions $S(X,\Sigma, \mu)$ on a probability space $(X, \Sigma, \mu)$ to be the set of measurable maps $X \to \mathbb{R}$ of finite image modulo equality almost everywhere equipped with pointwise addition, pointwise multiplication and expectation. The expectation is given by the usual expectation of a simple function.
 \end{definition}
 
 \begin{proposition}
@@ -1095,25 +1105,108 @@ For the sake of comparing this unusual definition of the set of simple functions
 
 This proof illustrates one of the most fascinating things about the set of atoms notation(the same goes for the $(\FinProb, J_{at})$ site). Partitions are treated on a very abstract level, where it does not even make sense to ask \emph{where} the different parts of the partitions are located. There is simply no data about the location of the partition, only how big it is. The way we defined the simple functions, we never had to deal with issues about \emph{where} exactly a simple function took a specific value, but instead just specified the measure of the preimages.
 
-Applying the inverse image functors of models inserts that missing location information(similarly when passing to the group action sites). The sets we deal with are suddenly much, much bigger. The surprising thing, is that for the purposes of calculating with simple functions, that data is fully irrelevant.
+Applying the inverse image functors of models inserts that missing location information. The sets we deal with are suddenly much, much bigger. The surprising thing is that for the purposes of calculating with simple functions, that data is fully irrelevant.
 
-\begin{theorem}
-    \begin{enumerate}
-    \item $\mathcal{S}$ is an expectation algebra.
-    \item The simple functions over an interval(one should explicitly give this theory, by stating the interval property for characteristic functions and state the Morita equivalence explicitly, maybe?) are all infinitary first order equivalent as expectation algebras.
-    \end{enumerate}
+We move to applications of the simple function construction in logic.
+
+\begin{theorem}\label{prob_space_invariance}
+    Let $I: \mathcal{E} \to \Prob$ be an interval in a Grothendieck topos $\mathcal{E}$. Then the expectation algebra $I^*(S)$ of simple functions over $I$ in $\mathcal{E}$ satisfies the same infinitary first-order sentences as the expectation algebra $\mathcal{S}$. In particular, the simple functions over any interval satisfy the same sentences.
 \end{theorem}
 \begin{proof}
-    Use that the topos is two-valued.
+    This follows from the fact that $\Prob$ is two-valued.
 \end{proof}
 
-% TODO: Say that poset structure also matches, since x \leq y iff y - x is a square.
+At it's core, this is a first promising result about \emph{the irrelevance of the base probability space}. Given any probability space such that it's associated measure algebra is atomless, the sentences satisfied by the corresponding expectation algebra of simple functions will always be the same. This is a first taste of how topos theory can give us \emph{theoretical guarantees}, that the common practice of paying no attention to the base probability space is actually completely justified.
 
-say the following
-\begin{enumerate}
-    \item Legitimizes(to a certain degree) the belief that the base $\sigma$-algebra does not matter
-    \item Extremely interesting: This technique is not at all specific to $\Prob$. One can imagine proving similar results in a wide variety of other contexts. Classical Model theory could not prove this kind of stuff?
-\end{enumerate}
+We can give an apparently stronger, topos-theoretic variation of the Theorem \ref{prob_space_invariance}.
+
+\begin{definition}
+    We define the theory of $\mathbb{T}_{\textup{sint}}$ simple interval-like expectation algebras to be the theory of expectation algebras together with the \emph{interval axiom}
+    \[
+        \top \vdash E_s a \wedge a^2 = a \wedge_a \exists b, b = b^2 \wedge b = a \cdot b \wedge E_r b
+    \]
+    for any $r,s \in [0,1]$ with $r < s$ and the \emph{idempotent generation axiom}
+    \[
+        \top \vdash \bigvee_{n \in \mathbb{N}, r_1,\cdots r_n} \exists a_1, \cdots, a_n, a_1^2 = a_2 \wedge \cdots \wedge a_n^2 = a_n \wedge b = r_1 a_1 + \cdots + r_n a_n .
+    \]
+\end{definition}
+
+The interval axiom is to be interpreted the following way: The condition $a^2 = a$ says that $a$ is an indicator function, and the $E_r$ determine what we think of as its measure. The formula $b = a \cdot b$ expresses that $b \le a$.
+
+The idempotent generation axiom states that the set of idempotents forms a generating set of the base $\mathbb{R}$-vector space.
+
+\begin{theorem}\label{classifying_sint}
+    $S$ is a simple interval-like expectation algebra and exhibits $\Prob$ as the classifying topos of the theory of simple interval-like expectation algebras $\mathbb{T}_{\textup{sint}}$.
+\end{theorem}
+\begin{proof}
+    The expectation algebra $S$ yields a geometric morphism $\Prob \to \Set[\mathbb{T}_{\textup{sint}}]$, with inverse image functor constructed by extending
+    \[
+        F: \mathcal{C}_{\mathbb{T}_{\textup{sint}}} \to \Prob .
+    \]
+
+    The key insight for this proof is that the category $\mathcal{C}_{\mathbb{T}_{\textup{sint}}}$ already contains an \emph{interval} of it's base elements. It's underlying object is given by the formula $V := \{ a . a^2 = a\}$ expressing idempotence. We equip it with the following boolean probability algebra structure:
+    \begin{align*}
+        a \wedge b := a \cdot b \\
+        a \vee b := a + b - a \cdot b \\
+        \neg a := 1 - a \\
+        B_r a := E_r a
+    \end{align*}
+
+    The reader can check that this does indeed form an interval. For a finite probability space $U_{r_i}$ we also get the corresponding object of partitions $V_{r_i}$ interpreting the corresponding formula.
+
+    The functor $F$ now carries $V$ to the interval $U$, and we can see that all finite powers of $U$ are in the essential image of $F$ and so are all the maps and subobjects of the structure $(U,\vee,\wedge,\neg,U_r)$. Notice that we can express the objects $U_{r_i}$ in terms of this structure and that we can moreover use the structure to define all morphisms $U_{r_i} \to U_{s_i}$ (both in terms of finite limits and colimits).
+    
+    It follows that the $U_{r_i}$ and the morphisms $U_{r_i} \to U_{s_i}$ are all in the essential image of $F$, and so is the whole of $\Prob$ since those objects and arrows generate it (under finite limits and colimits).
+
+    Thus, $F$ is full and essentially surjective on objects. It remains to show that it is fully faithful. To see that, it suffices to prove that the inverse image functor $V^*: \Prob \to \Sh(\mathcal{C}_{\mathbb{T}_{\textup{sint}}}, J)$ sends the expectation algebra $\mathcal{S}$ to the expectation algebra that corresponds to $\{ a . \top \}$.
+
+    Using the decomposition of $\mathcal{S}$ into a coproduct gives us that $V^*(\mathcal{S}) \cong \coprod_{\substack{r_1, \cdots r_n \in \mathcal{A} \\ x_1 < \cdots < x_n}} V_{r_i}$ equipped with the expectation algebra structure defined on the components of the coproduct as in Proposition \ref{operations}.
+
+    Indeed, by the idempotent generation axiom, we do have a surjection $\coprod_{\substack{r_1, \cdots r_n \in \mathcal{A} \\ x_1 < \cdots < x_n}} V_{r_i} \to \{ b . \top \}$ induced by the formula $[b = x_1 a_1 + \cdots x_n a_n]$ on the component given by $r_i$, $x_i$.
+
+    To see that this function is an isomorphism, we have to prove that for two families $r_i$, $x_1< \cdots <x_n$ and $s_i$, $y_1 < \cdots < y_n$, the corresponding subobjects are disjoint. More precisely, given that the two families are distinct, we need to prove
+    \[
+        x_1 a_1 + \cdots + x_n a_n = y_1 b_1 + \cdots + y_m b_m \vdash \bot .
+    \]
+    We consider two separate cases. In the first case, assume that $\exists i \forall j, x_i \ne y_j$. Then we have the following chain of sequents:
+    \begin{align*}
+        x_1 a_1 + \cdots + x_n a_n = y_1 b_1 + \cdots + y_m b_m &\vdash \bigwedge_j x_i a_i b_j = y_j a_i b_j \\
+        &\vdash \bigwedge_j a_i b_j = 0 \\
+        &\vdash \sum_j a_i b_j = 0 \\
+        &\vdash a_i = 0 \\
+        &\vdash \bot .
+    \end{align*}
+    In the first line we multiply the equation with $a_i b_j$ for all choices of $j$ and in the second line, we use that $x_i \ne y_j$. In the last line, we get $\bot$, since we now have that $E_0 a_i$ but also $E_{r_i} a_i$.
+
+    For the second case, $\forall i \exists j, x_i = y_j$. Since both families are ordered, we must have that $n = m$ and $x_i = y_i$ for all $i$. If $n = 1$, there is nothing to prove now, so in the following assume $n \ge 2$.
+    \begin{align*}
+        \sum_i x_i a_i = \sum_i x_i b_i &\vdash x_1 a_1 = a_1 \cdot \sum_i x_i b_i \\
+        &\vdash x_1 a_1 \ge a_1 x_2 \sum_i b_2 \\
+        &\vdash x_1 a_1 \ge x_2 a_1 \\
+        &\vdash \bot
+    \end{align*}
+    Here we're multiplying by $a_1$, and then using the partial order structure induced by the squaring operation to express and deduce $x_1 a_1 \ge x_2 a_1$. By taking expectations, we see that this is not possible, because the expectation of a square is always nonnegative.
+    
+    It follows that we have an isomorphism \[V^*(\mathcal{S}) \cong \coprod_{\substack{r_1, \cdots r_n \in \mathcal{A} \\ x_1 < \cdots < x_n}} V_{r_i},\] as claimed. The reader can check that this preserves the expectation algebra structure. This concludes the proof.
+\end{proof}
+
+The remarkable thing about this result, is that is gives an example of geometric morphism, that is not an interpretation between theories in the classical model-theoretic sense, making this \emph{a result that is unique to topos-theory}. It shows very concretely how Morita-equivalence of theories extends bi-interpretation of theories in such a way that we allow for constructions involving formal colimits.
+
+In analogy to the case of intervals, the coproduct decomposition of $\mathcal{S}$ now gives a \emph{normal form} for formulas in the theory of interval-like expectation algebras. We see that in this theory, formulas precisely describe sets of possible \emph{joint distributions}. This mimics a very direct way how probability theorists think about random variables. The base probability space is, quite simply, a formality; and everything of relevance for random variables is their distributions and their joint distributions.
+
+\subsection{Practical considerations}
+
+We have managed to build a framework for interpreting \emph{random variables} in $\Prob$. While, as discussed previously, in this setting we are limited to finitary phenomena, there is still an interesting class of problems that we can analyze.
+
+We can easily model a Bernoulli random variable by specifying its distribution. In fact, we can model any distribution with finitely many possible real values in this way.
+
+Notice that there is a way to axiomatize independent random variables by an infinitary first-order formula describing the distributions that we admit. Similarly, things like Bayes' theorem can be stated and proven.
+
+With these tools, the kind of problem in probability theory, that one might encounter in high-school. For instance, one can consider iterated coin flips, dice throws or turning of a roulette wheel and deduce the formula for the Binomial distribution that arises when we sum i.i.d Bernoulli-distributed random variables. One can also compute its expected value.
+
+Moreover, we can also model dependencies between events or also random variables that allows us to specify the \emph{probability tree diagrams} that we will often encounter when modeling problems involving drawing balls from an urn.
+
+The theory of interval-like expectation algebras now provides us with a formal setting which we can use to \emph{decide} or even \emph{get normal forms} (in our case distributions) for this type of formulas. For an actual computer implementation, like an SMT-solver for this theory that one might then apply as tactics in an interactive theorem prover, however, some considerations would have to be made regarding how one computes with the reals. Interestingly, for this type of problems, it does not seem to be the case that \emph{completeness} of the reals actually plays a role, so one could simply axiomatize a general linearly ordered field $R$ instead of working with $\mathbb{R}$.
 
 \bibliographystyle{unsrt}
 \bibliography{probability-topos}

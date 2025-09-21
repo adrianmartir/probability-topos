@@ -5,4 +5,11 @@
 *.log
 *.fls
 *.fdb_latexmk
+*.toc
+*.bbl
+*.blg
+*.out.
+*.xdv
+*.out
+*.xopp
 .vscode
