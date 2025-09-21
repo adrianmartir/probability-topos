@@ -73,7 +73,9 @@
 \begin{document}
 
 \begin{abstract}
-WIP
+In this article, we describe an infinitary first-order theory of intervals given by a finitely additive probability measure on a boolean algebra and an axiom that we call \emph{interval axiom}. We prove that this theory is complete and satisfies quantifier-elimination by providing a normal form given by formulas describing partitions. We define another theory of \emph{simple interval-like expectation algebras}, which models the simple functions on an interval and illustrate how this is an appropriate setup for encoding problems in probability theory with finitely many random variables. In this theory, we also have completeness and a certain normal form given by joint distributions of simple functions. This provides a first approximation to a formal justification for the probability theorist's intuition: \emph{It doesn't matter what base probability space we use} and \emph{the only really relevant part of a random variable is its distribution}.
+
+We prove these very practical logical results using the abstract machinery of topos theory. A concrete construction of the topos $\Prob$ as sheaves on finite probability spaces turns out to be the classifying topos of both of the theories mentioned above, making them Morita-equivalent. The topos $\Prob$ gives a construction of a \emph{universal interval} (and a corresponding object of simple functions over it), making it a suitable setting for synthetic probability theory (with finitely many random variables) that is fully independent of a chosen base probability space.
 \end{abstract}
 
 \maketitle
@@ -83,9 +85,35 @@ WIP
 
 \section{Introduction}
 
-WIP
+The usual foundations of probability theory certainly take some getting used to. One fixes a probability space $(\Omega,\Sigma, \mathbb{P})$ merely for the formal sake of being able to talk about \emph{events} and \emph{random variables}. However, the precise nature of our base probability space is actually quite irrelevant for most problems (beyond assuming regularity conditions).
 
-\section{A combinatorial construction of $\Prob$}
+Moreover, the base probability space need not really be fixed, but can be thought as an object that can be extended on the fly to incorporate \emph{new events} or \emph{new random variables} by providing a measurable measure-preserving map $(\Omega',\Sigma',\mathbb{P}') \to (\Omega,\Sigma, \mathbb{P})$ (this is described by Terence Tao in \cite{tao2010review}).
+
+We construct a topos $\Prob$ containing a \emph{generic} probability space, over which we can do probability theory. We build on the technical improvement provided by measure algebras (as described in \cite{fremlin2012measure}) to abstract away the points of a measure by dividing out the nullsets. Specifically, we will see that $\Prob$ contains a universal model for a certain theory of \emph{intervals}, which captures the (infinitary) first-order properties of the Lebesgue interval.
+
+We will see that $\Prob$ gives a valid synthetic setting free of any choice of probability space to model combinatorial problems in probability theory. By this we mean that we can statements that are often considered in \emph{high school probability}, where we roll dice, flip coins or play the kind of games which we analyze using probability trees.
+
+By imposing this finiteness restriction (finitely many random variables), we are able to get a very clear picture of the structure of $\Prob$, which has theoretical implications for the theory of intervals (completeness and quantifier-elimination). It also gives a clear formal statement that shows that, in this setting, \emph{the validity of those statements is the same regardless of the concrete interval one chooses}, justifying the common belief that \emph{the choice of probability space is not really important}. We will also see that, in this sense, it is only the joint distribution of random variables that really matter.
+
+%% Add here: Discussion of other measure theoretic toposes and possibly Rand.
+
+Beyond practical applications in this \emph{finitary} probability theory, the in-depth analysis of $\Prob$ provides a clear foundation and a guideline one can follow, when extending results to structurally more complex toposes such as the one considered by Simpson in \cite{simpson2017probability}.
+
+Moreover, future developments that seek to apply the geometric techniques first pioneered in algebraic geometry to the setting of probability theory may be built on top of this topos-theoretic construction (or one of its variations) in the future.
+
+%% Chapter summaries (extensible)
+
+We start Section \ref{section_combinatorial} by a simple construction of the topos $\Prob$ as the sheaf topos on the site given by finite probability spaces equipped with the atomic topology. We give an in-depth analysis of finite limits of the representable functors by using descriptions as polytopes. This is the foundational calculus that is usually needed to prove statements about $\Prob$.
+
+In Section \ref{section_classifying} we introduce the theory of boolean probability algebras, which is the theory of boolean algebras equipped with a (finitary) additive measure. We prove that the presheaves over finite probability spaces classify this theory in Theorem \ref{classifying_presheaf}. We then state the \emph{interval axiom} and show that $\Prob$ classifies the theory of intervals in Theorem \ref{classifying}. At the end of the section, we give a concrete logical interpretation of these results. We prove that the theory of intervals is complete and also satisfies an infinitary version of quantifier-elimination.
+
+While our results so far are certainly interesting, in Section \ref{section_simple_functions} we go beyond intervals and define an \emph{object of simple functions} in $\Prob$. After proving that this object behaves as expected, we conclude the chapter by proving that the topos $\Prob$ also classifies a certain theory of \emph{simple interval-like expectation algebras} (Theorem \ref{classifying_sint}), making the theories Morita-equivalent (using Caramello's terminology as described in \cite{caramello2018theories}). This has logical implications for normal forms in this theory, which can now be seen to be given by distributions (and joint distributions). This makes intuitive sense to the probability theorist, since he often likes to work with probability distributions instead of looking at actual random variables. The implied completeness of the theory of interval-like expectation algebras finally gives us the desired result: \emph{It does not matter which interval-like expectation algebra we choose in order to determine the truth of an infinitary first-order sentence}.
+
+%% Group actions
+%% Classification of Atoms
+%% Rand
+
+\section{A combinatorial construction of $\Prob$}\label{section_combinatorial}
 
 In this section, we define the topos $\Prob$ as a category of sheaves on the category of finite probability spaces. We then proceed by proving properties about this construction, which we will need throughout the paper.
 
@@ -143,7 +171,7 @@ We now introduce the protagonist of this paper.
 
 Much of this article is dedicated to finding other equivalent ways of describing $\Prob$. When we wish to leave the particular description of $\Prob$ vague, we will use the notation $\Prob$.
 
-Lemma 2 in section \Rmnum{3}.4 of \cite{maclane2012sheaves} gives us a criterion for checking whether a presheaf is actually a sheaf over the atomic topology:
+Lemma 2 in Section \Rmnum{3}.4 of \cite{maclane2012sheaves} gives us a criterion for checking whether a presheaf is actually a sheaf over the atomic topology:
 
 A presheaf $\mathcal{F}$ on $\FinProb$ is a sheaf over the atomic topology if and only if one can check the following for any morphism $f: \alpha \to \beta$ and any $a \in \mathcal{F}(\alpha)$: If for all diagrams
 
@@ -453,7 +481,7 @@ with $fg = fh$. But this certainly holds, since we can factor $g$ and $h$ throug
 Note that this proposition actually had little to do with finite probability spaces and is really about a sheaf condition for atomic topologies where the base category has multi-pullbacks.
 
 
-\section{$\Prob$ as the classifying topos of a theory of intervals}
+\section{$\Prob$ as the classifying topos of a theory of intervals}\label{section_classifying}
 
 In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part, we will use the notations and definitions as in part D.1 of \cite{johnstone2002sketches2}.
 
@@ -953,7 +981,7 @@ So, while we could easily fix the problem above by enlarging $\FinProb$ to conta
 
 Fixing this does require \emph{rethinking what the category of Grothendieck toposes and geometric morphisms is}, by modifying it so that the inverse image functors further preserve certain infinitary limits.
 
-\section{Simple functions in $\Prob$}\label{simple_functions}
+\section{Simple functions in $\Prob$}\label{section_simple_functions}
 
 While our logical results about $\mathbb{T}_{\textup{int}}$ are certainly interesting, there is no doubt that probability theory is really about spaces of functions on $\sigma$-algebras. Formulas over $\mathbb{T}_{\textup{int}}$ might not be sufficient for expressing statements about functions, however, the classifying topos $\mathbb{T}_{\textup{int}}$ contains additional objects that cannot be defined by formulas in $\mathbb{T}_{\textup{int}}$. Among those objects is the algebra of simple functions over the interval $U$.
 
