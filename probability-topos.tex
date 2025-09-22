@@ -89,15 +89,15 @@ The usual foundations of probability theory certainly take some getting used to.
 
 Moreover, the base probability space need not really be fixed, but can be thought as an object that can be extended on the fly to incorporate \emph{new events} or \emph{new random variables} by providing a measurable measure-preserving map $(\Omega',\Sigma',\mathbb{P}') \to (\Omega,\Sigma, \mathbb{P})$ (this is described by Terence Tao in \cite{tao2010review}).
 
-We construct a topos $\Prob$ containing a \emph{generic} probability space, over which we can do probability theory. We build on the technical improvement provided by measure algebras (as described in \cite{fremlin2012measure}) to abstract away the points of a measure by dividing out the nullsets. Specifically, we will see that $\Prob$ contains a universal model for a certain theory of \emph{intervals}, which captures the (infinitary) first-order properties of the Lebesgue interval.
+Using this idea of the possibility of extending the base probability space, we construct a topos $\Prob$ containing a \emph{generic} probability space, over which we can do probability theory. We build on the technical improvement provided by measure algebras (as described in \cite{fremlin2012measure}) to abstract away the points of a measure by dividing out the nullsets. Specifically, we will see that $\Prob$ contains a universal model for a certain theory of \emph{intervals}, which captures the infinitary first-order properties of the measure algebra corresponding to the Lebesgue interval.
 
-We will see that $\Prob$ gives a valid synthetic setting free of any choice of probability space to model combinatorial problems in probability theory. By this we mean that we can statements that are often considered in \emph{high school probability}, where we roll dice, flip coins or play the kind of games which we analyze using probability trees.
+We will see that $\Prob$ gives a valid synthetic setting to model combinatorial problems in probability theory, free from any choice of probability space. By this we mean that we can statements that are often considered in \emph{high school probability}, where we roll dice, flip coins or play the kind of games which we analyze using probability trees.
 
-By imposing this finiteness restriction (finitely many random variables), we are able to get a very clear picture of the structure of $\Prob$, which has theoretical implications for the theory of intervals (completeness and quantifier-elimination). It also gives a clear formal statement that shows that, in this setting, \emph{the validity of those statements is the same regardless of the concrete interval one chooses}, justifying the common belief that \emph{the choice of probability space is not really important}. We will also see that, in this sense, it is only the joint distribution of random variables that really matter.
+The purpose of the finiteness restriction on the number of random variables is that it quickly gives us a very clear picture of the structure of $\Prob$, which has theoretical implications for the theory of intervals (completeness and quantifier-elimination). It also gives a clear formal statement that shows that, in this setting, \emph{the validity of those statements is the same regardless of the concrete interval one chooses}, justifying the common belief that \emph{the choice of probability space is not really important}. We will also see that, in this sense, it is only the joint distribution of random variables that really matter.
 
 %% Add here: Discussion of other measure theoretic toposes and possibly Rand.
 
-Beyond practical applications in this \emph{finitary} probability theory, the in-depth analysis of $\Prob$ provides a clear foundation and a guideline one can follow, when extending results to structurally more complex toposes such as the one considered by Simpson in \cite{simpson2017probability}.
+Beyond practical applications in this \emph{finitary} probability theory, the in-depth analysis of $\Prob$ provides a clear foundation and a guideline one can follow, when extending results to bigger toposes such as the one considered by Simpson in \cite{simpson2017probability}, which would be better suited for an analysis of sequences and continuous distributions at the cost of additional complexity.
 
 Moreover, future developments that seek to apply the geometric techniques first pioneered in algebraic geometry to the setting of probability theory may be built on top of this topos-theoretic construction (or one of its variations) in the future.
 
@@ -105,7 +105,7 @@ Moreover, future developments that seek to apply the geometric techniques first 
 
 We start Section \ref{section_combinatorial} by a simple construction of the topos $\Prob$ as the sheaf topos on the site given by finite probability spaces equipped with the atomic topology. We give an in-depth analysis of finite limits of the representable functors by using descriptions as polytopes. This is the foundational calculus that is usually needed to prove statements about $\Prob$.
 
-In Section \ref{section_classifying} we introduce the theory of boolean probability algebras, which is the theory of boolean algebras equipped with a (finitary) additive measure. We prove that the presheaves over finite probability spaces classify this theory in Theorem \ref{classifying_presheaf}. We then state the \emph{interval axiom} and show that $\Prob$ classifies the theory of intervals in Theorem \ref{classifying}. At the end of the section, we give a concrete logical interpretation of these results. We prove that the theory of intervals is complete and also satisfies an infinitary version of quantifier-elimination.
+In Section \ref{section_classifying} we introduce the theory of boolean probability algebras, which is the theory of boolean algebras equipped with a finitel additive measure. We prove that the presheaves over finite probability spaces classify this theory in Theorem \ref{classifying_presheaf}. We then state the \emph{interval axiom} and show that $\Prob$ classifies the theory of intervals in Theorem \ref{classifying}. At the end of the section, we give a concrete logical interpretation of these results. We prove that the theory of intervals is complete and also satisfies an infinitary version of quantifier-elimination.
 
 While our results so far are certainly interesting, in Section \ref{section_simple_functions} we go beyond intervals and define an \emph{object of simple functions} in $\Prob$. After proving that this object behaves as expected, we conclude the chapter by proving that the topos $\Prob$ also classifies a certain theory of \emph{simple interval-like expectation algebras} (Theorem \ref{classifying_sint}), making the theories Morita-equivalent (using Caramello's terminology as described in \cite{caramello2018theories}). This has logical implications for normal forms in this theory, which can now be seen to be given by distributions (and joint distributions). This makes intuitive sense to the probability theorist, since he often likes to work with probability distributions instead of looking at actual random variables. The implied completeness of the theory of interval-like expectation algebras finally gives us the desired result: \emph{It does not matter which interval-like expectation algebra we choose in order to determine the truth of an infinitary first-order sentence}.
 
@@ -228,7 +228,7 @@ Note that the second and third part are merely formal consequences of the first 
 
 Recall that a site $(\C, J)$, is called \emph{atomic} if every nonempty sieve over an object $c$ is covering. Furthermore, a Grothendieck topos is called \emph{atomic} if it is equivalent to a topos of sheaves over an atomic site. Tautologically, $\Prob$ can be seen to be an atomic topos. An object in an atomic topos is called an \emph{atom} if it has precisely two subobjects (the initial object and the object itself).
 
-We just saw that the representables are actually sheaves. In fact, since our site is atomic, these representables are atoms. Moreover, for atomic toposes, every object can be uniquely written as a coproduct of atoms. So, in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? It turns out that this is actually the case.
+We just saw that the representables are actually sheaves. In fact, since our site is atomic, these representables are atoms. Moreover, for atomic toposes, every object can be uniquely written as a coproduct of atoms. So, in some sense, we can reduce all problems to atoms. The natural question arises: Are there more atoms than the representables? It turns out that this is the case.
 
 %% TODO: In \ref{atoms} we will give a complete list of the atoms and see that the representables are not all of them.
 
@@ -284,7 +284,7 @@ We now compute the finite limits of representables in $\Set^{\FinProb^{op}}$ (or
     where the indexing $t_{ij}$ range over the ones with the fixed sums specified above.
 \end{proposition}
 \begin{proof}
-    The $t_{ij}$ where precisely chosen such that the projections are measure preserving. To show
+    The $t_{ij}$ where precisely chosen such that the projections are measure-preserving. To show
     \[
     \y U_{r_i} \times \y U_{s_j} \cong \coprod_{t_{ij}} \y U_{t_{ij}} ,
     \]
