@@ -73,7 +73,7 @@
 \begin{document}
 
 \begin{abstract}
-In this article, we describe an infinitary first-order theory of intervals axiomatizing a boolean algebra equipped with a finitely additive probability measure satisfying an \emph{interval axiom}. We prove that this theory is complete and satisfies quantifier-elimination by providing a normal form given by formulas describing partitions. We define another theory of \emph{simple interval-like expectation algebras}, which models the simple functions on an interval and illustrate how this is an appropriate setup for encoding problems in probability theory with finitely many random variables. In this theory, we also have completeness and a certain normal form given by joint distributions of simple functions. This provides a first approximation to a formal justification for the probability theorist's intuition: \emph{It doesn't matter what base probability space we use} and \emph{the only really relevant part of a random variable is its distribution}.
+In this article, we describe an infinitary first-order theory of intervals. This theory axiomatizes a Boolean algebra equipped with a finitely additive probability measure satisfying an \emph{interval axiom}. We prove that this theory is complete and satisfies quantifier elimination by providing a normal form given by formulas describing partitions. We define another theory of \emph{simple interval-like expectation algebras} which models the simple functions on an interval and illustrate how this is an appropriate setup for encoding problems in probability theory with finitely many random variables. In this theory, we also have completeness and a certain normal form given by joint distributions of simple functions. This provides a first approximation to a formal justification for the probability theorist's intuition that \emph{it doesn't matter what base probability space we use} and that \emph{the only really relevant part of a random variable is its distribution}.
 
 We prove these very practical logical results using the abstract machinery of topos theory. A concrete construction of the topos $\Prob$ as sheaves on finite probability spaces turns out to be the classifying topos of both of the theories mentioned above, making them Morita-equivalent. The topos $\Prob$ gives a construction of a \emph{universal interval} (and a corresponding object of simple functions over it), making it a suitable setting for synthetic probability theory (with finitely many random variables) that is fully independent of a chosen base probability space.
 \end{abstract}
@@ -89,11 +89,11 @@ The usual foundations of probability theory certainly take some getting used to.
 
 Moreover, the base probability space need not really be fixed, but can be thought as an object that can be extended on the fly to incorporate \emph{new events} or \emph{new random variables} by providing a measurable measure-preserving map $(\Omega',\Sigma',\mathbb{P}') \to (\Omega,\Sigma, \mathbb{P})$ (this is described by Terence Tao in \cite{tao2010review}).
 
-Using this idea of the possibility of extending the base probability space, we construct a topos $\Prob$ containing a \emph{generic} probability space, over which we can do probability theory. We build on the technical improvement provided by measure algebras (as described in \cite{fremlin2012measure}) to abstract away the points of a measure by dividing out the nullsets. Specifically, we will see that $\Prob$ contains a universal model for a certain theory of \emph{intervals}, which captures the infinitary first-order properties of the measure algebra corresponding to the Lebesgue interval.
+Using this idea of the possibility of extending the base probability space, we construct a topos $\Prob$ containing a \emph{generic} probability space, over which we can do probability theory. Building on measure algebras (as described in \cite{fremlin2012measure}), the points of the measure space are abstracted away by considering only the lattice of measurable set (modulo nullset). More concretly, we will see that $\Prob$ contains a universal model for a certain theory of \emph{intervals}, which captures the infinitary first-order properties of the measure algebra corresponding to the Lebesgue interval.
 
-We will see that $\Prob$ gives a valid synthetic setting to model combinatorial problems in probability theory, free from any choice of probability space. By this we mean that we can statements that are often considered in \emph{high school probability}, where we roll dice, flip coins or play the kind of games which we analyze using probability trees.
+We will see that $\Prob$ gives a valid synthetic setting to model combinatorial problems in probability theory, free from any choice of probability space. By this we mean that we can encode statements that are often encountered in \emph{high-school probability theory}, where we roll dice, flip coins or play the kind of games which we analyze using probability trees.
 
-The purpose of the finiteness restriction on the number of random variables is that it quickly gives us a very clear picture of the structure of $\Prob$, which has theoretical implications for the theory of intervals (completeness and quantifier-elimination). It also gives a clear formal statement that shows that, in this setting, \emph{the validity of those statements is the same regardless of the concrete interval one chooses}, justifying the common belief that \emph{the choice of probability space is not really important}. We will also see that, in this sense, it is only the joint distribution of random variables that really matter.
+The purpose of the finiteness restriction on the number of random variables is that it quickly gives us a very clear picture of the structure of $\Prob$, which has theoretical implications for the theory of intervals (completeness and quantifier elimination). It also gives a clear formal statement that shows that, in this setting, \emph{the validity of those statements is the same regardless of the concrete interval one chooses}, justifying the common belief that \emph{the choice of probability space is not really important}. We will also see that, in this sense, it is only the joint distribution of random variables that really matter.
 
 %% Add here: Discussion of other measure theoretic toposes and possibly Rand.
 
@@ -105,7 +105,7 @@ Moreover, future developments that seek to apply the geometric techniques first 
 
 We start Section \ref{section_combinatorial} by a simple construction of the topos $\Prob$ as the sheaf topos on the site given by finite probability spaces equipped with the atomic topology. We give an in-depth analysis of finite limits of the representable functors by using descriptions as polytopes. This is the foundational calculus that is usually needed to prove statements about $\Prob$.
 
-In Section \ref{section_classifying} we introduce the theory of boolean probability algebras, which is the theory of boolean algebras equipped with a finitel additive measure. We prove that the presheaves over finite probability spaces classify this theory in Theorem \ref{classifying_presheaf}. We then state the \emph{interval axiom} and show that $\Prob$ classifies the theory of intervals in Theorem \ref{classifying}. At the end of the section, we give a concrete logical interpretation of these results. We prove that the theory of intervals is complete and also satisfies an infinitary version of quantifier-elimination.
+In Section \ref{section_classifying} we introduce the theory of Boolean probability algebras, which is the theory of Boolean algebras equipped with a finitely additive measure. We prove that the presheaves over finite probability spaces classify this theory in Theorem \ref{classifying_presheaf}. We then state the \emph{interval axiom} and show that $\Prob$ classifies the theory of intervals in Theorem \ref{classifying}. At the end of the section, we give a concrete logical interpretation of these results. We prove that the theory of intervals is complete and also satisfies an infinitary version of quantifier elimination.
 
 While our results so far are certainly interesting, in Section \ref{section_simple_functions} we go beyond intervals and define an \emph{object of simple functions} in $\Prob$. After proving that this object behaves as expected, we conclude the chapter by proving that the topos $\Prob$ also classifies a certain theory of \emph{simple interval-like expectation algebras} (Theorem \ref{classifying_sint}), making the theories Morita-equivalent (using Caramello's terminology as described in \cite{caramello2018theories}). This has logical implications for normal forms in this theory, which can now be seen to be given by distributions (and joint distributions). This makes intuitive sense to the probability theorist, since he often likes to work with probability distributions instead of looking at actual random variables. The implied completeness of the theory of interval-like expectation algebras finally gives us the desired result: \emph{It does not matter which interval-like expectation algebra we choose in order to determine the truth of an infinitary first-order sentence}.
 
@@ -129,7 +129,7 @@ In this section, we define the topos $\Prob$ as a category of sheaves on the cat
 
 Note that all maps of finite probability spaces are surjective, and we do not allow elements of measure zero.
 
-We want to consider the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ denotes the atomic topology. Recall that the atomic topology is defined by letting every nonempty sieve be a covering sieve. We need to check that this yields a Grothendieck topology.
+We will study the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ denotes the atomic topology. Recall that the atomic topology is defined by letting every nonempty sieve be a covering sieve. We need to check that this yields a Grothendieck topology.
 
 \begin{proposition} \label{pullback_measure}
     Given a diagram of finite probability spaces
@@ -155,8 +155,8 @@ We want to consider the sheaf topos $\Sh(\FinProb, J_{at})$, where $J_{at}$ deno
     \begin{align*}
         \sum_{(x,y) \in p_1^{-1} x} \nu(x,y) &= \sum_{y \in g^{-1} u} \frac{\mu_1(x)\mu_2(y)}{\mu(u)} \\
         &= \frac{\mu_1(x)}{\mu(u)} \sum_{y \in g^{-1} u} \mu_2(y) \\
-        &= \frac{\mu_2(x)}{\mu(u)} \mu(u) \\
-        &= \mu_2(x)
+        &= \frac{\mu_1(x)}{\mu(u)} \mu(u) \\
+        &= \mu_1(x)
     \end{align*}
     Similarly, $p_2$ is measure-preserving.
 
@@ -220,7 +220,7 @@ We can now check the sheaf condition for the vast majority of sheaves that we ar
 
         \item Checking that the representable functors are sheaves by using \ref{sheaf_condition_weak} reduces to the fact that the fork above is a coequalizer diagram.
 
-        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. But since we already know this sheaf condition holds for representables, we merely need to note that equalizers of coproducts are coproducts of equalizers in $\Set$.
+        \item We check the sheaf condition \ref{sheaf_condition_weak} for a coproduct of representables. However, we already know that this sheaf condition holds for representables, and we merely need to note that equalizers of coproducts are coproducts of equalizers in $\Set$.
     \end{enumerate}
 \end{proof}
 
@@ -251,7 +251,7 @@ We introduce convenient notation to emphasize the combinatorial nature of finite
         \{i \mid r_i \neq 0 \}
         \]
         equipped with the measure $\mu(i) = r_i$.
-        \item We will use the shorthand $U_r := U_{r,r-1}$ for $r \in [0,1]$.
+        \item We will use the shorthand $U_r := U_{r,1-r}$ for $r \in [0,1]$.
     \end{enumerate}
 \end{definition}
 
@@ -284,7 +284,7 @@ We now compute the finite limits of representables in $\Set^{\FinProb^{op}}$ (or
     where the indexing $t_{ij}$ range over the ones with the fixed sums specified above.
 \end{proposition}
 \begin{proof}
-    The $t_{ij}$ where precisely chosen such that the projections are measure-preserving. To show
+    The $t_{ij}$ were precisely chosen such that the projections are measure-preserving. To show
     \[
     \y U_{r_i} \times \y U_{s_j} \cong \coprod_{t_{ij}} \y U_{t_{ij}} ,
     \]
@@ -311,11 +311,11 @@ Finally, we also have multi-equalizers.
 
 \begin{proposition}
     Given the diagram \begin{tikzcd}[column sep=small]
-        \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \beta
+        \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \beta
         \end{tikzcd} in $\FinProb$ we have
     \[
         \eq(\begin{tikzcd}[column sep=small]
-        \y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \y \beta
+        \y \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \y \beta
         \end{tikzcd}) \cong \y \alpha \text{ if } f = g \text{ and } \emptyset \text{ otherwise.}
     \]
 \end{proposition}
@@ -323,7 +323,7 @@ Finally, we also have multi-equalizers.
     The interesting case is when $f \neq g$. In that case we compute the equalizer pointwise on a finite probability space $\gamma$:
     \[
         \eq(\begin{tikzcd}[column sep=small]
-        \y \alpha \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & \y \beta
+        \y \alpha \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \y \beta
         \end{tikzcd})(\gamma) \cong \{ h: \gamma \twoheadrightarrow \alpha \mid fh = gh \} \cong \emptyset .
     \]
 \end{proof}
@@ -417,7 +417,7 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
         \end{equation*}
         \item Define the presheaf $U$ in the following way:
         \[ U \cong \la 1 \mid (r_1,r_2) \in P^1_2 \ra \]
-        We will later see that this presheaf is in fact the underlying sheaf of a universal model in $\Prob$ for a suitable theory of boolean algebras with measures.
+        We will later see that this presheaf is in fact the underlying sheaf of a universal model in $\Prob$ for a suitable theory of Boolean algebras with measures.
     \end{itemize}
 \end{example}
 
@@ -488,7 +488,7 @@ Note that this proposition actually had little to do with finite probability spa
 In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain theory of intervals. For the most part, we will use the notations and definitions as in part D.1 of \cite{johnstone2002sketches2}.
 
 \begin{definition}
-    Define the geometric theory $\mathbb{T}_{\textup{bpalg}}$ of boolean probability algebras to have one sort $B$, constants and function symbols
+    Define the geometric theory $\mathbb{T}_{\textup{bpalg}}$ of Boolean probability algebras to have one sort $B$, constants and function symbols
     \begin{center}
         $1: B$ \\
         $0: B$ \\
@@ -545,7 +545,7 @@ In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain t
     Denote the category models of $\mathbb{T}_{\textup{bpalg}}$ in $\Set$ by $\BPAlg$.
 \end{definition}
 
-Essentially, we have encoded a boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. Notice that we require that there is only one element of measure zero. This requirement may seem somewhat surprising, since the boolean algebra of measurable sets of a $\sigma$-algebra certainly can have sets of measure zero, or \emph{nullsets}. Instead, we have a different kind of model in mind.
+Essentially, we have encoded a Boolean probability algebra geometrically by partitioning the base sort $B$ into the elements $B_r$ of measure $r \in [0,1]$. Notice that we require that there is only one element of measure zero. This requirement may seem somewhat surprising, since the Boolean algebra of measurable sets of a $\sigma$-algebra certainly can have sets of measure zero, or \emph{nullsets}. Instead, we have a different kind of model in mind.
 
 \begin{example}\label{mod_nullset}
     Let $(X, \Sigma, \mu)$ be a probability space. Consider the equivalence relation $\sim$ on $\Sigma$ with
@@ -553,28 +553,28 @@ Essentially, we have encoded a boolean probability algebra geometrically by part
         A \sim B \text{ iff } \mu (A \setminus B \cup B \setminus A) = 0 .
     \end{equation*}
 
-    We now consider the boolean algebra $B := \Sigma \, / \sim$\s (\emph{'measurable sets up to nullset'}) together with the unary relations $B_r \subset B$ given by the equivalence classes in $B$ that have measure $r$. This forms a boolean probability algebra.
+    We now consider the Boolean algebra $B := \Sigma \, / \sim$\s (\emph{'measurable sets up to nullset'}) together with the unary relations $B_r \subset B$ given by the equivalence classes in $B$ that have measure $r$. This forms a Boolean probability algebra.
 
-    Notice that the boolean probability algebras associated to the Borel and the Lebesgue intervals equipped with the Lebesgue measure are the same.
+    Notice that the Boolean probability algebras associated to the Borel and the Lebesgue intervals equipped with the Lebesgue measure are the same.
 \end{example}
 
 This is a well-established construction, and it yields what is known as a \emph{measure algebra}. In this case we even get a \emph{probability algebra}.
 
 \begin{definition}\label{probability_alg}
-    Call a boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
+    Call a Boolean probability algebra $(A,\mu)$ a probability algebra if $A$ is a complete Boolean algebra and moreover, for every directed family $a_i$ of elements of $A$, we have the additivity condition
     \[
     \mu(\bigvee a_i) = \text{sup } \mu(a_i) .
     \]
-    The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a probability algebra will simply be called measure algebras. A morphism of measure algebras is a morphism of boolean algebras that is measure-preserving.
+    The pairs $(A,\mu)$ for which there is a $c > 0$ such that $(A, c \mu)$ is a probability algebra will simply be called measure algebras. A morphism of measure algebras is a morphism of Boolean algebras that is measure-preserving.
 \end{definition}
 
 Note that we have chosen a slightly more restrictive definition of measure algebra than is standard, since we did not allow the measure to adopt infinite values.
 
 Given a measure space $(X,\Sigma,\mu)$, dividing out the nullsets out of $\Sigma$ (as above) is guaranteed to yield a measure algebra. This is surprising, since the $\sigma$-algebra doesn't need to have infinite joins or meets, but the measure algebra does have them. Conversely, every measure algebra $(A,\mu)$ arises this way, which is proved using the Stone space associated to $A$. For more details, see \S 321 of \cite{fremlin2012measure}. For a more category-theoretic treatment of this \emph{'point-free'} approach to measure spaces, and it's relationship to other approaches, see \cite{pavlov2022gelfand} or \cite{jamneshan2020foundational}.
 
-The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of boolean probability algebras is that we do not have actual measure algebras, and thus we cannot make statements about infinite unions and infinite sums of measures. This gives us a first glimpse how naively working with the topos $\Prob$ limits us to the study of \emph{finitary phenomena}.
+The bottom line is that it is a harmless and well-established idea to replace probability spaces by probability algebras. In fact, \cite{fremlin2012measure} develops integration and the theory of $L^p$ spaces in the setting of measure algebras. Rather, the limitation of the setting of Boolean probability algebras is that we do not have actual measure algebras, and thus we cannot make statements about infinite unions and infinite sums of measures. This gives us a first glimpse how naively working with the topos $\Prob$ limits us to the study of \emph{finitary phenomena}.
 
-\subsection{Classifying the theory of boolean probability algebras}
+\subsection{Classifying the theory of Boolean probability algebras}
 
 We would like to show that the presheaf topos \newline $\Set^{\FinProb^{op}}$ classifies the theory $\mathbb{T}_{\textup{bpalg}}$. More specifically, we will prove the equivalence
 
@@ -591,7 +591,7 @@ The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
     \[
         \FinProb^{op} \simeq \BPAlg_f
     \]
-    between the opposite category of finite probability spaces and the category of finite boolean probability algebras. We omit the proof and the data of the equivalence, since we won't use this fact outside this remark.
+    between the opposite category of finite probability spaces and the category of finite Boolean probability algebras. We omit the proof and the data of the equivalence, since we won't use this fact outside this remark.
 
     If \ref{equiv} were to be true, we would have that the points (or models) of both toposes are equivalent. This fact can be directly verified, as a consistency check, using \emph{Diaconescu's theorem}, the fact that flat functors to $\Set$ can be given as $\Ind$-completions and a substantial amount of property-checking for seeing that $\BPAlg$ is the $\Ind$-completion of $\BPAlg_f$:
     \begin{align*}
@@ -609,16 +609,16 @@ The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
 
 We will prove the equivalence \ref{equiv} by purely syntactical means. The functor in one direction will be given by an appropriate model of $\mathbb{T}_{\textup{bpalg}}$ in $\Set^{\FinProb^{op}}$. The functor in the other direction will require us to work with the syntactic category $\mathcal{C}^{\mathbb{T}_{\textup{bpalg}}}$ directly, and we will see that this will lead to us needing to work formally with geometric logic.
 
-Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent disjoint elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
+Before we begin, we explain the intuition behind this Morita-equivalence. The idea is that, while the left topos axiomatizes a Boolean probability algebra, the topos on the right directly axiomatizes the \emph{partitions} of the Boolean algebra into elements of prescribed measures. The object $\y U_{r_i}$ is supposed to represent disjoint elements $a_1,\cdots,a_n$ with measures $\mu(a_1) = r_1,\cdots,\mu(a_n) = r_n$. The maps $\y U_{s_i} \to \y U_{r_i}$ are supposed to represent unions of the partition $(s_i)$ into a coarser one.
 
-With this intuition in mind, how should we go about defining the universal model defining the geometric morphism $\Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{\textup{bpalg}}]$? Essentially, we are asking how to construct an object of \emph{all} elements of a boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
+With this intuition in mind, how should we go about defining the universal model defining the geometric morphism $\Set^{\FinProb^{op}} \to \Set[\mathbb{T}_{\textup{bpalg}}]$? Essentially, we are asking how to construct an object of \emph{all} elements of a Boolean algebra from the objects of elements with specified measures. Under this perspective, it becomes clear that we should define the underlying presheaf of the universal model $U$ to be
 \[
 \coprod_{r \in [0,1]} \y U_r \in \Set^{\FinProb^{op}} .
 \]
 One immediately sees that $U$ is just the powerset functor on the underlying set of a given probability space (a map $f$ between probability spaces gets sent to the map that takes the preimage of each subset).
 
 \begin{lemma} \label{universal model}
-$U$ is a model of the $\mathbb{T}_{\textup{bpalg}}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by the inclusions of the $\y U_r$ and the boolean algebra operations are inherited from the boolean algebra structure of $U(X, \mu)$, the powerset of $X$.
+$U$ is a model of the $\mathbb{T}_{\textup{bpalg}}$. The sort $B$ is given by $U$. The relation symbols $B_r$ are given by the inclusions of the $\y U_r$ and the Boolean algebra operations are inherited from the Boolean algebra structure of $U(X, \mu)$, the powerset of $X$.
 
 This yields a left-exact, colimit-preserving functor
 \[
@@ -698,7 +698,7 @@ This yields a left-exact, colimit-preserving functor
             [ b_i = \bigvee_j a_{ij}, c_j = \bigvee_i a_{ij} ]: \{ \vec{a}.\bigvee_{t_{ij} \in P^2_{r_i,s_j} } \phi^{\vec{a}}_{U_{t_{ij}}} \} \to \{\vec{b},\vec{c} . \phi^{\vec{b}}_{\alpha} \wedge \phi^{\vec{c}}_{\beta}\}.
         \]
 
-        Interestingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the boolean probability algebra axioms:
+        Interestingly, we have shown that this map is simply a substitution. But we can give another substitution that can be checked to be an inverse of this map by using the Boolean probability algebra axioms:
         \[
             [a_{ij} = b_i \wedge c_j]
         \]
@@ -735,7 +735,7 @@ This yields a left-exact, colimit-preserving functor
         \[
             (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}} \vdash_{\vec{a}} \bot .
         \]
-        Since that $f \neq g$, we have a $k$ be such that $f(k) \neq g(k)$. Now we can simply show that this sequent holds.
+        Using that $f \neq g$, we get a $k$ be such that $f(k) \neq g(k)$. Now we can simply show that this sequent holds.
         \begin{align*}
             (\exists \vec{b}) \theta_f^{\vec{a},\vec{b}} \wedge \theta_g^{\vec{a},\vec{b}}
             &\vdash_{\vec{a}} (\exists \vec{b}) \bigwedge_{j \in \beta} (b_j = \bigvee_{f i = j} a_i) \wedge \bigwedge_{j \in \beta} (b_j = \bigvee_{g i = j} a_i) \wedge \phi_{\alpha}^{\vec{a}} \\
@@ -810,7 +810,7 @@ The symbols $1$ and $\vee$ now automatically get preserved, since they are both 
 \end{proof}
 
 \begin{remark}
-    There is a way to embed $\Set[\mathbb{T}_{\textup{bpalg}}]$ into a coherent topos. We simply expand our theory to include boolean algebras $B$ together with a map $B \to A$ into an arbitrary abelian group $A$ with a fixed element $1$, satisfying conditions analogous to the ones for the measure of a boolean probability algebra. The classifying topos of this theory is coherent, and thus it has enough points. Since it contains $\Set[\mathbb{T}_{\textup{bpalg}}]$ as a subtopos, this might yield a strategy for proving \ref{classifying_presheaf} without the lengthy syntactical detour.
+    There is a way to embed $\Set[\mathbb{T}_{\textup{bpalg}}]$ into a coherent topos. We simply expand our theory to include Boolean algebras $B$ together with a map $B \to A$ into an arbitrary abelian group $A$ with a fixed element $1$, satisfying conditions analogous to the ones for the measure of a Boolean probability algebra. The classifying topos of this theory is coherent, and thus it has enough points. Since it contains $\Set[\mathbb{T}_{\textup{bpalg}}]$ as a subtopos, this might yield a strategy for proving \ref{classifying_presheaf} without the lengthy syntactical detour.
 \end{remark}
 
 \subsection{Classifying the theory of intervals} \label{theory_of_intervals}
@@ -823,7 +823,7 @@ We will show that the topos $\Sh(\FinProb, J_{at})$ classifies the following the
     \[
     B_s a \vdash_a (\exists b) \big ( (b = a \wedge b) \wedge B_r b \big )
     \]
-    for all $r,s \in [0,1]$ with $r \leq s$ to the theory of boolean probability algebras.
+    for all $r,s \in [0,1]$ with $r \leq s$ to the theory of Boolean probability algebras.
 \end{definition}
 
 The models of $\mathbb{T}_{\textup{int}}$ in $\Set$ must all be uncountable.
@@ -852,16 +852,16 @@ Using Zorn's lemma again, we get a minimal element $b' \leq a$, $b' \geq b$ such
 \]
 
 By construction, for all $c$ with $b \leq c \leq b'$, $c$ must either be $b$ or $b'$. This implies that $b' \wedge \neg b$ is an atom, or that $b' = b$. But the former is impossible due to the atomless hypothesis. Thus, we have constructed an element of measure $s$, which means that $(A,\mu)$ is an interval.
-\item Let $(I,\lambda)$ denote the boolean probability algebra associated to the $\sigma$-algebra of Lebesgue-subsets of $I := [0,1]$ equipped with the Lebesgue measure (use the construction from example \ref{mod_nullset}). This is an atomless measure algebra and thus an interval. We will refer to $(I, \lambda)$ as the \emph{Lebesgue interval}.
+\item Let $(I,\lambda)$ denote the Boolean probability algebra associated to the $\sigma$-algebra of Lebesgue-subsets of $I := [0,1]$ equipped with the Lebesgue measure (use the construction from example \ref{mod_nullset}). This is an atomless measure algebra and thus an interval. We will refer to $(I, \lambda)$ as the \emph{Lebesgue interval}.
 \item Note that not all intervals are atomless probability algebras. Consider the subalgebra
 \[
 A = \{(x_i) \in \prod_{i=1}^{\infty} I \mid \text{ finitely many } x_i \neq 0 \text{ or finitely many } x_i \neq 1 \}
 \]
-of the product of boolean algebras $\prod_{i \in \mathbb{N}} I$, where $(I, \lambda)$ is the Lebesgue interval. $A$ is the boolean algebra generated by elements that are everywhere zero except at one index. Note that $A$ is not complete, and we have a measure on this boolean algebra defined by
+of the product of Boolean algebras $\prod_{i \in \mathbb{N}} I$, where $(I, \lambda)$ is the Lebesgue interval. $A$ is the Boolean algebra generated by elements that are everywhere zero except at one index. Note that $A$ is not complete, and we have a measure on this Boolean algebra defined by
 \[
 \mu((x_i)) := \sum_{i=1}^{\infty} 2^{-i} \lambda(x_i) ,
 \]
-where $\lambda$ denotes the Lebesgue measure on the $i$th Lebesgue interval. It can be easily seen that the defined boolean probability algebra is actually an interval.
+where $\lambda$ denotes the Lebesgue measure on the $i$th Lebesgue interval. It can be easily seen that the defined Boolean probability algebra is actually an interval.
 \end{enumerate}
 \end{example}
 
@@ -892,7 +892,7 @@ We state the main result of this section.
     \end{equation}
     of geometric morphisms that commutes up to isomorphism (as in Theorem 8.1.3 in \cite{caramello2018theories}). 
     
-    To compute the universal model, insert the identity $\textup{Id}_{\Sh(\FinProb,J_{at})}$ into the top-left corner. Applying the left and bottom morphisms, yields the sheafification $j^*(U)$ (as a boolean probability algebra). Since the underlying presheaf $U$ is already a sheaf by Proposition \ref{subcanonical} (iii), this must be $U$. Thus, the result on the top-right must be the boolean probability algebra $U$, as required.
+    To compute the universal model, insert the identity $\textup{Id}_{\Sh(\FinProb,J_{at})}$ into the top-left corner. Applying the left and bottom morphisms, yields the sheafification $j^*(U)$ (as a Boolean probability algebra). Since the underlying presheaf $U$ is already a sheaf by Proposition \ref{subcanonical} (iii), this must be $U$. Thus, the result on the top-right must be the Boolean probability algebra $U$, as required.
 \end{proof}
 
 We can describe more explicitly how this result lets us view \emph{intervals} as geometric morphisms $\Set \to \Sh(\FinProb,J_{at})$.
@@ -918,7 +918,7 @@ We can describe more explicitly how this result lets us view \emph{intervals} as
 
 The abstract categorical statement of Theorem \ref{classifying} has some very concrete consequences for the structure of formulas-in-context up to $\mathbb{T}_{\textup{int}}$-provable equivalence, since those bijectively correspond to isomorphism classes of subobjects of a power of the universal model $U$.
 
-While we typically the fragment of logic preserved by (inverse images of) geometric morphisms is geometric logic, if a topos (such as $\Prob$) is boolean, then every geometric morphism into it will also preserve negation. This is the case since the complement $b$ of a subobject $a$ can be uniquely determined by saying that $a \wedge b = 0$ and $a \vee b = 1$, which is a property that gets preserved. In other words, every geometric morphism into a boolean topos is open.
+While we typically the fragment of logic preserved by (inverse images of) geometric morphisms is geometric logic, if a topos (such as $\Prob$) is Boolean, then every geometric morphism into it will also preserve negation. This is the case since the complement $b$ of a subobject $a$ can be uniquely determined by saying that $a \wedge b = 0$ and $a \vee b = 1$, which is a property that gets preserved. In other words, every geometric morphism into a Boolean topos is open.
 
 This has the pleasant consequence that every model of $\mathbb{T}_{\textup{int}}$ in \emph{any} Grothendieck topos will satisfy all $\mathbb{T}_{\textup{int}}$-provable sequent possibly containing \emph{infinitary} first-order-formulas. In this way, the fact that the classifying topos of $\mathbb{T}_{\textup{int}}$ is atomic does not only have consequences for geometric sequents, but also for infinitary first-order sequents.
 
@@ -948,7 +948,7 @@ In the following statement, let the term $x^{\epsilon}$ denote $x$ if $\epsilon 
     By the discussion above about infinitary first-order logic, this does translate to the corresponding isomorphism in any (possibly categorical) model of $\mathbb{T}_{\textup{int}}$. Completeness of the deduction system for infinitary first-order logic now implies the claim.
 \end{proof}
 
-This is a form of quantifier elimination. Every infinitary first-order formula is $\mathbb{T}_{\textup{int}}$-provably equivalent to a quantifier-free geometric formula. The quantifier-free geometric formula may very well contain proper infinitary disjunctions, so this cannot be compared to a quantifier-elimination type statement for classical, finitary, first-order logic.
+This is a form of quantifier elimination. Every infinitary first-order formula is $\mathbb{T}_{\textup{int}}$-provably equivalent to a quantifier-free geometric formula. The quantifier-free geometric formula may very well contain proper infinitary disjunctions, so this cannot be compared to a quantifier elimination type statement for classical, finitary, first-order logic.
 
 The case $n = 0$ of the previous result deserves some additional attention:
 
@@ -960,7 +960,7 @@ The case $n = 0$ of the previous result deserves some additional attention:
     $P^0 = 1$, which has precisely two subsets that yield the formulas $\bot$ and $\top$.
 \end{proof}
 
-This result is particularly remarkable, since it tells us that for the purposes of studying infinitary first-order sentences for the theory $\mathbb{T}_{\textup{int}}$, \emph{the choice of the interval does not matter}. This supports the widespread practice in probability theory of working with \emph{some} $\sigma$-algebra, but never putting any special attention on its specific features. In fact, it tells us that, without losing generality, we might as well work with the Lebesgue interval $(I,\lambda)$.
+This result is particularly remarkable, since it tells us that for the purposes of studying infinitary first-order sentences for the theory $\mathbb{T}_{\textup{int}}$, \emph{the choice of the interval does not matter}. This supports the widespread practice in probability theory of working with \emph{some} probability space, but never putting any special attention on its specific features. In fact, it tells us that, without losing generality, we might as well work with the Lebesgue interval $(I,\lambda)$.
 
 On the flip side, this also gives a theoretical guarantee that $\Prob$ is a suitable \emph{synthetic} context for probability theory: Any infinitary sentence that you are able to prove for \emph{some} interval, will also hold for the model $U$ in $\Prob$.
 
@@ -985,7 +985,7 @@ Fixing this does require \emph{rethinking what the category of Grothendieck topo
 
 \section{Simple functions in $\Prob$}\label{section_simple_functions}
 
-While our logical results about $\mathbb{T}_{\textup{int}}$ are certainly interesting, there is no doubt that probability theory is really about spaces of functions on $\sigma$-algebras. Formulas over $\mathbb{T}_{\textup{int}}$ might not be sufficient for expressing statements about functions, however, the classifying topos $\mathbb{T}_{\textup{int}}$ contains additional objects that cannot be defined by formulas in $\mathbb{T}_{\textup{int}}$. Among those objects is the algebra of simple functions over the interval $U$.
+While our logical results about $\mathbb{T}_{\textup{int}}$ are certainly interesting, there is no doubt that probability theory is really about spaces of functions on $\sigma$-algebras. Formulas over $\mathbb{T}_{\textup{int}}$ might not be sufficient for expressing statements about functions, however, $\Prob$ contains additional objects that cannot be defined by formulas in $\mathbb{T}_{\textup{int}}$. Among those objects is the algebra of simple functions over the interval $U$.
 
 We shall note here again, that we limit ourselves to studying combinatorial aspects of functions by studying the simple ones. The reason for this is that the study of analytic phenomena (such as integrable functions) would require an enlargement of our original site $\FinProb$\footnote{The authors arrived at this conclusion after extensive trial and error.}. Nevertheless, the benefit of working out the theory for the less complex topos $\Prob$ is, that it gives us a relatively simple and well fleshed-out theory.
 
@@ -1056,9 +1056,9 @@ We take Terrance Tao's blog post \cite{tao2014algebraic} as a rough model for th
     \end{enumerate}
 \end{definition}
 
-Here we made use of the same trick we used when defining the theory of boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra $A$, since we can consider $\lambda \cdot 1$. In this way, we have a \emph{subalgebra of real numbers} $R \subset A$ and an $\mathbb{R}$-linear map $A \to R$, which can be thought of \emph{the expectation operator.}
+Here we made use of the same trick we used when defining the theory of Boolean probability algebras. We used unary relation symbols to encode a function. The thing that now is different, is that if we have a real $\lambda \in \mathbb{R}$, we get again a canonical element of our $\mathbb{R}$-algebra $A$, since we can consider $\lambda \cdot 1$. In this way, we have a \emph{subalgebra of real numbers} $R \subset A$ and an $\mathbb{R}$-linear map $A \to R$, which can be thought of \emph{the expectation operator.}
 
-Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. One can see this by noticing that the indicator functions $a$ in our expectation algebra are characterized by the equation $a^2 = a$ (at least for boolean probability algebras in $\Set$). The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. The \emph{no nullsets} axiom corresponds to the fact that there is only one element of measure zero in a boolean probability algebra. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
+Now under the usual functional-analytic correspondence of finitely additive measures and linear operators to $\mathbb{R}$, the fact that a measure is non-negative corresponds to our \emph{positivity} axiom. One can see this by noticing that an element $a$ is an indicator function if and only if $a^2 = a$ (at least for Boolean probability algebras in $\Set$). The fact that a measure is a probability measure, corresponds to our \emph{expectation} axiom. The \emph{no nullsets} axiom corresponds to the fact that there is only one element of measure zero in a Boolean probability algebra. Note that we could have also axiomatized the operator $\mathbb{E}$ directly, although that wouldn't necessarily have been easier.
 
 \begin{remark}
     This theory of expectation-algebras is perfectly suitable for expressing questions about order: the predicate $\exists z, y - x = z^2$ can be viewed as an abbreviation of $x \le y$. This yields the intended semantics for models in $\Set$.
@@ -1092,7 +1092,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
             U_{t_{ij}} \to U_{\sum_{y_i + z_j = x_k} t_{ij}}
         \]
         defined to be the join the two pairs $(i,j)$, $(i',j')$ if the equality $y_i + z_j = y_{i'} + z_{j'}$ holds.
-        \item We calculate multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j \mid i,j \}$. Then, the multiplication is given on elements by
+        \item We now calculate multiplication on an element $(t_{ij}, y_i, z_j)$. Let $x_1 < x_2 < \cdots < x_k$ denote the elements of $\{y_i \cdot z_j \mid i,j \}$. Then, the multiplication is given on elements by
         \[
             (t_{ij},y_i,z_j) \mapsto (\sum_{y_i \cdot z_j = x_k} t_{ij}, x_k)
         \]
@@ -1110,7 +1110,7 @@ Now we can use \ref{atom_coprod_maps} to specify our structure on the elements o
     \end{enumerate}
 \end{proposition}
 
-Having defined the simple functions in $\Prob$, we can now transport this object to any setting whether there is an interval (a boolean probability algebra would suffice).
+Having defined the simple functions in $\Prob$, we can now transport this object to any setting whether there is an interval (a Boolean probability algebra would suffice).
 
 \begin{definition}
     Let $F: \mathcal{E} \to \Prob$ be an interval in $\mathcal{E}$. Then we can define the simple functions over $F$ to be $F^*(\mathcal{S})$ equipped with the corresponding expectation algebra structure.
@@ -1174,7 +1174,7 @@ The idempotent generation axiom states that the set of idempotents forms a gener
         F: \mathcal{C}_{\mathbb{T}_{\textup{sint}}} \to \Prob .
     \]
 
-    The key insight for this proof is that the category $\mathcal{C}_{\mathbb{T}_{\textup{sint}}}$ already contains an \emph{interval} of it's base elements. It's underlying object is given by the formula $V := \{ a . a^2 = a\}$ expressing idempotence. We equip it with the following boolean probability algebra structure:
+    The key insight for this proof is that the category $\mathcal{C}_{\mathbb{T}_{\textup{sint}}}$ already contains an \emph{interval} of it's base elements. It's underlying object is given by the formula $V := \{ a . a^2 = a\}$ expressing idempotence. We equip it with the following Boolean probability algebra structure:
     \begin{align*}
         a \wedge b := a \cdot b \\
         a \vee b := a + b - a \cdot b \\
@@ -1228,7 +1228,7 @@ In analogy to the case of intervals, the coproduct decomposition of $\mathcal{S}
 
 We have managed to build a framework for interpreting \emph{random variables} in $\Prob$. While, as discussed previously, in this setting we are limited to finitary phenomena, there is still an interesting class of problems that we can analyze.
 
-We can easily model a Bernoulli random variable by specifying its distribution. In fact, we can model any distribution with finitely many possible real values in this way.
+We can easily model Bernoulli random variables by specifying their distributions. In fact, we can model any distribution with finitely many possible real values in this way.
 
 Notice that there is a way to axiomatize independent random variables by an infinitary first-order formula describing the distributions that we admit. Similarly, things like Bayes' theorem can be stated and proven.
 
