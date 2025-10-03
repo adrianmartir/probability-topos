@@ -369,10 +369,14 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{definition}
     Let $n_1, \cdots, n_k$ be positive integers.
     \begin{enumerate}
-        \item Define:
+        \item We define
         \begin{equation*}
-            P^k_{n_1,\cdots,n_k} := \{ (t_{i_1 \cdots i_k}) \in \mathbb{R}^{n_1 \times \cdots \times n_k} \mid t_{i_1 \cdots i_k} \geq 0, \sum_{i_1,\cdots,i_k} t_{i_1 \cdots i_k} = 1 \}
+            P^k_{n_1,\cdots,n_k} := \{ (t_{i_1 \cdots i_k}) \in \mathbb{R}^{n_1 \times \cdots \times n_k} \mid t_{i_1 \cdots i_k} \geq 0, \sum_{i_1,\cdots,i_k} t_{i_1 \cdots i_k} = 1 \} .
         \end{equation*}
+        Using this, we can set
+        \[
+            P^k := \bigcup_{n_1,\cdots, n_k \in \mathbb{N}^+} P^k_{n_1,\cdots,n_k} .
+        \]
         \item For each $j = 1, \cdots k$, let $r^j_1, \cdots r^j_{n_j}$ be nonnegative real numbers summing up to $1$. Now let
         \begin{equation*}
             \begin{split}
@@ -424,7 +428,7 @@ We have seen that when thinking about binary multi-products, subsets $(t_{ij})$ 
 \begin{remark} We have seen that the elements $t_{ij}$ of a binary multi-product\footnote{We have not specified what exactly the data $(S,T)$ is, for which we want to consider elements. In this case, and in the future, we trust that the reader is able to infer this data on his own.} are the $t_{ij} \in P^2_{r_i,s_i}$. This set can be seen a subset of the set of $n\times m$-matrices, which is, in fact, a polytope in $\mathbb{R}^{n\times m}$. The combinatorics literature has called these polytopes \emph{transportation polytopes}. Chapter 8 of \cite{brualdi2006combinatorial} is dedicated to their study.
 \end{remark}
 
-Notice that all the sheaves we have worked with until now can be written as sheaves associated to sets of atoms. One might hope that every sheaf can be written in this form, but as remarked earlier, this is not possible, since there are non-representable atoms. Nevertheless, our notation can be easily extended to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
+Notice that all the sheaves we have worked with until now can be written as sheaves associated to sets of atoms. One might hope that every sheaf can be written in this form, but this is not possible, since there are non-representable atoms. % Nevertheless, our notation can be easily extended to incorporate the non-representable atoms we discuss in \ref{atoms}, but we won't need this in this article.
 
 The most convenient thing about sets of atoms, is that it is easy to send them through (the inverse image functor of) a geometric morphism, since geometric morphisms preserve coproducts. In fact, we found that the only practical way to compute geometric morphisms on a sheaf is by decomposing the sheaf into atoms. This will be done numerous times throughout the article. In fact, we will occasionally also need to send morphisms in $\Prob$ through inverse image functors, so we also describe a mechanism through which to decompose morphisms:
 
@@ -534,9 +538,9 @@ In this section we will show that $\Sh(\FinProb, J_{at})$ classifies a certain t
         \]
         \item \textit{Probability measure}. For all $r, s \in [0,1]$, we further require
         \[
-        (a \wedge b = 0) \wedge B_r(a) \wedge B_s(b) \vdash B_{r+s}(a \vee b)
+        (a \wedge b = 0) \wedge B_r(a) \wedge B_s(b) \vdash B_{r+s}(a \vee b) .
         \]
-        and finally we need
+        Finally we need
         \begin{align*}
             \top & \vdash B_1(1) \\
             B_0(a) & \vdash a = 0.
@@ -584,7 +588,7 @@ We would like to show that the presheaf topos \newline $\Set^{\FinProb^{op}}$ cl
 
 where $\Set[\mathbb{T}_{\textup{bpalg}}]$ denotes the construction of the classifying topos of $\mathbb{T}_{\textup{bpalg}}$ as the sheaves on a certain geometric category of formulas in context.
 
-The reader uninterested in the proof can skip to \ref{theory_of_intevals}.
+The reader uninterested in the proof can skip to \ref{theory_of_intervals}.
 
 \begin{remark}
     We have an equivalence of categories
@@ -924,8 +928,8 @@ This has the pleasant consequence that every model of $\mathbb{T}_{\textup{int}}
 
 In the following statement, let the term $x^{\epsilon}$ denote $x$ if $\epsilon = 1$ and $\neg x$ if $\epsilon = 2$.
 
-\begin{corollary}
-    For every infinitary first-order formula $\{\vec{x}. \psi\}$ in context over the variables $x_1,\cdots, x_n$, there is a subset $S \subset P^n_{2,\cdots,2}$ such that we have the $\mathbb{T}_{\textup{int}}$-provable equivalence
+\begin{corollary}\label{normal_form}
+    For every infinitary first-order formula $\{\vec{x}. \psi\}$ in context over the variables $x_1,\cdots, x_n$, there is a unique subset $S \subset P^n_{2,\cdots,2}$ such that we have the $\mathbb{T}_{\textup{int}}$-provable equivalence
     \[
         \psi \dashv \vdash_{\vec{x}} \bigvee_{t_{i_1,\cdots,i_n} \in S} \phi^{\vec{y}}_{U_{t_{i_1,\cdots,i_n}}} [ x_1^{i_1} \wedge \cdots \wedge x_n^{i_n} / y_{i_1,\cdots, i_n}] ,
     \]
@@ -1075,8 +1079,8 @@ Using this structure, we can sectionwise verify that $\mathcal{S}$ does indeed s
 Our aim is to send $\mathcal{S}$ and its structure through inverse image functors. Thus, it is imperative to figure out how our structure behaves on the atoms. The first step is decomposing $\mathcal{S} \times \mathcal{S}$:
 
 \begin{align*}
-    S \times S &\cong \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra^2 \\
-    &\cong \la \{y_1 < \cdots < y_n, z_1 < \cdots < z_m \mid y_i, z_j \in \mathbb{R} \} \mid (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in \mathcal{A}\ra
+    \mathcal{S} \times \mathcal{S} &\cong \la \{y_1 < \cdots < y_n \mid y_i \in \mathbb{R} \} \mid (r_1, \cdots, r_n) \in \mathcal{A} \ra^2 \\
+    &\cong \la \{y_1 < \cdots < y_n, z_1 < \cdots < z_m \mid y_i, z_j \in \mathbb{R} \} \mid (t_{ij})_{1 \leq i \leq n, 0 \leq j \leq m} \in P^2\ra
 \end{align*}
 
 Now we can use \ref{atom_coprod_maps} to specify our structure on the elements of this set of atoms:
@@ -1222,7 +1226,23 @@ The idempotent generation axiom states that the set of idempotents forms a gener
 
 The remarkable thing about this result, is that is gives an example of geometric morphism, that is not an interpretation between theories in the classical model-theoretic sense, making this \emph{a result that is unique to topos-theory}. It shows very concretely how Morita-equivalence of theories extends bi-interpretation of theories in such a way that we allow for constructions involving formal colimits.
 
-In analogy to the case of intervals, the coproduct decomposition of $\mathcal{S}$ now gives a \emph{normal form} for formulas in the theory of interval-like expectation algebras. We see that in this theory, formulas precisely describe sets of possible \emph{joint distributions}. This mimics a very direct way how probability theorists think about random variables. The base probability space is, quite simply, a formality; and everything of relevance for random variables is their distributions and their joint distributions.
+In analogy to the case of intervals, the coproduct decomposition of $\mathcal{S}$ now gives a \emph{normal form} for formulas in the theory of interval-like expectation algebras.
+
+\begin{corollary}\label{simple_normal_form}
+    For every infinitary first-order formula in context $\{\vec{b} . \phi \}$ over the variables $b_1,\cdots,b_n$ over the signature of expectation algebras, there is a unique subset \[S \subset \{ t_{i_1,\cdots,t_n} \in P^n, x_{k 1} < \cdots < x_{k m_k}\text{ for }x_{k j} \in \mathbb{R} \text{ for any } 0 < k \le n \},\] where the $m_k$ denote the bounds of the index $i_k$, such that there is a $\mathbb{T}_{\textup{sint}}$-provable equivalence
+    \[
+     \psi \dashv \vdash_{\vec{b}} \bigvee_{t_{i_1,\cdots,i_n}, x_{k j} \in S} \exists a_{i_1,\cdots,i_n}, \bigwedge_k b_k = x_{k 1} a_{k 1} + \cdots + x_{k m_k} a_{k m_k}\wedge \phi'_{U_{t_{i_1,\cdots, i_n}}}[a_{i_1,\cdots,i_n}] .
+    \]
+    Here $a_k j$ denotes the $j$th projection onto the $k$th side, i.e.
+    \[
+        a_{kj} := \bigvee_{i_l, l \ne k} a_{i_1,\cdots,i_{k-1},j,i_{k+1}, \cdots i_n}
+    \]
+    and the formula $\phi'_{U_{t_{i_1,\cdots, i_n}}}$ states the idempotence of each of the $a_{i_1,\cdots,i_n}$ together with the fact that they form a partition into the measures $t_{i_1,\cdots,i_n}$, as in our original definition of $\phi_{U_{t_{i_1,\cdots, i_n}}}$. This can be done using the Boolean algebra structure on the idempotents described in the proof of \ref{classifying_sint}.
+\end{corollary}
+
+Now this might not be completely obvious from our choice of notation, but these formulas precisely describe sets of possible \emph{joint distributions}. The reason for this is that $t_{i_1,\cdots,i_n}$ can be seen to be the probability for $b_1 = x_{1i_1},\cdots, b_n = x_{ni_n}$.
+
+Philosophically, this mimics a very direct way how probability theorists think about random variables. The base probability space is, quite simply, a formality; and everything of relevance for random variables is their distributions and their joint distributions.
 
 \subsection{Practical considerations}
 
@@ -1232,9 +1252,9 @@ We can easily model Bernoulli random variables by specifying their distributions
 
 Notice that there is a way to axiomatize independent random variables by an infinitary first-order formula describing the distributions that we admit. Similarly, things like Bayes' theorem can be stated and proven.
 
-With these tools, the kind of problem in probability theory, that one might encounter in high-school. For instance, one can consider iterated coin flips, dice throws or turning of a roulette wheel and deduce the formula for the Binomial distribution that arises when we sum i.i.d Bernoulli-distributed random variables. One can also compute its expected value.
+With these tools we can analyze the kind of problems probability theory that one might encounter in high-school. For instance, one can consider iterated coin flips, dice throws or turning of a roulette wheel and deduce the formula for the Binomial distribution that arises when we sum i.i.d Bernoulli-distributed random variables. One can also compute its expected value.
 
-Moreover, we can also model dependencies between events or also random variables that allows us to specify the \emph{probability tree diagrams} that we will often encounter when modeling problems involving drawing balls from an urn.
+Moreover, we can also model dependencies between events or also random variables. In that way we can specify the \emph{probability tree diagrams} that we will often encounter when modeling problems involving drawing balls from an urn.
 
 The theory of interval-like expectation algebras now provides us with a formal setting which we can use to \emph{decide} or even \emph{get normal forms} (in our case distributions) for this type of formulas. For an actual computer implementation, like an SMT-solver for this theory that one might then apply as tactics in an interactive theorem prover, however, some considerations would have to be made regarding how one computes with the reals. Interestingly, for this type of problems, it does not seem to be the case that \emph{completeness} of the reals actually plays a role, so one could simply axiomatize a general linearly ordered field $R$ instead of working with $\mathbb{R}$.
 
