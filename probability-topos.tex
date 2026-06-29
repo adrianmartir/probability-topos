@@ -1231,18 +1231,12 @@ In analogy to the case of intervals, the coproduct decomposition of $\mathcal{S}
 \begin{corollary}\label{simple_normal_form}
     For every infinitary first-order formula in context $\{\vec{b} . \phi \}$ over the variables $b_1,\cdots,b_n$ over the signature of expectation algebras, there is a unique subset \[S \subset \{ t_{i_1,\cdots,t_n} \in P^n, x_{k 1} < \cdots < x_{k m_k}\text{ for }x_{k j} \in \mathbb{R} \text{ for any } 0 < k \le n \},\] where the $m_k$ denote the bounds of the index $i_k$, such that there is a $\mathbb{T}_{\textup{sint}}$-provable equivalence
     \[
-     \psi \dashv \vdash_{\vec{b}} \bigvee_{t_{i_1,\cdots,i_n}, x_{k j} \in S} \exists a_{i_1,\cdots,i_n}, \bigwedge_k b_k = x_{k 1} a_{k 1} + \cdots + x_{k m_k} a_{k m_k}\wedge \phi'_{U_{t_{i_1,\cdots, i_n}}}[a_{i_1,\cdots,i_n}] .
+     \psi \dashv \vdash_{\vec{b}} \bigvee_{t_{i_1,\cdots,i_n}, x_{k j} \in S} \exists a_{k j}, \bigwedge_k b_k = x_{k 1} a_{k 1} + \cdots + x_{k m_k} a_{k m_k}\wedge \phi'_{U_{t_{i_1,\cdots, i_n}}}[a_{1 i_1} \wedge \cdots \wedge a_{n i_n} / y_{i_1,\cdots,i_n}] .
     \]
-    Here $a_{k j}$ denotes the $j$th projection onto the $k$th side, i.e.
-    \[
-        a_{kj} := \bigvee_{i_l, l \ne k} a_{i_1,\cdots,i_{k-1},j,i_{k+1}, \cdots i_n}
-    \]
-    and the formula $\phi'_{U_{t_{i_1,\cdots, i_n}}}$ states the idempotence of each of the $a_{i_1,\cdots,i_n}$ together with the fact that they form a partition into the measures $t_{i_1,\cdots,i_n}$, as in our original definition of $\phi_{U_{t_{i_1,\cdots, i_n}}}$. This can be done using the Boolean algebra structure on the idempotents described in the proof of \ref{classifying_sint}.
+    Here the formula $\phi'_{U_{t_{i_1,\cdots, i_n}}}$ states the idempotence of each of the $y_{i_1,\cdots,i_n}$ together with the fact that they form a partition into the measures $t_{i_1,\cdots,i_n}$, as in our original definition of $\phi_{U_{t_{i_1,\cdots, i_n}}}$. This can be done using the Boolean algebra structure on the idempotents described in the proof of \ref{classifying_sint}.
 \end{corollary}
 
-Now this might not be completely obvious from our choice of notation, but these formulas precisely describe sets of possible \emph{joint distributions}. The reason for this is that $t_{i_1,\cdots,i_n}$ can be seen to be the probability for $b_1 = x_{1i_1},\cdots, b_n = x_{ni_n}$.
-
-Philosophically, this mimics a very direct way how probability theorists think about random variables. The base probability space is, quite simply, a formality; and everything of relevance for random variables is their distributions and their joint distributions.
+We see that the $t_{i_1,\cdots,i_n}$ give the probabilities for $b_1 = x_{1i_1},\cdots, b_n = x_{ni_n}$, so that these formulas precisely describe sets of possible \emph{joint distributions}. Philosophically, this mimics a very direct way how probability theorists think about random variables. The base probability space is, quite simply, a formality; and everything of relevance for random variables is their distributions and their joint distributions.
 
 \subsection{Practical considerations}
 
